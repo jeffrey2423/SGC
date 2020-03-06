@@ -1,0 +1,7 @@
+API_PORT = 4000
+USER = postgres
+HOST = localhost
+DATABASE = api
+PASS = root
+PORTBD = 5432
+PORTSERVER = 5000
