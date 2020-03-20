@@ -1,4 +1,4 @@
-const {Client} = require('pg');
+const {Client } = require('pg');
 
 const connection = new Client({
     user: process.env.USER,
@@ -16,3 +16,5 @@ connection.connect(function (err){
         console.log('db is connected');
     }
 });
+
+module.exports = connection;
