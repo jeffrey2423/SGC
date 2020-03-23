@@ -1,4 +1,4 @@
-const {Client} = require('pg');
+const { Pool, Client } = require('pg');
 
 const connection = new Client({
     user: process.env.USER,
@@ -9,10 +9,17 @@ const connection = new Client({
 });
 
 connection.connect(function (err){
-    if(err){
+    try {
+        if(err){
+            console.log(err);
+            return;
+        }else{
+            console.log('db is connected');
+        }
+    } catch (error) {
         console.log(err);
-        return;
-    }else{
-        console.log('db is connected');
     }
+
 });
+
+module.exports = connection;
