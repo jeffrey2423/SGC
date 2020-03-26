@@ -2,21 +2,35 @@ const rsc = require('./rsc_server');
 
 const rsc_controller = {};
 
-//funcion para leer el json de recursos del servidor
-rsc_controller.leerRecurso = (key) => {
-
+// Funcion para obtener el json del recurso para enviar al Cliente 
+// el parametro traza sera opcional para cuando se llame un recurso
+// de error, para mostrar un mensaje adecuado al cliente pero 
+// igual tener una traza del error
+rsc_controller.leerRecurso = (keymsg, traza = "") => {
     try {
-        if (rsc.hasOwnProperty(key)) {
-            const strJson = JSON.stringify(rsc);
-            const objValue = JSON.parse(strJson);
-            return objValue[key];
-        } else {
-            return "no esta";
-        }
+        let data = {
+            id: 0000,
+            description: "",
+            status: ""
+        };
+        Object.keys(rsc).forEach(function (key) {
+            var value = rsc[key];
+            if (value.id == keymsg) {
+                if (traza != "") {
+                    value.traza = traza;
+                    data = value;
+                } else {
+                    data = value;
+                }
+            } else {
+                return "";
+            }
+
+        });
+        return data;
     } catch (error) {
         console.log(error);
     }
-
 }
 
 module.exports = rsc_controller;
