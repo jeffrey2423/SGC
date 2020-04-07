@@ -40,4 +40,3 @@ CREATE TABLE t1002_perfil_extendido(
 );
 
 
-
