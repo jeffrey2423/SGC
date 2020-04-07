@@ -1,0 +1,43 @@
+CREATE DATABASE sgc;
+
+USE sgc;
+
+CREATE TABLE t1000_perfiles(
+    f1000_ts TIMESTAMP NOT NULL DEFAULT NOW(),
+    f1000_id SERIAL NOT NULL,
+    f1000_nombre VARCHAR(100) NOT NULL,
+    f1000_descripcion VARCHAR(100),
+    CONSTRAINT t1000_pk
+        PRIMARY KEY (f1000_id)
+);
+
+CREATE TABLE t1001_permisos(
+    f1001_ts TIMESTAMP NOT NULL DEFAULT NOW(),
+    f1001_id SERIAL NOT NULL,
+    f1001_nombre VARCHAR(100) NOT NULL,
+    f1001_descripcion VARCHAR(100),
+    CONSTRAINT t1001_pk
+        PRIMARY KEY (f1001_id)
+);
+
+CREATE TABLE t1002_perfil_extendido(
+    f1002_ts TIMESTAMP NOT NULL DEFAULT NOW(),
+    f1002_id SERIAL NOT NULL,
+    f1002_id_perfil_t1000 INTEGER NOT NULL,
+    f1002_id_permiso_t1001 INTEGER NOT NULL,
+    CONSTRAINT t1002_pk
+        PRIMARY KEY (f1002_id),
+    CONSTRAINT t1002_fk_t1000
+        FOREIGN KEY (f1002_id_perfil_t1000)
+        REFERENCES t1000_perfiles(f1000_id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT t1002_fk_t1001
+        FOREIGN KEY (f1002_id_permiso_t1001)
+        REFERENCES t1001_permisos(f1001_id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+
+
