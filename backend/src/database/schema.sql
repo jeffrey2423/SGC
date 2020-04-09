@@ -52,25 +52,26 @@ CREATE TABLE t1004_usuarios(
     f1004_ts TIMESTAMP NOT NULL DEFAULT NOW()::TIMESTAMP,
     f1004_id SERIAL NOT NULL,
     f1004_nombre VARCHAR(100) NOT NULL,
-    t1004_apellido VARCHAR(100) ,
-    t1004_fecha_nacimiento DATE,
-    t1004_id_profesion_t1003 INTEGER NOT NULL,
-    t1004_email VARCHAR(100) NOT NULL,
-    t1004_clave VARCHAR(250) NOT NULL,
-    t1004_id_perfil_t1000 INTEGER NOT NULL,
-    t1004_ind_activo INTEGER NOT NULL DEFAULT 1,
+    f1004_apellido VARCHAR(100) ,
+    f1004_fecha_nacimiento DATE,
+    f1004_id_profesion_t1003 INTEGER NOT NULL,
+    f1004_email VARCHAR(100) NOT NULL,
+    f1004_clave VARCHAR(250) NOT NULL,
+    f1004_id_perfil_t1000 INTEGER NOT NULL,
+    f1004_ind_activo INTEGER NOT NULL DEFAULT 1,
     CONSTRAINT t1004_pk
         PRIMARY KEY (f1004_id),
     CONSTRAINT t1004_fk_t1003
-        FOREIGN KEY (t1004_id_profesion_t1003)
+        FOREIGN KEY (f1004_id_profesion_t1003)
         REFERENCES t1003_profesion(f1003_id)
         ON UPDATE CASCADE
         ON DELETE CASCADE,
     CONSTRAINT t1004_fk_t1000
-        FOREIGN KEY (t1004_id_perfil_t1000)
+        FOREIGN KEY (f1004_id_perfil_t1000)
         REFERENCES t1000_perfiles(f1000_id)
         ON UPDATE CASCADE
-        ON DELETE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT t1004_no_repeat UNIQUE(f1004_email)
 );
 
 CREATE TABLE t1005_imagenes(
