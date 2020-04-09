@@ -2,24 +2,27 @@ const connection = require('../database/database');
 const userController = {};
 const rscController = require('../resources/rsc_controller')
 
+const PERMISOS = require('../resources/permisos')
+
 // Declaramos enumeradores para no crear confusion al leer el codigo
-const estadoUsuario = {
+const ESTADO_USUARIO = {
     INACTIVO: 0,
     ACTIVO: 1,
-    DATOS_NO_VALIDOS: 9999
+    NO_EXISTE:0,
+    EXISTE: 1
 }
 
 // Funcion para obtener usuarios
 userController.getUsers = async (req, res) => {
     try {
         const query = {
-            text: "select * from f_get_users()"
+            text: "select * from f_obtener_usuarios()"
         }
         await connection.query(query, (err, results) => {
             if (!err) {
                 res.status(200).json(results.rows);
             } else {
-                res.json(rscController.leerRecurso(1000, error.message));
+                res.json(rscController.leerRecurso(1000, err.message));
             }
         });
     } catch (error) {
@@ -35,13 +38,13 @@ userController.createUser = async (req, res) => {
         const query = {
             text: "select f_insertar_usuario($1)",
             values: [newUser]
-        }
+        };
         await connection.query(query, (err, results) => {
             if (!err) {
                 res.json(rscController.leerRecurso(1002));
 
             } else {
-                res.json(rscController.leerRecurso(1003, error.message));
+                res.json(rscController.leerRecurso(1003, err.message));
             }
         });
     } catch (error) {
