@@ -5,5 +5,6 @@ module.exports = {
     DATABASE: process.env.DATABASE || "sgc",
     PASS: process.env.PASS ||"root",
     PORTBD: process.env.PORTBD ||5432,
-    PORTSERVER: process.env.PORTSERVER || 5000
+    PORTSERVER: process.env.PORTSERVER || 5000,
+    SECRET_KEY: process.env.SECRET_KEY || "sgc_api"
 }
