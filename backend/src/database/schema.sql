@@ -107,3 +107,26 @@ CREATE TABLE t1006_eventos(
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
+
+CREATE OR REPLACE VIEW v2000_usuarios_info AS(
+    SELECT
+		f1004_ts 					AS f_fecha_creacion,
+		f1004_id 					AS f_id,
+		f1004_nombre 				AS f_nombre,
+		f1004_apellido				AS f_apellido,
+		f1004_fecha_nacimiento		AS f_fecha_nacimiento,
+		f1003_nombre				AS f_profesion,
+		f1004_email					AS f_email,
+		f1004_clave					AS f_clave,
+		f1000_nombre				AS f_perfil,
+		CASE
+			WHEN
+						(f1004_ind_activo) = 0 THEN 'Inactivo'
+			ELSE 'Activo'
+		END	AS f_activo
+	FROM t1004_usuarios
+	INNER JOIN t1003_profesion
+	ON t1004_usuarios.f1004_id_profesion_t1003 = t1003_profesion.f1003_id
+	INNER JOIN t1000_perfiles
+	ON t1004_usuarios.f1004_id_perfil_t1000 = t1000_perfiles.f1000_id
+);
