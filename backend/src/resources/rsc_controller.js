@@ -1,6 +1,15 @@
-const rsc = require('./rsc_server');
+const connection = require('../database/database');
+const rsc = require('./constantes/rsc_server');
 
 const rsc_controller = {};
+
+// Declaramos enumeradores para no crear confusion al leer el codigo
+const ESTADO_USUARIO = {
+    INACTIVO: 0,
+    ACTIVO: 1,
+    NO_EXISTE: 0,
+    EXISTE: 1
+}
 
 // Funcion para obtener el json del recurso para enviar al Cliente 
 // el parametro traza sera opcional para cuando se llame un recurso
@@ -31,6 +40,29 @@ rsc_controller.leerRecurso = (keymsg, traza = "") => {
     } catch (error) {
         console.log(error);
     }
-}
+};
+
+rsc_controller.obtenerEstadoUsuario = async (email) => {
+    try {
+        const query = {
+            text: "select f_validar_usuario_db($1)",
+            values: [email]
+        };
+        await connection.query(query, (err, results) => {
+            if (!err) {               
+                const estadoUsuario = results.rows[0].f_validar_usuario_db;
+                return (estadoUsuario == ESTADO_USUARIO.NO_EXISTE) ? true : false;               
+            } else {
+                return  false;
+            }
+        });
+        
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+};
+
+rsc_controller.snooze = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 module.exports = rsc_controller;
