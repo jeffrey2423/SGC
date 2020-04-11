@@ -2,13 +2,6 @@ const connection = require('../database/database');
 const userController = {};
 const rscController = require('../resources/rsc_controller')
 
-const ESTADO_USUARIO = {
-    INACTIVO: 0,
-    ACTIVO: 1,
-    NO_EXISTE: 0,
-    EXISTE: 1
-}
-
 // Funcion para obtener usuarios
 userController.getUsers = async (req, res) => {
     try {
@@ -35,16 +28,18 @@ userController.createUser = async (req, res) => {
 
         let resultadoValidar;
         const queryValidarUsuario = {
-            text: "select f_validar_usuario_db($1)",
+            text: "select * from f_validar_usuario_db($1)",
             values: [req.body.email]
         };
         // Validamos que el email no exista
         await connection.query(queryValidarUsuario, (err, results) => {
             if (!err) {
                 const estadoUsuario = results.rows[0].f_validar_usuario_db;
-                resultadoValidar = (estadoUsuario == ESTADO_USUARIO.NO_EXISTE) ? true : false;
+                resultadoValidar = (estadoUsuario == rscController.ESTADO_USUARIO.NO_EXISTE) ? true : false;
+                
             } else {
                 resultadoValidar = false;
+                console.log(err);
             }
         });
 
@@ -55,7 +50,7 @@ userController.createUser = async (req, res) => {
         if (resultadoValidar) {
             const newUser = req.body;
             const query = {
-                text: "select f_insertar_usuario($1)",
+                text: "select * from f_insertar_usuario($1)",
                 values: [newUser]
             };
             await connection.query(query, (err, results) => {

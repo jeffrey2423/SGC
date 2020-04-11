@@ -121,7 +121,7 @@ CREATE OR REPLACE VIEW v2000_usuarios_info AS(
 		f1000_nombre				AS f_perfil,
 		CASE
 			WHEN
-						(f1004_ind_activo) = 0 THEN 'Inactivo'
+				(f1004_ind_activo) = 0 THEN 'Inactivo'
 			ELSE 'Activo'
 		END	AS f_activo
 	FROM t1004_usuarios
