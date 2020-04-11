@@ -19,6 +19,11 @@ module.exports = {
         id: 1003,
         description: "Error al guardar el usuario",
         status: "error"
+    },
+    1004:{
+        id: 1004,
+        description: "El email ya se encuentra registrado",
+        status: "error"
     }
 
 
