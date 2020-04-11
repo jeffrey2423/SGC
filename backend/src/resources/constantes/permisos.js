@@ -1,5 +1,5 @@
 module.exports = {
-    BORRAR_USUARIO: 1,
-    MODIFICAR_USUARIO: 2
+    OBTENER_USUARIOS: 1,
+    CREAR_USUARIO: 2
 }
 

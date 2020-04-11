@@ -1,15 +1,15 @@
 const connection = require('../database/database');
 const rsc = require('./constantes/rsc_server');
+const authToken = require("../middlewares/auth_token");
 
 const rsc_controller = {};
 
 // Declaramos enumeradores para no crear confusion al leer el codigo
 rsc_controller.ESTADO_USUARIO = {
-    INACTIVO: 2,
-    ACTIVO: 1,
-    NO_EXISTE: 0,
-    EXISTE: 1,
-
+    INACTIVO: 0,
+    NO_EXISTE: 1,
+    DATOS_INCORRECTOS: 2,
+    EXISTE_PERMISO: 1
 }
 
 // Funcion para obtener el json del recurso para enviar al Cliente 
@@ -50,19 +50,43 @@ rsc_controller.obtenerEstadoUsuario = async (email) => {
             values: [email]
         };
         await connection.query(query, (err, results) => {
-            if (!err) {               
+            if (!err) {
                 const estadoUsuario = results.rows[0].f_validar_usuario_db;
-                return (estadoUsuario == ESTADO_USUARIO.NO_EXISTE) ? true : false;               
+                return (estadoUsuario == ESTADO_USUARIO.NO_EXISTE) ? true : false;
             } else {
-                return  false;
+                return false;
             }
         });
-        
+
     } catch (error) {
         console.log(error);
         return false;
     }
 };
+
+
+rsc_controller.validarPermisoUsuario = async (perfil, permiso) => {
+    try {
+        const query = {
+            text: "select f_verificar_permiso_usuario()",
+            values: [perfil, permiso],
+        }
+        await connection.query(query, (err, results) => {
+            if (!err) {
+                const permisoUsuario = results.rows[0].f_verificar_permiso_usuario;
+                console.log(permisoUsuario);
+                return (permisoUsuario != rscController.ESTADO_USUARIO.EXISTE_PERMISO) ? true : false;
+
+            } else {
+                console.log(err.message);
+                return false;
+            }
+        });
+    } catch (error) {
+        console.log(error.message);
+        return false;
+    }
+}
 
 rsc_controller.snooze = ms => new Promise(resolve => setTimeout(resolve, ms));
 
