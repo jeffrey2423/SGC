@@ -32,12 +32,27 @@ module.exports = {
     },
     1006:{
         id: 1006,
-        description: "El email o la contraseña son incorrectos o el usuario no existe",
+        description: "El email o la contraseña son incorrectos",
         status: "error"
     },
     1007:{
         id: 1007,
         description: "El usuario se encuentra inactivo, comunicate con el administrador",
+        status: "error"
+    },
+    1008:{
+        id: 1008,
+        description: "El email no esta registrado, comunicate con el administrador",
+        status: "error"
+    },
+    1009:{
+        id: 1009,
+        description: "no tienes los permisos suficientes para esta accion, comunicate con el administrador",
+        status: "error"
+    },
+    1010:{
+        id: 1010,
+        description: "no existe un token de autorizacion, inicia sesion de nuevo",
         status: "error"
     }
 
