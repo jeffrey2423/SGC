@@ -4,11 +4,12 @@ const rsc = require('./constantes/rsc_server');
 const rsc_controller = {};
 
 // Declaramos enumeradores para no crear confusion al leer el codigo
-const ESTADO_USUARIO = {
-    INACTIVO: 0,
+rsc_controller.ESTADO_USUARIO = {
+    INACTIVO: 2,
     ACTIVO: 1,
     NO_EXISTE: 0,
-    EXISTE: 1
+    EXISTE: 1,
+
 }
 
 // Funcion para obtener el json del recurso para enviar al Cliente 

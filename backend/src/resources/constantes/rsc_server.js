@@ -24,6 +24,21 @@ module.exports = {
         id: 1004,
         description: "El email ya se encuentra registrado",
         status: "error"
+    },
+    1005:{
+        id: 1005,
+        description: "Hubo un error al intentar iniciar sesion",
+        status: "error"
+    },
+    1006:{
+        id: 1006,
+        description: "El email o la contraseña son incorrectos o el usuario no existe",
+        status: "error"
+    },
+    1007:{
+        id: 1007,
+        description: "El usuario se encuentra inactivo, comunicate con el administrador",
+        status: "error"
     }
 
 
