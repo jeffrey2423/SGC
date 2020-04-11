@@ -35,7 +35,7 @@ userController.createUser = async (req, res) => {
         await connection.query(queryValidarUsuario, (err, results) => {
             if (!err) {
                 const estadoUsuario = results.rows[0].f_validar_usuario_db;
-                resultadoValidar = (estadoUsuario == rscController.ESTADO_USUARIO.NO_EXISTE) ? true : false;
+                resultadoValidar = (estadoUsuario != rscController.ESTADO_USUARIO.NO_EXISTE) ? true : false;
                 
             } else {
                 resultadoValidar = false;
