@@ -1,9 +1,9 @@
 CREATE OR REPLACE FUNCTION f_autenticacion_usuario(in_json_txt JSON)
-RETURNS SETOF v2000_usuarios_info AS
+RETURNS SETOF t1004_usuarios AS
 $BODY$
 DECLARE
-    r v2000_usuarios_info%rowtype;
-	v_error_stack text;
+    reg RECORD;
+	err_context text;
     v_email text;
     v_clave text;
 
@@ -17,21 +17,22 @@ BEGIN
         FROM json_to_record(in_json_txt) 
             AS x(clave text);
 
-        FOR r IN 
+    FOR REG IN
+        SELECT *
+        FROM t1004_usuarios
+        WHERE   f1004_email = v_email
+        AND     f1004_clave = v_clave
+        LOOP
+        RETURN NEXT reg;
+    END LOOP;
+    RETURN;
 
-            SELECT * FROM v2000_usuarios_info
-            WHERE   f_email = v_email
-            AND     f_clave = v_clave
 
-            LOOP
-            RETURN NEXT r;
-        END LOOP;
-        RETURN;
-
-	EXCEPTION WHEN OTHERS THEN
-	GET STACKED DIAGNOSTICS v_error_stack = PG_EXCEPTION_CONTEXT;
-
-    RAISE WARNING 'The stack trace of the error is: "%"', v_error_stack;
+        EXCEPTION WHEN OTHERS THEN
+            GET STACKED DIAGNOSTICS err_context = PG_EXCEPTION_CONTEXT;
+            RAISE INFO 'Error Name:%',SQLERRM;
+            RAISE INFO 'Error State:%', SQLSTATE;
+            RAISE INFO 'Error Context:%', err_context;
 END
 $BODY$ LANGUAGE 'plpgsql'
 
