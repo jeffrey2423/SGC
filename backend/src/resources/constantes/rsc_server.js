@@ -89,6 +89,56 @@ module.exports = {
         id: 1017,
         description: "Permiso asignado con exicto",
         status: "success"
+    },
+    1018:{
+        id: 1018,
+        description: "Usuario actualizado con exito",
+        status: "success"
+    },
+    1019:{
+        id: 1019,
+        description: "Error al tratar de actualizar el usuario",
+        status: "error"
+    },
+    1020:{
+        id: 1020,
+        description: "Error al tratar de actualizar la clave",
+        status: "error"
+    },
+    1021:{
+        id: 1021,
+        description: "Clave actualizada con exito",
+        status: "success"
+    },
+    1022:{
+        id: 1022,
+        description: "Error al tratar de actualizar el email",
+        status: "error"
+    },
+    1023:{
+        id: 1023,
+        description: "Email actualizado con exito",
+        status: "success"
+    },
+    1024:{
+        id: 1024,
+        description: "Error al tratar de inactivar el usuario",
+        status: "error"
+    },
+    1025:{
+        id: 1025,
+        description: "Usuario inactivado con exito",
+        status: "success"
+    },
+    1026:{
+        id: 1026,
+        description: "Error al tratar de activar el usuario",
+        status: "error"
+    },
+    1027:{
+        id: 1027,
+        description: "Usuario activado con exito",
+        status: "success"
     }
 
 

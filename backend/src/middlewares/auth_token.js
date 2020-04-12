@@ -71,10 +71,6 @@ module.exports = async (req, res, next) => {
                             res.json(rscController.leerRecurso(1009));
                         }
                         break;
-                    case rutas.VER_PERFILES:
-                        next();
-                        break;
-
                     default:
                         next();
                 }
