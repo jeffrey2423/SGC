@@ -5,17 +5,34 @@ const rscController = require('../resources/rsc_controller')
 // Funcion para obtener usuarios
 userController.getUsers = async (req, res) => {
     try {
-        const query = {
-            text: "select * from f_obtener_usuarios()"
-        }
-        await connection.query(query, (err, results) => {
-            if (!err) {
-                res.status(200).json(results.rows);
-            } else {
-                connection.query('ROLLBACK');
-                res.json(rscController.leerRecurso(1000, err.message));
+        const id_usuario = req.params.id;
+        if (id_usuario == 9999) {
+            const query = {
+                text: "select * from f_obtener_usuarios()"
             }
-        });
+            await connection.query(query, (err, results) => {
+                if (!err) {
+                    res.status(200).json(results.rows);
+                } else {
+                    connection.query('ROLLBACK');
+                    res.json(rscController.leerRecurso(1000, err.message));
+                }
+            });
+        } else {
+            const query = {
+                text: "select * from f_obtener_usuario($1)",
+                values: [id_usuario]
+            }
+            await connection.query(query, (err, results) => {
+                if (!err) {
+                    res.status(200).json(results.rows);
+                } else {
+                    connection.query('ROLLBACK');
+                    res.json(rscController.leerRecurso(1000, err.message));
+                }
+            });
+        }
+
     } catch (error) {
         await connection.query('ROLLBACK');
         res.json(rscController.leerRecurso(1000, error.message));
@@ -25,7 +42,6 @@ userController.getUsers = async (req, res) => {
 // funcion para guardar usuarios
 userController.createUser = async (req, res) => {
     try {
-
         let resultadoValidar;
         const queryValidarUsuario = {
             text: "select * from f_validar_usuario_db($1)",
@@ -36,7 +52,7 @@ userController.createUser = async (req, res) => {
             if (!err) {
                 const estadoUsuario = results.rows[0].f_validar_usuario_db;
                 resultadoValidar = (estadoUsuario != rscController.ESTADO_USUARIO.NO_EXISTE) ? true : false;
-                
+
             } else {
                 resultadoValidar = false;
                 console.log(err);
@@ -45,7 +61,7 @@ userController.createUser = async (req, res) => {
 
         // dormimos el hilo principal para que no pase al siguiente bloque
         // sin que la variable resultadoValidar este llena
-        await rscController.snooze(10);      
+        await rscController.snooze(10);
 
         if (resultadoValidar) {
             const newUser = req.body;
@@ -69,6 +85,128 @@ userController.createUser = async (req, res) => {
     } catch (error) {
         await connection.query('ROLLBACK');
         res.json(rscController.leerRecurso(1003, error.message));
+    }
+}
+
+userController.updateUser = async (req, res) => {
+    try {
+        const id_usuario = req.params.id;
+        const newData = req.body;
+
+        const query = {
+            text: "select * from f_actualizar_usuario($1,$2)",
+            values: [newData, id_usuario]
+        }
+        await connection.query(query, (err, results) => {
+            if (!err) {
+                res.json(rscController.leerRecurso(1018));
+            } else {
+                connection.query('ROLLBACK');
+                res.json(rscController.leerRecurso(1019, err.message));
+            }
+        });
+
+
+    } catch (error) {
+        await connection.query('ROLLBACK');
+        res.json(rscController.leerRecurso(1019, error.message));
+    }
+}
+
+userController.updateUserPass = async (req, res) => {
+    try {
+        const id_usuario = req.params.id;
+        const clave = req.body.clave;
+
+        const query = {
+            text: "select * from f_actualizar_usuario_clave($1,$2)",
+            values: [clave, id_usuario]
+        }
+        await connection.query(query, (err, results) => {
+            if (!err) {
+                res.json(rscController.leerRecurso(1021));
+            } else {
+                connection.query('ROLLBACK');
+                res.json(rscController.leerRecurso(1020, err.message));
+            }
+        });
+
+
+    } catch (error) {
+        await connection.query('ROLLBACK');
+        res.json(rscController.leerRecurso(1020, error.message));
+    }
+}
+
+userController.updateUserEmail = async (req, res) => {
+    try {
+        const id_usuario = req.params.id;
+        const email = req.body.email;
+
+        const query = {
+            text: "select * from f_actualizar_usuario_email($1,$2)",
+            values: [email, id_usuario]
+        }
+        await connection.query(query, (err, results) => {
+            if (!err) {
+                res.json(rscController.leerRecurso(1023));
+            } else {
+                connection.query('ROLLBACK');
+                res.json(rscController.leerRecurso(1022, err.message));
+            }
+        });
+
+
+    } catch (error) {
+        await connection.query('ROLLBACK');
+        res.json(rscController.leerRecurso(1022, error.message));
+    }
+}
+
+userController.deleteUser = async (req, res) => {
+    try {
+        const id_usuario = req.params.id;
+
+        const query = {
+            text: "select * from f_eliminar_usuario($1)",
+            values: [id_usuario]
+        }
+        await connection.query(query, (err, results) => {
+            if (!err) {
+                res.json(rscController.leerRecurso(1025));
+            } else {
+                connection.query('ROLLBACK');
+                res.json(rscController.leerRecurso(1024, err.message));
+            }
+        });
+
+
+    } catch (error) {
+        await connection.query('ROLLBACK');
+        res.json(rscController.leerRecurso(1024, error.message));
+    }
+}
+
+userController.activateUser = async (req, res) => {
+    try {
+        const id_usuario = req.params.id;
+
+        const query = {
+            text: "select * from f_activar_usuario($1)",
+            values: [id_usuario]
+        }
+        await connection.query(query, (err, results) => {
+            if (!err) {
+                res.json(rscController.leerRecurso(1027));
+            } else {
+                connection.query('ROLLBACK');
+                res.json(rscController.leerRecurso(1026, err.message));
+            }
+        });
+
+    } catch (error) {
+        await connection.query('ROLLBACK');
+        res.json(rscController.leerRecurso(1026, error.message));
     }
 }
 
