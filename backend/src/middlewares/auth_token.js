@@ -76,7 +76,7 @@ module.exports = async (req, res, next) => {
                         break;
 
                     default:
-
+                        next();
                 }
 
             } else {
