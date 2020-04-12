@@ -133,3 +133,18 @@ CREATE OR REPLACE VIEW v2000_usuarios_info AS(
 	INNER JOIN t1000_perfiles
 	ON t1004_usuarios.f1004_id_perfil_t1000 = t1000_perfiles.f1000_id
 );
+
+CREATE OR REPLACE VIEW v2001_permisos_info AS(
+SELECT 			
+    f1000_id 			AS f_id_pefil,
+    f1001_ts 			AS f_fecha_creacion_permiso,
+    f1001_id 			AS f_id_permiso,
+    f1001_nombre 		AS f_nombre_permiso,
+    f1001_descripcion 	AS f_desc_permiso
+    FROM t1000_perfiles
+    INNER JOIN t1002_perfil_extendido
+    ON f1000_id = f1002_id_perfil_t1000
+    INNER JOIN t1001_permisos
+    ON t1001_permisos.f1001_id = t1002_perfil_extendido.f1002_id_permiso_t1001
+                
+);
