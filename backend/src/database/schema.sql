@@ -8,7 +8,8 @@ CREATE TABLE t1000_perfiles(
     f1000_nombre VARCHAR(100) NOT NULL,
     f1000_descripcion VARCHAR(100),
     CONSTRAINT t1000_pk
-        PRIMARY KEY (f1000_id)
+        PRIMARY KEY (f1000_id),
+    CONSTRAINT t1000_no_repeat UNIQUE(f1000_nombre)
 );
 
 CREATE TABLE t1001_permisos(
@@ -17,7 +18,8 @@ CREATE TABLE t1001_permisos(
     f1001_nombre VARCHAR(100) NOT NULL,
     f1001_descripcion VARCHAR(100),
     CONSTRAINT t1001_pk
-        PRIMARY KEY (f1001_id)
+        PRIMARY KEY (f1001_id),
+    CONSTRAINT t1001_no_repeat UNIQUE(f1001_nombre)
 );
 
 CREATE TABLE t1002_perfil_extendido(
@@ -45,7 +47,8 @@ CREATE TABLE t1003_profesion(
     f1003_nombre VARCHAR(100) NOT NULL,
     f1003_descripcion VARCHAR(100),
     CONSTRAINT t1003_pk
-        PRIMARY KEY (f1003_id)
+        PRIMARY KEY (f1003_id),
+    CONSTRAINT t1003_no_repeat UNIQUE(f1003_nombre)
 );
 
 CREATE TABLE t1004_usuarios(
