@@ -54,6 +54,11 @@ module.exports = {
         id: 1010,
         description: "no existe un token de autorizacion, inicia sesion de nuevo",
         status: "error"
+    },
+    1011:{
+        id: 1011,
+        description: "error al obtener los perfiles",
+        status: "error"
     }
 
 

@@ -25,5 +25,6 @@ app.use(express.json());
 app.use(authToken);
 app.use('/api/user', require('./routes/user'));
 app.use('/api/user/auth', require('./routes/auth'));
+app.use('/api/user/profile', require('./routes/profile'));
 
 module.exports = app;
