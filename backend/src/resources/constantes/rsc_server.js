@@ -59,7 +59,38 @@ module.exports = {
         id: 1011,
         description: "error al obtener los perfiles",
         status: "error"
+    },
+    1012:{
+        id: 1012,
+        description: "error al obtener los permisos",
+        status: "error"
+    },
+    1013:{
+        id: 1013,
+        description: "error al crear el perfil",
+        status: "error"
+    },
+    1014:{
+        id: 1014,
+        description: "Perfil creado con exito",
+        status: "success"
+    },
+    1015:{
+        id: 1015,
+        description: "Error al asignar el permiso",
+        status: "error"
+    },
+    1016:{
+        id: 1016,
+        description: "Este perfil ya tiene asignado ese permiso",
+        status: "error"
+    },
+    1017:{
+        id: 1017,
+        description: "Permiso asignado con exicto",
+        status: "success"
     }
+
 
 
 }

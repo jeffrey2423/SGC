@@ -12,6 +12,10 @@ rsc_controller.ESTADO_USUARIO = {
     EXISTE_PERMISO: 1
 }
 
+rsc_controller.ESTADO_PERMISO = {
+    NO_EXISTE: 0
+}
+
 // Funcion para obtener el json del recurso para enviar al Cliente 
 // el parametro traza sera opcional para cuando se llame un recurso
 // de error, para mostrar un mensaje adecuado al cliente pero 
