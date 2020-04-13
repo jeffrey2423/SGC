@@ -26,5 +26,6 @@ app.use(authToken);
 app.use('/api/user', require('./routes/user'));
 app.use('/api/user/auth', require('./routes/auth'));
 app.use('/api/user/profile', require('./routes/profile'));
+app.use('/api/user/events', require('./routes/events'));
 
 module.exports = app;
