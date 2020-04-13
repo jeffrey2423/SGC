@@ -17,7 +17,7 @@ export default class NavBar extends Component {
                             <Link className="nav-link" to="/GestionUsuarios">Gestion Usuarios</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="/GestionCitas">Gestion Citas</Link>
+                            <Link className="nav-link" to="/GestionPerfiles">Gestion Perfiles</Link>
                         </li>
                         <li className="nav-item">
                             <div className="btn-group dropleft">
