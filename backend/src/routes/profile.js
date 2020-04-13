@@ -7,13 +7,13 @@ router.route('/getProfiles')
     //obtener datos
     .get(profileController.getProfiles)
 router.route('/getPermission/:id')
-    //obtener permisos
+    //obtener permisos por perfil
     .get(profileController.getPermissions)
 router.route('/createProfile')
     //crear perfil
     .post(profileController.createProfile)
 router.route('/createProfileExt')
-    //crear perfil
+    //crear perfil con permiso
     .post(profileController.createProfileExt)
 
 module.exports = router;

@@ -139,6 +139,11 @@ module.exports = {
         id: 1027,
         description: "Usuario activado con exito",
         status: "success"
+    },
+    1028:{
+        id: 1028,
+        description: "Error al obtener los eventos",
+        status: "error"
     }
 
 

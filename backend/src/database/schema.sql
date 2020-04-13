@@ -148,3 +148,25 @@ SELECT
     ON t1001_permisos.f1001_id = t1002_perfil_extendido.f1002_id_permiso_t1001
                 
 );
+
+CREATE OR REPLACE VIEW v2002_eventos_info AS(
+    SELECT 
+        f1006_ts						AS f_fecha_creacion,
+        f1006_id						AS f_id,
+        f1006_titulo					AS title,
+        f1006_descripcion				AS desc,
+        f1006_fecha_iso8601_inicial		AS start,
+        f1006_fecha_iso8601_final		AS end,
+        CASE
+                WHEN
+                    (f1006_ind_todo_el_dia) = 0 THEN 'No'
+                ELSE 'Si'
+        END	AS allDay,
+        creador.f1004_nombre AS f_creado_por,
+        asignado.f1004_nombre AS f_asignado_a
+        FROM t1006_eventos AS eventos
+        LEFT JOIN t1004_usuarios AS creador
+        ON eventos.f1006_id_usuario_asignado_t1004 = creador.f1004_id
+        LEFT JOIN t1004_usuarios AS asignado
+        ON eventos.f1006_id_usuario_creador_t1004 = asignado.f1004_id        
+);
