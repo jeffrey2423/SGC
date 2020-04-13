@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import Swal from 'sweetalert2/dist/sweetalert2.js'
+import 'sweetalert2/src/sweetalert2.scss'
 
 export class GestionPerfiles extends Component {
     state = {
@@ -17,8 +19,18 @@ export class GestionPerfiles extends Component {
                 'Authorization': `Bearer ${this.state.token}`
             }
         });
-        console.log(res.data);
-        this.setState({ permisos: res.data });
+        if (res.data.status === "error") {
+            Swal.fire({
+                icon: 'error',
+                title: res.data.status,
+                text: res.data.description,
+                footer: res.data.id
+              })
+        }else{
+            this.setState({ permisos: res.data });
+        }
+        
+        
     }
 
     render() {
