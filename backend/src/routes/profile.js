@@ -15,5 +15,9 @@ router.route('/createProfile')
 router.route('/createProfileExt')
     //crear perfil con permiso
     .post(profileController.createProfileExt)
+router.route('/deletePermisoExt')
+    //eliminar  permiso de perfil
+    .delete(profileController.deletePermisoExt)
+
 
 module.exports = router;

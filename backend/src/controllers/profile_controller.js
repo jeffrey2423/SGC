@@ -60,7 +60,6 @@ profileController.getPermissions = async (req, res) => {
 profileController.createProfile = async (req, res) => {
     try {
         const perfil = req.body;
-        console.log(perfil);
         const query = {
             text: "select * from f_insertar_perfil($1)",
             values: [perfil]
@@ -92,7 +91,7 @@ profileController.createProfileExt = async (req, res) => {
             if (!err) {
                 const estadoPerfil = results.rows[0].f_validar_perfil_ext;
                 resultadoValidar = (estadoPerfil == rscController.ESTADO_PERMISO.NO_EXISTE) ? true : false;
-                
+
             } else {
                 resultadoValidar = false;
                 res.json(rscController.leerRecurso(1016, err.message));
@@ -101,7 +100,7 @@ profileController.createProfileExt = async (req, res) => {
 
         // dormimos el hilo principal para que no pase al siguiente bloque
         // sin que la variable resultadoValidar este llena
-        await rscController.snooze(10);      
+        await rscController.snooze(10);
 
         if (resultadoValidar) {
             const query = {
@@ -117,7 +116,7 @@ profileController.createProfileExt = async (req, res) => {
                     res.json(rscController.leerRecurso(1015, err.message));
                 }
             });
-        }else{
+        } else {
             res.json(rscController.leerRecurso(1016));
         }
     } catch (error) {
@@ -125,4 +124,28 @@ profileController.createProfileExt = async (req, res) => {
         res.json(rscController.leerRecurso(1015, error.message));
     }
 }
+
+profileController.deletePermisoExt = async (req, res) => {
+    try {
+        const perfil = req.body.perfil;
+        const permiso = req.body.permiso;
+
+        const query = {
+            text: "select * from f_eliminar_permiso_ext($1,$2)",
+            values: [perfil,permiso]
+        };
+        await connection.query(query, (err, results) => {
+            if (!err) {
+                res.json(rscController.leerRecurso(1029));
+            } else {
+                connection.query('ROLLBACK');
+                res.json(rscController.leerRecurso(1030, err.message));
+            }
+        });
+    } catch (error) {
+        await connection.query('ROLLBACK');
+        res.json(rscController.leerRecurso(1030, error.message));
+    }
+}
+
 module.exports = profileController;
