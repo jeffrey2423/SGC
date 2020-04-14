@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 
-export default class Inicio extends Component {
+export default class GestionCitas extends Component {
     render() {
         return (
             <div>
-                Esto es inicio
+                
             </div>
         )
     }
