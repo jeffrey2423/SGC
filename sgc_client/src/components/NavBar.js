@@ -17,19 +17,6 @@ export default class NavBar extends Component {
                         <li className="nav-item">
                             <Link className="nav-link" to="/GestionPerfiles">Gestion Perfiles</Link>
                         </li>
-                        <li className="nav-item">
-                            <div className="btn-group dropleft">
-                                <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Perfil
-                            </button>
-                                <div className="dropdown-menu bg-dark" aria-labelledby="dropdownMenuButton">
-                                    <Link className="nav-link" to="/Perfil">Mi Perfil</Link>
-                                    <Link className="nav-link" to="/GestionCitas">Mis Citas</Link>
-                                    <Link className="nav-link" to="/login">Cerrar Sesion</Link>
-                                </div>
-                            </div>
-
-                        </li>
                     </ul>
                 </div>
             </nav>
