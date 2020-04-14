@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 
 import Header from './/components/header'
-import Menu from './/components/NavBar'
 
 import Inicio from './/components/Inicio'
 import GestionUsuarios from './/components/GestionUsuarios'
@@ -17,7 +16,6 @@ function App() {
   return (
     <Router>
       <Header />
-      <Menu />
       <div className="container p-4">
         <Route path="/Inicio" exact component={Inicio} />
         <Route path="/GestionUsuarios" exact component={GestionUsuarios} />

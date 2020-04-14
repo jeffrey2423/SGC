@@ -9,22 +9,25 @@ export default class NavBar extends Component {
                 margin: 0,
                 paddingLeft: 0,
                 listStyle: 'none',
-                background: '#d2cfd6'
+                background: '#d2cfd6',
+                paddingLeft: '140px'
             },
             "navbar_link": {
-                color:'#632380'
+                color: '#632380'
             }
         };
 
         return (
-            <nav className="nav nav-pills nav-fill" style={styles["navbar_spa"]}>
+            
+                <div className="nav nav-pills " style={styles["navbar_spa"]}>
 
-                <Link className="nav-item nav-link active" style= {styles["navbar_link"]} to="/Inicio">Inicio</Link>
-                <Link className="nav-item nav-link" style= {styles["navbar_link"]} to="/GestionUsuarios">Gestion Usuarios</Link>
-                <Link className="nav-item nav-link" style= {styles["navbar_link"]} to="/GestionCitas">Gestion Citas</Link>
-                <Link className="nav-item nav-link" style= {styles["navbar_link"]} to="/GestionPerfiles">Gestion Perfiles</Link>
+                    <Link className="nav-item nav-link active-spa" style={styles["navbar_link"]} to="/Inicio">Inicio</Link>
+                    <Link className="nav-item nav-link" style={styles["navbar_link"]} to="/GestionUsuarios">Gestion Usuarios</Link>
+                    <Link className="nav-item nav-link" style={styles["navbar_link"]} to="/GestionCitas">Gestion Citas</Link>
+                    <Link className="nav-item nav-link" style={styles["navbar_link"]} to="/GestionPerfiles">Gestion Perfiles</Link>
 
-            </nav>
+                </div>
+
         )
     }
 }
