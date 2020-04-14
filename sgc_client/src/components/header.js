@@ -30,6 +30,7 @@ export default class header extends Component {
                         <div className="btn-group navbar-nav ml-auto">
                             <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Perfil
+                                <span className="glyphicon glyphicon-user"></span>
                             </button>
                             <div className="dropdown-menu bg-dark" aria-labelledby="dropdownMenuButton">
                                 <Link className="nav-link" to="/Perfil">Mi Perfil</Link>
