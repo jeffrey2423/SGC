@@ -29,7 +29,7 @@ export default class header extends Component {
 
 
                 <div className="profile-menu">
-                    <div className="btn-group tx-profilemenu">
+                    <div className="btn-group tx-profilemenu dropleft">
                         <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Perfil
                                 <span className="glyphicon glyphicon-user"></span>
