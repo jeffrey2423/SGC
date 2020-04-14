@@ -4,7 +4,7 @@ export default class GestionUsuarios extends Component {
     render() {
         return (
             <div>
-                Esto es gestión de usuarios
+                Esto es inicio
             </div>
         )
     }
