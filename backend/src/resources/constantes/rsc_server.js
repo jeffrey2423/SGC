@@ -144,6 +144,16 @@ module.exports = {
         id: 1028,
         description: "Error al obtener los eventos",
         status: "error"
+    },
+    1029:{
+        id: 1029,
+        description: "Permiso eliminado con exito",
+        status: "success"
+    },
+    1030:{
+        id: 1030,
+        description: "Error al eliminar el permiso",
+        status: "error"
     }
 
 
