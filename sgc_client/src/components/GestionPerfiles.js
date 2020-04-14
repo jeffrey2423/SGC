@@ -135,7 +135,7 @@ export class GestionPerfiles extends Component {
             <div className="row">
                 <div className="col-md-4">
                     <ul className="list-group" style={{ width: '100%', height: '80%', overflowY: 'scroll' }}>
-                        <li class="list-group-item active">Perfiles</li>
+                        <li className="list-group-item active">Perfiles</li>
                         {
                             this.state.perfiles.map(perfil => (
                                 <li
@@ -152,9 +152,9 @@ export class GestionPerfiles extends Component {
                     </ul>
                 </div>
                 <div className="col-md-8">
-                    <ul classname="list-group" style={{ width: '100%', height: '80%', overflowY: 'scroll' }}>
+                    <ul className="list-group" style={{ width: '100%', height: '80%', overflowY: 'scroll' }}>
 
-                        <li class="list-group-item active">Permisos</li>
+                        <li className="list-group-item active">Permisos</li>
                         {
                             this.state.permisos.map(permiso => (
                                 <li
@@ -163,7 +163,7 @@ export class GestionPerfiles extends Component {
                                 >
 
                                     <div className="d-flex w-100 justify-content-between">
-                                        <h5 class="mb-1">{permiso.f_nombre_permiso}</h5>
+                                        <h5 className="mb-1">{permiso.f_nombre_permiso}</h5>
                                         <span className="badge badge-primary badge-pill"
                                             onClick={() => this.deletePermisoExt(permiso.f_id_permiso)}>
                                             Borrar</span>
