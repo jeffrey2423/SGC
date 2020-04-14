@@ -15,10 +15,12 @@ export default class NavBar extends Component {
 
         return (
             <nav className="nav nav-pills nav-fill" style={styles["navbar_spa"]}>
-                
-                <Link className="nav-item nav-link active" to="/GestionUsuarios">Gestion Usuarios</Link>
+
+                <Link className="nav-item nav-link active" to="/Inicio">Inicio</Link>
+                <Link className="nav-item nav-link" to="/GestionUsuarios">Gestion Usuarios</Link>
+                <Link className="nav-item nav-link" to="/GestionCitas">Gestion Citas</Link>
                 <Link className="nav-item nav-link" to="/GestionPerfiles">Gestion Perfiles</Link>
-             
+
             </nav>
         )
     }
