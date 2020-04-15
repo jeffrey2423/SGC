@@ -2,16 +2,24 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 
-import Menu from './/components/NavBar'
+import Header from './/components/header'
+
+import Inicio from './/components/Inicio'
+import GestionUsuarios from './/components/GestionUsuarios'
+import GestionCitas from './/components/GestionCitas'
 import GestionPerfiles from './/components/GestionPerfiles'
+
 
 import './App.css'
 
 function App() {
   return (
     <Router>
-      <Menu />
-      <div className="container p-4">
+      <Header />
+      <div className="container p-4 spa-content">
+        <Route path="/Inicio" exact component={Inicio} />
+        <Route path="/GestionUsuarios" exact component={GestionUsuarios} />
+        <Route path="/GestionCitas" exact component={GestionCitas} />
         <Route path="/GestionPerfiles" exact component={GestionPerfiles} />
       </div>
     </Router>
