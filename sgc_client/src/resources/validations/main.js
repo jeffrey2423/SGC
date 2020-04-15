@@ -26,13 +26,34 @@ validationController.success = (estado, descripcion, id) => {
     })
 };
 
-validationController.error = (estado, descripcion, id) => {
+validationController.error = (estado, descripcion, id, traza) => {
     Swal.fire({
         icon: 'error',
         title: estado,
         text: descripcion,
-        footer: id
+        footer: id +" " +traza === null || traza === "" ? "": traza
     })
 };
+
+validationController.validarCampo = (texto,campo) => {
+    let sePuede = true;
+    if (texto === "") {
+        Swal.fire({
+            icon: 'error',
+            title: "error",
+            text: "El campo "+campo+ " no puede estar vacio",
+
+        })
+        sePuede = false;
+    }
+
+    return sePuede;
+}
+
+validationController.descripcion = (texto) => {
+    Swal.fire(texto === null ? "": texto)
+}
+
+
 
 export default validationController;
