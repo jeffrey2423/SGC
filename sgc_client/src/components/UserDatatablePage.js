@@ -51,7 +51,7 @@ const UserDatatablePage = () => {
         "id_perfil": "1"
       },
       {
-        "nombre": "jeffrey",
+        "nombre": "jeffrey2",
         "apellido": "rios",
         "fecha_nacimiento": "1999-02-04",
         "id_profesion": "1",
@@ -59,7 +59,7 @@ const UserDatatablePage = () => {
         "id_perfil": "1"
       },
       {
-        "nombre": "jeffrey",
+        "nombre": "jeffrey3",
         "apellido": "rios",
         "fecha_nacimiento": "1999-02-04",
         "id_profesion": "1",
