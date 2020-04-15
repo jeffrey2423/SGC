@@ -24,7 +24,7 @@ export default class GestionUsuarios extends Component {
 
     alertHoverTable = () => {
         $(document).ready(function(){
-            $('tr').not(':first').mouseover(function(){
+            $('div.tableuser tr').not(':first').mouseover(function(){
                 var user = $(this).find('td:first-child').text();
                 $("#message-mouseover").empty();
                 $("#message-mouseover").append("Click sobre la fila para actualizar");  
