@@ -12,7 +12,7 @@ export default class header extends Component {
                 background: '#612080'
             },
             "img-logo": {
-                height: '90px',
+                height: '100px',
                 width: 'auto',
                 border:'1px solid black'
             }
@@ -42,9 +42,7 @@ export default class header extends Component {
                     </div>
                 </div>
 
-                <div className="navigation">
                     <Menu />
-                </div>
             </header>
         )
     }
