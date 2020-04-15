@@ -24,7 +24,7 @@
 }
 
 .profile-menu{
-    background: #fafafa;;
+    background: #70388b;
     height: 40px;
 }
 
@@ -39,7 +39,9 @@
 }
 
 .spa-content{
-  background: 	#d2cfd6;
+  background: 	#fafafa;
+  box-shadow: 0px 0px 5px #632382;
+  min-height: 400px;
 }
 
 @media (prefers-reduced-motion: no-preference) {
