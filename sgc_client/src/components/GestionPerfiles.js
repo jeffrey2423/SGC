@@ -332,7 +332,7 @@ export class GestionPerfiles extends Component {
                         <div className="form-group">
                             <input
                                 type="text"
-                                class="form-control"
+                                className="form-control"
                                 placeholder="Nombre"
                                 name="perfilNuevo"
                                 onChange={this.onInputChange}
@@ -346,7 +346,7 @@ export class GestionPerfiles extends Component {
                         <div className="form-group">
                             <input
                                 type="text"
-                                class="form-control"
+                                className="form-control"
                                 placeholder="Descripcion"
                                 name="desPerfilNuevo"
                                 onChange={this.onInputChange}
