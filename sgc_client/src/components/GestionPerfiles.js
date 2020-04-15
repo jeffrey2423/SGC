@@ -3,7 +3,7 @@ import axios from 'axios'
 import { format, register } from 'timeago.js';
 import validation from '../resources/validations/main';
 import clientResource from '../resources/client';
-import Breadcrumbs from './Breadcrumbs'
+//import Breadcrumbs from './Breadcrumbs'
 
 register('es_ES', clientResource.localeFunc);
 
@@ -204,6 +204,9 @@ export class GestionPerfiles extends Component {
     render() {
         return (
             <div className="container">
+                
+                <h2>Permisos asociados a un perfil</h2>
+                <hr />
                 <div className="row">
                     <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                         <ul className="list-group" style={{ width: '100%', height: '80%', overflowY: 'scroll' }}>
@@ -264,6 +267,9 @@ export class GestionPerfiles extends Component {
                     </div>
                 </div >
                 {/* FILA ASIGNAR PERMISO */}
+                
+                <h2>Asignar permiso a un perfil</h2>
+                <hr />
                 <div className="row">
                     <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                         <div className="form-group">
@@ -320,7 +326,7 @@ export class GestionPerfiles extends Component {
                                     type="submit"
                                     className="btn btn-success btn-block"
                                 >
-                                    Asignar permiso a perfil
+                                    Asignar permiso
                             </button>
                             </form>
                         </div>
@@ -328,7 +334,10 @@ export class GestionPerfiles extends Component {
                 </div>
 
                 {/* FILA CREAR PERFIL */}
-                <div className="row mt-5">
+              
+                <h2>Agregar un perfil</h2>
+                <hr />
+                <div className="row ">
                     <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                         <div className="form-group">
                             <input
@@ -369,7 +378,10 @@ export class GestionPerfiles extends Component {
                     </div>
                 </div>
                 {/* FILA ASIGNAR PERFIL */}
-                <div className="row mt-5">
+               
+                <h2>Asignar perfil a un usuario</h2>
+                <hr />
+                <div className="row">
                     <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                         <div className="form-group">
                             <select
@@ -422,7 +434,7 @@ export class GestionPerfiles extends Component {
                                     type="submit"
                                     className="btn btn-success btn-block"
                                 >
-                                    Actualizar perfil usuario
+                                    Asignar perfil
                             </button>
                             </form>
                         </div>
