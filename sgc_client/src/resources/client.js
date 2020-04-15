@@ -19,4 +19,11 @@ ClientController.localeFunc = (number, index, total_sec) => {
     ][index];
 };
 
+ClientController.agregarSesion = (usuario) => {
+    for(var key in usuario){
+        /*Guardando los datos en el sessionStorage*/
+        sessionStorage.setItem(key, usuario[key]);
+    }
+};
+
 export default ClientController;
