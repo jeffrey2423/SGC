@@ -23,7 +23,8 @@ export default class NavBar extends Component {
                 paddingLeft: 0,
                 listStyle: 'none',
                 background: '#d2cfd6',
-                paddingLeft: '150px'
+                paddingLeft: '150px',
+                borderBottom: '5px solid #70388b'
             },
             "navbar_link": {
                 color: '#632380'
