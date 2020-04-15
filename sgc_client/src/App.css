@@ -7,43 +7,6 @@
   pointer-events: none;
 }
 
-.active-spa {
-  color: #ffffff !important;
-  background-color: #612080;
-}
-
-.logo {
-  float: left;
-  height: 100px;
-  margin-left: 10px;
-  position: absolute;
-  text-align: center;
-  transition: width .5s, height .5s;
-  width: 150px;
-  z-index: 2;
-}
-
-.profile-menu{
-    background: #70388b;
-    height: 40px;
-}
-
-.tx-profilemenu{
-  float: right;
-  margin: 0 5px;
-}
-
-.navigation {
-  margin-left: 0px;
-  height: 60px;
-}
-
-.spa-content{
-  background: 	#fafafa;
-  box-shadow: 0px 0px 5px #632382;
-  min-height: 400px;
-}
-
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

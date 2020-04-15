@@ -11,3 +11,46 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+.active-spa {
+  color: #ffffff !important;
+  background-color: #612080;
+}
+
+.logo {
+  float: left;
+  height: 100px;
+  margin-left: 10px;
+  position: absolute;
+  text-align: center;
+  transition: width .5s, height .5s;
+  width: 150px;
+  z-index: 2;
+}
+
+.profile-menu{
+    background: #70388b;
+    height: 40px;
+}
+
+.tx-profilemenu{
+  float: right;
+  margin: 0 5px;
+  height: 35px;
+}
+
+.navigation {
+  margin-left: 0px;
+  height: 60px;
+}
+
+.spa-content{
+  background: 	#fafafa;
+  box-shadow: 0px 0px 5px #632382;
+  min-height: 400px;
+}
+
+#dropdownMenuButton {
+  height: 35px;
+}
