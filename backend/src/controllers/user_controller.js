@@ -210,5 +210,28 @@ userController.activateUser = async (req, res) => {
     }
 }
 
+userController.updateUserPerfil = async (req, res) => {
+    try {
+        const id_usuario = req.body.id_usuario;
+        const id_perfil = req.body.id_perfil;
+        const query = {
+            text: "select * from f_actualizar_usuario_perfil($1,$2)",
+            values: [id_perfil,id_usuario]
+        }
+        await connection.query(query, (err, results) => {
+            if (!err) {
+                res.json(rscController.leerRecurso(1031));
+            } else {
+                connection.query('ROLLBACK');
+                res.json(rscController.leerRecurso(1032, err.message));
+            }
+        });
+
+    } catch (error) {
+        await connection.query('ROLLBACK');
+        res.json(rscController.leerRecurso(1032, error.message));
+    }
+}
+
 
 module.exports = userController;

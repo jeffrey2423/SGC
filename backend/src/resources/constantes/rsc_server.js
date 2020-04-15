@@ -154,6 +154,16 @@ module.exports = {
         id: 1030,
         description: "Error al eliminar el permiso",
         status: "error"
+    },
+    1031:{
+        id: 1031,
+        description: "Perfil actualizado con exito",
+        status: "success"
+    },
+    1032:{
+        id: 1032,
+        description: "Error al actualizar el perfil",
+        status: "error"
     }
 
 
