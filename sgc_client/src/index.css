@@ -54,3 +54,7 @@ code {
 #dropdownMenuButton {
   height: 35px;
 }
+
+#message-mouseover{
+  display: inline-block;
+}
