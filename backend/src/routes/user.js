@@ -31,4 +31,8 @@ router.route('/activateUser/:id')
     //actualizar indicador activo usuario
     .put(userController.activateUser)
 
+router.route('/updateUserPerfil')
+    //actualizar perfil usuario
+    .put(userController.updateUserPerfil)
+
 module.exports = router;
