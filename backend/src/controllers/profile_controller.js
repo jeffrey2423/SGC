@@ -81,6 +81,7 @@ profileController.createProfile = async (req, res) => {
 profileController.createProfileExt = async (req, res) => {
     try {
         const datos = req.body;
+        console.log(datos);
         let resultadoValidar;
         const queryValidarUsuario = {
             text: "select * from f_validar_perfil_ext($1)",
