@@ -3,6 +3,7 @@ import axios from 'axios'
 import { format, register } from 'timeago.js';
 import validation from '../resources/validations/main';
 import clientResource from '../resources/client';
+import Breadcrumbs from './Breadcrumbs'
 
 register('es_ES', clientResource.localeFunc);
 
@@ -204,7 +205,7 @@ export class GestionPerfiles extends Component {
         return (
             <div className="container">
                 <div className="row">
-                    <div className="col">
+                    <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                         <ul className="list-group" style={{ width: '100%', height: '80%', overflowY: 'scroll' }}>
                             <li className="list-group-item active">Perfiles</li>
                             {
@@ -229,7 +230,7 @@ export class GestionPerfiles extends Component {
                             }
                         </ul>
                     </div>
-                    <div className="col">
+                    <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                         <ul className="list-group" style={{ width: '100%', height: '80%', overflowY: 'scroll' }}>
 
                             <li className="list-group-item active">Permisos</li>
@@ -264,7 +265,7 @@ export class GestionPerfiles extends Component {
                 </div >
                 {/* FILA ASIGNAR PERMISO */}
                 <div className="row">
-                    <div className="col">
+                    <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                         <div className="form-group">
                             <select
                                 name="perfilSeleccionadoSelect"
@@ -288,7 +289,7 @@ export class GestionPerfiles extends Component {
                             </select>
                         </div>
                     </div>
-                    <div className="col">
+                    <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                         <div className="form-group">
                             <select
                                 name="permisoSeleccionadoSelect"
@@ -312,7 +313,7 @@ export class GestionPerfiles extends Component {
                             </select>
                         </div>
                     </div>
-                    <div className="col">
+                    <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                         <div className="form-group">
                             <form onSubmit={this.onSubmit}>
                                 <button
@@ -328,7 +329,7 @@ export class GestionPerfiles extends Component {
 
                 {/* FILA CREAR PERFIL */}
                 <div className="row mt-5">
-                    <div className="col">
+                    <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                         <div className="form-group">
                             <input
                                 type="text"
@@ -342,7 +343,7 @@ export class GestionPerfiles extends Component {
 
                         </div>
                     </div>
-                    <div className="col">
+                    <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                         <div className="form-group">
                             <input
                                 type="text"
@@ -354,7 +355,7 @@ export class GestionPerfiles extends Component {
                             </input>
                         </div>
                     </div>
-                    <div className="col">
+                    <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                         <div className="form-group">
                             <form onSubmit={this.onSubmitPerfil}>
                                 <button
@@ -369,7 +370,7 @@ export class GestionPerfiles extends Component {
                 </div>
                 {/* FILA ASIGNAR PERFIL */}
                 <div className="row mt-5">
-                    <div className="col">
+                    <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                         <div className="form-group">
                             <select
                                 name="usuarioSeleccionado"
@@ -392,7 +393,7 @@ export class GestionPerfiles extends Component {
 
                         </div>
                     </div>
-                    <div className="col">
+                    <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                         <div className="form-group">
                         <select
                                 name="perfilSeleccionadoSelect"
@@ -414,7 +415,7 @@ export class GestionPerfiles extends Component {
                             </select>
                         </div>
                     </div>
-                    <div className="col">
+                    <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                         <div className="form-group">
                             <form onSubmit={this.onSubmitUsuario}>
                                 <button
