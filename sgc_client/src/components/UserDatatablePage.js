@@ -53,10 +53,11 @@ export class UserDatatablePage extends Component {
           width: 270
         },
         {
-          label: 'Fecha de Nacimiento',
-          field: 'f_fecha_nacimiento',
+          label: 'Email',
+          field: 'f_email',
           sort: 'asc',
-          width: 150
+          width: 100,
+          style: {color:'red'}
         },
         {
           label: 'Profesión',
@@ -65,15 +66,14 @@ export class UserDatatablePage extends Component {
           width: 100
         },
         {
-          label: 'Email',
-          field: 'f_email',
-          sort: 'asc',
-          width: 100,
-          style: {color:'red'}
-        },
-        {
           label: 'Perfil/Rol',
           field: 'f_perfil',
+          sort: 'asc',
+          width: 100
+        },
+        {
+          label: 'Estado',
+          field: 'f_activo',
           sort: 'asc',
           width: 100
         }
@@ -83,6 +83,7 @@ export class UserDatatablePage extends Component {
 
     return (
       <MDBDataTable
+      responsive
         striped
         bordered
         hover
