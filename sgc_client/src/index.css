@@ -62,3 +62,10 @@ code {
 .tableuser .dataTables_wrapper th:nth-child(1), .tableuser .dataTables_wrapper tbody tr td:nth-child(1){
   display: none;
 }
+
+.userform{
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: 0;
+  padding-top: 10px;
+}

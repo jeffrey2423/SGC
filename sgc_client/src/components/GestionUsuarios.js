@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
-import UserDatatablePage from './UserDatatablePage'
+import React, { Component } from 'react';
+import UserDatatablePage from './UserDatatablePage';
+import UserForm from './UserForm';
 import $ from 'jquery';
 
 export default class GestionUsuarios extends Component {
@@ -23,14 +24,14 @@ export default class GestionUsuarios extends Component {
     }
 
     alertHoverTable = () => {
-        $(document).ready(function(){
-            $('div.tableuser tr').not(':first').mouseover(function(){
+        $(document).ready(function () {
+            $('div.tableuser tr').not(':first').mouseover(function () {
                 $("#message-mouseover").empty();
-                $("#message-mouseover").append("Click sobre la fila para actualizar");  
+                $("#message-mouseover").append("Click sobre la fila para actualizar");
             })
-            .mouseout(function () {
-                $("#message-mouseover").empty();
-            });
+                .mouseout(function () {
+                    $("#message-mouseover").empty();
+                });
         });
         /*$("#usersdatatable table tr")
             .mouseover(function () {
@@ -52,6 +53,11 @@ export default class GestionUsuarios extends Component {
                 <span id="message-mouseover"></span>
                 <div className="tableuser" id="usersdatatable">
                     <UserDatatablePage />
+                </div>
+                <div className="userform container " id="userform">
+                    <h2>Formulario de usuarios</h2>
+                    <hr />
+                    <UserForm />
                 </div>
             </div>
         )
