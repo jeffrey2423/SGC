@@ -58,3 +58,23 @@ code {
 #message-mouseover{
   display: inline-block;
 }
+
+.tableuser .dataTables_wrapper th:nth-child(1), .tableuser .dataTables_wrapper tbody tr td:nth-child(1){
+  display: none;
+}
+
+.userform{
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: 0;
+  padding-top: 10px;
+}
+
+.sticky {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  border-top: 0;
+}
