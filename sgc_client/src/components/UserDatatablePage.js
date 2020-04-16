@@ -35,6 +35,12 @@ export class UserDatatablePage extends Component {
     const data = {
       columns: [
         {
+          label: 'Id',
+          field: 'f_id',
+          sort: 'asc',
+          width: 150
+        },
+        {
           label: 'Nombre',
           field: 'f_nombre',
           sort: 'asc',
