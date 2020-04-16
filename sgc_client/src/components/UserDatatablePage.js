@@ -37,6 +37,7 @@ export class UserDatatablePage extends Component {
         {
           label: 'Id',
           field: 'f_id',
+          name: 'f_id',
           sort: 'asc',
           width: 150
         },

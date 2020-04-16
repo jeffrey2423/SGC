@@ -1,5 +1,5 @@
 import React from "react";
-import { MDBContainer, MDBInputGroup, MDBInput } from "mdbreact";
+import { MDBContainer } from "mdbreact";
 import axios from 'axios';
 import validation from '../resources/validations/main';
 
@@ -49,86 +49,109 @@ class UserForm extends React.Component {
             <MDBContainer>
                 <div className="row">
                     <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <MDBInputGroup containerClassName="mb-3" prepend="Nombre" type="text" hint="Nombre" id="f_nombre" />
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-default">Nombre</span>
+                            </div>
+                            <input type="text" id="f_nombre" placeholder="Nombre" className="form-control"
+                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
+                        </div>
                     </div>
                     <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <MDBInputGroup containerClassName="mb-3" prepend="Apellido" type="text" hint="Apellido" id="f_apellido" />
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-default">Apellido</span>
+                            </div>
+                            <input type="text" id="f_apellido" placeholder="Apellido" className="form-control"
+                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
+                        </div>
                     </div>
                 </div>
 
                 <div className="row">
                     <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <MDBInputGroup containerClassName="mb-3" prepend="Email" hint="example@email.com" id="f_email" type="email" />
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-default">Email</span>
+                            </div>
+                            <input type="email" id="f_email" placeholder="example@email.com" className="form-control"
+                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
+                        </div>
                     </div>
 
                     <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <select
-                            name="perfilSeleccionadoSelectUserForm"
-                            className="browser-default custom-select mb-3"
-                        >
-                            <option>
-                                Perfil/Rol
-                                </option>
-                            {
-                                this.state.perfiles.map(perfil =>
-                                    <option value={perfil.f1000_id} key={perfil.f1000_id}>
-                                        {perfil.f1000_nombre}
-                                    </option>
-                                )
-                            }
 
-                        </select>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="inputGroupSelect01">Perfil/Rol</label>
+                            </div>
+                            <select class="custom-select" id="f_perfil">
+                                <option selected>Choose...</option>
+                                {
+                                    this.state.perfiles.map(perfil =>
+                                        <option value={perfil.f1000_id} key={perfil.f1000_id}>
+                                            {perfil.f1000_nombre}
+                                        </option>
+                                    )
+                                }
+                            </select>
+                        </div>
                     </div>
                 </div>
 
                 <div className="row">
                     <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <MDBInputGroup containerClassName="mb-3" prepend="Contraseña" hint="Contraseña de usuario" id="f_clave"
-                            group type="password" validate />
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-default">Contraseña</span>
+                            </div>
+                            <input type="password" id="f_clave" placeholder="Contraseña de usuario" className="form-control"
+                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
+                        </div>
                     </div>
 
                     <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <MDBInputGroup containerClassName="mb-3" prepend="Contraseña" hint="Repita contraseña" id="f_clave_retype"
-                            group type="password" validate />
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-default">Contraseña</span>
+                            </div>
+                            <input type="password" id="f_clave" placeholder="Repita contraseña" className="form-control"
+                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
+                        </div>
                     </div>
                 </div>
 
                 <div className="row">
                     <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <select
-                            name="perfilSeleccionadoSelectUserForm"
-                            className="browser-default custom-select mb-3"
-                        >
-                            <option>
-                                Profesión
-                                </option>
-                            {
-                                this.state.perfiles.map(perfil =>
-                                    <option value={perfil.f1000_id} key={perfil.f1000_id}>
-                                        {perfil.f1000_nombre}
-                                    </option>
-                                )
-                            }
-
-                        </select>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="inputGroupSelect01">Profesión</label>
+                            </div>
+                            <select class="custom-select" id="f_profesion">
+                                <option selected>Choose...</option>
+                                {
+                                    this.state.perfiles.map(perfil =>
+                                        <option value={perfil.f1000_id} key={perfil.f1000_id}>
+                                            {perfil.f1000_nombre}
+                                        </option>
+                                    )
+                                }
+                            </select>
+                        </div>
                     </div>
 
-                    <div className="col-lg-6 col-md-6 col-sm-12 col-xs-122">
-                        <select
-                            name="perfilSeleccionadoSelectUserForm"
-                            className="browser-default custom-select mb-3"
-                        >
-                            <option>
-                                Estado
-                                </option>
-                            <option value="1">
-                                Activo
-                            </option>
-                            <option value="0">
-                                Inactivo
-                            </option>
-
-                        </select>
+                    <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="inputGroupSelect01">Estado</label>
+                            </div>
+                            <select class="custom-select" id="f_activo">
+                                <option selected>Choose...</option>
+                                <option value="1"> Activo</option>
+                                <option value="0">Inactivo</option>
+                            </select>
+                        </div>
+                       
                     </div>
                 </div>
             </MDBContainer >

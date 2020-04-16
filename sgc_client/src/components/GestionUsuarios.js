@@ -12,14 +12,20 @@ export default class GestionUsuarios extends Component {
 
     clickTableUpdateUser = () => {
         $(document).on('click', '#usersdatatable table tbody tr td', function () {
-            let valores = "";
 
-            // Obtenemos la primer columna de la fila seleccionada
-            // seleccionada
-            valores = $(this).parents("tr").find("td:first").html();
+            //Get data from table
+            let usuario = {};
+            usuario.f_nombre = $(this).parents("tr").find("td").eq(1).html();
+            usuario.f_apellido = $(this).parents("tr").find("td").eq(2).html();
+            usuario.f_email = $(this).parents("tr").find("td").eq(3).html();
+            usuario.f_profesion = $(this).parents("tr").find("td").eq(4).html();
+            usuario.f_perfil = $(this).parents("tr").find("td").eq(5).html();
+            usuario.f_activo = $(this).parents("tr").find("td").eq(6).html();
 
-            alert(valores);
-
+            //Set data to form
+            $("#f_nombre").attr("value",usuario.f_nombre);
+            $("#f_apellido").attr("value",usuario.f_apellido);
+            $("#f_email").attr("value",usuario.f_email);
         });
     }
 
