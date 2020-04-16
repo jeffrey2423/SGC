@@ -23,7 +23,7 @@ export default class header extends Component {
             <header style={styles["header_style"]}>
                 <div className="logo">
                     <Link className="header-logo" to="/Calendar">
-                        <img src="./spa-logo.PNG" title="ValentinSpa" style={styles["img-logo"]} className="img-logo" />
+                        <img alt= "" src="./spa-logo.PNG" title="ValentinSpa" style={styles["img-logo"]} className="img-logo" />
                     </Link>
                 </div>
 
