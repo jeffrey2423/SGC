@@ -12,8 +12,8 @@ export class GestionPerfiles extends Component {
         perfiles: [],
         permisos: [],
         permisos_todos: [],
-        usuarios:[],
-        usuarioSeleccionado:0,
+        usuarios: [],
+        usuarioSeleccionado: 0,
         perfilSeleccionado: 0,
         perfilSeleccionadoSelect: 0,
         permisoSeleccionadoSelect: 0,
@@ -204,243 +204,260 @@ export class GestionPerfiles extends Component {
     render() {
         return (
             <div className="container">
-                
-                <h2>Permisos asociados a un perfil</h2>
-                <hr />
-                <div className="row">
-                    <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <ul className="list-group" style={{ width: '100%', height: '80%', overflowY: 'scroll' }}>
-                            <li className="list-group-item active">Perfiles</li>
-                            {
-                                this.state.perfiles.map(perfil => (
-                                    <li
-                                        className="list-group-item list-group-item-action"
-                                        key={perfil.f1000_id}
-                                        onClick={() => this.getPermisosExt(perfil.f1000_id)}>
-                                        <div className="float-right">
-                                            <span className="badge badge-secondary badge-pill"
-                                                onClick={() => validation.descripcion(perfil.f1000_descripcion)}>
-                                                Descripcion
+                <div className="card">
+                    <div class="card-body">
+                        <h2 className="card-title">Permisos asociados a un perfil</h2>
+                        <hr />
+                        <div className="row">
+                            <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <ul className="list-group" style={{ width: '100%', height: '80%', overflowY: 'scroll' }}>
+                                    <li className="list-group-item active">Perfiles</li>
+                                    {
+                                        this.state.perfiles.map(perfil => (
+                                            <li
+                                                className="list-group-item list-group-item-action"
+                                                key={perfil.f1000_id}
+                                                onClick={() => this.getPermisosExt(perfil.f1000_id)}>
+                                                <div className="float-right">
+                                                    <span className="badge badge-secondary badge-pill"
+                                                        onClick={() => validation.descripcion(perfil.f1000_descripcion)}>
+                                                        Descripcion
                                             </span>
-                                        </div>
+                                                </div>
 
-                                        {perfil.f1000_nombre}
-                                        <div className="d-flex w-100 justify-content-between">
-                                            <small>{format(perfil.f1000_ts, 'es_ES')}</small>
-                                        </div>
-                                    </li>)
-                                )
-                            }
-                        </ul>
-                    </div>
-                    <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <ul className="list-group" style={{ width: '100%', height: '80%', overflowY: 'scroll' }}>
+                                                {perfil.f1000_nombre}
+                                                <div className="d-flex w-100 justify-content-between">
+                                                    <small>{format(perfil.f1000_ts, 'es_ES')}</small>
+                                                </div>
+                                            </li>)
+                                        )
+                                    }
+                                </ul>
+                            </div>
+                            <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <ul className="list-group" style={{ width: '100%', height: '80%', overflowY: 'scroll' }}>
 
-                            <li className="list-group-item active">Permisos</li>
-                            {
-                                this.state.permisos.map(permiso => (
-                                    <li
-                                        className="list-group-item list-group-item-action"
-                                        key={permiso.f_id_permiso}
-                                    >
-                                        {permiso.f_nombre_permiso}
-                                        <div className="float-right">
-                                            <span className="badge badge-primary badge-pill"
-                                                onClick={() => this.deletePermisoExt(permiso.f_id_permiso)}>
-                                                Borrar
+                                    <li className="list-group-item active">Permisos</li>
+                                    {
+                                        this.state.permisos.map(permiso => (
+                                            <li
+                                                className="list-group-item list-group-item-action"
+                                                key={permiso.f_id_permiso}
+                                            >
+                                                {permiso.f_nombre_permiso}
+                                                <div className="float-right">
+                                                    <span className="badge badge-primary badge-pill"
+                                                        onClick={() => this.deletePermisoExt(permiso.f_id_permiso)}>
+                                                        Borrar
                                             </span>
-                                            <span className="badge badge-secondary badge-pill"
-                                                onClick={() => validation.descripcion(permiso.f_desc_permiso)}>
-                                                Descripcion
+                                                    <span className="badge badge-secondary badge-pill"
+                                                        onClick={() => validation.descripcion(permiso.f_desc_permiso)}>
+                                                        Descripcion
                                             </span>
-                                        </div>
+                                                </div>
 
 
-                                        <div className="d-flex w-100 justify-content-between">
-                                            <small>{format(permiso.f_fecha_creacion_permiso, 'es_ES')}</small>
-                                        </div>
+                                                <div className="d-flex w-100 justify-content-between">
+                                                    <small>{format(permiso.f_fecha_creacion_permiso, 'es_ES')}</small>
+                                                </div>
 
-                                    </li>)
-                                )
-                            }
-                        </ul>
-                    </div>
+                                            </li>)
+                                        )
+                                    }
+                                </ul>
+                            </div>
+                        </div >
+                    </div >
                 </div >
+
                 {/* FILA ASIGNAR PERMISO */}
-                
-                <h2>Asignar permiso a un perfil</h2>
-                <hr />
-                <div className="row">
-                    <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                        <div className="form-group">
-                            <select
-                                name="perfilSeleccionadoSelect"
-                                className="form-control"
-                                value={this.state.perfilSeleccionadoSelect}
-                                onChange={this.onInputChange}
+                <div className="card mt-4">
+                    <div className="card-body">
+                        <h2 className="card-title">Asignar permiso a un perfil</h2>
+                        <hr />
+                        <div className="row">
+                            <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+
+                                <div className="form-group">
+                                    <select
+                                        name="perfilSeleccionadoSelect"
+                                        className="form-control"
+                                        value={this.state.perfilSeleccionadoSelect}
+                                        onChange={this.onInputChange}
 
 
-                            >
-                                <option>
-                                    Perfiles
+                                    >
+                                        <option>
+                                            Perfiles
                                 </option>
-                                {
-                                    this.state.perfiles.map(perfil =>
-                                        <option value={perfil.f1000_id} key={perfil.f1000_id}>
-                                            {perfil.f1000_nombre}
-                                        </option>
-                                    )
-                                }
+                                        {
+                                            this.state.perfiles.map(perfil =>
+                                                <option value={perfil.f1000_id} key={perfil.f1000_id}>
+                                                    {perfil.f1000_nombre}
+                                                </option>
+                                            )
+                                        }
 
-                            </select>
-                        </div>
-                    </div>
-                    <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                        <div className="form-group">
-                            <select
-                                name="permisoSeleccionadoSelect"
-                                className="form-control"
-                                value={this.state.permisoSeleccionadoSelect}
-                                onChange={this.onInputChange}
+                                    </select>
+                                </div>
+
+                            </div>
+
+                            <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <div className="form-group">
+                                    <select
+                                        name="permisoSeleccionadoSelect"
+                                        className="form-control"
+                                        value={this.state.permisoSeleccionadoSelect}
+                                        onChange={this.onInputChange}
 
 
-                            >
-                                <option>
-                                    Permisos
+                                    >
+                                        <option>
+                                            Permisos
                                 </option>
-                                {
-                                    this.state.permisos_todos.map(permisos_all =>
-                                        <option value={permisos_all.f1001_id} key={permisos_all.f1001_id}>
-                                            {permisos_all.f1001_nombre}
-                                        </option>
-                                    )
-                                }
+                                        {
+                                            this.state.permisos_todos.map(permisos_all =>
+                                                <option value={permisos_all.f1001_id} key={permisos_all.f1001_id}>
+                                                    {permisos_all.f1001_nombre}
+                                                </option>
+                                            )
+                                        }
 
-                            </select>
-                        </div>
-                    </div>
-                    <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                        <div className="form-group">
-                            <form onSubmit={this.onSubmit}>
-                                <button
-                                    type="submit"
-                                    className="btn btn-success btn-block"
-                                >
-                                    Asignar permiso
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <div className="form-group">
+                                    <form onSubmit={this.onSubmit}>
+                                        <button
+                                            type="submit"
+                                            className="btn btn-success btn-block"
+                                        >
+                                            Asignar permiso
                             </button>
-                            </form>
+                                    </form>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
 
                 {/* FILA CREAR PERFIL */}
-              
-                <h2>Agregar un perfil</h2>
-                <hr />
-                <div className="row ">
-                    <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                        <div className="form-group">
-                            <input
-                                type="text"
-                                className="form-control"
-                                placeholder="Nombre"
-                                name="perfilNuevo"
-                                onChange={this.onInputChange}
-                                required
-                            >
-                            </input>
+                <div className="card mt-4">
+                    <div className="card-body">
+                        <h2 className="card-title">Agregar un perfil</h2>
+                        <hr />
+                        <div className="row ">
+                            <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <div className="form-group">
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="Nombre"
+                                        name="perfilNuevo"
+                                        onChange={this.onInputChange}
+                                        required
+                                    >
+                                    </input>
 
-                        </div>
-                    </div>
-                    <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                        <div className="form-group">
-                            <input
-                                type="text"
-                                className="form-control"
-                                placeholder="Descripcion"
-                                name="desPerfilNuevo"
-                                onChange={this.onInputChange}
-                            >
-                            </input>
-                        </div>
-                    </div>
-                    <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                        <div className="form-group">
-                            <form onSubmit={this.onSubmitPerfil}>
-                                <button
-                                    type="submit"
-                                    className="btn btn-success btn-block"
-                                >
-                                    Crear perfil
+                                </div>
+                            </div>
+                            <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <div className="form-group">
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="Descripcion"
+                                        name="desPerfilNuevo"
+                                        onChange={this.onInputChange}
+                                    >
+                                    </input>
+                                </div>
+                            </div>
+                            <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <div className="form-group">
+                                    <form onSubmit={this.onSubmitPerfil}>
+                                        <button
+                                            type="submit"
+                                            className="btn btn-success btn-block"
+                                        >
+                                            Crear perfil
                             </button>
-                            </form>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 {/* FILA ASIGNAR PERFIL */}
-               
-                <h2>Asignar perfil a un usuario</h2>
-                <hr />
-                <div className="row">
-                    <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                        <div className="form-group">
-                            <select
-                                name="usuarioSeleccionado"
-                                className="form-control"
-                                value={this.state.usuarioSeleccionado}
-                                onChange={this.onInputChange}
-                            >
-                                <option>
-                                    Usuarios
+                <div className="card mt-4">
+                    <div className="card-body">
+                        <h2 className="card-title">Asignar perfil a un usuario</h2>
+                        <hr />
+                        <div className="row">
+                            <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <div className="form-group">
+                                    <select
+                                        name="usuarioSeleccionado"
+                                        className="form-control"
+                                        value={this.state.usuarioSeleccionado}
+                                        onChange={this.onInputChange}
+                                    >
+                                        <option>
+                                            Usuarios
                                 </option>
-                                {
-                                    this.state.usuarios.map(usuarios =>
-                                        <option value={usuarios.f_id} key={usuarios.f_id}>
-                                            {usuarios.f_nombre}
-                                        </option>
-                                    )
-                                }
+                                        {
+                                            this.state.usuarios.map(usuarios =>
+                                                <option value={usuarios.f_id} key={usuarios.f_id}>
+                                                    {usuarios.f_nombre}
+                                                </option>
+                                            )
+                                        }
 
-                            </select>
+                                    </select>
 
-                        </div>
-                    </div>
-                    <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                        <div className="form-group">
-                        <select
-                                name="perfilSeleccionadoSelect"
-                                className="form-control"
-                                value={this.state.perfilSeleccionadoSelect}
-                                onChange={this.onInputChange}
-                            >
-                                <option>
-                                    Perfiles
+                                </div>
+                            </div>
+                            <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <div className="form-group">
+                                    <select
+                                        name="perfilSeleccionadoSelect"
+                                        className="form-control"
+                                        value={this.state.perfilSeleccionadoSelect}
+                                        onChange={this.onInputChange}
+                                    >
+                                        <option>
+                                            Perfiles
                                 </option>
-                                {
-                                    this.state.perfiles.map(perfil =>
-                                        <option value={perfil.f1000_id} key={perfil.f1000_id}>
-                                            {perfil.f1000_nombre}
-                                        </option>
-                                    )
-                                }
+                                        {
+                                            this.state.perfiles.map(perfil =>
+                                                <option value={perfil.f1000_id} key={perfil.f1000_id}>
+                                                    {perfil.f1000_nombre}
+                                                </option>
+                                            )
+                                        }
 
-                            </select>
-                        </div>
-                    </div>
-                    <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                        <div className="form-group">
-                            <form onSubmit={this.onSubmitUsuario}>
-                                <button
-                                    type="submit"
-                                    className="btn btn-success btn-block"
-                                >
-                                    Asignar perfil
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <div className="form-group">
+                                    <form onSubmit={this.onSubmitUsuario}>
+                                        <button
+                                            type="submit"
+                                            className="btn btn-success btn-block"
+                                        >
+                                            Asignar perfil
                             </button>
-                            </form>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
                 </div>
-
             </div>
 
         )

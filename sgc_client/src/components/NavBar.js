@@ -20,7 +20,6 @@ export default class NavBar extends Component {
         const styles = {
             "navbar_spa": {
                 margin: 0,
-                paddingLeft: 0,
                 listStyle: 'none',
                 background: '#d2cfd6',
                 paddingLeft: '150px',
