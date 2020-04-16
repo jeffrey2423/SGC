@@ -1,6 +1,5 @@
 import React from 'react';
 import { MDBDataTable } from 'mdbreact';
-import MDBTableEditor from 'mdb-react-table-editor';
 
 const UserDatatablePage = () => {
   const data = {
