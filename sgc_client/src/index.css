@@ -58,3 +58,7 @@ code {
 #message-mouseover{
   display: inline-block;
 }
+
+.tableuser .dataTables_wrapper th:nth-child(1) {
+  display: none;
+}

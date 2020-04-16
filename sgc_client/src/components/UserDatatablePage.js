@@ -1,203 +1,91 @@
-import React from 'react';
+import React, { Component } from 'react'
+import axios from 'axios'
 import { MDBDataTable } from 'mdbreact';
+import validation from '../resources/validations/main';
 
-const UserDatatablePage = () => {
-  const data = {
-    columns: [
-      {
-        label: 'Nombre',
-        field: 'nombre',
-        sort: 'asc',
-        width: 150
-      },
-      {
-        label: 'Apellido',
-        field: 'apellido',
-        sort: 'asc',
-        width: 270
-      },
-      {
-        label: 'Fecha de Nacimiento',
-        field: 'fecha_nacimiento',
-        sort: 'asc',
-        width: 150
-      },
-      {
-        label: 'Profesión',
-        field: 'id_profesion',
-        sort: 'asc',
-        width: 100
-      },
-      {
-        label: 'Email',
-        field: 'email',
-        sort: 'asc',
-        width: 100
-      },
-      {
-        label: 'Perfil/Rol',
-        field: 'id_perfil',
-        sort: 'asc',
-        width: 100
+export class UserDatatablePage extends Component {
+
+  state = {
+    usuarios: [],
+    token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmMTAwNF90cyI6IjIwMjAtMDQtMTFUMDM6MTI6MjEuMDY5WiIsImYxMDA0X2lkIjo1MSwiZjEwMDRfbm9tYnJlIjoiamVmZnJleSIsImYxMDA0X2FwZWxsaWRvIjoicmlvcyIsImYxMDA0X2ZlY2hhX25hY2ltaWVudG8iOiIxOTk5LTAyLTA0VDA1OjAwOjAwLjAwMFoiLCJmMTAwNF9pZF9wcm9mZXNpb25fdDEwMDMiOjEsImYxMDA0X2VtYWlsIjoiMjR0ZGRqamdndGc1NTNAZ21haWwuY29tIiwiZjEwMDRfY2xhdmUiOiI4MjdjY2IwZWVhOGE3MDZjNGMzNGExNjg5MWY4NGU3YiIsImYxMDA0X2lkX3BlcmZpbF90MTAwMCI6MSwiZjEwMDRfaW5kX2FjdGl2byI6MSwiaWF0IjoxNTg2NjQ0MTYyfQ.CSy6iwftRC3lvJ4-t0P2vIgB2bnKyVWUkMq9rBIiDVs"
+  }
+
+  componentWillMount = async () => {
+    this.getUsuarios();
+  }
+
+  getUsuarios = async () => {
+
+    const res = await axios.get("http://localhost:4000/api/user/getUsers/" + 9999, {
+      headers: {
+        'Authorization': `Bearer ${this.state.token}`
       }
-    ],
-    rows: [
-      {
-        "nombre": "jeffrey",
-        "apellido": "rios",
-        "fecha_nacimiento": "1999-02-04",
-        "id_profesion": "1",
-        "email": "pruebatoken@gmail.com",
-        "id_perfil": "1"
-      },
-      {
-        "nombre": "jeffrey2",
-        "apellido": "rios",
-        "fecha_nacimiento": "1999-02-04",
-        "id_profesion": "1",
-        "email": "pruebatoken@gmail.com",
-        "id_perfil": "1"
-      },
-      {
-        "nombre": "jeffrey3",
-        "apellido": "rios",
-        "fecha_nacimiento": "1999-02-04",
-        "id_profesion": "1",
-        "email": "pruebatoken@gmail.com",
-        "id_perfil": "1"
-      },
-      {
-        "nombre": "jeffrey",
-        "apellido": "rios",
-        "fecha_nacimiento": "1999-02-04",
-        "id_profesion": "1",
-        "email": "pruebatoken@gmail.com",
-        "id_perfil": "1"
-      },
-      {
-        "nombre": "jeffrey",
-        "apellido": "rios",
-        "fecha_nacimiento": "1999-02-04",
-        "id_profesion": "1",
-        "email": "pruebatoken@gmail.com",
-        "id_perfil": "1"
-      },
-      {
-        "nombre": "jeffrey",
-        "apellido": "rios",
-        "fecha_nacimiento": "1999-02-04",
-        "id_profesion": "1",
-        "email": "pruebatoken@gmail.com",
-        "id_perfil": "1"
-      },
-      {
-        "nombre": "jeffrey",
-        "apellido": "rios",
-        "fecha_nacimiento": "1999-02-04",
-        "id_profesion": "1",
-        "email": "pruebatoken@gmail.com",
-        "id_perfil": "1"
-      },
-      {
-        "nombre": "jeffrey",
-        "apellido": "rios",
-        "fecha_nacimiento": "1999-02-04",
-        "id_profesion": "1",
-        "email": "pruebatoken@gmail.com",
-        "id_perfil": "1"
-      },
-      {
-        "nombre": "jeffrey",
-        "apellido": "rios",
-        "fecha_nacimiento": "1999-02-04",
-        "id_profesion": "1",
-        "email": "pruebatoken@gmail.com",
-        "id_perfil": "1"
-      },
-      {
-        "nombre": "jeffrey",
-        "apellido": "rios",
-        "fecha_nacimiento": "1999-02-04",
-        "id_profesion": "1",
-        "email": "pruebatoken@gmail.com",
-        "id_perfil": "1"
-      },
-      {
-        "nombre": "jeffrey",
-        "apellido": "rios",
-        "fecha_nacimiento": "1999-02-04",
-        "id_profesion": "1",
-        "email": "pruebatoken@gmail.com",
-        "id_perfil": "1"
-      },
-      {
-        "nombre": "jeffrey",
-        "apellido": "rios",
-        "fecha_nacimiento": "1999-02-04",
-        "id_profesion": "1",
-        "email": "pruebatoken@gmail.com",
-        "id_perfil": "1"
-      },
-      {
-        "nombre": "jeffrey",
-        "apellido": "rios",
-        "fecha_nacimiento": "1999-02-04",
-        "id_profesion": "1",
-        "email": "pruebatoken@gmail.com",
-        "id_perfil": "1"
-      },
-      {
-        "nombre": "jeffrey",
-        "apellido": "rios",
-        "fecha_nacimiento": "1999-02-04",
-        "id_profesion": "1",
-        "email": "pruebatoken@gmail.com",
-        "id_perfil": "1"
-      },
-      {
-        "nombre": "jeffrey",
-        "apellido": "rios",
-        "fecha_nacimiento": "1999-02-04",
-        "id_profesion": "1",
-        "email": "pruebatoken@gmail.com",
-        "id_perfil": "1"
-      },
-      {
-        "nombre": "jeffrey",
-        "apellido": "rios",
-        "fecha_nacimiento": "1999-02-04",
-        "id_profesion": "1",
-        "email": "pruebatoken@gmail.com",
-        "id_perfil": "1"
-      },
-      {
-        "nombre": "jeffrey",
-        "apellido": "rios",
-        "fecha_nacimiento": "1999-02-04",
-        "id_profesion": "1",
-        "email": "pruebatoken@gmail.com",
-        "id_perfil": "1"
-      },
-      {
-        "nombre": "jeffrey",
-        "apellido": "rios",
-        "fecha_nacimiento": "1999-02-04",
-        "id_profesion": "1",
-        "email": "pruebatoken@gmail.com",
-        "id_perfil": "1"
-      }
+    });
+    if (res.data.status === "error") {
+      validation.error(res.data.status, res.data.description, res.data.id, res.data.traza);
+    } else {
+      this.setState({ usuarios: res.data });
+      console.log(this.state.usuarios);
+    }
 
-    ]
-  };
+  }
 
-  return (
-    <MDBDataTable
-      striped
-      bordered
-      hover
-      data={data}
-    />
-  );
+  render() {
+
+    const data = {
+      columns: [
+        {
+          label: 'Nombre',
+          field: 'f_nombre',
+          sort: 'asc',
+          width: 150
+        },
+        {
+          label: 'Apellido',
+          field: 'f_apellido',
+          sort: 'asc',
+          width: 270
+        },
+        {
+          label: 'Fecha de Nacimiento',
+          field: 'f_fecha_nacimiento',
+          sort: 'asc',
+          width: 150
+        },
+        {
+          label: 'Profesión',
+          field: 'f_profesion',
+          sort: 'asc',
+          width: 100
+        },
+        {
+          label: 'Email',
+          field: 'f_email',
+          sort: 'asc',
+          width: 100,
+          style: {color:'red'}
+        },
+        {
+          label: 'Perfil/Rol',
+          field: 'f_perfil',
+          sort: 'asc',
+          width: 100
+        }
+      ],
+      rows: this.state.usuarios
+    };
+
+    return (
+      <MDBDataTable
+        striped
+        bordered
+        hover
+        data={data}
+      />
+    );
+
+  }
+
 }
 
 export default UserDatatablePage;
