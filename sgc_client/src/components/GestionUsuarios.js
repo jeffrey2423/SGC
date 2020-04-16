@@ -59,11 +59,15 @@ export default class GestionUsuarios extends Component {
     render() {
         return (
             <div className="container">
-                <h2>Usuarios de la aplicación</h2>
-                <hr />
-                <span id="message-mouseover"></span>
-                <div className="tableuser" id="usersdatatable">
-                    <UserDatatablePage />
+                <div className="card">
+                    <div className="card-body">
+                        <h2 className="card-title">Usuarios de la aplicación</h2>
+                        <hr />
+                        <span id="message-mouseover"></span>
+                        <div className="tableuser" id="usersdatatable">
+                            <UserDatatablePage />
+                        </div>
+                    </div>
                 </div>
                 <div className="userform container " id="userform">
                     <h2>Formulario de usuarios</h2>
