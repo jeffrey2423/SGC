@@ -89,7 +89,7 @@ class UserForm extends React.Component {
                                 <option selected>Choose...</option>
                                 {
                                     this.state.perfiles.map(perfil =>
-                                        <option value={perfil.f1000_id} key={perfil.f1000_id}>
+                                        <option value={perfil.f1000_nombre} key={perfil.f1000_id}>
                                             {perfil.f1000_nombre}
                                         </option>
                                     )

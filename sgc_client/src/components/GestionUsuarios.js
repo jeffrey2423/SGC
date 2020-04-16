@@ -23,9 +23,14 @@ export default class GestionUsuarios extends Component {
             usuario.f_activo = $(this).parents("tr").find("td").eq(6).html();
 
             //Set data to form
-            $("#f_nombre").attr("value",usuario.f_nombre);
-            $("#f_apellido").attr("value",usuario.f_apellido);
-            $("#f_email").attr("value",usuario.f_email);
+            $("#f_nombre").attr("value", usuario.f_nombre);
+            $("#f_apellido").attr("value", usuario.f_apellido);
+            $("#f_email").attr("value", usuario.f_email);
+            $("#f_perfil option[value="+usuario.f_perfil+"]").attr('selected','selected');
+
+            $('html, body').animate({
+                scrollTop: $("#userform").offset().top
+            }, 1500);
         });
     }
 
