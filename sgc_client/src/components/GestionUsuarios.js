@@ -59,7 +59,7 @@ export default class GestionUsuarios extends Component {
     render() {
         return (
             <div className="container">
-                <div className="card">
+                <div className="card-spa">
                     <div className="card-body">
                         <h2 className="card-title">Usuarios de la aplicación</h2>
                         <hr />
@@ -69,7 +69,7 @@ export default class GestionUsuarios extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="userform container " id="userform">
+                <div className="userform card-spa container mt-4" id="userform">
                     <h2>Formulario de usuarios</h2>
                     <hr />
                     <UserForm />
