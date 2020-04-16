@@ -204,7 +204,7 @@ export class GestionPerfiles extends Component {
     render() {
         return (
             <div className="container">
-                <div className="card">
+                <div className="card-spa">
                     <div class="card-body">
                         <h2 className="card-title">Permisos asociados a un perfil</h2>
                         <hr />
@@ -271,7 +271,7 @@ export class GestionPerfiles extends Component {
                 </div >
 
                 {/* FILA ASIGNAR PERMISO */}
-                <div className="card mt-4">
+                <div className="card-spa mt-4">
                     <div className="card-body">
                         <h2 className="card-title">Asignar permiso a un perfil</h2>
                         <hr />
@@ -345,7 +345,7 @@ export class GestionPerfiles extends Component {
                 </div>
 
                 {/* FILA CREAR PERFIL */}
-                <div className="card mt-4">
+                <div className="card-spa mt-4">
                     <div className="card-body">
                         <h2 className="card-title">Agregar un perfil</h2>
                         <hr />
@@ -392,7 +392,7 @@ export class GestionPerfiles extends Component {
                     </div>
                 </div>
                 {/* FILA ASIGNAR PERFIL */}
-                <div className="card mt-4">
+                <div className="card-spa mt-4">
                     <div className="card-body">
                         <h2 className="card-title">Asignar perfil a un usuario</h2>
                         <hr />
