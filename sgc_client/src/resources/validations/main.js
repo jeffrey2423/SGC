@@ -31,17 +31,17 @@ validationController.error = (estado, descripcion, id, traza) => {
         icon: 'error',
         title: estado,
         text: descripcion,
-        footer: id +" " +traza === null || traza === "" ? "": traza
+        footer: id + " " + traza === null || traza === "" ? "" : traza
     })
 };
 
-validationController.validarCampo = (texto,campo) => {
+validationController.validarCampo = (texto, campo) => {
     let sePuede = true;
     if (texto === "") {
         Swal.fire({
             icon: 'error',
             title: "error",
-            text: "El campo "+campo+ " no puede estar vacio",
+            text: "El campo " + campo + " no puede estar vacio",
 
         })
         sePuede = false;
@@ -50,8 +50,18 @@ validationController.validarCampo = (texto,campo) => {
     return sePuede;
 }
 
+validationController.errorGenereal = (desc) => {
+    Swal.fire({
+        icon: 'error',
+        title: "error",
+        text: desc,
+
+    })
+
+}
+
 validationController.descripcion = (texto) => {
-    Swal.fire(texto === null ? "": texto)
+    Swal.fire(texto === null ? "" : texto)
 }
 
 

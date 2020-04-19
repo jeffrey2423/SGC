@@ -20,7 +20,8 @@ module.exports = async (req, res, next) => {
                 jwt.verify(token, config.SECRET_KEY, (err, decoded) => {
                     if (err) {
                         res.json(rscController.leerRecurso(1005, err.message));
-                        res.end();
+                        res.sendStatus(500);
+                        return;
                     } else {
                         datosUsuario = decoded;
                         perfilUsuario = decoded.f1004_id_perfil_t1000;
