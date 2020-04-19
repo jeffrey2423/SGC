@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import $ from 'jquery';
-const config  = require('../config/config')
+const config = require('../config/config')
 
 export default class NavBar extends Component {
 
@@ -47,13 +47,24 @@ export default class NavBar extends Component {
                     {sessionStorage.getItem("token") ? (
                         <div className="navbar-nav nav-pills">
                             <Link className="nav-item nav-link active-spa" style={styles["navbar_link"]} to="/Inicio">Inicio</Link>
-                            <Link className="nav-item nav-link" style={styles["navbar_link"]} to="/GestionUsuarios">Gestion Usuarios</Link>
                             <Link className="nav-item nav-link" style={styles["navbar_link"]} to="/GestionCitas">Gestion Citas</Link>
-                            <Link className="nav-item nav-link" style={styles["navbar_link"]} to="/GestionPerfiles">Gestion Perfiles</Link>
+                            {
+
+                                sessionStorage.getItem("f1004_id_profesion_t1003") == config.ADMINISTRADOR ? (
+                                    <React.Fragment>
+                                        <Link className="nav-item nav-link" style={styles["navbar_link"]} to="/GestionUsuarios">Gestion Usuarios</Link>
+                                        <Link className="nav-item nav-link" style={styles["navbar_link"]} to="/GestionPerfiles">Gestion Perfiles</Link>
+                                    </React.Fragment>
+                                ) :
+
+                                    null
+
+                            }
+
                         </div>
                     ) : (
                             <div className="navbar-nav nav-pills">
-                            
+
                             </div>
                         )}
 

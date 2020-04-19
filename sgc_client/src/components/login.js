@@ -46,6 +46,7 @@ export default class login extends Component {
                 
                 window.location.href = '/inicio';
                 
+                
 
             }
         } else {
