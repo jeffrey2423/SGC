@@ -164,6 +164,46 @@ module.exports = {
         id: 1032,
         description: "Error al actualizar el perfil",
         status: "error"
+    },
+    1033:{
+        id: 1033,
+        description: "Error al obtener las profesiones",
+        status: "error"
+    },
+    1034:{
+        id: 1034,
+        description: "error al crear el evento",
+        status: "error"
+    },
+    1035:{
+        id: 1035,
+        description: "Evento creado con exito",
+        status: "success"
+    },
+    1036:{
+        id: 1036,
+        description: "El usuario asignado ya tiene un evento con esa fecha y hora inicial",
+        status: "error"
+    },
+    1037:{
+        id: 1037,
+        description: "Error al tratar de cancelar el evento",
+        status: "error"
+    },
+    1038:{
+        id: 1038,
+        description: "Evento cancelado con exito",
+        status: "success"
+    },
+    1039:{
+        id: 1039,
+        description: "Evento actualizado con exito",
+        status: "success"
+    },
+    1040:{
+        id: 1040,
+        description: "Error al actualizar el evento",
+        status: "error"
     }
 
 

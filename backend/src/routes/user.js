@@ -7,6 +7,10 @@ router.route('/getUsers/:id')
     //obtener datos
     .get(userController.getUsers)
 
+router.route('/getProfesiones')
+    //obtener profesiones
+    .get(userController.getProfesiones)
+
 router.route('/createUser')
     //crear usuario
     .post(userController.createUser)
