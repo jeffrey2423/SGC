@@ -8,6 +8,7 @@ import Inicio from './/components/Inicio'
 import GestionUsuarios from './/components/GestionUsuarios'
 import GestionCitas from './/components/GestionCitas'
 import GestionPerfiles from './/components/GestionPerfiles'
+import Login from './/components/login'
 
 
 import './App.css'
@@ -16,7 +17,8 @@ function App() {
   return (
     <Router>
       <Header />
-      <div className="container p-4 spa-content">
+      <div className="container p-4">
+        <Route path="/" exact component={Login} />
         <Route path="/Inicio" exact component={Inicio} />
         <Route path="/GestionUsuarios" exact component={GestionUsuarios} />
         <Route path="/GestionCitas" exact component={GestionCitas} />
