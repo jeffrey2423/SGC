@@ -55,7 +55,7 @@ userController.createUser = async (req, res) => {
 
             } else {
                 resultadoValidar = false;
-                console.log(err);
+                res.json(rscController.leerRecurso(1003, err.message));
             }
         });
 
@@ -143,6 +143,26 @@ userController.updateUserEmail = async (req, res) => {
         const id_usuario = req.params.id;
         const email = req.body.email;
 
+        let resultadoValidar;
+        const queryValidarUsuario = {
+            text: "select * from f_validar_usuario_email_actualizar($1,$2)",
+            values: [id_usuario, email]
+        };
+        // Validamos que el email no exista
+        await connection.query(queryValidarUsuario, (err, results) => {
+            if (!err) {
+                const estadoUsuario = results.rows[0].f_validar_usuario_email_actualizar;
+                resultadoValidar = (estadoUsuario != rscController.ESTADO_USUARIO.NO_EXISTE) ? true : false;
+
+            } else {
+                resultadoValidar = false;
+                res.json(rscController.leerRecurso(1022, err.message));
+            }
+        });
+
+        await rscController.snooze(10);
+
+        if (resultadoValidar) {
         const query = {
             text: "select * from f_actualizar_usuario_email($1,$2)",
             values: [email, id_usuario]
@@ -155,6 +175,9 @@ userController.updateUserEmail = async (req, res) => {
                 res.json(rscController.leerRecurso(1022, err.message));
             }
         });
+    }else{
+        res.json(rscController.leerRecurso(1004));
+    }
 
 
     } catch (error) {
@@ -216,7 +239,7 @@ userController.updateUserPerfil = async (req, res) => {
         const id_perfil = req.body.id_perfil;
         const query = {
             text: "select * from f_actualizar_usuario_perfil($1,$2)",
-            values: [id_perfil,id_usuario]
+            values: [id_perfil, id_usuario]
         }
         await connection.query(query, (err, results) => {
             if (!err) {
@@ -230,6 +253,28 @@ userController.updateUserPerfil = async (req, res) => {
     } catch (error) {
         await connection.query('ROLLBACK');
         res.json(rscController.leerRecurso(1032, error.message));
+    }
+}
+
+// Funcion para obtener porfesiones
+userController.getProfesiones = async (req, res) => {
+    try {
+
+        const query = {
+            text: "select * from f_obtener_profesiones()"
+        }
+        await connection.query(query, (err, results) => {
+            if (!err) {
+                res.status(200).json(results.rows);
+            } else {
+                connection.query('ROLLBACK');
+                res.json(rscController.leerRecurso(1033, err.message));
+            }
+        });
+
+    } catch (error) {
+        await connection.query('ROLLBACK');
+        res.json(rscController.leerRecurso(1033, error.message));
     }
 }
 

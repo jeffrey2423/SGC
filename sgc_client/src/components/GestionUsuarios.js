@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
-import UserDatatablePage from './UserDatatablePage'
+import React, { Component } from 'react';
+import UserDatatablePage from './UserDatatablePage';
+import UserForm from './UserForm';
 import $ from 'jquery';
 
 export default class GestionUsuarios extends Component {
@@ -11,21 +12,31 @@ export default class GestionUsuarios extends Component {
 
     clickTableUpdateUser = () => {
         $(document).on('click', '#usersdatatable table tbody tr td', function () {
-            let valores = "";
 
-            // Obtenemos la primer columna de la fila seleccionada
-            // seleccionada
-            valores = $(this).parents("tr").find("td:first").html();
+            //Get data from table
+            let usuario = {};
+            usuario.f_nombre = $(this).parents("tr").find("td").eq(1).html();
+            usuario.f_apellido = $(this).parents("tr").find("td").eq(2).html();
+            usuario.f_email = $(this).parents("tr").find("td").eq(3).html();
+            usuario.f_profesion = $(this).parents("tr").find("td").eq(4).html();
+            usuario.f_perfil = $(this).parents("tr").find("td").eq(5).html();
+            usuario.f_activo = $(this).parents("tr").find("td").eq(6).html();
 
-            alert(valores);
+            //Set data to form
+            $("#f_nombre").attr("value", usuario.f_nombre);
+            $("#f_apellido").attr("value", usuario.f_apellido);
+            $("#f_email").attr("value", usuario.f_email);
+            $("#f_perfil option[value="+usuario.f_perfil+"]").attr('selected','selected');
 
+            $('html, body').animate({
+                scrollTop: $("#userform").offset().top
+            }, 1500);
         });
     }
 
     alertHoverTable = () => {
         $(document).ready(function () {
             $('div.tableuser tr').not(':first').mouseover(function () {
-                // var user = $(this).find('td:first-child').text();
                 $("#message-mouseover").empty();
                 $("#message-mouseover").append("Click sobre la fila para actualizar");
             })
@@ -48,7 +59,7 @@ export default class GestionUsuarios extends Component {
     render() {
         return (
             <div className="container">
-                <div className="card">
+                <div className="card-spa">
                     <div className="card-body">
                         <h2 className="card-title">Usuarios de la aplicación</h2>
                         <hr />
@@ -57,6 +68,11 @@ export default class GestionUsuarios extends Component {
                             <UserDatatablePage />
                         </div>
                     </div>
+                </div>
+                <div className="userform card-spa container mt-4" id="userform">
+                    <h2>Formulario de usuarios</h2>
+                    <hr />
+                    <UserForm />
                 </div>
             </div>
         )

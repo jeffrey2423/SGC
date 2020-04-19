@@ -110,6 +110,7 @@ CREATE TABLE t1006_eventos(
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
+ALTER TABLE t1006_eventos ADD f1006_ind_estado INTEGER NOT NULL DEFAULT 1;
 
 CREATE OR REPLACE VIEW v2000_usuarios_info AS(
     SELECT
@@ -163,10 +164,36 @@ CREATE OR REPLACE VIEW v2002_eventos_info AS(
                 ELSE 'Si'
         END	AS allDay,
         creador.f1004_nombre AS f_creado_por,
-        asignado.f1004_nombre AS f_asignado_a
+        asignado.f1004_nombre AS f_asignado_a,
+        CASE
+            WHEN
+                (f1006_ind_estado) = 0 THEN 'Cancelado'
+            ELSE 'Activo'
+        END	AS Estado
         FROM t1006_eventos AS eventos
         LEFT JOIN t1004_usuarios AS creador
         ON eventos.f1006_id_usuario_asignado_t1004 = creador.f1004_id
         LEFT JOIN t1004_usuarios AS asignado
         ON eventos.f1006_id_usuario_creador_t1004 = asignado.f1004_id        
+);
+
+
+CREATE OR REPLACE VIEW v2003_eventos_filtro AS(
+    SELECT 
+        f1006_titulo					AS title,
+        f1006_descripcion				AS desc,
+        f1006_fecha_iso8601_inicial		AS start,
+        f1006_fecha_iso8601_final		AS end,
+        CASE
+                WHEN
+                    (f1006_ind_todo_el_dia) = 0 THEN false
+                ELSE true
+        END	AS allDay,
+        creador.f1004_id AS f_creado_por,
+        asignado.f1004_id AS f_asignado_a
+        FROM t1006_eventos AS eventos
+        LEFT JOIN t1004_usuarios AS creador
+        ON eventos.f1006_id_usuario_asignado_t1004 = creador.f1004_id
+        LEFT JOIN t1004_usuarios AS asignado
+        ON eventos.f1006_id_usuario_creador_t1004 = asignado.f1004_id       
 );
