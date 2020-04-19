@@ -16,6 +16,16 @@ rsc_controller.ESTADO_PERMISO = {
     NO_EXISTE: 0
 }
 
+rsc_controller.ESTADO_EVENTO = {
+    NO_EXISTE: 0
+}
+
+rsc_controller.TIPO_PROFESION = {
+    COLABORADOR: 1,
+    ADMINISTRADOR: 2
+    
+}
+
 // Funcion para obtener el json del recurso para enviar al Cliente 
 // el parametro traza sera opcional para cuando se llame un recurso
 // de error, para mostrar un mensaje adecuado al cliente pero 
