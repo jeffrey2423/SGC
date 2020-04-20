@@ -42,39 +42,38 @@ export class EventDatatablePage extends Component {
           width: 150
         },
         {
-          label: 'Nombre',
-          field: 'f_nombre',
+          label: 'Título',
+          field: 'f_titulo',
           sort: 'asc',
           width: 150
         },
         {
-          label: 'Apellido',
-          field: 'f_apellido',
+          label: 'Descripción',
+          field: 'f_descripcion',
           sort: 'asc',
           width: 270
         },
         {
-          label: 'Email',
-          field: 'f_email',
-          sort: 'asc',
-          width: 100,
-          style: {color:'red'}
-        },
-        {
-          label: 'Profesión',
-          field: 'f_profesion',
+          label: 'Creador',
+          field: 'f_creado_por',
           sort: 'asc',
           width: 100
         },
         {
-          label: 'Perfil/Rol',
-          field: 'f_perfil',
+          label: 'Responsable',
+          field: 'f_asignado_a',
           sort: 'asc',
           width: 100
         },
         {
-          label: 'Estado',
-          field: 'f_activo',
+          label: 'Fecha y hora inicial',
+          field: 'f_fecha_inicial',
+          sort: 'asc',
+          width: 100
+        },
+        {
+          label: 'Fecha y hora final',
+          field: 'f_fecha_final',
           sort: 'asc',
           width: 100
         }
