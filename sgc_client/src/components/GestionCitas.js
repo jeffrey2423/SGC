@@ -47,7 +47,7 @@ export default class GestionCitas extends Component {
 
     alertHoverTable = () => {
         $(document).ready(function () {
-            $('div.tableevent tr').not(':first').mouseover(function () {
+            $("div.tableevent tr").not(":first").mouseover(function () {
                 $("#message-mouseover-event").empty();
                 $("#message-mouseover-event").append("Click sobre la fila para actualizar");
             })
@@ -75,7 +75,7 @@ export default class GestionCitas extends Component {
           <div className="card-body">
             <h2 className="card-title">Citas creadas</h2>
             <hr />
-            <span id="message-mouseover-event"></span>
+            <span className="message-mouseover" id="message-mouseover-event"></span>
             <div className="tableevent" id="eventsdatatable">
               <EventDatatablePage />
             </div>

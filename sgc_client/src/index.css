@@ -55,7 +55,7 @@ code {
   height: 35px;
 }
 
-#message-mouseover{
+.message-mouseover{
   display: inline-block;
 }
 
