@@ -74,10 +74,10 @@ export default class login extends Component {
         return (
             <div className="row">
 
-                <div className="col-md-a mx-auto">
+                <div className="col-md-a mx-auto card-spa">
 
                     <form
-                        className="text-center border border-light p-5"
+                        className="text-center  p-5"
                         onSubmit={this.onSubmit}
                     >
                         <p className="h4 mb-4">Sign in</p>

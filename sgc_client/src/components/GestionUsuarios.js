@@ -37,11 +37,11 @@ export default class GestionUsuarios extends Component {
     alertHoverTable = () => {
         $(document).ready(function () {
             $('div.tableuser tr').not(':first').mouseover(function () {
-                $("#message-mouseover").empty();
-                $("#message-mouseover").append("Click sobre la fila para actualizar");
+                $("#message-mouseover-user").empty();
+                $("#message-mouseover-user").append("Click sobre la fila para actualizar");
             })
                 .mouseout(function () {
-                    $("#message-mouseover").empty();
+                    $("#message-mouseover-user").empty();
                 });
         });
         /*$("#usersdatatable table tr")
@@ -63,7 +63,7 @@ export default class GestionUsuarios extends Component {
                     <div className="card-body">
                         <h2 className="card-title">Usuarios de la aplicación</h2>
                         <hr />
-                        <span id="message-mouseover"></span>
+                        <span className="message-mouseover" id="message-mouseover-user"></span>
                         <div className="tableuser" id="usersdatatable">
                             <UserDatatablePage />
                         </div>
