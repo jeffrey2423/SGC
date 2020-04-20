@@ -59,7 +59,9 @@ code {
   display: inline-block;
 }
 
-.tableuser .dataTables_wrapper th:nth-child(1), .tableuser .dataTables_wrapper tbody tr td:nth-child(1){
+.tableuser .dataTables_wrapper th:nth-child(1), .tableuser .dataTables_wrapper tbody tr td:nth-child(1),
+.tableevent .dataTables_wrapper th:nth-child(1), .tableevent .dataTables_wrapper tbody tr td:nth-child(1)
+{
   display: none;
 }
 

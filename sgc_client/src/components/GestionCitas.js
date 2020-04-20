@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 //library to show notifications
 import SweetAlert from 'sweetalert-react';
 import 'sweetalert/dist/sweetalert.css';
+import EventDatatablePage from './EventDatatablePage';
+import EventForm from './UserForm';
 
 export default class GestionCitas extends Component {
   constructor(props, context) {
@@ -21,15 +23,15 @@ export default class GestionCitas extends Component {
             <h2 className="card-title">Citas creadas</h2>
             <hr />
             <span id="message-mouseover"></span>
-            <div className="table-spa" id="eventsdatatable">
-              <EventsDatatablePage />
+            <div className="tableevent" id="eventsdatatable">
+              <EventDatatablePage />
             </div>
           </div>
         </div>
-        <div className="form-spa card-spa container mt-4" id="eventform">
+        <div className="formevent card-spa container mt-4" id="eventform">
           <h2>Formulario de citas</h2>
           <hr />
-          <EventsForm />
+          <EventForm />
         </div>
       </div>
             
