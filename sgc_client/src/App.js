@@ -17,7 +17,7 @@ function App() {
   return (
     <Router>
       <Header />
-      <div className="container p-4">
+      <div className="container p-4 spa-content">
         <Route path="/" exact component={Login} />
         <Route path="/Inicio" exact component={Inicio} />
         <Route path="/GestionUsuarios" exact component={GestionUsuarios} />
