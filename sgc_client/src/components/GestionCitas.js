@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import SweetAlert from 'sweetalert-react';
 import 'sweetalert/dist/sweetalert.css';
 import EventDatatablePage from './EventDatatablePage';
-import EventForm from './UserForm';
+import EventForm from './EventForm';
 
 export default class GestionCitas extends Component {
   constructor(props, context) {

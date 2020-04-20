@@ -72,7 +72,7 @@ export class EventDatatablePage extends Component {
           width: 100
         },
         {
-          label: 'Fecha y hora final',
+          label: 'Fecha y hora fin',
           field: 'f_fecha_final',
           sort: 'asc',
           width: 100

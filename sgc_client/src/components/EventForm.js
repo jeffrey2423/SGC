@@ -22,66 +22,18 @@ class EventForm extends React.Component {
                     <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroup-sizing-default">Nombre</span>
+                                <span class="input-group-text" id="inputGroup-sizing-default">Título</span>
                             </div>
-                            <input type="text" id="f_nombre" placeholder="Nombre" className="form-control"
+                            <input type="text" id="f_titulo" placeholder="Título" className="form-control"
                                 aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
                         </div>
                     </div>
                     <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroup-sizing-default">Apellido</span>
+                                <span class="input-group-text" id="inputGroup-sizing-default">Descripción</span>
                             </div>
-                            <input type="text" id="f_apellido" placeholder="Apellido" className="form-control"
-                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
-                        </div>
-                    </div>
-                </div>
-
-                <div className="row">
-                    <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroup-sizing-default">Email</span>
-                            </div>
-                            <input type="email" id="f_email" placeholder="example@email.com" className="form-control"
-                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
-                        </div>
-                    </div>
-
-                    <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text" for="inputGroupSelect01">Perfil/Rol</label>
-                            </div>
-                            <select class="custom-select" id="f_perfil">
-                                <option selected>Choose...</option>
-                                <option value="1"> Activo</option>
-                                <option value="0">Inactivo</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="row">
-                    <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroup-sizing-default">Contraseña</span>
-                            </div>
-                            <input type="password" id="f_clave" placeholder="Contraseña de usuario" className="form-control"
-                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
-                        </div>
-                    </div>
-
-                    <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroup-sizing-default">Contraseña</span>
-                            </div>
-                            <input type="password" id="f_clave" placeholder="Repita contraseña" className="form-control"
+                            <input type="text" id="f_descripcion" placeholder="Descripción" className="form-control"
                                 aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
                         </div>
                     </div>
@@ -91,7 +43,30 @@ class EventForm extends React.Component {
                     <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <label class="input-group-text" for="inputGroupSelect01">Profesión</label>
+                                <span class="input-group-text" id="inputGroup-sizing-default">Fecha y hora inicio</span>
+                            </div>
+                            <input type="text" id="f_fecha_inicial" placeholder="Fecha y hora inicio" className="form-control"
+                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
+                        </div>
+                    </div>
+
+                    <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-default">Fecha y hora fin</span>
+                            </div>
+                            <input type="text" id="f_fecha_final" placeholder="Fecha y hora fin" className="form-control"
+                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
+                        </div>
+                    </div>
+                </div>
+
+                <div className="row">
+                    <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="inputGroupSelect01">Responsable</label>
                             </div>
                             <select class="custom-select" id="f_profesion">
                                 <option selected>Choose...</option>
@@ -109,7 +84,7 @@ class EventForm extends React.Component {
                             <select class="custom-select" id="f_activo">
                                 <option selected>Choose...</option>
                                 <option value="1"> Activo</option>
-                                <option value="0">Inactivo</option>
+                                <option value="0">Cancelado</option>
                             </select>
                         </div>
                        
