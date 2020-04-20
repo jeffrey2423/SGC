@@ -5,25 +5,34 @@ import SweetAlert from 'sweetalert-react';
 import 'sweetalert/dist/sweetalert.css';
 
 export default class GestionCitas extends Component {
-    constructor(props, context) {
-        super(props, context);
-        this.state = {
-          show: false,
-        };
-      }
-      
-    render() {
-        return (
-            <div>
-            <button onClick={() => this.setState({ show: true })}>Alert</button>
-            <SweetAlert
-              show={this.state.show}
-              title="Demo"
-              text="SweetAlert in React"
-              onConfirm={() => this.setState({ show: false })}
-            />
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      show: false,
+    };
+  }
+
+  render() {
+    return (
+
+      <div className="container">
+        <div className="card-spa">
+          <div className="card-body">
+            <h2 className="card-title">Citas creadas</h2>
+            <hr />
+            <span id="message-mouseover"></span>
+            <div className="table-spa" id="eventsdatatable">
+              <EventsDatatablePage />
+            </div>
           </div>
+        </div>
+        <div className="form-spa card-spa container mt-4" id="eventform">
+          <h2>Formulario de citas</h2>
+          <hr />
+          <EventsForm />
+        </div>
+      </div>
             
         )
-    }
+  }
 }
