@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import UserDatatablePage from './UserDatatablePage';
 import UserForm from './UserForm';
+import { MDBBtn, MDBIcon } from "mdbreact";
 import $ from 'jquery';
 
 export default class GestionUsuarios extends Component {
@@ -11,6 +12,8 @@ export default class GestionUsuarios extends Component {
         } else {
             this.clickTableUpdateUser();
             this.alertHoverTable();
+            this.hoverUserFormValidate();
+            this.clickAddUserScroll();
         }
 
     }
@@ -32,6 +35,7 @@ export default class GestionUsuarios extends Component {
             $("#f_apellido").attr("value", usuario.f_apellido);
             $("#f_email").attr("value", usuario.f_email);
             $("#f_perfil option[value=" + usuario.f_perfil + "]").attr('selected', 'selected');
+            $("#userform").addClass("update-user");
 
             $('html, body').animate({
                 scrollTop: $("#userform").offset().top
@@ -61,11 +65,41 @@ export default class GestionUsuarios extends Component {
 
     }
 
+    hoverUserFormValidate = () => {
+        $(document).ready(function () {
+            $('div.userform').mouseover(function () {
+               //Validate if update or insert
+               if($("#userform").hasClass("update-user")){
+                   //Add icons to update particular fields
+                   $("#update-password").removeClass("hide-field");
+               }else{
+                if($("#userform").hasClass("insert-user")){
+                    //Remove icons to insert form
+                    $("#update-password").addClass("hide-field");
+                }
+               }
+            })
+                .mouseout(function () {
+                });
+        });
+    }
+
+    clickAddUserScroll = () => {
+        $(document).on('click', '#add-user-scroll', function () {
+            $('html, body').animate({
+                scrollTop: $("#userform").offset().top
+            }, 1500);
+        });
+    }
+
     render() {
         return (
             <div className="container">
                 <div className="card-spa">
                     <div className="card-body">
+                        <MDBBtn color="purple" title="Agregar usuario" id="add-user-scroll">
+                        <MDBIcon icon="user-alt" className="mr-1"  /> 
+                        Agregar usuario</MDBBtn>
                         <h2 className="card-title">Usuarios de la aplicación</h2>
                         <hr />
                         <span className="message-mouseover" id="message-mouseover-user"></span>
@@ -74,7 +108,7 @@ export default class GestionUsuarios extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="userform card-spa container mt-4" id="userform">
+                <div className="userform card-spa container mt-4 insert-user" id="userform">
                     <h2>Formulario de usuarios</h2>
                     <hr />
                     <UserForm />

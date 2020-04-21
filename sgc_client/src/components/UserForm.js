@@ -1,5 +1,5 @@
 import React from "react";
-import { MDBContainer } from "mdbreact";
+import { MDBContainer, MDBBtn, MDBIcon } from "mdbreact";
 import axios from 'axios';
 import validation from '../resources/validations/main';
 
@@ -100,6 +100,7 @@ class UserForm extends React.Component {
                 </div>
 
                 <div className="row">
+                <hr />
                     <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
@@ -119,6 +120,8 @@ class UserForm extends React.Component {
                                 aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
                         </div>
                     </div>
+                    <MDBIcon icon="key"  title="Actualizar contraseña" className="update-spa-icon hide-field" id="update-password" /> 
+                    <hr />
                 </div>
 
                 <div className="row">
@@ -154,6 +157,11 @@ class UserForm extends React.Component {
                        
                     </div>
                 </div>
+                <div className="row">
+                <MDBBtn color="purple" title="Agregar usuario" id="insert-user">Agregar usuario</MDBBtn>
+                <MDBBtn color="purple" title="Actualizar usuario" id="update-user">Actualizar usuario</MDBBtn>
+                </div>
+
             </MDBContainer >
         );
     }

@@ -55,6 +55,24 @@ code {
   height: 35px;
 }
 
+.update-spa-icon{
+  font-size: x-large;
+  position: absolute;
+}
+
+.hide-field{
+  display: none !important;
+}
+
+#add-user-scroll{
+  float: right;
+}
+
+.update-spa-icon:hover{
+  font-size: xx-large;
+  transition: all .5s;
+}
+
 .message-mouseover{
   display: inline-block;
 }
