@@ -9,13 +9,46 @@ class UserForm extends React.Component {
     state = {
         perfiles: [],
         permisos: [],
-        token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmMTAwNF90cyI6IjIwMjAtMDQtMTFUMDM6MTI6MjEuMDY5WiIsImYxMDA0X2lkIjo1MSwiZjEwMDRfbm9tYnJlIjoiamVmZnJleSIsImYxMDA0X2FwZWxsaWRvIjoicmlvcyIsImYxMDA0X2ZlY2hhX25hY2ltaWVudG8iOiIxOTk5LTAyLTA0VDA1OjAwOjAwLjAwMFoiLCJmMTAwNF9pZF9wcm9mZXNpb25fdDEwMDMiOjEsImYxMDA0X2VtYWlsIjoiMjR0ZGRqamdndGc1NTNAZ21haWwuY29tIiwiZjEwMDRfY2xhdmUiOiI4MjdjY2IwZWVhOGE3MDZjNGMzNGExNjg5MWY4NGU3YiIsImYxMDA0X2lkX3BlcmZpbF90MTAwMCI6MSwiZjEwMDRfaW5kX2FjdGl2byI6MSwiaWF0IjoxNTg2NjQ0MTYyfQ.CSy6iwftRC3lvJ4-t0P2vIgB2bnKyVWUkMq9rBIiDVs"
+        nuevo_usuario: {},
+        token: sessionStorage.getItem("token") === "" || sessionStorage.getItem("token") === null ? " " : sessionStorage.getItem("token") 
     }
 
     async componentDidMount() {
         this.getPerfiles();
         this.getPermisos();
         this.clickRestartForm();
+        this.addUser();
+    }
+
+    addUser = async () => {
+
+            this.state.nuevo_usuario.nombre = $("#f_nombre").val();
+            this.state.nuevo_usuario.apellido = $("#f_apellido").val();
+            this.state.nuevo_usuario.fecha_nacimiento = "1999/01/01";
+            this.state.nuevo_usuario.id_profesion = 1;
+            this.state.nuevo_usuario.email = $("#f_email").val();
+            this.state.nuevo_usuario.clave = $("#f_clave").val();
+            this.state.nuevo_usuario.id_perfil = 1;
+
+            if (validation.validarUsuario(this.state.perfilNuevo, "nombre")) {
+                const data = this.state.nuevo_usuario;
+                const res = await axios.post("http://localhost:4000/api/user/createUser", data, {
+                    headers: {
+                        'Content-Type': 'application/json;charset=UTF-8',
+                        'Authorization': `Bearer ${this.state.token}`
+                    }
+                });
+    
+                if (res.data.status === "error") {
+                    validation.error(res.data.status, res.data.description, res.data.id, res.data.traza);
+                } else {
+                    validation.success(res.data.status, res.data.description, res.data.id);
+                    window.setTimeout(function () {
+                        window.location.href = '/GestionUsuarios';
+                    }, 1500);
+    
+                }
+            }
     }
 
     clickRestartForm = () => {
@@ -58,6 +91,14 @@ class UserForm extends React.Component {
     }
 
     render() {
+
+        const styles = {
+            "password-fields": {
+                paddingTop: "15px",
+                borderTop: "1px solid rgba(0,0,0,.125)"
+            }
+        };
+
         return (
             <MDBContainer>
                 <div className="row">
@@ -113,31 +154,6 @@ class UserForm extends React.Component {
                 </div>
 
                 <div className="row">
-                    <hr />
-                    <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroup-sizing-default">Contraseña</span>
-                            </div>
-                            <input type="password" id="f_clave" placeholder="Contraseña de usuario" className="form-control"
-                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
-                        </div>
-                    </div>
-
-                    <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroup-sizing-default">Contraseña</span>
-                            </div>
-                            <input type="password" id="f_clave" placeholder="Repita contraseña" className="form-control"
-                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
-                        </div>
-                    </div>
-                    <MDBIcon icon="key" title="Actualizar contraseña" className="update-spa-icon hide-field" id="update-password" />
-                    <hr />
-                </div>
-
-                <div className="row">
                     <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
@@ -165,8 +181,31 @@ class UserForm extends React.Component {
 
                     </div>
                 </div>
+                
+                <div className="row" style={styles["password-fields"]} >
+                    <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-default">Contraseña</span>
+                            </div>
+                            <input type="password" id="f_clave" placeholder="Contraseña de usuario" className="form-control"
+                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
+                        </div>
+                    </div>
+
+                    <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-default">Contraseña</span>
+                            </div>
+                            <input type="password" id="f_clave" placeholder="Repita contraseña" className="form-control"
+                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
+                        </div>
+                    </div>
+                    <MDBIcon icon="key" title="Actualizar contraseña" className="update-spa-icon hide-field" id="update-password" />
+                </div>
                 <div className="row">
-                    <MDBBtn color="purple" className="hide-field" title="Agregar usuario" id="bt-insert-user">Agregar usuario</MDBBtn>
+                    <MDBBtn color="purple" className="hide-field" title="Agregar usuario" id="bt-insert-user" onClick={this.addUser}>Agregar usuario</MDBBtn>
                     <MDBBtn color="purple" className="hide-field" title="Actualizar usuario" id="bt-update-user">Actualizar usuario</MDBBtn>
                     <MDBBtn color="mdb-color" title="Limpiar campos" id="restart-form">Limpiar campos</MDBBtn>
                 </div>
