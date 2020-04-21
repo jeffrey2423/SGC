@@ -12,6 +12,11 @@ export default class login extends Component {
         pass: "1234567"
 
     }
+    async componentDidMount() {
+        if (sessionStorage.getItem("token")) {
+            window.history.back();
+        }
+    }
 
     onSubmit = async (e) => {
         e.preventDefault();
@@ -80,7 +85,7 @@ export default class login extends Component {
                         className="text-center  p-5"
                         onSubmit={this.onSubmit}
                     >
-                        <p className="h4 mb-4">Sign in</p>
+                        <p className="h4 mb-4">Inicio de sesion</p>
                         {/* Email */}
                         <input
                             name="email"
@@ -108,7 +113,7 @@ export default class login extends Component {
                             type="submit"
                             style={styles["submit_style"]}
                         >
-                            Sign in
+                            Iniciar Sesion
                         </button>
 
                         {/* Social login */}

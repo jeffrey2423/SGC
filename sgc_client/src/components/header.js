@@ -34,6 +34,11 @@ export default class header extends Component {
         });
     }
 
+    cerrarSession = () => {
+        sessionStorage.clear();
+        window.location.href = '/';
+    }
+
     render() {
         const styles = {
             "header_style": {
@@ -66,9 +71,14 @@ export default class header extends Component {
                                                     <span className="glyphicon glyphicon-user"></span>
                                 </button>
                                 <div className="dropdown-menu " aria-labelledby="dropdownMenuButton" role="menu">
-                                    <Link className="nav-link" to="/Perfil">Mi Perfil</Link>
-                                    <Link className="nav-link" to="/GestionCitas">Mis Citas</Link>
-                                    <Link className="nav-link" to="/login">Cerrar Sesion</Link>
+                                    {/* <Link className="nav-link" to="/Perfil">Mi Perfil</Link>
+                                    <Link className="nav-link" to="/GestionCitas">Mis Citas</Link> */}
+                                    <Link
+                                        className="nav-link"
+                                        onClick={() => this.cerrarSession()}
+                                    >
+                                        Cerrar Sesion
+                                        </Link>
                                 </div>
                             </div>
                         </div>
