@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 
 import Header from './/components/header'
@@ -9,6 +9,7 @@ import GestionUsuarios from './/components/GestionUsuarios'
 import GestionCitas from './/components/GestionCitas'
 import GestionPerfiles from './/components/GestionPerfiles'
 import Login from './/components/login'
+import My404 from './/components/My404'
 
 
 import './App.css'
@@ -18,11 +19,14 @@ function App() {
     <Router>
       <Header />
       <div className="container p-4 spa-content">
-        <Route path="/" exact component={Login} />
-        <Route path="/Inicio" exact component={Inicio} />
-        <Route path="/GestionUsuarios" exact component={GestionUsuarios} />
-        <Route path="/GestionCitas" exact component={GestionCitas} />
-        <Route path="/GestionPerfiles" exact component={GestionPerfiles} />
+        <Switch>
+          <Route path="/" exact component={Login} />
+          <Route path="/Inicio" exact component={Inicio} />
+          <Route path="/GestionUsuarios" exact component={GestionUsuarios} />
+          <Route path="/GestionCitas" exact component={GestionCitas} />
+          <Route path="/GestionPerfiles" exact component={GestionPerfiles} />
+          <Route component={My404} />
+        </Switch>
       </div>
     </Router>
 

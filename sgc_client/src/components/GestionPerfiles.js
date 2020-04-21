@@ -23,9 +23,13 @@ export class GestionPerfiles extends Component {
     }
 
     async componentDidMount() {
+        if (!sessionStorage.getItem("token")) {
+            window.location.href = '/';
+        }else{ 
         this.getPerfiles();
         this.getPermisos();
         this.getUsuarios();
+        }
     }
 
     getPerfiles = async () => {

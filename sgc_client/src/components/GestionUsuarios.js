@@ -6,8 +6,13 @@ import $ from 'jquery';
 export default class GestionUsuarios extends Component {
 
     async componentDidMount() {
-        this.clickTableUpdateUser();
-        this.alertHoverTable();
+        if (!sessionStorage.getItem("token")) {
+            window.location.href = '/';
+        } else {
+            this.clickTableUpdateUser();
+            this.alertHoverTable();
+        }
+
     }
 
     clickTableUpdateUser = () => {
@@ -26,7 +31,7 @@ export default class GestionUsuarios extends Component {
             $("#f_nombre").attr("value", usuario.f_nombre);
             $("#f_apellido").attr("value", usuario.f_apellido);
             $("#f_email").attr("value", usuario.f_email);
-            $("#f_perfil option[value="+usuario.f_perfil+"]").attr('selected','selected');
+            $("#f_perfil option[value=" + usuario.f_perfil + "]").attr('selected', 'selected');
 
             $('html, body').animate({
                 scrollTop: $("#userform").offset().top
