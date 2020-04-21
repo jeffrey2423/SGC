@@ -3,6 +3,8 @@ import { MDBContainer, MDBBtn, MDBIcon } from "mdbreact";
 import axios from 'axios';
 import validation from '../resources/validations/main';
 import $ from 'jquery';
+import SweetAlert from 'sweetalert-react';
+import 'sweetalert/dist/sweetalert.css';
 
 class UserForm extends React.Component {
 
@@ -17,7 +19,6 @@ class UserForm extends React.Component {
         this.getPerfiles();
         this.getPermisos();
         this.clickRestartForm();
-        this.addUser();
     }
 
     addUser = async () => {
@@ -30,7 +31,9 @@ class UserForm extends React.Component {
             this.state.nuevo_usuario.clave = $("#f_clave").val();
             this.state.nuevo_usuario.id_perfil = 1;
 
-            if (validation.validarUsuario(this.state.perfilNuevo, "nombre")) {
+            if (validation.validarUsuario(this.state.nuevo_usuario)) {
+                validation.insertUserSuccess();
+                /*
                 const data = this.state.nuevo_usuario;
                 const res = await axios.post("http://localhost:4000/api/user/createUser", data, {
                     headers: {
@@ -47,7 +50,7 @@ class UserForm extends React.Component {
                         window.location.href = '/GestionUsuarios';
                     }, 1500);
     
-                }
+                }*/
             }
     }
 
@@ -108,7 +111,7 @@ class UserForm extends React.Component {
                                 <span class="input-group-text" id="inputGroup-sizing-default">Nombre</span>
                             </div>
                             <input type="text" id="f_nombre" placeholder="Nombre" className="form-control"
-                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
+                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required />
                         </div>
                     </div>
                     <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -117,7 +120,7 @@ class UserForm extends React.Component {
                                 <span class="input-group-text" id="inputGroup-sizing-default">Apellido</span>
                             </div>
                             <input type="text" id="f_apellido" placeholder="Apellido" className="form-control"
-                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
+                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required/>
                         </div>
                     </div>
                 </div>
@@ -129,7 +132,7 @@ class UserForm extends React.Component {
                                 <span class="input-group-text" id="inputGroup-sizing-default">Email</span>
                             </div>
                             <input type="email" id="f_email" placeholder="example@email.com" className="form-control"
-                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
+                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required/>
                         </div>
                     </div>
 
@@ -140,7 +143,7 @@ class UserForm extends React.Component {
                                 <label class="input-group-text" for="inputGroupSelect01">Perfil/Rol</label>
                             </div>
                             <select class="custom-select" id="f_perfil">
-                                <option value="default" selected>Choose...</option>
+                                <option value="default" selected disabled>Choose...</option>
                                 {
                                     this.state.perfiles.map(perfil =>
                                         <option value={perfil.f1000_nombre} key={perfil.f1000_id}>
@@ -189,7 +192,7 @@ class UserForm extends React.Component {
                                 <span class="input-group-text" id="inputGroup-sizing-default">Contraseña</span>
                             </div>
                             <input type="password" id="f_clave" placeholder="Contraseña de usuario" className="form-control"
-                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
+                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required/>
                         </div>
                     </div>
 
@@ -199,7 +202,7 @@ class UserForm extends React.Component {
                                 <span class="input-group-text" id="inputGroup-sizing-default">Contraseña</span>
                             </div>
                             <input type="password" id="f_clave" placeholder="Repita contraseña" className="form-control"
-                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
+                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required />
                         </div>
                     </div>
                     <MDBIcon icon="key" title="Actualizar contraseña" className="update-spa-icon hide-field" id="update-password" />
