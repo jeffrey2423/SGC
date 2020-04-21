@@ -12,7 +12,7 @@ class UserForm extends React.Component {
         perfiles: [],
         permisos: [],
         nuevo_usuario: {},
-        token: sessionStorage.getItem("token") === "" || sessionStorage.getItem("token") === null ? " " : sessionStorage.getItem("token") 
+        token: sessionStorage.getItem("token") === "" || sessionStorage.getItem("token") === null ? " " : sessionStorage.getItem("token")
     }
 
     async componentDidMount() {
@@ -23,35 +23,33 @@ class UserForm extends React.Component {
 
     addUser = async () => {
 
-            this.state.nuevo_usuario.nombre = $("#f_nombre").val();
-            this.state.nuevo_usuario.apellido = $("#f_apellido").val();
-            this.state.nuevo_usuario.fecha_nacimiento = "1999/01/01";
-            this.state.nuevo_usuario.id_profesion = 1;
-            this.state.nuevo_usuario.email = $("#f_email").val();
-            this.state.nuevo_usuario.clave = $("#f_clave").val();
-            this.state.nuevo_usuario.id_perfil = 1;
+        this.state.nuevo_usuario.nombre = $("#f_nombre").val();
+        this.state.nuevo_usuario.apellido = $("#f_apellido").val();
+        this.state.nuevo_usuario.fecha_nacimiento = "1999/01/01";
+        this.state.nuevo_usuario.id_profesion = 1;
+        this.state.nuevo_usuario.email = $("#f_email").val();
+        this.state.nuevo_usuario.clave = $("#f_clave").val();
+        this.state.nuevo_usuario.id_perfil = 4;
 
-            if (validation.validarUsuario(this.state.nuevo_usuario)) {
+        if (validation.validarUsuario(this.state.nuevo_usuario)) {
+            const data = this.state.nuevo_usuario;
+            const res = await axios.post("http://localhost:4000/api/user/createUser", data, {
+                headers: {
+                    'Content-Type': 'application/json;charset=UTF-8',
+                    'Authorization': `Bearer ${this.state.token}`
+                }
+            });
+
+            if (res.data.status === "error") {
+                validation.error(res.data.status, res.data.description, res.data.id, res.data.traza);
+            } else {
                 validation.insertUserSuccess();
-                /*
-                const data = this.state.nuevo_usuario;
-                const res = await axios.post("http://localhost:4000/api/user/createUser", data, {
-                    headers: {
-                        'Content-Type': 'application/json;charset=UTF-8',
-                        'Authorization': `Bearer ${this.state.token}`
-                    }
-                });
-    
-                if (res.data.status === "error") {
-                    validation.error(res.data.status, res.data.description, res.data.id, res.data.traza);
-                } else {
-                    validation.success(res.data.status, res.data.description, res.data.id);
-                    window.setTimeout(function () {
-                        window.location.href = '/GestionUsuarios';
-                    }, 1500);
-    
-                }*/
+                window.setTimeout(function () {
+                    window.location.href = '/GestionUsuarios';
+                }, 1500);
+
             }
+        }
     }
 
     clickRestartForm = () => {
@@ -120,7 +118,7 @@ class UserForm extends React.Component {
                                 <span class="input-group-text" id="inputGroup-sizing-default">Apellido</span>
                             </div>
                             <input type="text" id="f_apellido" placeholder="Apellido" className="form-control"
-                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required/>
+                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required />
                         </div>
                     </div>
                 </div>
@@ -132,7 +130,7 @@ class UserForm extends React.Component {
                                 <span class="input-group-text" id="inputGroup-sizing-default">Email</span>
                             </div>
                             <input type="email" id="f_email" placeholder="example@email.com" className="form-control"
-                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required/>
+                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required />
                         </div>
                     </div>
 
@@ -184,7 +182,7 @@ class UserForm extends React.Component {
 
                     </div>
                 </div>
-                
+
                 <div className="row" style={styles["password-fields"]} >
                     <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                         <div class="input-group mb-3">
@@ -192,7 +190,7 @@ class UserForm extends React.Component {
                                 <span class="input-group-text" id="inputGroup-sizing-default">Contraseña</span>
                             </div>
                             <input type="password" id="f_clave" placeholder="Contraseña de usuario" className="form-control"
-                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required/>
+                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required />
                         </div>
                     </div>
 
