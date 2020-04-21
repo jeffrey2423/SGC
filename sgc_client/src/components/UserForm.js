@@ -2,6 +2,7 @@ import React from "react";
 import { MDBContainer, MDBBtn, MDBIcon } from "mdbreact";
 import axios from 'axios';
 import validation from '../resources/validations/main';
+import $ from 'jquery';
 
 class UserForm extends React.Component {
 
@@ -14,6 +15,18 @@ class UserForm extends React.Component {
     async componentDidMount() {
         this.getPerfiles();
         this.getPermisos();
+        this.clickRestartForm();
+    }
+
+    clickRestartForm = () => {
+        $(document).on('click', '#restart-form', function () {
+            $("#userform").removeClass("update-user");
+            $("#userform").addClass("insert-user");
+
+            $("#userform input").each(function () {
+                $(this).val("");
+            });
+        });
     }
 
     getPerfiles = async () => {
@@ -86,7 +99,7 @@ class UserForm extends React.Component {
                                 <label class="input-group-text" for="inputGroupSelect01">Perfil/Rol</label>
                             </div>
                             <select class="custom-select" id="f_perfil">
-                                <option selected>Choose...</option>
+                                <option value="default" selected>Choose...</option>
                                 {
                                     this.state.perfiles.map(perfil =>
                                         <option value={perfil.f1000_nombre} key={perfil.f1000_id}>
@@ -100,7 +113,7 @@ class UserForm extends React.Component {
                 </div>
 
                 <div className="row">
-                <hr />
+                    <hr />
                     <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
@@ -120,7 +133,7 @@ class UserForm extends React.Component {
                                 aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
                         </div>
                     </div>
-                    <MDBIcon icon="key"  title="Actualizar contraseña" className="update-spa-icon hide-field" id="update-password" /> 
+                    <MDBIcon icon="key" title="Actualizar contraseña" className="update-spa-icon hide-field" id="update-password" />
                     <hr />
                 </div>
 
@@ -131,14 +144,9 @@ class UserForm extends React.Component {
                                 <label class="input-group-text" for="inputGroupSelect01">Profesión</label>
                             </div>
                             <select class="custom-select" id="f_profesion">
-                                <option selected>Choose...</option>
-                                {
-                                    this.state.perfiles.map(perfil =>
-                                        <option value={perfil.f1000_id} key={perfil.f1000_id}>
-                                            {perfil.f1000_nombre}
-                                        </option>
-                                    )
-                                }
+                                <option value="default" selected>Choose...</option>
+                                <option value="1">Administrador</option>
+                                <option value="2">Colaborador</option>
                             </select>
                         </div>
                     </div>
@@ -149,17 +157,18 @@ class UserForm extends React.Component {
                                 <label class="input-group-text" for="inputGroupSelect01">Estado</label>
                             </div>
                             <select class="custom-select" id="f_activo">
-                                <option selected>Choose...</option>
+                                <option value="default" selected>Choose...</option>
                                 <option value="1"> Activo</option>
                                 <option value="0">Inactivo</option>
                             </select>
                         </div>
-                       
+
                     </div>
                 </div>
                 <div className="row">
-                <MDBBtn color="purple" title="Agregar usuario" id="insert-user">Agregar usuario</MDBBtn>
-                <MDBBtn color="purple" title="Actualizar usuario" id="update-user">Actualizar usuario</MDBBtn>
+                    <MDBBtn color="purple" className="hide-field" title="Agregar usuario" id="bt-insert-user">Agregar usuario</MDBBtn>
+                    <MDBBtn color="purple" className="hide-field" title="Actualizar usuario" id="bt-update-user">Actualizar usuario</MDBBtn>
+                    <MDBBtn color="mdb-color" title="Limpiar campos" id="restart-form">Limpiar campos</MDBBtn>
                 </div>
 
             </MDBContainer >

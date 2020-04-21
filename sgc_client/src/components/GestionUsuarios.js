@@ -31,11 +31,12 @@ export default class GestionUsuarios extends Component {
             usuario.f_activo = $(this).parents("tr").find("td").eq(6).html();
 
             //Set data to form
-            $("#f_nombre").attr("value", usuario.f_nombre);
-            $("#f_apellido").attr("value", usuario.f_apellido);
-            $("#f_email").attr("value", usuario.f_email);
+            $("#f_nombre").val(usuario.f_nombre);
+            $("#f_apellido").val(usuario.f_apellido);
+            $("#f_email").val(usuario.f_email);
             $("#f_perfil option[value=" + usuario.f_perfil + "]").attr('selected', 'selected');
             $("#userform").addClass("update-user");
+            $("#userform").removeClass("insert-user");
 
             $('html, body').animate({
                 scrollTop: $("#userform").offset().top
@@ -72,10 +73,14 @@ export default class GestionUsuarios extends Component {
                if($("#userform").hasClass("update-user")){
                    //Add icons to update particular fields
                    $("#update-password").removeClass("hide-field");
+                   $("#bt-update-user").removeClass("hide-field");
+                   $("#bt-insert-user").addClass("hide-field");
                }else{
                 if($("#userform").hasClass("insert-user")){
                     //Remove icons to insert form
                     $("#update-password").addClass("hide-field");
+                    $("#bt-update-user").addClass("hide-field");
+                    $("#bt-insert-user").removeClass("hide-field");
                 }
                }
             })
@@ -86,6 +91,9 @@ export default class GestionUsuarios extends Component {
 
     clickAddUserScroll = () => {
         $(document).on('click', '#add-user-scroll', function () {
+            $("#userform").removeClass("update-user");
+            $("#userform").addClass("insert-user");
+
             $('html, body').animate({
                 scrollTop: $("#userform").offset().top
             }, 1500);
