@@ -12,6 +12,71 @@ import moment, { now } from 'moment';
 // Setup the localizer by providing the moment (or globalize) Object
 // to the correct localizer.
 BigCalendar.momentLocalizer(moment); // or globalizeLocalizer
+const eventtt = [
+    {
+        "title": "Evento prueba",
+        "desc": "Evento prueba Y su estado es activo",
+        "start": new Date("2020-04-12T05:00:00.000Z"),
+        "end": new Date("2020-04-12T05:00:00.000Z"),
+        "allday": false
+    },
+    {
+        "title": "Evento prueba",
+        "desc": "Evento prueba Y su estado es activo",
+        "start": new Date("2020-04-12T05:00:00.000Z"),
+        "end": new Date("2020-04-12T05:00:00.000Z"),
+        "allday": false
+    },
+    {
+        "title": "DESDE POSTMAN",
+        "desc": "DESDE POSTMAN Y su estado es cancelado",
+        "start": new Date("2020-04-12T05:00:00.000Z"),
+        "end": new Date("2020-04-12T05:00:00.000Z"),
+        "allday": false
+    },
+    {
+        "title": "DESDE POSTMAN",
+        "desc": "DESDE POSTMAN Y su estado es activo",
+        "start": new Date("2020-04-12T05:00:00.000Z"),
+        "end": new Date("2020-04-12T05:00:00.000Z"),
+        "allday": false
+    },
+    {
+        "title": "Evento prueba",
+        "desc": "Evento prueba Y su estado es cancelado",
+        "start": new Date("2020-04-12T05:00:00.000Z"),
+        "end": new Date("2020-04-12T05:00:00.000Z"),
+        "allday": false
+    },
+    {
+        "title": "DESDE POSTMAN ACTUALIZADO",
+        "desc": "DESDE POSTMAN ACTUALIZADO Y su estado es cancelado",
+        "start": new Date("2020-04-12T05:00:00.000Z"),
+        "end": new Date("2020-04-12T05:00:00.000Z"),
+        "allday": false
+    },
+    {
+        "title": "DESDE POSTMAN ACTUALIZADO",
+        "desc": "DESDE POSTMAN ACTUALIZADO Y su estado es cancelado",
+        "start": new Date("2020-04-12T05:00:00.000Z"),
+        "end": new Date("2020-04-12T05:00:00.000Z"),
+        "allday": false
+    },
+    {
+        "title": "DESDE POSTMAN",
+        "desc": "DESDE POSTMAN Y su estado es activo",
+        "start": new Date("2020-04-12T05:00:00.000Z"),
+        "end": new Date("2020-04-12T05:00:00.000Z"),
+        "allday": false
+    },
+    {
+        "title": "DESDE POSTMAN ACTUALIZADO",
+        "desc": "DESDE POSTMAN ACTUALIZADO Y su estado es activo",
+        "start": new Date("2020-04-12T05:00:00.000Z"),
+        "end": new Date("2020-04-12T05:00:00.000Z"),
+        "allday": false
+    }
+]
 
 export default class Inicio extends Component {
     state = {
@@ -28,7 +93,13 @@ export default class Inicio extends Component {
         }
 
     }
-  
+
+    cambiarValor = (valorABuscar, json) => {
+        json.forEach(function (elemento) { // recorremos el array        
+           //asignamos el valor del elemento dependiendo del valor a buscar, validamos que el valor sea el mismo y se reemplaza con el nuevo. 
+          elemento[valorABuscar] = new Date(elemento[valorABuscar])
+        })
+      }
 
     
     getEventos = async () => {
@@ -45,6 +116,8 @@ export default class Inicio extends Component {
             validation.error(res.data.status, res.data.description, res.data.id, res.data.traza);
         } else {
             this.setState({ eventos: res.data });
+            this.cambiarValor('start',this.state.eventos)
+            this.cambiarValor('end',this.state.eventos)
             console.log(this.state.eventos)
         }
     }
@@ -57,7 +130,8 @@ export default class Inicio extends Component {
                 <BigCalendar
                     selectable
                     popup
-                    events={this.state.eventos}
+                    // events={this.state.eventos}
+                    events = {eventtt}
                     defaultView='week'
                     scrollToTime={new Date(1970, 1, 1, 6)}
                     defaultDate={now()}
@@ -68,15 +142,6 @@ export default class Inicio extends Component {
                             text: event.desc,
                             showConfirmButton: false,
                             showCloseButton: true,
-                            width: 600,
-                            padding: '3em',
-                            background: '#fff url(/images/trees.png)',
-                            backdrop: `
-                            rgba(121, 129, 134, 0.2)
-                              url("/images/nyan-cat.gif")
-                              left top
-                              no-repeat
-                            `
                           })
                           
                         
