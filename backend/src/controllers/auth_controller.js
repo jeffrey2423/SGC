@@ -9,6 +9,7 @@ const jwt =  require("jsonwebtoken");
 authController.auth = async (req, res) => {
     try {
         const user = req.body;
+        console.log(user)
 
         let resultadoValidar;
         const queryValidarUsuario = {
