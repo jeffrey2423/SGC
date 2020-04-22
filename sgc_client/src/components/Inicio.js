@@ -3,177 +3,52 @@ import * as BigCalendar from 'react-big-calendar-like-google';
 import 'react-big-calendar-like-google/lib/css/react-big-calendar.css'
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/src/sweetalert2.scss'
+import axios from 'axios'
+import validation from '../resources/validations/main';
 
 //import BigCalendar from 'react-big-calendar';
-import moment from 'moment';
+import moment, { now } from 'moment';
 
 // Setup the localizer by providing the moment (or globalize) Object
 // to the correct localizer.
 BigCalendar.momentLocalizer(moment); // or globalizeLocalizer
 
-const events = [
-    {
-        'title': 'All Day Event very long title',
-        'allDay': true,
-        'start': new Date(2015, 3, 0),
-        'end': new Date(2015, 3, 1)
-    },
-    {
-        'title': 'Long Event',
-        'start': new Date(2015, 3, 7),
-        'end': new Date(2015, 3, 10)
-    },
-
-    {
-        'title': 'DTS STARTS',
-        'start': new Date(2016, 2, 13, 0, 0, 0),
-        'end': new Date(2016, 2, 20, 0, 0, 0)
-    },
-
-    {
-        'title': 'DTS ENDS',
-        'start': new Date(2016, 10, 6, 0, 0, 0),
-        'end': new Date(2016, 10, 13, 0, 0, 0)
-    },
-
-    {
-        'title': 'Some Event',
-        'start': new Date(2015, 3, 9, 0, 0, 0),
-        'end': new Date(2015, 3, 9, 0, 0, 0)
-    },
-    {
-        'title': 'Conference',
-        'start': new Date(2015, 3, 11),
-        'end': new Date(2015, 3, 13),
-        desc: 'Big conference for important people'
-    },
-    {
-        'title': 'Conference',
-        'start': new Date(2015, 3, 11),
-        'end': new Date(2015, 3, 13),
-        desc: 'Big conference for important people'
-    },
-    {
-        'title': 'Conference',
-        'start': new Date(2015, 3, 11),
-        'end': new Date(2015, 3, 13),
-        desc: 'Big conference for important people'
-    },
-    {
-        'title': 'Conference',
-        'start': new Date(2015, 3, 11),
-        'end': new Date(2015, 3, 13),
-        desc: 'Big conference for important people'
-    },
-    {
-        'title': 'Meeting',
-        'start': new Date(2015, 3, 12, 10, 30, 0, 0),
-        'end': new Date(2015, 3, 12, 12, 30, 0, 0),
-        desc: 'Pre-meeting meeting, to prepare for the meeting'
-    },
-    {
-        'title': 'Lunch',
-        'start': new Date(2015, 3, 12, 12, 0, 0, 0),
-        'end': new Date(2015, 3, 12, 13, 0, 0, 0),
-        desc: 'Power lunch'
-    },
-    {
-        'title': 'Lunch',
-        'start': new Date(2015, 3, 12, 12, 0, 0, 0),
-        'end': new Date(2015, 3, 12, 13, 0, 0, 0),
-        desc: 'Power lunch'
-    },
-    {
-        'title': 'Lunch',
-        'start': new Date(2015, 3, 12, 12, 0, 0, 0),
-        'end': new Date(2015, 3, 12, 13, 0, 0, 0),
-        desc: 'Power lunch'
-    },
-    {
-        'title': 'Lunch',
-        'start': new Date(2015, 3, 12, 12, 0, 0, 0),
-        'end': new Date(2015, 3, 12, 13, 0, 0, 0),
-        desc: 'Power lunch'
-    },
-    {
-        'title': 'Lunch',
-        'start': new Date(2015, 3, 12, 12, 0, 0, 0),
-        'end': new Date(2015, 3, 12, 13, 0, 0, 0),
-        desc: 'Power lunch'
-    },
-    {
-        'title': 'Meeting',
-        'start': new Date(2015, 3, 12, 14, 0, 0, 0),
-        'end': new Date(2015, 3, 12, 15, 0, 0, 0)
-    },
-    {
-        'title': 'Happy Hour',
-        'start': new Date(2015, 3, 12, 17, 0, 0, 0),
-        'end': new Date(2015, 3, 12, 17, 30, 0, 0),
-        desc: 'Most important meal of the day'
-    },
-    {
-        'title': 'Dinner',
-        'start': new Date(2015, 3, 12, 20, 0, 0, 0),
-        'end': new Date(2015, 3, 12, 21, 0, 0, 0)
-    },
-    {
-        'title': 'Birthday Party',
-        'start': new Date(2015, 3, 13, 7, 0, 0),
-        'end': new Date(2015, 3, 13, 10, 30, 0)
-    },
-    {
-        'title': 'Birthday Party 2',
-        'start': new Date(2015, 3, 13, 7, 0, 0),
-        'end': new Date(2015, 3, 13, 10, 30, 0)
-    },
-    {
-        'title': 'Birthday Party 3',
-        'start': new Date(2015, 3, 13, 7, 0, 0),
-        'end': new Date(2015, 3, 13, 10, 30, 0)
-    },
-    {
-        'title': 'Late Night Event',
-        'start': new Date(2015, 3, 17, 19, 30, 0),
-        'end': new Date(2015, 3, 18, 2, 0, 0)
-    },
-    {
-        'title': 'Late Night Event',
-        'start': new Date(2015, 3, 17, 19, 30, 0),
-        'end': new Date(2015, 3, 18, 2, 0, 0)
-    },
-    {
-        'title': 'Late Night Event',
-        'start': new Date(2015, 3, 17, 19, 30, 0),
-        'end': new Date(2015, 3, 18, 2, 0, 0)
-    },
-    {
-        'title': 'Late Night Event',
-        'start': new Date(2015, 3, 17, 19, 30, 0),
-        'end': new Date(2015, 3, 18, 2, 0, 0)
-    },
-    {
-        'title': 'Late Night Event',
-        'start': new Date(2015, 3, 17, 19, 30, 0),
-        'end': new Date(2015, 3, 18, 2, 0, 0)
-    },
-    {
-        'title': 'Multi-day Event',
-        'start': new Date(2015, 3, 20, 19, 30, 0),
-        'end': new Date(2015, 3, 22, 2, 0, 0)
+export default class Inicio extends Component {
+    state = {
+        eventos: [],
+        token: sessionStorage.getItem("token") === "" || sessionStorage.getItem("token") === null ? " " : sessionStorage.getItem("token")
     }
 
-]
 
-export default class Inicio extends Component {
     async componentDidMount() {
         if (!sessionStorage.getItem("token")) {
             window.location.href = '/';
         } else {
-
+            this.getEventos();
         }
 
     }
+  
+
+    
+    getEventos = async () => {
+        const userData = {
+            id_profesion: sessionStorage.getItem("f1004_id_profesion_t1003"),
+            id_usuario: sessionStorage.getItem("f1004_id")
+        }
+        const res = await axios.post("http://localhost:4000/api/user/events/getEventsFilter",userData,{
+            headers: {
+                'Authorization': `Bearer ${this.state.token}`
+            }
+        });
+        if (res.data.status === "error") {
+            validation.error(res.data.status, res.data.description, res.data.id, res.data.traza);
+        } else {
+            this.setState({ eventos: res.data });
+            console.log(this.state.eventos)
+        }
+    }
+
 
     render() {
         return (
@@ -182,28 +57,35 @@ export default class Inicio extends Component {
                 <BigCalendar
                     selectable
                     popup
-                    events={events}
+                    events={this.state.eventos}
                     defaultView='week'
                     scrollToTime={new Date(1970, 1, 1, 6)}
-                    defaultDate={new Date(2015, 3, 17)}
+                    defaultDate={now()}
                     onSelectEvent={event =>
 
-                        Swal.fire({
+                          Swal.fire({
                             title: event.title,
                             text: event.desc,
                             showConfirmButton: false,
                             showCloseButton: true,
                             width: 600,
-                            padding: '3em'
-                        })
-
-
+                            padding: '3em',
+                            background: '#fff url(/images/trees.png)',
+                            backdrop: `
+                            rgba(121, 129, 134, 0.2)
+                              url("/images/nyan-cat.gif")
+                              left top
+                              no-repeat
+                            `
+                          })
+                          
+                        
                     }
-                    onSelectSlot={(slotInfo) => alert(
-                        `selected slot: \n\nstart ${slotInfo.start.toLocaleString()} ` +
-                        `\nend: ${slotInfo.end.toLocaleString()}` +
-                        `\naction: ${slotInfo.action}`
-                    )}
+                onSelectSlot={(slotInfo) => alert(
+                    `selected slot: \n\nstart ${slotInfo.start.toLocaleString()} ` +
+                    `\nend: ${slotInfo.end.toLocaleString()}` +
+                    `\naction: ${slotInfo.action}`
+                )}
                 />
             </div>
         )

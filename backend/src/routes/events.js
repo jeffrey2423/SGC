@@ -9,7 +9,7 @@ router.route('/getEvents/:id')
 
 router.route('/getEventsFilter')
     //obtener datos con filtro
-    .get(eventController.getEventsFilter)
+    .post(eventController.getEventsFilter)
 
 router.route('/createEvent')
     //obtener datos con filtro
