@@ -24,7 +24,7 @@ export class EventDatatablePage extends Component {
     if (res.data.status === "error") {
       validation.error(res.data.status, res.data.description, res.data.id, res.data.traza);
     } else {
-      this.setState({ usuarios: res.data });
+      this.setState({ events: res.data });
       console.log(this.state.events);
     }
 
