@@ -46,7 +46,7 @@ module.exports = async (req, res, next) => {
                         if (permitir) {
                             next();
                         } else {
-                            res.json(rscController.leerRecurso(1009));
+                            res.json(rscController.leerRecurso(1041));
                         }
 
                         break;
