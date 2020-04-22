@@ -56,6 +56,8 @@ validationController.validarUsuario = (usuario) =>{
     results.push(!validationController.validateEmptyField(usuario.nombre));
     results.push(!validationController.validateEmptyField(usuario.apellido));
     results.push(!validationController.validateEmptyField(usuario.clave));
+    results.push(validationController.validateSelect(usuario.id_profesion));
+    results.push(validationController.validateSelect(usuario.id_perfil));
     results.push(validationController.validateEmail(usuario.email));
 
     for(var element in results) {
@@ -77,6 +79,11 @@ validationController.validarUsuario = (usuario) =>{
 validationController.validateEmptyField = (field) => {
     var re = /^\s+$/;
     return re.test(field) || field === null || field === "";
+};
+
+validationController.validateSelect = (field) => {
+    var re = /^[1-9]+[0-9]*$/;
+    return re.test(field);
 };
 
 validationController.validateEmail = (email) => {
