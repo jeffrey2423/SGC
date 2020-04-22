@@ -26,10 +26,10 @@ class UserForm extends React.Component {
         this.state.nuevo_usuario.nombre = $("#f_nombre").val();
         this.state.nuevo_usuario.apellido = $("#f_apellido").val();
         this.state.nuevo_usuario.fecha_nacimiento = "1999/01/01";
-        this.state.nuevo_usuario.id_profesion = 1;
+        this.state.nuevo_usuario.id_profesion = $("#f_profesion").val();
         this.state.nuevo_usuario.email = $("#f_email").val();
         this.state.nuevo_usuario.clave = $("#f_clave").val();
-        this.state.nuevo_usuario.id_perfil = 4;
+        this.state.nuevo_usuario.id_perfil = $("#f_perfil").val();
 
         if (validation.validarUsuario(this.state.nuevo_usuario)) {
             const data = this.state.nuevo_usuario;
@@ -104,18 +104,18 @@ class UserForm extends React.Component {
             <MDBContainer>
                 <div className="row">
                     <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroup-sizing-default">Nombre</span>
+                        <div className="input-group mb-3">
+                            <div className="input-group-prepend">
+                                <span className="input-group-text" id="inputGroup-sizing-default">Nombre</span>
                             </div>
                             <input type="text" id="f_nombre" placeholder="Nombre" className="form-control"
                                 aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required />
                         </div>
                     </div>
                     <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroup-sizing-default">Apellido</span>
+                        <div className="input-group mb-3">
+                            <div className="input-group-prepend">
+                                <span className="input-group-text" id="inputGroup-sizing-default">Apellido</span>
                             </div>
                             <input type="text" id="f_apellido" placeholder="Apellido" className="form-control"
                                 aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required />
@@ -125,9 +125,9 @@ class UserForm extends React.Component {
 
                 <div className="row">
                     <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroup-sizing-default">Email</span>
+                        <div className="input-group mb-3">
+                            <div className="input-group-prepend">
+                                <span className="input-group-text" id="inputGroup-sizing-default">Email</span>
                             </div>
                             <input type="email" id="f_email" placeholder="example@email.com" className="form-control"
                                 aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required />
@@ -136,15 +136,15 @@ class UserForm extends React.Component {
 
                     <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text" for="inputGroupSelect01">Perfil/Rol</label>
+                        <div className="input-group mb-3">
+                            <div className="input-group-prepend">
+                                <label className="input-group-text" htmlFor="inputGroupSelect01">Perfil/Rol</label>
                             </div>
-                            <select class="custom-select" id="f_perfil">
+                            <select className="custom-select" id="f_perfil">
                                 <option value="default" selected disabled>Choose...</option>
                                 {
                                     this.state.perfiles.map(perfil =>
-                                        <option value={perfil.f1000_nombre} key={perfil.f1000_id}>
+                                        <option value={perfil.f1000_id} key={perfil.f1000_id}>
                                             {perfil.f1000_nombre}
                                         </option>
                                     )
@@ -156,24 +156,24 @@ class UserForm extends React.Component {
 
                 <div className="row">
                     <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text" for="inputGroupSelect01">Profesión</label>
+                        <div className="input-group mb-3">
+                            <div className="input-group-prepend">
+                                <label className="input-group-text" htmlFor="inputGroupSelect01">Profesión</label>
                             </div>
-                            <select class="custom-select" id="f_profesion">
+                            <select className="custom-select" id="f_profesion">
                                 <option value="default" selected>Choose...</option>
-                                <option value="1">Administrador</option>
-                                <option value="2">Colaborador</option>
+                                <option value="2">Administrador</option>
+                                <option value="1">Colaborador</option>
                             </select>
                         </div>
                     </div>
 
                     <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text" for="inputGroupSelect01">Estado</label>
+                        <div className="input-group mb-3">
+                            <div className="input-group-prepend">
+                                <label className="input-group-text" htmlFor="inputGroupSelect01">Estado</label>
                             </div>
-                            <select class="custom-select" id="f_activo">
+                            <select className="custom-select" id="f_activo">
                                 <option value="default" selected>Choose...</option>
                                 <option value="1"> Activo</option>
                                 <option value="0">Inactivo</option>
@@ -185,9 +185,9 @@ class UserForm extends React.Component {
 
                 <div className="row" style={styles["password-fields"]} >
                     <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroup-sizing-default">Contraseña</span>
+                        <div className="input-group mb-3">
+                            <div className="input-group-prepend">
+                                <span className="input-group-text" id="inputGroup-sizing-default">Contraseña</span>
                             </div>
                             <input type="password" id="f_clave" placeholder="Contraseña de usuario" className="form-control"
                                 aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required />
@@ -195,9 +195,9 @@ class UserForm extends React.Component {
                     </div>
 
                     <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroup-sizing-default">Contraseña</span>
+                        <div className="input-group mb-3">
+                            <div className="input-group-prepend">
+                                <span className="input-group-text" id="inputGroup-sizing-default">Contraseña</span>
                             </div>
                             <input type="password" id="f_clave" placeholder="Repita contraseña" className="form-control"
                                 aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required />

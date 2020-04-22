@@ -27,7 +27,7 @@ module.exports = {
     },
     1005:{
         id: 1005,
-        description: "Hubo un error al intentar iniciar sesion",
+        description: "Hubo un error al intentar iniciar sesión",
         status: "error"
     },
     1006:{
@@ -203,6 +203,11 @@ module.exports = {
     1040:{
         id: 1040,
         description: "Error al actualizar el evento",
+        status: "error"
+    },
+    1041:{
+        id: 1041,
+        description: "No tienes permisos para ver usuarios, comunícate con el administrador",
         status: "error"
     }
 

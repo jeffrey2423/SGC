@@ -84,6 +84,8 @@ export class UserDatatablePage extends Component {
 
     return (
       <MDBDataTable
+      id="datatable_users"
+      className="datatable_users"
       responsive
         striped
         bordered
