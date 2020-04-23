@@ -41,7 +41,7 @@ export default class GestionUsuarios extends Component {
 
     }
 
-    clickTableUpdateUser =  () => {
+    clickTableUpdateUser = () => {
 
         let usuario = {}, id;
         let current = this;
@@ -50,26 +50,26 @@ export default class GestionUsuarios extends Component {
 
             id = $(this).parents("tr").find("td").eq(0).html();
             current.getUserToUpdate(id);
-        usuario.f_nombre = current.state.user_to_update.f1004_nombre;
-        usuario.f_apellido = current.state.user_to_update.f1004_apellido;
-        usuario.f_email = current.state.user_to_update.f1004_email;
-        usuario.f_profesion = current.state.user_to_update.f1004_id_profesion_t1003;
-        usuario.f_perfil = current.state.user_to_update.f1004_id_perfil_t1000;
-        usuario.f_activo = current.state.user_to_update.f1004_ind_activo;
+            usuario.f_nombre = current.state.user_to_update.f1004_nombre;
+            usuario.f_apellido = current.state.user_to_update.f1004_apellido;
+            usuario.f_email = current.state.user_to_update.f1004_email;
+            usuario.f_profesion = current.state.user_to_update.f1004_id_profesion_t1003;
+            usuario.f_perfil = current.state.user_to_update.f1004_id_perfil_t1000;
+            usuario.f_activo = current.state.user_to_update.f1004_ind_activo;
 
-        //Set data to form
-        $("#f_nombre").val(usuario.f_nombre);
-        $("#f_apellido").val(usuario.f_apellido);
-        $("#f_email").val(usuario.f_email);
-        $("#f_perfil").val(usuario.f_perfil);
-        $("#f_profesion").val(usuario.f_profesion);
-        $("#f_activo").val(usuario.f_activo);
-        $("#userform").addClass("update-user");
-        $("#userform").removeClass("insert-user");
+            //Set data to form
+            $("#f_nombre").val(usuario.f_nombre);
+            $("#f_apellido").val(usuario.f_apellido);
+            $("#f_email").val(usuario.f_email);
+            $("#f_perfil").val(usuario.f_perfil);
+            $("#f_profesion").val(usuario.f_profesion);
+            $("#f_activo").val(usuario.f_activo);
+            $("#userform").addClass("update-user");
+            $("#userform").removeClass("insert-user");
 
-        $('html, body').animate({
-            scrollTop: $("#userform").offset().top
-        }, 1500);
+            $('html, body').animate({
+                scrollTop: $("#userform").offset().top
+            }, 1500);
         });
 
         /*this.getUserToUpdate(id);
@@ -99,11 +99,12 @@ export default class GestionUsuarios extends Component {
     alertHoverTable = () => {
         $(document).ready(function () {
             $('div.tableuser tr').not(':first').mouseover(function () {
-                $("#message-mouseover-user").empty();
-                $("#message-mouseover-user").append("Click sobre la fila para actualizar");
+                $("#message-mouseover-user .message").empty();
+                $("#message-mouseover-user .message").append("<strong>¿Quieres actualizar?</strong> Deberías dar click sobre la fila.");
+                $("#message-mouseover-user").removeClass("hide-field");
             })
                 .mouseout(function () {
-                    $("#message-mouseover-user").empty();
+                    //$("#message-mouseover-user").empty();
                 });
         });
         /*$("#usersdatatable table tr")
@@ -164,7 +165,18 @@ export default class GestionUsuarios extends Component {
                         Agregar usuario</MDBBtn>
                         <h2 className="card-title">Usuarios de la aplicación</h2>
                         <hr />
-                        <span className="message-mouseover" id="message-mouseover-user"></span>
+                        
+                        <div style={{ height: '45px' }}>
+                        <div className="alert alert-info alert-dismissible fade show 
+                        message-mouseover hide-field" id="message-mouseover-user"  role="alert"
+                        style={{ display: 'block' }}>
+                                <div className="message">
+                                </div>
+                                <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        </div>
                         <div className="tableuser" id="usersdatatable" onClick={this.clickTableUpdateUser}>
                             <UserDatatablePage />
                         </div>
