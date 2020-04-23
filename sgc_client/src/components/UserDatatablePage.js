@@ -10,8 +10,12 @@ export class UserDatatablePage extends Component {
     token: sessionStorage.getItem("token") === "" || sessionStorage.getItem("token") === null ? " " : sessionStorage.getItem("token") 
   }
 
-  componentWillMount = async () => {
+  async componentDidMount() {
+    if (!sessionStorage.getItem("token")) {
+        window.location.href = '/';
+    } else {
     this.getUsuarios();
+    }
   }
 
   getUsuarios = async () => {

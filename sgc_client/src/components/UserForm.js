@@ -169,7 +169,7 @@ class UserForm extends React.Component {
                     </div>
 
                     <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <div className="input-group mb-3">
+                        <div className="input-group mb-3" style={{display: 'none'}}>
                             <div className="input-group-prepend">
                                 <label className="input-group-text" htmlFor="inputGroupSelect01">Estado</label>
                             </div>

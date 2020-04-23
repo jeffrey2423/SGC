@@ -162,7 +162,6 @@ export default class GestionUsuarios extends Component {
                         <MDBBtn color="purple" title="Agregar usuario" id="add-user-scroll">
                             <MDBIcon icon="user-alt" className="mr-1" />
                         Agregar usuario</MDBBtn>
-                        <input type="text" id="id-user-to-update" placeholder="Nombre" />
                         <h2 className="card-title">Usuarios de la aplicación</h2>
                         <hr />
                         <span className="message-mouseover" id="message-mouseover-user"></span>

@@ -28,7 +28,7 @@ export class GestionPerfiles extends Component {
         }else{ 
         this.getPerfiles();
         this.getPermisos();
-        this.getUsuarios();
+        //this.getUsuarios();
         }
     }
 
@@ -408,6 +408,7 @@ export class GestionPerfiles extends Component {
                                         className="form-control"
                                         value={this.state.usuarioSeleccionado}
                                         onChange={this.onInputChange}
+                                        onClick={this.getUsuarios}
                                     >
                                         <option>
                                             Usuarios
