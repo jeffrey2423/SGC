@@ -18,7 +18,7 @@ export default class GestionUsuarios extends Component {
             window.location.href = '/';
         } else {
             //this.clickTableUpdateUser();
-            this.alertHoverTable();
+            //this.alertHoverTable();
             this.hoverUserFormValidate();
             this.clickAddUserScroll();
         }
@@ -96,7 +96,7 @@ export default class GestionUsuarios extends Component {
 */
     }
 
-    alertHoverTable = () => {
+    alertHoverTable () {
         $(document).ready(function () {
             $('div.tableuser tr').not(':first').mouseover(function () {
                 $("#message-mouseover-user .message").empty();
@@ -177,7 +177,8 @@ export default class GestionUsuarios extends Component {
                             </button>
                         </div>
                         </div>
-                        <div className="tableuser" id="usersdatatable" onClick={this.clickTableUpdateUser}>
+                        <div className="tableuser" id="usersdatatable" onClick={this.clickTableUpdateUser}
+                        onMouseOver={this.alertHoverTable}>
                             <UserDatatablePage />
                         </div>
                     </div>

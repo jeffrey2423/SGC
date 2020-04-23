@@ -56,6 +56,7 @@ validationController.validarUsuario = (usuario) =>{
     results.push(!validationController.validateEmptyField(usuario.nombre));
     results.push(!validationController.validateEmptyField(usuario.apellido));
     results.push(!validationController.validateEmptyField(usuario.clave));
+    results.push(usuario.clave==usuario.clave2);
     results.push(validationController.validateSelect(usuario.id_profesion));
     results.push(validationController.validateSelect(usuario.id_perfil));
     results.push(validationController.validateEmail(usuario.email));
