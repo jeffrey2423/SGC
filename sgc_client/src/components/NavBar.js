@@ -14,6 +14,15 @@ export default class NavBar extends Component {
             $(".nav-item").removeClass("active-spa");
             $(this).addClass("active-spa");
         });
+
+        $(".nav-item").each(function(){
+            let id = $(this).attr("id");
+            if(window.location.toString().includes(id)){
+                $("#Inicio").removeClass("active-spa");
+                $("#"+id).removeClass("active-spa");
+                $("#"+id).addClass("active-spa");
+            }
+        });
     }
 
     render() {
@@ -46,14 +55,14 @@ export default class NavBar extends Component {
 
                     {sessionStorage.getItem("token") ? (
                         <div className="navbar-nav nav-pills">
-                            <Link className="nav-item nav-link active-spa" style={styles["navbar_link"]} to="/Inicio">Inicio</Link>
-                            <Link className="nav-item nav-link" style={styles["navbar_link"]} to="/GestionCitas">Gestion Citas</Link>
+                            <Link className="nav-item nav-link active-spa" style={styles["navbar_link"]} to="/Inicio" id="Inicio">Inicio</Link>
+                            <Link className="nav-item nav-link" style={styles["navbar_link"]} to="/GestionCitas" id="GestionCitas">Gestion Citas</Link>
                             {
 
                                 sessionStorage.getItem("f1004_id_profesion_t1003") == config.ADMINISTRADOR ? (
                                     <React.Fragment>
-                                        <Link className="nav-item nav-link" style={styles["navbar_link"]} to="/GestionUsuarios">Gestion Usuarios</Link>
-                                        <Link className="nav-item nav-link" style={styles["navbar_link"]} to="/GestionPerfiles">Gestion Perfiles</Link>
+                                        <Link className="nav-item nav-link" style={styles["navbar_link"]} to="/GestionUsuarios" id="GestionUsuarios">Gestion Usuarios</Link>
+                                        <Link className="nav-item nav-link" style={styles["navbar_link"]} to="/GestionPerfiles" id="GestionPerfiles">Gestion Perfiles</Link>
                                     </React.Fragment>
                                 ) :
 
