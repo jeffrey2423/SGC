@@ -21,6 +21,13 @@ class UserForm extends React.Component {
         this.clickRestartForm();
     }
 
+    validatePassword(){
+        $("#message-incorrect-password").empty();
+        if($("#f_clave").val() != $("#f_clave2").val()){
+            $("#message-incorrect-password").append("Contraseñas no coinciden");
+        }
+    }
+
     addUser = async () => {
 
         this.state.nuevo_usuario.nombre = $("#f_nombre").val();
@@ -29,6 +36,7 @@ class UserForm extends React.Component {
         this.state.nuevo_usuario.id_profesion = $("#f_profesion").val();
         this.state.nuevo_usuario.email = $("#f_email").val();
         this.state.nuevo_usuario.clave = $("#f_clave").val();
+        this.state.nuevo_usuario.clave2 = $("#f_clave2").val();
         this.state.nuevo_usuario.id_perfil = $("#f_perfil").val();
 
         if (validation.validarUsuario(this.state.nuevo_usuario)) {
@@ -169,7 +177,7 @@ class UserForm extends React.Component {
                     </div>
 
                     <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <div className="input-group mb-3">
+                        <div className="input-group mb-3" style={{display: 'none'}}>
                             <div className="input-group-prepend">
                                 <label className="input-group-text" htmlFor="inputGroupSelect01">Estado</label>
                             </div>
@@ -190,8 +198,10 @@ class UserForm extends React.Component {
                                 <span className="input-group-text" id="inputGroup-sizing-default">Contraseña</span>
                             </div>
                             <input type="password" id="f_clave" placeholder="Contraseña de usuario" className="form-control"
-                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required />
+                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required
+                                onChange={this.validatePassword}  />
                         </div>
+                        <span id="message-incorrect-password" style={{color:'red'}}></span>
                     </div>
 
                     <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -199,8 +209,9 @@ class UserForm extends React.Component {
                             <div className="input-group-prepend">
                                 <span className="input-group-text" id="inputGroup-sizing-default">Contraseña</span>
                             </div>
-                            <input type="password" id="f_clave" placeholder="Repita contraseña" className="form-control"
-                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required />
+                            <input type="password" id="f_clave2" placeholder="Repita contraseña" className="form-control"
+                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required
+                                onChange={this.validatePassword} />
                         </div>
                     </div>
                     <MDBIcon icon="key" title="Actualizar contraseña" className="update-spa-icon hide-field" id="update-password" />
