@@ -4,6 +4,7 @@ const morgan = require('morgan');
 require('dotenv').config()
 const app = express();
 const authToken = require("./middlewares/auth_token");
+const config = require('./config/config')
 
 //SETTINGS
 app.set('port', process.env.API_PORT ||  4000);
@@ -13,9 +14,15 @@ app.set('port', process.env.API_PORT ||  4000);
 //se le dice al servidor que debe entender json
 //enviar en este caso o entender
 app.use(morgan('dev'));
-app.use(cors());
-app.use(express.urlencoded({extended: false}));
+app.use(cors(
+    config.application.cors.server
+));
 app.use(express.json());
+
+// app.use(cors());
+// app.use(express.urlencoded({extended: false}));
+// app.use(express.json());
+
 
 
 
