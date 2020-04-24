@@ -1,10 +1,22 @@
 module.exports = {
     API_PORT: process.env.API_PORT || 4000,
     USER: process.env.USER || "postgres",
-    HOST: process.env.HOST ||"localhost",
+    HOST: process.env.HOST || "localhost",
     DATABASE: process.env.DATABASE || "sgc",
-    PASS: process.env.PASS ||"root",
-    PORTBD: process.env.PORTBD ||5432,
+    PASS: process.env.PASS || "root",
+    PORTBD: process.env.PORTBD || 5432,
     PORTSERVER: process.env.PORTSERVER || 5000,
-    SECRET_KEY: process.env.SECRET_KEY || "sgc_api"
+    SECRET_KEY: process.env.SECRET_KEY || "sgc_api",
+
+    application: {
+        cors: {
+            server: [
+                {
+                    origin: "*", //servidor que deseas "localhost:3000" que consuma o (*) en caso que sea acceso libre
+                    credentials: true
+                }
+            ]
+        }
+
+    }
 }
