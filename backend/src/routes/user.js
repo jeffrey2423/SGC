@@ -27,13 +27,13 @@ router.route('/updateUserEmail/:id')
     //actualizar email usuario
     .put(userController.updateUserEmail)
 
-router.route('/deleteUser/:id')
+router.route('/deleteUser')
     //actualizar indicador activo usuario
-    .put(userController.deleteUser)
+    .post(userController.deleteUser)
 
-router.route('/activateUser/:id')
+router.route('/activateUser')
     //actualizar indicador activo usuario
-    .put(userController.activateUser)
+    .post(userController.activateUser)
 
 router.route('/updateUserPerfil')
     //actualizar perfil usuario

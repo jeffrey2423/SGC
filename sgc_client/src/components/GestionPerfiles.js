@@ -108,9 +108,8 @@ export class GestionPerfiles extends Component {
             } else {
                 validation.success(res.data.status, res.data.description, res.data.id);
                 window.setTimeout(function () {
-                    window.location.href = '/GestionPerfiles';
+                    clientResource.refreshPage();
                 }, 1500);
-
             }
         }
 
@@ -136,7 +135,7 @@ export class GestionPerfiles extends Component {
             } else {
                 validation.success(res.data.status, res.data.description, res.data.id);
                 window.setTimeout(function () {
-                    window.location.href = '/GestionPerfiles';
+                    clientResource.refreshPage();
                 }, 1500);
 
             }
@@ -162,7 +161,7 @@ export class GestionPerfiles extends Component {
             } else {
                 validation.success(res.data.status, res.data.description, res.data.id);
                 window.setTimeout(function () {
-                    window.location.href = '/GestionPerfiles';
+                    clientResource.refreshPage();
                 }, 1500);
 
             }
@@ -190,7 +189,7 @@ export class GestionPerfiles extends Component {
             } else {
                 validation.success(res.data.status, res.data.description, res.data.id);
                 window.setTimeout(function () {
-                    window.location.href = '/GestionPerfiles';
+                    clientResource.refreshPage();
                 }, 1500);
 
             }

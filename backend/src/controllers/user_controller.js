@@ -188,7 +188,7 @@ userController.updateUserEmail = async (req, res) => {
 
 userController.deleteUser = async (req, res) => {
     try {
-        const id_usuario = req.params.id;
+        const id_usuario = req.body.id;
 
         const query = {
             text: "select * from f_eliminar_usuario($1)",
@@ -212,7 +212,7 @@ userController.deleteUser = async (req, res) => {
 
 userController.activateUser = async (req, res) => {
     try {
-        const id_usuario = req.params.id;
+        const id_usuario = req.body.id;
 
         const query = {
             text: "select * from f_activar_usuario($1)",
