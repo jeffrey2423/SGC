@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const Swal = require('sweetalert2/dist/sweetalert2.js')
 require('sweetalert2/src/sweetalert2.scss')
-const config  = require('../config/config')
+const config = require('../config/config')
 const ClientController = {};
 
 ClientController.localeFunc = (number, index, total_sec) => {
@@ -38,14 +38,14 @@ ClientController.getSessionData = (key) => {
     }
 }
 
-ClientController.getDataFronToken = (token) =>{
+ClientController.getDataFronToken = (token) => {
     jwt.verify(token.token.toString(), config.SECRET_KEY, (err, decoded) => {
         if (err) {
             Swal.fire({
                 icon: 'error',
                 title: "Error",
                 text: "Error al intentar iniciar sesion, intente de nuevo",
-                footer: 1005 
+                footer: 1005
             })
         } else {
             const datosUsuario = decoded;
@@ -54,5 +54,16 @@ ClientController.getDataFronToken = (token) =>{
         }
     });
 }
+
+ClientController.refreshPage = () => {
+    window.location.reload(false);
+}
+
+ClientController.isoToDate = (iso) => {
+    let date = new Date(iso);
+    return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+}
+
+ClientController.snooze = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 export default ClientController;
