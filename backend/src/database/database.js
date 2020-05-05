@@ -1,11 +1,11 @@
 const { Pool, Client } = require('pg');
 
 const connection = new Client({
-    user: process.env.USER,
-    host: process.env.HOST,
-    database: process.env.DATABASE,
-    password: process.env.PASS,
-    port: process.env.PORTBD
+    user: "postgres",
+    host: "localhost",
+    database: "sgc",
+    password: "Salem314821",
+    port: "5432"
 });
 
 connection.connect(function (err){
@@ -14,7 +14,7 @@ connection.connect(function (err){
             console.log(err);
             return;
         }else{
-            console.log('db is connected');
+            console.log('Database is connected');
         }
     } catch (error) {
         console.log(err);
