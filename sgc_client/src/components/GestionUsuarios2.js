@@ -264,137 +264,167 @@ export default class GestionUsuarios2 extends Component {
                     </div>
                 </div>
                 {/* ********************************INICIO MODAL EDITAR******************************************* */}
-                <div className="modal fade" id="editModal" tabIndex={-1} role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                    <div className="modal-dialog modal-dialog-centered" role="document">
+                <div className="modal fade bd-example-modal-xl" id="editModal" tabIndex={-1} role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                    <div className="modal-dialog modal-xl" role="document">
                         <div className="modal-content">
+                            {/** HEADER DEL MODAL ACTUALIZAR **/}
                             <div className="modal-header">
-                                <h5 className="modal-title" id="exampleModalLabel">
-                                    Actualizar Usuario
-                                </h5>
-                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">×</span>
-                                </button>
+                                        <h4 className="modal-title" id="exampleModalLabel">
+                                            ACTUALIZAR DATOS DE USUARIO
+                                        </h4>
+                                        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
                             </div>
+                            {/** FIN HEADER DEL MODAL ACTUALIZAR **/}
                             <div className="modal-body">
                                 <MDBContainer>
                                     <div>
-                                        <ul className="nav nav-tabs" id="myTab" role="tablist">
-                                            <li className="nav-item">
-                                                <a className="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
-                                                    Generales
-                                                    </a>
-                                            </li>
-                                            <li className="nav-item">
-                                                <a className="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">
-                                                    Usuario
-                                                    </a>
-                                            </li>
-                                        </ul>
                                         <div className="tab-content p-3" id="myTabContent">
                                             <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                                <div className="input-group mb-3">
-                                                    <div className="input-group-prepend">
-                                                        <span className="input-group-text" id="inputGroup-sizing-default">Nombre</span>
+
+                                        <div className="card-spa mt-4">
+                                            <div className="card-body">
+                                                {/**AQUI SECCIÓN DATOS GENRALES DEL MODAL ACTUALIZAR**** */}
+                                                <h2 className="card-title">Datos Generales</h2>
+                                                <hr />
+                                                    <div className="row ">
+                                                        <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                                            <div className="input-group mb-3">
+                                                                <div className="input-group-prepend">
+                                                                  <span className="input-group-text" id="inputGroup-sizing-default">Nombre</span>
+                                                                </div>
+                                                                <input type="text" id="f_nombre" placeholder="Nombre del usuario" className="form-control"
+                                                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required />
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                                            <div className="input-group mb-3">
+                                                                <div className="input-group-prepend">
+                                                                  <span className="input-group-text" id="inputGroup-sizing-default">Apellido</span>
+                                                                </div>
+                                                                <input type="text" id="f_apellido" placeholder="Apellido del usuario" className="form-control"
+                                                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required />
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                                            <div className="form-group">
+                                                                {/*******AQUI BOTON ACTUALIZAR PRIMER CARD FILA */}
+                                                                    <button
+                                                                        type="submit"
+                                                                        className="btn btn btn-secondary btn-block"
+                                                                    >
+                                                                    Actualizar
+                                                                    </button>
+                                                                
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <input type="text" id="f_nombre" placeholder="Nombre" className="form-control"
-                                                        aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required />
-                                                </div>
-
-                                                <div className="input-group mb-3">
-                                                    <div className="input-group-prepend">
-                                                        <span className="input-group-text" id="inputGroup-sizing-default">Apellido</span>
+                                                    <div className="row ">
+                                                        <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                                            <div className="input-group mb-3">
+                                                                <div className="input-group-prepend">
+                                                                    <label className="input-group-text" htmlFor="inputGroupSelect01">Profesión</label>
+                                                                </div>
+                                                                <select className="custom-select" id="f_profesion">
+                                                                    <option value="default" selected>Choose...</option>
+                                                                    <option value="2">Administrador</option>
+                                                                    <option value="1">Colaborador</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <input type="text" id="f_apellido" placeholder="Apellido" className="form-control"
-                                                        aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required />
+
                                                 </div>
-
-
-
-                                                <div className="input-group mb-3">
-                                                    <div className="input-group-prepend">
-                                                        <label className="input-group-text" htmlFor="inputGroupSelect01">Profesión</label>
-                                                    </div>
-                                                    <select className="custom-select" id="f_profesion">
-                                                        <option value="default" selected disabled>Choose...</option>
-                                                        <option value="2">Administrador</option>
-                                                        <option value="1">Colaborador</option>
-                                                    </select>
-                                                </div>
-                                                <div className="float-left">
-                                                    <button type="button" className="btn btn-secondary">Actualizar</button>
-                                                </div>
-
                                             </div>
 
-                                            <div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                                <div class="form-row">
-                                                    <div class="col">
-                                                        <input type="text" class="form-control" placeholder="First name"></input>
-                                                    </div>
-                                                    <div class="col">
-                                                    <button type="button" className="btn btn-secondary" >Actualizar</button>
-                                                    </div>
-                                                </div>
+                                            {/*************************DATOS DEL USUARIO*************** */}
+                                            <div className="card-spa mt-4">
+                                                <div className="card-body">
+                                                    <h2 className="card-title">Datos del Usuario</h2>
+                                                        <hr />
+                                                        <div className="row ">
+                                                            <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                                                <div className="input-group mb-3">
+                                                                    <div className="input-group-prepend">
+                                                                        <span className="input-group-text" id="inputGroup-sizing-default">Contraseña</span>
+                                                                    </div>
+                                                                    <input type="password" id="f_clave" placeholder="Contraseña de usuario" className="form-control"
+                                                                        aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required
+                                                                        onChange={this.validatePassword} />
+                                                                </div>
+                                                                <span id="message-incorrect-password" style={{ color: 'red' }}></span>
+                                                            </div>
+                                                            <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                                                <div className="input-group mb-3">
+                                                                    <div className="input-group-prepend">
+                                                                        <span className="input-group-text" id="inputGroup-sizing-default">Contraseña</span>
+                                                                    </div>
+                                                                    <input type="password" id="f_clave2" placeholder="Repita contraseña" className="form-control"
+                                                                        aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required
+                                                                        onChange={this.validatePassword} />
+                                                                </div>
+                                                            </div>
 
-
-                                                <div className="input-group mb-3">
-                                                    <div className="input-group-prepend">
-                                                        <label className="input-group-text" htmlFor="inputGroupSelect01">Perfil/Rol</label>
-                                                    </div>
-                                                    <select className="custom-select" id="f_perfil">
-                                                        <option value="default" selected disabled>Choose...</option>
-                                                        {
-                                                            this.state.perfiles.map(perfil =>
-                                                                <option value={perfil.f1000_id} key={perfil.f1000_id}>
-                                                                    {perfil.f1000_nombre}
-                                                                </option>
-                                                            )
-                                                        }
-                                                    </select>
-                                                </div>
-
-
-                                                <div className="row" style={styles["password-fields"]} >
-
-                                                    <div className="input-group mb-3">
-                                                        <div className="input-group-prepend">
-                                                            <span className="input-group-text" id="inputGroup-sizing-default">Contraseña</span>
+                                                            <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                                                <div className="form-group">
+                                                                {/*******AQUI BOTON 1 ACTUALIZAR del SEGUNDO CARD */}
+                                                                    <button
+                                                                        type="submit"
+                                                                        className="btn btn btn-secondary btn-block"
+                                                                    >
+                                                                    Actualizar
+                                                                    </button>
+                                                                
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <input type="password" id="f_clave" placeholder="Contraseña de usuario" className="form-control"
-                                                            aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required
-                                                            onChange={this.validatePassword} />
-                                                    </div>
-                                                    <span id="message-incorrect-password" style={{ color: 'red' }}></span>
-
-
-
-                                                    <div className="input-group mb-3">
-                                                        <div className="input-group-prepend">
-                                                            <span className="input-group-text" id="inputGroup-sizing-default">Contraseña</span>
+                                                    <hr /> 
+                                                        <div className="row ">
+                                                            <div class="col-8">
+                                                                <div className="input-group mb-3">
+                                                                    <div className="input-group-prepend">
+                                                                        <label className="input-group-text" htmlFor="inputGroupSelect01">Perfil/Rol</label>
+                                                                    </div>
+                                                                    <select className="custom-select" id="f_perfil">
+                                                                    <option value="default" selected disabled>Choose...</option>
+                                                                    {
+                                                                        this.state.perfiles.map(perfil =>
+                                                                        <option value={perfil.f1000_id} key={perfil.f1000_id}>
+                                                                        {perfil.f1000_nombre}
+                                                                        </option>
+                                                                        )
+                                                                     }
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-4">
+                                                                <div className="form-group">
+                                                                    {/*******AQUI BOTON 2 ACTUALIZAR SEGUNDO CARD */}
+                                                                    <button
+                                                                        type="submit"
+                                                                        className="btn btn btn-secondary btn-block"
+                                                                    >
+                                                                    Actualizar
+                                                                    </button>
+                                                                
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <input type="password" id="f_clave2" placeholder="Repita contraseña" className="form-control"
-                                                            aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required
-                                                            onChange={this.validatePassword} />
-                                                    </div>
                                                 </div>
-
                                             </div>
-
+                             
+                                        </div>
                                         </div>
                                     </div>
-
-
-
-
-
                                 </MDBContainer >
                             </div>
-                            <div className="modal-footer">
-                                <div className="">
+                                <div className="modal-footer">
+                                    <div className="">
                                     <button type="button" className="btn btn-danger" data-dismiss="modal">Cerrar</button>
                                 </div>
-
-
                             </div>
                         </div>
                     </div>
