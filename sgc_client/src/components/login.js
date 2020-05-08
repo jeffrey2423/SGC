@@ -18,7 +18,7 @@ export default class login extends Component {
         }
     }
 
-    onSubmit = async (e) => {
+    handleSubmit = async (e) => {
         e.preventDefault();
         if (this.state.email !== "" &&
             this.state.pass !== "") {
@@ -79,7 +79,7 @@ export default class login extends Component {
 
                     <form
                         className="text-center  p-5"
-                        onSubmit={this.onSubmit}
+                        onSubmit={this.handleSubmit}
                     >
                         <p className="h4 mb-4">Inicio de sesion</p>
                         {/* Email */}
