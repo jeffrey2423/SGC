@@ -280,16 +280,17 @@ export default class GestionUsuarios2 extends Component {
                             <div className="modal-body">
                                 <MDBContainer>
                                     <div>
+
                                         <div className="tab-content p-3" id="myTabContent">
                                             <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 
                                         <div className="card-spa mt-4">
                                             <div className="card-body">
                                                 {/**AQUI SECCIÓN DATOS GENRALES DEL MODAL ACTUALIZAR**** */}
-                                                <h2 className="card-title">Datos Generales</h2>
+                                                <h2 className="card-title">Información General</h2>
                                                 <hr />
                                                     <div className="row ">
-                                                        <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                                        <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                                             <div className="input-group mb-3">
                                                                 <div className="input-group-prepend">
                                                                   <span className="input-group-text" id="inputGroup-sizing-default">Nombre</span>
@@ -299,7 +300,7 @@ export default class GestionUsuarios2 extends Component {
                                                             </div>
                                                         </div>
 
-                                                        <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                                        <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                                             <div className="input-group mb-3">
                                                                 <div className="input-group-prepend">
                                                                   <span className="input-group-text" id="inputGroup-sizing-default">Apellido</span>
@@ -308,22 +309,9 @@ export default class GestionUsuarios2 extends Component {
                                                                 aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required />
                                                             </div>
                                                         </div>
-
-                                                        <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                                            <div className="form-group">
-                                                                {/*******AQUI BOTON ACTUALIZAR PRIMER CARD FILA */}
-                                                                    <button
-                                                                        type="submit"
-                                                                        className="btn btn btn-secondary btn-block"
-                                                                    >
-                                                                    Actualizar
-                                                                    </button>
-                                                                
-                                                            </div>
-                                                        </div>
                                                     </div>
                                                     <div className="row ">
-                                                        <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                                        <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12"> 
                                                             <div className="input-group mb-3">
                                                                 <div className="input-group-prepend">
                                                                     <label className="input-group-text" htmlFor="inputGroupSelect01">Profesión</label>
@@ -335,53 +323,107 @@ export default class GestionUsuarios2 extends Component {
                                                                 </select>
                                                             </div>
                                                         </div>
+    
                                                     </div>
-
-                                                </div>
-                                            </div>
-
-                                            {/*************************DATOS DEL USUARIO*************** */}
-                                            <div className="card-spa mt-4">
-                                                <div className="card-body">
-                                                    <h2 className="card-title">Datos del Usuario</h2>
+                                                    <div class="row">
+                                                        <div class="col-6 col-md-4"></div>
+                                                        <div class="col-6 col-md-4"></div>
+                                                        <div class="col-6 col-md-4"> 
+                                                            <button
+                                                                    type="submit"
+                                                                    className="btn btn btn-secondary btn-block"
+                                                                >
+                                                                Actualizar
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                     {/**ACTUALIZAR DATOS DE SEGURIDAD**** */}
+                                                    <hr />
+                                                    <div className="row ">
+                                                        <div class="col-8">
+                                                            <h2 className="card-title">
+                                                                Seguridad
+                                                            </h2>
+                                                        </div>
+                                                        
+                                                    </div>
                                                         <hr />
                                                         <div className="row ">
-                                                            <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                                            <div class="col-8">
                                                                 <div className="input-group mb-3">
                                                                     <div className="input-group-prepend">
                                                                         <span className="input-group-text" id="inputGroup-sizing-default">Contraseña</span>
                                                                     </div>
-                                                                    <input type="password" id="f_clave" placeholder="Contraseña de usuario" className="form-control"
+                                                                        <input type="password" id="f_clave" placeholder="Contraseña de usuario" className="form-control"
                                                                         aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required
-                                                                        onChange={this.validatePassword} />
+                                                                        onChange={this.validatePassword}  />
                                                                 </div>
-                                                                <span id="message-incorrect-password" style={{ color: 'red' }}></span>
+                                                                    <span id="message-incorrect-password" style={{color:'red'}}></span>
                                                             </div>
-                                                            <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-8">
                                                                 <div className="input-group mb-3">
                                                                     <div className="input-group-prepend">
                                                                         <span className="input-group-text" id="inputGroup-sizing-default">Contraseña</span>
                                                                     </div>
-                                                                    <input type="password" id="f_clave2" placeholder="Repita contraseña" className="form-control"
-                                                                        aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required
-                                                                        onChange={this.validatePassword} />
+                                                                    <input type="password" id="f_clave2" placeholder="Confirme su contraseña" className="form-control"
+                                                                    aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required
+                                                                    onChange={this.validatePassword} />
                                                                 </div>
                                                             </div>
-
-                                                            <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                                                <div className="form-group">
-                                                                {/*******AQUI BOTON 1 ACTUALIZAR del SEGUNDO CARD */}
-                                                                    <button
-                                                                        type="submit"
-                                                                        className="btn btn btn-secondary btn-block"
-                                                                    >
-                                                                    Actualizar
-                                                                    </button>
-                                                                
+                                                            <div class="col-6 col-md-4"></div>
+                                                            <div class="col-6 col-md-4"></div>
+                                                            <div class="col-6 col-md-4"></div>
+                                                            <div className="col-6 col-md-4">
+                                                                <button
+                                                                    type="submit"
+                                                                    className="btn btn btn-secondary btn-block"
+                                                                >
+                                                                Actualizar
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <hr />
+                                                        {/**ACTUALIZAR CORREO ELECTRONICO*** */}
+                                                        <div className="row ">
+                                                            <div class="col-8">
+                                                                <h2 className="card-title">
+                                                                Correo Electrónico
+                                                                </h2>
+                                                            </div>
+                                                        </div>
+                                                        <hr />
+                                                        <div className="row ">
+                                                            <div class="col-8">
+                                                                <div className="input-group mb-3">
+                                                                    <div className="input-group-prepend">
+                                                                    <span className="input-group-text" id="inputGroup-sizing-default">Correo</span>
+                                                                    </div>
+                                                                    <input type="text" id="f_email" placeholder="Correo del usuario" className="form-control"
+                                                                    aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required />
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    <hr /> 
+                                                        <div class="row">
+                                                            <div class="col-6 col-md-4"></div>
+                                                            <div class="col-6 col-md-4"></div>
+                                                            <div class="col-6 col-md-4"> 
+                                                                <button
+                                                                    type="submit"
+                                                                    className="btn btn btn-secondary btn-block"
+                                                                >
+                                                                Actualizar
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <hr />
+                                                     {/**ACTUALIZAR PERFIL DE ACCESO*** */}
+                                                        <h2 className="card-title">
+                                                            Perfil de acceso
+                                                        </h2>
+                                                        <hr />
                                                         <div className="row ">
                                                             <div class="col-8">
                                                                 <div className="input-group mb-3">
@@ -400,27 +442,28 @@ export default class GestionUsuarios2 extends Component {
                                                                     </select>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-4">
-                                                                <div className="form-group">
-                                                                    {/*******AQUI BOTON 2 ACTUALIZAR SEGUNDO CARD */}
-                                                                    <button
-                                                                        type="submit"
-                                                                        className="btn btn btn-secondary btn-block"
-                                                                    >
-                                                                    Actualizar
-                                                                    </button>
-                                                                
-                                                                </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-6 col-md-4"></div>
+                                                            <div class="col-6 col-md-4"></div>
+                                                            <div class="col-6 col-md-4"> 
+                                                                <button
+                                                                    type="submit"
+                                                                    className="btn btn btn-secondary btn-block"
+                                                                >
+                                                                Actualizar
+                                                                </button>
                                                             </div>
                                                         </div>
+
                                                 </div>
                                             </div>
-                             
                                         </div>
                                         </div>
                                     </div>
                                 </MDBContainer >
                             </div>
+                            {/**FOOTER CON BOTÓN**** */}
                                 <div className="modal-footer">
                                     <div className="">
                                     <button type="button" className="btn btn-danger" data-dismiss="modal">Cerrar</button>
