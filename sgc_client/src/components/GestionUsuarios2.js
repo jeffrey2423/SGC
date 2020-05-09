@@ -172,6 +172,7 @@ export default class GestionUsuarios2 extends Component {
                         >
                             <MDBIcon icon="user-alt" className="mr-1" />Agregar usuario
                         </span>
+                        <hr />
                         <h2 className="card-title">Usuarios de la aplicación</h2>
                         <hr />
                         {/* <div className="form-inline my-lg-0 float-right p-3">
@@ -264,8 +265,8 @@ export default class GestionUsuarios2 extends Component {
                     </div>
                 </div>
                 {/* ********************************INICIO MODAL EDITAR******************************************* */}
-                <div className="modal fade bd-example-modal-xl" id="editModal" tabIndex={-1} role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                    <div className="modal-dialog modal-xl" role="document">
+                <div class="modal fade bd-example-modal-lg" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                    <div className="modal-dialog modal-lg" role="document">
                         <div className="modal-content">
                             {/** HEADER DEL MODAL ACTUALIZAR **/}
                             <div className="modal-header">
@@ -280,21 +281,27 @@ export default class GestionUsuarios2 extends Component {
                             <div className="modal-body">
                                 <MDBContainer>
                                     <div>
-
-                                        <div className="tab-content p-3" id="myTabContent">
-                                            <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-
-                                        <div className="card-spa mt-4">
-                                            <div className="card-body">
-                                                {/**AQUI SECCIÓN DATOS GENRALES DEL MODAL ACTUALIZAR**** */}
-                                                <h2 className="card-title">Información General</h2>
+                                    <ul class="nav nav-pills nav-1 mb-3" id="pills-tab" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active nav-2" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Información General</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link nav-2" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Seguridad</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link nav-2" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Correo</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content" id="pills-tabContent">
+                                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                                            <div className="card-spa mt-4">
+                                                <div className="card-body">
+                                                    {/******AJSJASDÑOASHAKSDAHKSDHASD */}
+                                                    <h4 className="card-title">Información General</h4>
                                                 <hr />
                                                     <div className="row ">
                                                         <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                                             <div className="input-group mb-3">
-                                                                <div className="input-group-prepend">
-                                                                  <span className="input-group-text" id="inputGroup-sizing-default">Nombre</span>
-                                                                </div>
                                                                 <input type="text" id="f_nombre" placeholder="Nombre del usuario" className="form-control"
                                                                 aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required />
                                                             </div>
@@ -302,9 +309,6 @@ export default class GestionUsuarios2 extends Component {
 
                                                         <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                                             <div className="input-group mb-3">
-                                                                <div className="input-group-prepend">
-                                                                  <span className="input-group-text" id="inputGroup-sizing-default">Apellido</span>
-                                                                </div>
                                                                 <input type="text" id="f_apellido" placeholder="Apellido del usuario" className="form-control"
                                                                 aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required />
                                                             </div>
@@ -313,11 +317,8 @@ export default class GestionUsuarios2 extends Component {
                                                     <div className="row ">
                                                         <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12"> 
                                                             <div className="input-group mb-3">
-                                                                <div className="input-group-prepend">
-                                                                    <label className="input-group-text" htmlFor="inputGroupSelect01">Profesión</label>
-                                                                </div>
                                                                 <select className="custom-select" id="f_profesion">
-                                                                    <option value="default" selected>Choose...</option>
+                                                                    <option value="default" selected>Profesión...</option>
                                                                     <option value="2">Administrador</option>
                                                                     <option value="1">Colaborador</option>
                                                                 </select>
@@ -326,9 +327,8 @@ export default class GestionUsuarios2 extends Component {
     
                                                     </div>
                                                     <div class="row">
-                                                        <div class="col-6 col-md-4"></div>
-                                                        <div class="col-6 col-md-4"></div>
-                                                        <div class="col-6 col-md-4"> 
+                                                    <div class="col-auto mr-auto"></div>
+                                                        <div class="col-auto"> 
                                                             <button
                                                                     type="submit"
                                                                     className="btn btn btn-secondary btn-block"
@@ -337,78 +337,78 @@ export default class GestionUsuarios2 extends Component {
                                                             </button>
                                                         </div>
                                                     </div>
-                                                     {/**ACTUALIZAR DATOS DE SEGURIDAD**** */}
-                                                    <hr />
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {/************************************************************* */}
+                                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                            <div className="card-spa mt-4">
+                                                <div className="card-body">
                                                     <div className="row ">
                                                         <div class="col-8">
-                                                            <h2 className="card-title">
+                                                            <h4 className="card-title">
                                                                 Seguridad
-                                                            </h2>
+                                                            </h4>
                                                         </div>
                                                         
                                                     </div>
-                                                        <hr />
-                                                        <div className="row ">
-                                                            <div class="col-8">
-                                                                <div className="input-group mb-3">
-                                                                    <div className="input-group-prepend">
-                                                                        <span className="input-group-text" id="inputGroup-sizing-default">Contraseña</span>
-                                                                    </div>
-                                                                        <input type="password" id="f_clave" placeholder="Contraseña de usuario" className="form-control"
-                                                                        aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required
-                                                                        onChange={this.validatePassword}  />
-                                                                </div>
-                                                                    <span id="message-incorrect-password" style={{color:'red'}}></span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-8">
-                                                                <div className="input-group mb-3">
-                                                                    <div className="input-group-prepend">
-                                                                        <span className="input-group-text" id="inputGroup-sizing-default">Contraseña</span>
-                                                                    </div>
-                                                                    <input type="password" id="f_clave2" placeholder="Confirme su contraseña" className="form-control"
+                                                    <hr />
+                                                    <div className="row ">
+                                                        <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                            <div className="input-group mb-3">
+                                                                    <input type="password" id="f_clave" placeholder="Contraseña de usuario" className="form-control"
                                                                     aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required
-                                                                    onChange={this.validatePassword} />
-                                                                </div>
+                                                                    onChange={this.validatePassword}  />
                                                             </div>
-                                                            <div class="col-6 col-md-4"></div>
-                                                            <div class="col-6 col-md-4"></div>
-                                                            <div class="col-6 col-md-4"></div>
-                                                            <div className="col-6 col-md-4">
-                                                                <button
-                                                                    type="submit"
-                                                                    className="btn btn btn-secondary btn-block"
-                                                                >
-                                                                Actualizar
-                                                                </button>
+                                                            <span id="message-incorrect-password" style={{color:'red'}}></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                            <div className="input-group mb-3">
+                                                                <input type="password" id="f_clave2" placeholder="Confirme su contraseña" className="form-control"
+                                                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required
+                                                                onChange={this.validatePassword} />
                                                             </div>
                                                         </div>
-                                                        <hr />
-                                                        {/**ACTUALIZAR CORREO ELECTRONICO*** */}
-                                                        <div className="row ">
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-auto mr-auto"></div>
+                                                        <div class="col-auto"> 
+                                                            <button
+                                                                type="submit"
+                                                                className="btn btn btn-secondary btn-block"
+                                                            >
+                                                            Actualizar
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>       
+                                        </div>
+                                        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                                        <div className="card-spa mt-4">
+                                                <div className="card-body">
+                                                <div className="row ">
                                                             <div class="col-8">
-                                                                <h2 className="card-title">
+                                                                <h4 className="card-title">
                                                                 Correo Electrónico
-                                                                </h2>
+                                                                </h4>
                                                             </div>
                                                         </div>
                                                         <hr />
                                                         <div className="row ">
-                                                            <div class="col-8">
+                                                            <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                                                 <div className="input-group mb-3">
-                                                                    <div className="input-group-prepend">
-                                                                    <span className="input-group-text" id="inputGroup-sizing-default">Correo</span>
-                                                                    </div>
                                                                     <input type="text" id="f_email" placeholder="Correo del usuario" className="form-control"
                                                                     aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required />
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col-6 col-md-4"></div>
-                                                            <div class="col-6 col-md-4"></div>
-                                                            <div class="col-6 col-md-4"> 
+                                                            <div class="col-auto mr-auto"></div>
+                                                            <div class="col-auto">  
                                                                 <button
                                                                     type="submit"
                                                                     className="btn btn btn-secondary btn-block"
@@ -420,18 +420,15 @@ export default class GestionUsuarios2 extends Component {
                                                         
                                                         <hr />
                                                      {/**ACTUALIZAR PERFIL DE ACCESO*** */}
-                                                        <h2 className="card-title">
+                                                        <h4 className="card-title">
                                                             Perfil de acceso
-                                                        </h2>
+                                                        </h4>
                                                         <hr />
                                                         <div className="row ">
-                                                            <div class="col-8">
+                                                            <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                                                 <div className="input-group mb-3">
-                                                                    <div className="input-group-prepend">
-                                                                        <label className="input-group-text" htmlFor="inputGroupSelect01">Perfil/Rol</label>
-                                                                    </div>
                                                                     <select className="custom-select" id="f_perfil">
-                                                                    <option value="default" selected disabled>Choose...</option>
+                                                                    <option value="default" selected disabled>Perfil/Rol..</option>
                                                                     {
                                                                         this.state.perfiles.map(perfil =>
                                                                         <option value={perfil.f1000_id} key={perfil.f1000_id}>
@@ -444,9 +441,8 @@ export default class GestionUsuarios2 extends Component {
                                                             </div>
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col-6 col-md-4"></div>
-                                                            <div class="col-6 col-md-4"></div>
-                                                            <div class="col-6 col-md-4"> 
+                                                            <div class="col-auto mr-auto"></div>
+                                                            <div class="col-auto"> 
                                                                 <button
                                                                     type="submit"
                                                                     className="btn btn btn-secondary btn-block"
@@ -455,9 +451,14 @@ export default class GestionUsuarios2 extends Component {
                                                                 </button>
                                                             </div>
                                                         </div>
-
                                                 </div>
                                             </div>
+                                        </div>
+                                    </div>
+
+                                        <div className="tab-content p-3" id="myTabContent">
+                                            <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
                                         </div>
                                         </div>
                                     </div>

@@ -94,7 +94,7 @@ export default class GestionCitas extends Component {
             <MDBIcon far icon="calendar-check" className="mr-1"/>Nueva cita
           </span>
           <hr />
-            <h2 className="card-title">Citas creadas</h2>
+            <h2 className="card-title">Citas programadas</h2>
       
             <span className="message-mouseover" id="message-mouseover-event"></span>
             <div className="tableevent" id="eventsdatatable">
