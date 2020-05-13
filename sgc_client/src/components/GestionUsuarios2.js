@@ -281,7 +281,7 @@ export default class GestionUsuarios2 extends Component {
                             <div className="modal-body">
                                 <MDBContainer>
                                     <div>
-                                    <ul class="nav nav-pills nav-1 mb-3" id="pills-tab" role="tablist">
+                                    <ul class="nav nav-pills nav-1 mb-3 nav-act" id="pills-tab" role="tablist">
                                         <li class="nav-item">
                                             <a class="nav-link active nav-2" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Información General</a>
                                         </li>
@@ -289,7 +289,7 @@ export default class GestionUsuarios2 extends Component {
                                             <a class="nav-link nav-2" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Seguridad</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link nav-2" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Correo</a>
+                                            <a class="nav-link nav-2" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Datos de acceso</a>
                                         </li>
                                     </ul>
                                     <div class="tab-content" id="pills-tabContent">
