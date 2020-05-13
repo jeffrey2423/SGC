@@ -134,6 +134,17 @@ textarea:hover, input:hover, textarea:active, input:active, textarea:focus, inpu
 }
 
 
+.nav-pills .nav-link.active,
+.show>.nav-1 .nav-2{
+    background: #9A5AB8 !important;
+    color: #ffffff !important
+}
+
+.nav-1 .nav-2{
+  color: #70388b !important
+}
+
+
 
 /* .dataTables_filter > label::before {
   content: "Buscar";

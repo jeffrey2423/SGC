@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { MDBDataTable } from 'mdbreact';
 import validation from '../resources/validations/main';
-
+import clientResource from '../resources/client';
+import $ from 'jquery';
 export class EventDatatablePage extends Component {
 
   state = {
@@ -12,6 +13,13 @@ export class EventDatatablePage extends Component {
 
   componentWillMount = async () => {
     this.getEvents();
+
+    $(document).ready(function () {
+      $('#dtOrderExample').DataTable({
+      "order": [[ 3, "desc" ]]
+      });
+      $('.dataTables_length').addClass('bs-select');
+      });
   }
 
   getEvents = async () => {
@@ -32,63 +40,54 @@ export class EventDatatablePage extends Component {
 
   render() {
 
-    const data = {
-      columns: [
-        {
-          label: 'Id',
-          field: 'f_id',
-          name: 'f_id',
-          sort: 'asc',
-          width: 150
-        },
-        {
-          label: 'Título',
-          field: 'f_titulo',
-          sort: 'asc',
-          width: 150
-        },
-        {
-          label: 'Descripción',
-          field: 'f_descripcion',
-          sort: 'asc',
-          width: 270
-        },
-        {
-          label: 'Creador',
-          field: 'f_creado_por',
-          sort: 'asc',
-          width: 100
-        },
-        {
-          label: 'Responsable',
-          field: 'f_asignado_a',
-          sort: 'asc',
-          width: 100
-        },
-        {
-          label: 'Fecha y hora inicial',
-          field: 'f_fecha_inicial',
-          sort: 'asc',
-          width: 100
-        },
-        {
-          label: 'Fecha y hora fin',
-          field: 'f_fecha_final',
-          sort: 'asc',
-          width: 100
-        }
-      ],
-      rows: this.state.events
-    };
-
     return (
-      <MDBDataTable
-      responsive
-        striped
-        bordered
-        hover
-        data={data}
-      />
+            <div class="table-responsive ">
+
+                <table id="dtOrderExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">  
+                    <thead style={{ position: 'sticky' }}>
+                      <tr>
+                        <th scope="col">Nombre cliente</th>
+                        <th scope="col">Apellido cliente</th>
+                        <th scope="col">Descripción</th>
+                        <th scope="col">Responsable</th>
+                        <th scope="col">Hora inicio</th>
+                        <th scope="col">Hora fin</th>
+                        <th scope="col">Fecha cita</th>
+                        <th scope="col">Asignado por</th>
+                                        
+                      </tr>
+                    </thead>
+                    <tbody>
+
+                      {/** AQUI EL CUERPO DE LA TABLA O INFORMACIÓN A MOSTRAR */}
+                      <tr>
+                      <td>María</td>
+                      <td>Pérez</td>
+                      <td>El/La cliente viene para manicure</td>
+                      <td>Jeffrey</td>
+                      <td>14:00</td>
+                      <td>15:00</td>
+                      <td>07/05/2020</td>
+                      <td>Febe</td>
+                      </tr>
+                      
+
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <th scope="col">Nombre cliente</th>
+                        <th scope="col">Apellido cliente</th>
+                        <th scope="col">Descripción</th>
+                        <th scope="col">Responsable</th>
+                        <th scope="col">Hora inicio</th>
+                        <th scope="col">Hora fin</th>
+                        <th scope="col">Fecha cita</th>
+                        <th scope="col">Asignado por</th>
+                      </tr>
+                    </tfoot>
+                </table>
+            </div>
+
     );
 
   }

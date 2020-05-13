@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { MDBContainer, MDBIcon } from "mdbreact";
+import { MDBContainer, MDBIcon, MDBBtn } from "mdbreact";
 import axios from 'axios'
 import validation from '../resources/validations/main';
 import clientResource from '../resources/client';
@@ -172,6 +172,7 @@ export default class GestionUsuarios2 extends Component {
                         >
                             <MDBIcon icon="user-alt" className="mr-1" />Agregar usuario
                         </span>
+                        <hr />
                         <h2 className="card-title">Usuarios de la aplicación</h2>
                         <hr />
                         {/* <div className="form-inline my-lg-0 float-right p-3">
@@ -264,137 +265,210 @@ export default class GestionUsuarios2 extends Component {
                     </div>
                 </div>
                 {/* ********************************INICIO MODAL EDITAR******************************************* */}
-                <div className="modal fade" id="editModal" tabIndex={-1} role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                    <div className="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal fade bd-example-modal-lg" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                    <div className="modal-dialog modal-lg" role="document">
                         <div className="modal-content">
+                            {/** HEADER DEL MODAL ACTUALIZAR **/}
                             <div className="modal-header">
-                                <h5 className="modal-title" id="exampleModalLabel">
-                                    Actualizar Usuario
-                                </h5>
-                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">×</span>
-                                </button>
+                                        <h4 className="modal-title" id="exampleModalLabel">
+                                            ACTUALIZAR DATOS DE USUARIO
+                                        </h4>
+                                        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
                             </div>
+                            {/** FIN HEADER DEL MODAL ACTUALIZAR **/}
                             <div className="modal-body">
                                 <MDBContainer>
                                     <div>
-                                        <ul className="nav nav-tabs" id="myTab" role="tablist">
-                                            <li className="nav-item">
-                                                <a className="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
-                                                    Generales
-                                                    </a>
-                                            </li>
-                                            <li className="nav-item">
-                                                <a className="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">
-                                                    Usuario
-                                                    </a>
-                                            </li>
-                                        </ul>
-                                        <div className="tab-content p-3" id="myTabContent">
-                                            <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                                <div className="input-group mb-3">
-                                                    <div className="input-group-prepend">
-                                                        <span className="input-group-text" id="inputGroup-sizing-default">Nombre</span>
-                                                    </div>
-                                                    <input type="text" id="f_nombre" placeholder="Nombre" className="form-control"
-                                                        aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required />
-                                                </div>
-
-                                                <div className="input-group mb-3">
-                                                    <div className="input-group-prepend">
-                                                        <span className="input-group-text" id="inputGroup-sizing-default">Apellido</span>
-                                                    </div>
-                                                    <input type="text" id="f_apellido" placeholder="Apellido" className="form-control"
-                                                        aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required />
-                                                </div>
-
-
-
-                                                <div className="input-group mb-3">
-                                                    <div className="input-group-prepend">
-                                                        <label className="input-group-text" htmlFor="inputGroupSelect01">Profesión</label>
-                                                    </div>
-                                                    <select className="custom-select" id="f_profesion">
-                                                        <option value="default" selected disabled>Choose...</option>
-                                                        <option value="2">Administrador</option>
-                                                        <option value="1">Colaborador</option>
-                                                    </select>
-                                                </div>
-                                                <div className="float-left">
-                                                    <button type="button" className="btn btn-secondary">Actualizar</button>
-                                                </div>
-
-                                            </div>
-
-                                            <div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                                <div class="form-row">
-                                                    <div class="col">
-                                                        <input type="text" class="form-control" placeholder="First name"></input>
-                                                    </div>
-                                                    <div class="col">
-                                                    <button type="button" className="btn btn-secondary" >Actualizar</button>
-                                                    </div>
-                                                </div>
-
-
-                                                <div className="input-group mb-3">
-                                                    <div className="input-group-prepend">
-                                                        <label className="input-group-text" htmlFor="inputGroupSelect01">Perfil/Rol</label>
-                                                    </div>
-                                                    <select className="custom-select" id="f_perfil">
-                                                        <option value="default" selected disabled>Choose...</option>
-                                                        {
-                                                            this.state.perfiles.map(perfil =>
-                                                                <option value={perfil.f1000_id} key={perfil.f1000_id}>
-                                                                    {perfil.f1000_nombre}
-                                                                </option>
-                                                            )
-                                                        }
-                                                    </select>
-                                                </div>
-
-
-                                                <div className="row" style={styles["password-fields"]} >
-
-                                                    <div className="input-group mb-3">
-                                                        <div className="input-group-prepend">
-                                                            <span className="input-group-text" id="inputGroup-sizing-default">Contraseña</span>
+                                    <ul class="nav nav-pills nav-1 mb-3" id="pills-tab" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active nav-2" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Información General</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link nav-2" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Seguridad</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link nav-2" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Correo</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content" id="pills-tabContent">
+                                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                                            <div className="card-spa mt-4">
+                                                <div className="card-body">
+                                                    {/******AJSJASDÑOASHAKSDAHKSDHASD */}
+                                                    <h4 className="card-title">Información General</h4>
+                                                <hr />
+                                                    <div className="row ">
+                                                        <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                            <div className="input-group mb-3">
+                                                                <input type="text" id="f_nombre" placeholder="Nombre del usuario" className="form-control"
+                                                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required />
+                                                            </div>
                                                         </div>
-                                                        <input type="password" id="f_clave" placeholder="Contraseña de usuario" className="form-control"
-                                                            aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required
-                                                            onChange={this.validatePassword} />
-                                                    </div>
-                                                    <span id="message-incorrect-password" style={{ color: 'red' }}></span>
 
-
-
-                                                    <div className="input-group mb-3">
-                                                        <div className="input-group-prepend">
-                                                            <span className="input-group-text" id="inputGroup-sizing-default">Contraseña</span>
+                                                        <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                            <div className="input-group mb-3">
+                                                                <input type="text" id="f_apellido" placeholder="Apellido del usuario" className="form-control"
+                                                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required />
+                                                            </div>
                                                         </div>
-                                                        <input type="password" id="f_clave2" placeholder="Repita contraseña" className="form-control"
-                                                            aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required
-                                                            onChange={this.validatePassword} />
+                                                    </div>
+                                                    <div className="row ">
+                                                        <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12"> 
+                                                            <div className="input-group mb-3">
+                                                                <select className="custom-select" id="f_profesion">
+                                                                    <option value="default" selected>Profesión...</option>
+                                                                    <option value="2">Administrador</option>
+                                                                    <option value="1">Colaborador</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+    
+                                                    </div>
+                                                    <div class="row">
+                                                    <div class="col-auto mr-auto"></div>
+                                                        <div class="col-auto"> 
+                                                            <button
+                                                                    type="submit"
+                                                                    className="btn btn btn-secondary btn-block"
+                                                                >
+                                                                Actualizar
+                                                            </button>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {/************************************************************* */}
+                                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                            <div className="card-spa mt-4">
+                                                <div className="card-body">
+                                                    <div className="row ">
+                                                        <div class="col-8">
+                                                            <h4 className="card-title">
+                                                                Seguridad
+                                                            </h4>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <hr />
+                                                    <div className="row ">
+                                                        <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                            <div className="input-group mb-3">
+                                                                    <input type="password" id="f_clave" placeholder="Contraseña de usuario" className="form-control"
+                                                                    aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required
+                                                                    onChange={this.validatePassword}  />
+                                                            </div>
+                                                            <span id="message-incorrect-password" style={{color:'red'}}></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                            <div className="input-group mb-3">
+                                                                <input type="password" id="f_clave2" placeholder="Confirme su contraseña" className="form-control"
+                                                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required
+                                                                onChange={this.validatePassword} />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-auto mr-auto"></div>
+                                                        <div class="col-auto"> 
+                                                            <button
+                                                                type="submit"
+                                                                className="btn btn btn-secondary btn-block"
+                                                            >
+                                                            Actualizar
+                                                            </button>
+                                                        </div>
                                                     </div>
                                                 </div>
-
+                                            </div>       
+                                        </div>
+                                        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                                        <div className="card-spa mt-4">
+                                                <div className="card-body">
+                                                <div className="row ">
+                                                            <div class="col-8">
+                                                                <h4 className="card-title">
+                                                                Correo Electrónico
+                                                                </h4>
+                                                            </div>
+                                                        </div>
+                                                        <hr />
+                                                        <div className="row ">
+                                                            <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                                <div className="input-group mb-3">
+                                                                    <input type="text" id="f_email" placeholder="Correo del usuario" className="form-control"
+                                                                    aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-auto mr-auto"></div>
+                                                            <div class="col-auto">  
+                                                                <button
+                                                                    type="submit"
+                                                                    className="btn btn btn-secondary btn-block"
+                                                                >
+                                                                Actualizar
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <hr />
+                                                     {/**ACTUALIZAR PERFIL DE ACCESO*** */}
+                                                        <h4 className="card-title">
+                                                            Perfil de acceso
+                                                        </h4>
+                                                        <hr />
+                                                        <div className="row ">
+                                                            <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                                <div className="input-group mb-3">
+                                                                    <select className="custom-select" id="f_perfil">
+                                                                    <option value="default" selected disabled>Perfil/Rol..</option>
+                                                                    {
+                                                                        this.state.perfiles.map(perfil =>
+                                                                        <option value={perfil.f1000_id} key={perfil.f1000_id}>
+                                                                        {perfil.f1000_nombre}
+                                                                        </option>
+                                                                        )
+                                                                     }
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-auto mr-auto"></div>
+                                                            <div class="col-auto"> 
+                                                                <button
+                                                                    type="submit"
+                                                                    className="btn btn btn-secondary btn-block"
+                                                                >
+                                                                Actualizar
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                </div>
                                             </div>
-
                                         </div>
                                     </div>
 
+                                        <div className="tab-content p-3" id="myTabContent">
+                                            <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 
-
-
-
+                                        </div>
+                                        </div>
+                                    </div>
                                 </MDBContainer >
                             </div>
-                            <div className="modal-footer">
-                                <div className="">
+                            {/**FOOTER CON BOTÓN**** */}
+                                <div className="modal-footer">
+                                    <div className="">
                                     <button type="button" className="btn btn-danger" data-dismiss="modal">Cerrar</button>
                                 </div>
-
-
                             </div>
                         </div>
                     </div>
@@ -403,20 +477,120 @@ export default class GestionUsuarios2 extends Component {
 
                 {/* ********************************INICIO MODAL CREAR******************************************* */}
                 <div className="modal fade" id="createModal" tabIndex={-1} role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div className="modal-dialog modal-dialog-centered" role="document">
+                    <div className="modal-dialog modal-lg" role="document">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <h4 className="modal-title" id="exampleModalLabel">Crear Usuario</h4>
                                 <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">×</span>
                                 </button>
                             </div>
                             <div className="modal-body">
-                                CREAR
+                            
+                                <MDBContainer>
+                                Inserte Los Datos
+                                    <div className="tab-content p-3" id="myTabContent">
+                                            <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                                 {/* ****** CAMPO LLENAR NOMBRE ******* */}
+                                                 <div className="row">
+                                                    <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                         <div className="input-group mb-3">
+                                                             <div className="input-group-prepend">
+                                                                  <span className="input-group-text" id="inputGroup-sizing-default">Nombre</span>
+                                                            </div>
+                                                                <input type="text" id="f_nombre" placeholder="Nombre" className="form-control"
+                                                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required />
+                                                        </div>
+                                                    </div>
+                                                    <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                        <div className="input-group mb-3">
+                                                            <div className="input-group-prepend">
+                                                             <span className="input-group-text" id="inputGroup-sizing-default">Apellido</span>
+                                                             </div>
+                                                            <input type="text" id="f_apellido" placeholder="Apellido" className="form-control"
+                                                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                              {/* ****** CAMPO LLENAR EMAIL ******* */}
+                                              <div className="row">
+                                                <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                     <div className="input-group mb-3">
+                                                         <div className="input-group-prepend">
+                                                             <span className="input-group-text" id="inputGroup-sizing-default">E-mail</span>
+                                                        </div>
+                                                        <input type="email" id="f_email" placeholder="example@email.com" className="form-control"
+                                                            aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required />
+                                                     </div>
+                                                 </div>
+
+                                                <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
+                                                    <div className="input-group mb-3">
+                                                         <div className="input-group-prepend">
+                                                             <label className="input-group-text" htmlFor="inputGroupSelect01">Perfil/Rol</label>
+                                                        </div>
+                                                        <select className="custom-select" id="f_perfil">
+                                                            <option value="default" selected disabled>Choose...</option>
+                                                                {
+                                                                    this.state.perfiles.map(perfil =>
+                                                                    <option value={perfil.f1000_id} key={perfil.f1000_id}>
+                                                                    {perfil.f1000_nombre}
+                                                                    </option>
+                                                                    )
+                                                                }
+                                                        </select>
+                                                    </div>
+                                                 </div>
+                                             </div>
+                                                        
+                                    <div className="row">
+                                            <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                <div className="input-group mb-3">
+                                                   <div className="input-group-prepend">
+                                                       <label className="input-group-text" htmlFor="inputGroupSelect01">Profesión</label>
+                                                 </div>
+                                                   <select className="custom-select" id="f_profesion">
+                                                     <option value="default" selected>Choose...</option>
+                                                     <option value="2">Administrador</option>
+                                                     <option value="1">Colaborador</option>
+                                                    </select>
+                                                </div>
+                                             </div>
+                                    </div>
+
+                                         <div className="row" >
+                                         <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                            <div className="input-group mb-3">
+                                                 <div className="input-group-prepend">
+                                                     <span className="input-group-text" id="inputGroup-sizing-default">Contraseña</span>
+                                                 </div>
+                                                     <input type="password" id="f_clave" placeholder="Contraseña de usuario" className="form-control"
+                                                     aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required
+                                                     onChange={this.validatePassword}  />
+                                                 </div>
+                                                 <span id="message-incorrect-password" style={{color:'red'}}></span>
+                                             </div>
+
+                                             <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                 <div className="input-group mb-3">
+                                                      <div className="input-group-prepend">
+                                                           <span className="input-group-text" id="inputGroup-sizing-default">Contraseña</span>
+                                                      </div>
+                                                       <input type="password" id="f_clave2" placeholder="Confirme su contraseña" className="form-control"
+                                                         aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required
+                                                          onChange={this.validatePassword} />
+                                                  </div>
+                                              </div>
+                                         </div>
+                                      
+                                        </div>
+                                    </div>
+                                </MDBContainer>
                             </div>
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                                <button type="button" className="btn btn-secondary">Crear Usuario</button>
+                                <MDBBtn color="purple" title="Crear usuario" id="bt-insert-user">Crear usuario</MDBBtn>
                             </div>
                         </div>
                     </div>
