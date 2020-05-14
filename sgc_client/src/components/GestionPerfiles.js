@@ -134,9 +134,9 @@ export class GestionPerfiles extends Component {
                 validation.error(res.data.status, res.data.description, res.data.id, res.data.traza);
             } else {
                 validation.success(res.data.status, res.data.description, res.data.id);
-                window.setTimeout(function () {
-                    clientResource.refreshPage();
-                }, 1500);
+                // window.setTimeout(function () {
+                //     clientResource.refreshPage();
+                // }, 1500);
 
             }
         }
@@ -159,10 +159,12 @@ export class GestionPerfiles extends Component {
             if (res.data.status === "error") {
                 validation.error(res.data.status, res.data.description, res.data.id, res.data.traza);
             } else {
+                this.getPerfiles();
                 validation.success(res.data.status, res.data.description, res.data.id);
-                window.setTimeout(function () {
-                    clientResource.refreshPage();
-                }, 1500);
+                
+                // window.setTimeout(function () {
+                //     clientResource.refreshPage();
+                // }, 1500);
 
             }
         }
@@ -188,9 +190,9 @@ export class GestionPerfiles extends Component {
                 validation.error(res.data.status, res.data.description, res.data.id, res.data.traza);
             } else {
                 validation.success(res.data.status, res.data.description, res.data.id);
-                window.setTimeout(function () {
-                    clientResource.refreshPage();
-                }, 1500);
+                // window.setTimeout(function () {
+                //     clientResource.refreshPage();
+                // }, 1500);
 
             }
         }
@@ -405,9 +407,10 @@ export class GestionPerfiles extends Component {
                                     <select
                                         name="usuarioSeleccionado"
                                         className="form-control"
+                                        onClick={this.getUsuarios}
                                         value={this.state.usuarioSeleccionado}
                                         onChange={this.onInputChange}
-                                        onClick={this.getUsuarios}
+                                        
                                     >
                                         <option>
                                             Usuarios
