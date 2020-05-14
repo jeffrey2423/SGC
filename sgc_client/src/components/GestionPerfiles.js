@@ -106,10 +106,11 @@ export class GestionPerfiles extends Component {
             if (res.data.status === "error") {
                 validation.error(res.data.status, res.data.description, res.data.id, res.data.traza);
             } else {
+                this.getPermisosExt(this.state.perfilSeleccionado)
                 validation.success(res.data.status, res.data.description, res.data.id);
-                window.setTimeout(function () {
-                    clientResource.refreshPage();
-                }, 1500);
+                // window.setTimeout(function () {
+                //     clientResource.refreshPage();
+                // }, 1500);
             }
         }
 
