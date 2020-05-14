@@ -4,7 +4,7 @@ import axios from 'axios'
 import validation from '../resources/validations/main';
 import clientResource from '../resources/client';
 const jwt = require("jsonwebtoken");
-const config  = require('../config/config')
+const config = require('../config/config')
 
 export default class login extends Component {
     state = {
@@ -37,17 +37,17 @@ export default class login extends Component {
 
                 jwt.verify(token.token.toString(), config.SECRET_KEY, (err, decoded) => {
                     if (err) {
-                        validation.error("Error", "Error al intentar iniciar sesion, intente de nuevo", 1005 , "");
+                        validation.error("Error", "Error al intentar iniciar sesion, intente de nuevo", 1005, "");
                     } else {
                         const datosUsuario = decoded;
                         console.log(datosUsuario)
                         clientResource.agregarSesion(datosUsuario);
                     }
                 });
-                
+
                 window.location.href = '/inicio';
-                
-                
+
+
 
             }
         } else {
@@ -77,9 +77,9 @@ export default class login extends Component {
 
                 <div className="col-md-a mx-auto card-spa">
 
-                    <form
+                    <div
                         className="text-center  p-5"
-                        onSubmit={this.handleSubmit}
+
                     >
                         <p className="h4 mb-4">Inicio de sesion</p>
                         {/* Email */}
@@ -104,20 +104,23 @@ export default class login extends Component {
                         />
 
                         {/* Sign in button */}
-                        <button
-                            className="btn btn-block my-4"
-                            type="submit"
-                            style={styles["submit_style"]}
-                        >
-                            Iniciar Sesion
+                        <form onSubmit={this.handleSubmit}>
+                            <button
+                                className="btn btn-block my-4"
+                                type="submit"
+                                style={styles["submit_style"]}
+                            >
+                                Iniciar Sesion
                         </button>
+                        </form>
+
 
                         {/* Social login */}
                         <Link to="" className="mx-2" role="button"><i className="fab fa-facebook-f" style={styles["social"]} ></i></Link>
                         <Link to="" className="mx-2" role="button"><i className="fab fa-twitter" style={styles["social"]} ></i></Link>
                         <Link to="" className="mx-2" role="button"><i className="fab fa-linkedin-in" style={styles["social"]}></i></Link>
                         <Link to="" className="mx-2" role="button"><i className="fab fa-github" style={styles["social"]}></i></Link>
-                    </form>
+                    </div>
                 </div>
             </div>
 

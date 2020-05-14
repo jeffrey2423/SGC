@@ -5,23 +5,19 @@ require('dotenv').config()
 const app = express();
 const authToken = require("./middlewares/auth_token");
 const config = require('./config/config')
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-
-    // authorized headers for preflight requests
-    // https://developer.mozilla.org/en-US/docs/Glossary/preflight_request
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
-
-    app.options('*', (req, res) => {
-        // allowed XHR methods  
-        res.header('Access-Control-Allow-Methods', 'GET, PATCH, PUT, POST, DELETE, OPTIONS');
-        res.send();
-    });
 });
+const corsOptions = {
+    origin: true,
+    credentials: true
+}
+app.options('*', cors(corsOptions))
 app.use(function (req, res, next) { req.headers['if-none-match'] = 'no-match-for-this'; next(); });
 //SETTINGS
-app.set('port', process.env.API_PORT ||  4000);
+app.set('port', process.env.API_PORT || 4000);
 
 
 //MIDDLEWARES
@@ -29,7 +25,7 @@ app.set('port', process.env.API_PORT ||  4000);
 //enviar en este caso o entender
 app.use(morgan('dev'));
 app.use(cors(
-    config.application.cors.server
+    corsOptions
 ));
 app.use(express.json());
 
