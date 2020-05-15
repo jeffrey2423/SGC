@@ -75,7 +75,7 @@ export default class login extends Component {
         return (
             <div className="row">
 
-                <div className="col-md-a mx-auto card-spa">
+                <form onSubmit={this.handleSubmit} className="col-md-a mx-auto card-spa">
 
                     <div
                         className="text-center  p-5"
@@ -104,7 +104,7 @@ export default class login extends Component {
                         />
 
                         {/* Sign in button */}
-                        <form onSubmit={this.handleSubmit}>
+                        
                             <button
                                 className="btn btn-block my-4"
                                 type="submit"
@@ -112,7 +112,7 @@ export default class login extends Component {
                             >
                                 Iniciar Sesion
                         </button>
-                        </form>
+                        
 
 
                         {/* Social login */}
@@ -121,7 +121,7 @@ export default class login extends Component {
                         <Link to="" className="mx-2" role="button"><i className="fab fa-linkedin-in" style={styles["social"]}></i></Link>
                         <Link to="" className="mx-2" role="button"><i className="fab fa-github" style={styles["social"]}></i></Link>
                     </div>
-                </div>
+                    </form>
             </div>
 
 

@@ -1,9 +1,10 @@
-import React, { Component } from 'react'
+import React, { Component, Suspense } from 'react'
 import { MDBContainer, MDBIcon, MDBBtn } from "mdbreact";
 import axios from 'axios'
 import validation from '../resources/validations/main';
 import clientResource from '../resources/client';
 import 'datatables.net-dt'
+import Loading from './Loading'
 
 // import 'mdbootstrap'
 // import $$ from 'mdbootstrap/js/addons/DataTable'
@@ -32,7 +33,7 @@ export default class GestionUsuarios2 extends Component {
 
             window.setTimeout(function () {
                 $('#example').DataTable();
-            }, 1500);
+            }, 1000);
 
 
         }
@@ -153,7 +154,7 @@ export default class GestionUsuarios2 extends Component {
             f_email: data[0].f1004_email
 
         })
-        
+
 
         await this.getPerfiles()
 
@@ -183,6 +184,7 @@ export default class GestionUsuarios2 extends Component {
         };
 
         return (
+            <Suspense delayMs={400} fallback={<Loading/>}>
             <div className="container">
 
                 <div className="card-spa">
@@ -202,88 +204,90 @@ export default class GestionUsuarios2 extends Component {
                         {/* <div className="form-inline my-lg-0 float-right p-3">
                                 <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"></input>
                             </div> */}
+
                         <div class="table-responsive ">
+                            
+                                <table className="table table-bordered table-striped mb-0" id="example">
+                                    <thead style={{ position: 'sticky' }}>
+                                        <tr>
+                                            <th scope="col">Id</th>
+                                            <th scope="col">Creacion</th>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">Apellido</th>
+                                            <th scope="col">Profesion</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col">Perfil</th>
+                                            <th scope="col">Estado</th>
+                                            <th scope="col">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
 
-                            <table className="table table-bordered table-striped mb-0" id="example">
-                                <thead style={{ position: 'sticky' }}>
-                                    <tr>
-                                        <th scope="col">Id</th>
-                                        <th scope="col">Creacion</th>
-                                        <th scope="col">Nombre</th>
-                                        <th scope="col">Apellido</th>
-                                        <th scope="col">Profesion</th>
-                                        <th scope="col">Email</th>
-                                        <th scope="col">Perfil</th>
-                                        <th scope="col">Estado</th>
-                                        <th scope="col">Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    {
-                                        this.state.usuarios.map(usuario =>
-                                            <tr>
-                                                <th scope="row">{usuario.f_id}</th>
-                                                <td>
-                                                    {clientResource.isoToDate(usuario.f_fecha_creacion)}
-                                                </td>
-                                                <td>{usuario.f_nombre}</td>
-                                                <td>{usuario.f_apellido}</td>
-                                                <td>{usuario.f_profesion}</td>
-                                                <td>{usuario.f_email}</td>
-                                                <td>{usuario.f_perfil}</td>
-                                                <td>{usuario.f_activo}</td>
-                                                <td>
-                                                    <span
-                                                        style={{ cursor: 'pointer' }}
-                                                        class="badge badge-secondary m-2 modBtn p-2"
-                                                        // data-toggle="modal"
-                                                        // data-target="#exampleModal"
-                                                        onClick={() => this.editModal(usuario.f_id)}
-                                                    >
-                                                        Editar
-                                                    </span>
-                                                    {usuario.f_activo === 'Activo' ? (
-
+                                        {
+                                            this.state.usuarios.map(usuario =>
+                                                <tr>
+                                                    <th scope="row">{usuario.f_id}</th>
+                                                    <td>
+                                                        {clientResource.isoToDate(usuario.f_fecha_creacion)}
+                                                    </td>
+                                                    <td>{usuario.f_nombre}</td>
+                                                    <td>{usuario.f_apellido}</td>
+                                                    <td>{usuario.f_profesion}</td>
+                                                    <td>{usuario.f_email}</td>
+                                                    <td>{usuario.f_perfil}</td>
+                                                    <td>{usuario.f_activo}</td>
+                                                    <td>
                                                         <span
                                                             style={{ cursor: 'pointer' }}
-                                                            class="badge badge-danger m-2 p-2"
-                                                            onClick={() => this.inactivar(usuario.f_id)}
-                                                        >Inactivar
-                                                        </span>
-                                                    ) : (
+                                                            class="badge badge-secondary m-2 modBtn p-2"
+                                                            // data-toggle="modal"
+                                                            // data-target="#exampleModal"
+                                                            onClick={() => this.editModal(usuario.f_id)}
+                                                        >
+                                                            Editar
+                                                    </span>
+                                                        {usuario.f_activo === 'Activo' ? (
 
                                                             <span
                                                                 style={{ cursor: 'pointer' }}
                                                                 class="badge badge-danger m-2 p-2"
-                                                                onClick={() => this.activar(usuario.f_id)}
-                                                            >Activar
+                                                                onClick={() => this.inactivar(usuario.f_id)}
+                                                            >Inactivar
                                                             </span>
+                                                        ) : (
 
-                                                        )}
+                                                                <span
+                                                                    style={{ cursor: 'pointer' }}
+                                                                    class="badge badge-danger m-2 p-2"
+                                                                    onClick={() => this.activar(usuario.f_id)}
+                                                                >Activar
+                                                                </span>
 
-                                                </td>
+                                                            )}
 
-                                            </tr>
-                                        )
-                                    }
+                                                    </td>
 
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th scope="col">Id</th>
-                                        <th scope="col">Creacion</th>
-                                        <th scope="col">Nombre</th>
-                                        <th scope="col">Apellido</th>
-                                        <th scope="col">Profesion</th>
-                                        <th scope="col">Email</th>
-                                        <th scope="col">Perfil</th>
-                                        <th scope="col">Estado</th>
-                                        <th scope="col">Acciones</th>
+                                                </tr>
+                                            )
+                                        }
 
-                                    </tr>
-                                </tfoot>
-                            </table>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th scope="col">Id</th>
+                                            <th scope="col">Creacion</th>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">Apellido</th>
+                                            <th scope="col">Profesion</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col">Perfil</th>
+                                            <th scope="col">Estado</th>
+                                            <th scope="col">Acciones</th>
+
+                                        </tr>
+                                    </tfoot>
+                                </table>
+  
                         </div>
 
                     </div>
@@ -327,11 +331,11 @@ export default class GestionUsuarios2 extends Component {
                                                             <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                                                 <div className="input-group mb-3">
                                                                     <input type="text" id="f_nombre" placeholder="Nombre del usuario" className="form-control"
-                                                                        aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required 
+                                                                        aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required
                                                                         name="f_nombre"
                                                                         value={this.state.f_nombre}
                                                                         onChange={this.onInputChange}
-                                                                        />
+                                                                    />
                                                                 </div>
                                                             </div>
 
@@ -409,8 +413,8 @@ export default class GestionUsuarios2 extends Component {
                                                                     <input type="password" id="f_clave2" placeholder="Confirme su contraseña" className="form-control"
                                                                         aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required
                                                                         // onChange={this.validatePassword}                                                                        
-                                                                         name="f_reclave"
-                                                                         onChange={this.onInputChange} />
+                                                                        name="f_reclave"
+                                                                        onChange={this.onInputChange} />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -446,7 +450,7 @@ export default class GestionUsuarios2 extends Component {
                                                                         aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required
                                                                         name="f_email"
                                                                         value={this.state.f_email}
-                                                                        onChange={this.onInputChange}  />
+                                                                        onChange={this.onInputChange} />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -650,6 +654,8 @@ export default class GestionUsuarios2 extends Component {
                 {/* ********************************FIN MODAL CREAR******************************************* */}
 
             </div>
+            </Suspense>
         )
+        
     }
 }

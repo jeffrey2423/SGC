@@ -1,9 +1,10 @@
-import React, { Component } from 'react'
+import React, { Component, Suspense } from 'react'
 import axios from 'axios'
 import { format, register } from 'timeago.js';
 import validation from '../resources/validations/main';
 import clientResource from '../resources/client';
 //import Breadcrumbs from './Breadcrumbs'
+import Loading from './Loading'
 
 register('es_ES', clientResource.localeFunc);
 
@@ -19,16 +20,16 @@ export class GestionPerfiles extends Component {
         permisoSeleccionadoSelect: 0,
         perfilNuevo: "",
         desPerfilNuevo: "",
-        token: sessionStorage.getItem("token") === "" || sessionStorage.getItem("token") === null ? " " : sessionStorage.getItem("token") 
+        token: sessionStorage.getItem("token") === "" || sessionStorage.getItem("token") === null ? " " : sessionStorage.getItem("token")
     }
 
     async componentDidMount() {
         if (!sessionStorage.getItem("token")) {
             window.location.href = '/';
-        }else{ 
-        this.getPerfiles();
-        this.getPermisos();
-        //this.getUsuarios();
+        } else {
+            this.getPerfiles();
+            this.getPermisos();
+            //this.getUsuarios();
         }
     }
 
@@ -134,6 +135,7 @@ export class GestionPerfiles extends Component {
             if (res.data.status === "error") {
                 validation.error(res.data.status, res.data.description, res.data.id, res.data.traza);
             } else {
+                this.getPermisosExt(this.state.perfilSeleccionadoSelect)
                 validation.success(res.data.status, res.data.description, res.data.id);
                 // window.setTimeout(function () {
                 //     clientResource.refreshPage();
@@ -162,7 +164,7 @@ export class GestionPerfiles extends Component {
             } else {
                 this.getPerfiles();
                 validation.success(res.data.status, res.data.description, res.data.id);
-                
+
                 // window.setTimeout(function () {
                 //     clientResource.refreshPage();
                 // }, 1500);
@@ -210,71 +212,73 @@ export class GestionPerfiles extends Component {
     render() {
         return (
             <div className="container">
-                <div className="card-spa">
-                    <div class="card-body">
-                        <h2 className="card-title">Permisos asociados a un perfil</h2>
-                        <hr />
-                        <div className="row">
-                            <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                <ul className="list-group" style={{ width: '100%', height: '80%', overflowY: 'scroll' }}>
-                                    <li className="list-group-item active">Perfiles</li>
-                                    {
-                                        this.state.perfiles.map(perfil => (
-                                            <li
-                                                className="list-group-item list-group-item-action"
-                                                key={perfil.f1000_id}
-                                                onClick={() => this.getPermisosExt(perfil.f1000_id)}>
-                                                <div className="float-right">
-                                                    <span className="badge badge-secondary badge-pill"
-                                                        onClick={() => validation.descripcion(perfil.f1000_descripcion)}>
-                                                        Descripcion
+                <Suspense delayMs={400} fallback={<Loading/>}>
+                    <div className="card-spa">
+                        <div class="card-body">
+                            <h2 className="card-title">Permisos asociados a un perfil</h2>
+                            <hr />
+                            <div className="row">
+                                <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <ul className="list-group" style={{ width: '100%', height: '80%', overflowY: 'scroll' }}>
+                                        <li className="list-group-item active">Perfiles</li>
+                                        {
+                                            this.state.perfiles.map(perfil => (
+                                                <li
+                                                    className="list-group-item list-group-item-action"
+                                                    key={perfil.f1000_id}
+                                                    onClick={() => this.getPermisosExt(perfil.f1000_id)}>
+                                                    <div className="float-right">
+                                                        <span className="badge badge-secondary badge-pill"
+                                                            onClick={() => validation.descripcion(perfil.f1000_descripcion)}>
+                                                            Descripcion
                                             </span>
-                                                </div>
+                                                    </div>
 
-                                                {perfil.f1000_nombre}
-                                                <div className="d-flex w-100 justify-content-between">
-                                                    <small>{format(perfil.f1000_ts, 'es_ES')}</small>
-                                                </div>
-                                            </li>)
-                                        )
-                                    }
-                                </ul>
-                            </div>
-                            <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                <ul className="list-group" style={{ width: '100%', height: '80%', overflowY: 'scroll' }}>
+                                                    {perfil.f1000_nombre}
+                                                    <div className="d-flex w-100 justify-content-between">
+                                                        <small>{format(perfil.f1000_ts, 'es_ES')}</small>
+                                                    </div>
+                                                </li>)
+                                            )
+                                        }
+                                    </ul>
+                                </div>
+                                <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <ul className="list-group" style={{ width: '100%', height: '80%', overflowY: 'scroll' }}>
 
-                                    <li className="list-group-item active">Permisos</li>
-                                    {
-                                        this.state.permisos.map(permiso => (
-                                            <li
-                                                className="list-group-item list-group-item-action"
-                                                key={permiso.f_id_permiso}
-                                            >
-                                                {permiso.f_nombre_permiso}
-                                                <div className="float-right">
-                                                    <span className="badge badge-primary badge-pill"
-                                                        onClick={() => this.deletePermisoExt(permiso.f_id_permiso)}>
-                                                        Borrar
+                                        <li className="list-group-item active">Permisos</li>
+                                        {
+                                            this.state.permisos.map(permiso => (
+                                                <li
+                                                    className="list-group-item list-group-item-action"
+                                                    key={permiso.f_id_permiso}
+                                                >
+                                                    {permiso.f_nombre_permiso}
+                                                    <div className="float-right">
+                                                        <span className="badge badge-primary badge-pill"
+                                                            onClick={() => this.deletePermisoExt(permiso.f_id_permiso)}>
+                                                            Borrar
                                             </span>
-                                                    <span className="badge badge-secondary badge-pill"
-                                                        onClick={() => validation.descripcion(permiso.f_desc_permiso)}>
-                                                        Descripcion
+                                                        <span className="badge badge-secondary badge-pill"
+                                                            onClick={() => validation.descripcion(permiso.f_desc_permiso)}>
+                                                            Descripcion
                                             </span>
-                                                </div>
+                                                    </div>
 
 
-                                                <div className="d-flex w-100 justify-content-between">
-                                                    <small>{format(permiso.f_fecha_creacion_permiso, 'es_ES')}</small>
-                                                </div>
+                                                    <div className="d-flex w-100 justify-content-between">
+                                                        <small>{format(permiso.f_fecha_creacion_permiso, 'es_ES')}</small>
+                                                    </div>
 
-                                            </li>)
-                                        )
-                                    }
-                                </ul>
-                            </div>
+                                                </li>)
+                                            )
+                                        }
+                                    </ul>
+                                </div>
+                            </div >
                         </div >
                     </div >
-                </div >
+                </Suspense>
 
                 {/* FILA ASIGNAR PERMISO */}
                 <div className="card-spa mt-4">
@@ -411,7 +415,7 @@ export class GestionPerfiles extends Component {
                                         onClick={this.getUsuarios}
                                         value={this.state.usuarioSeleccionado}
                                         onChange={this.onInputChange}
-                                        
+
                                     >
                                         <option>
                                             Usuarios

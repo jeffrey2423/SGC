@@ -14,7 +14,7 @@ const corsOptions = {
     origin: true,
     credentials: true
 }
-app.options('*', cors(corsOptions))
+// app.options('*', cors(corsOptions))
 app.use(function (req, res, next) { req.headers['if-none-match'] = 'no-match-for-this'; next(); });
 //SETTINGS
 app.set('port', process.env.API_PORT || 4000);

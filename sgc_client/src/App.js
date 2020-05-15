@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 
@@ -8,12 +8,18 @@ import Inicio from './/components/Inicio'
 import GestionUsuarios from './/components/GestionUsuarios'
 import GestionUsuarios2 from './/components/GestionUsuarios2'
 import GestionCitas from './/components/GestionCitas'
-import GestionPerfiles from './/components/GestionPerfiles'
 import Login from './/components/login'
 import My404 from './/components/My404'
 
-
+import Loading from './/components/Loading'
 import './App.css'
+
+const GestionPerfiles = lazy(() => import('.//components/GestionPerfiles'))
+
+
+
+
+
 
 function App() {
   return (
@@ -26,7 +32,9 @@ function App() {
           {/* <Route path="/GestionUsuarios" exact component={GestionUsuarios} /> */}
           <Route path="/GestionUsuarios" exact component={GestionUsuarios2} />
           <Route path="/GestionCitas" exact component={GestionCitas} />
-          <Route path="/GestionPerfiles" exact component={GestionPerfiles} />
+          <Suspense fallback={<Loading />}>
+            <Route path="/GestionPerfiles" exact component={GestionPerfiles} />
+          </Suspense>
           <Route component={My404} />
         </Switch>
       </div>
