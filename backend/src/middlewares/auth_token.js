@@ -30,8 +30,10 @@ module.exports = async (req, res, next) => {
 
                 switch (ruta) {
                     case rutas.VER_USUARIOS:
+                        console.log(perfilUsuario)
                         queryParams = [perfilUsuario, permisos.OBTENER_USUARIOS];
                         await connection.query(query, queryParams, (err, results) => {
+                             rscController.snooze(10);
                             if (!err) {
                                 const permisoUsuario = results.rows[0].f_verificar_permiso_usuario;
                                 permitir = (permisoUsuario == rscController.ESTADO_USUARIO.EXISTE_PERMISO) ? true : false;
@@ -55,6 +57,7 @@ module.exports = async (req, res, next) => {
                         queryParams = [perfilUsuario, permisos.CREAR_USUARIO];
 
                         await connection.query(query, queryParams, (err, results) => {
+                             rscController.snooze(10);
                             if (!err) {
                                 const permisoUsuario = results.rows[0].f_verificar_permiso_usuario;
                                 permitir = (permisoUsuario == rscController.ESTADO_USUARIO.EXISTE_PERMISO) ? true : false;
