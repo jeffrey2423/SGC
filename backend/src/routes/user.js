@@ -17,15 +17,15 @@ router.route('/createUser')
 
 router.route('/updateUser/:id')
     //actualizar usuario
-    .put(userController.updateUser)
+    .post(userController.updateUser)
 
 router.route('/updateUserPass/:id')
     //actualizar contraseña usuario
-    .put(userController.updateUserPass)
+    .post(userController.updateUserPass)
 
 router.route('/updateUserEmail/:id')
     //actualizar email usuario
-    .put(userController.updateUserEmail)
+    .post(userController.updateUserEmail)
 
 router.route('/deleteUser')
     //actualizar indicador activo usuario
@@ -37,6 +37,6 @@ router.route('/activateUser')
 
 router.route('/updateUserPerfil')
     //actualizar perfil usuario
-    .put(userController.updateUserPerfil)
+    .post(userController.updateUserPerfil)
 
 module.exports = router;

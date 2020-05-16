@@ -17,10 +17,10 @@ router.route('/createEvent')
 
 router.route('/deleteEvent/:id')
     //obtener datos con filtro
-    .put(eventController.deleteEvent)
+    .post(eventController.deleteEvent)
 
 router.route('/updateEvent/:id')
     //obtener datos con filtro
-    .put(eventController.updateEvent)
+    .post(eventController.updateEvent)
 
 module.exports = router;
