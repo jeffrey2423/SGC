@@ -30,7 +30,7 @@ module.exports = async (req, res, next) => {
 
                 switch (ruta) {
                     case rutas.VER_USUARIOS:
-                        console.log(perfilUsuario)
+                        // console.log(perfilUsuario)
                         queryParams = [perfilUsuario, permisos.OBTENER_USUARIOS];
                         await connection.query(query, queryParams, (err, results) => {
                              rscController.snooze(10);
@@ -43,7 +43,7 @@ module.exports = async (req, res, next) => {
                                 res.json(rscController.leerRecurso(1005, err.message));
                             }
                         });
-                        await rscController.snooze(10);
+                        await rscController.snooze(15);
 
                         if (permitir) {
                             next();
@@ -67,7 +67,7 @@ module.exports = async (req, res, next) => {
                                 res.json(rscController.leerRecurso(1005, err.message));
                             }
                         });
-                        await rscController.snooze(10);
+                        await rscController.snooze(15);
 
                         if (permitir) {
                             next();
