@@ -26,7 +26,11 @@ export default class login extends Component {
                 email: this.state.email,
                 clave: this.state.pass
             }
-            const res = await axios.post("http://localhost:4000/api/user/auth/login", data);
+            const res = await axios.post("http://localhost:4000/api/user/auth/login", data, {
+                headers: {
+                    'Content-Type': 'application/json;charset=UTF-8'
+                }
+            });
 
             if (res.data.status === "error") {
                 validation.error(res.data.status, res.data.description, res.data.id, res.data.traza);

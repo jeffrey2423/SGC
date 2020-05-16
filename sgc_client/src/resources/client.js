@@ -60,8 +60,15 @@ ClientController.refreshPage = () => {
 }
 
 ClientController.isoToDate = (iso) => {
+
+    const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+        "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+    const weekNames = ["Domingo","Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"];
+
     let date = new Date(iso);
-    return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+    // const fechaCliente = date.getDay() + " de " + monthNames[date.getMonth() + 1] + " del " + date.getFullYear()
+    // return fechaCliente;
+     return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
 }
 
 ClientController.snooze = ms => new Promise(resolve => setTimeout(resolve, ms));

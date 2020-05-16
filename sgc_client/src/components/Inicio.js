@@ -12,71 +12,6 @@ import moment, { now } from 'moment';
 // Setup the localizer by providing the moment (or globalize) Object
 // to the correct localizer.
 BigCalendar.momentLocalizer(moment); // or globalizeLocalizer
-const eventtt = [
-    {
-        "title": "Evento prueba",
-        "desc": "Evento prueba Y su estado es activo",
-        "start": new Date("2020-04-12T05:00:00.000Z"),
-        "end": new Date("2020-04-12T05:00:00.000Z"),
-        "allday": false
-    },
-    {
-        "title": "Evento prueba",
-        "desc": "Evento prueba Y su estado es activo",
-        "start": new Date("2020-04-12T05:00:00.000Z"),
-        "end": new Date("2020-04-12T05:00:00.000Z"),
-        "allday": false
-    },
-    {
-        "title": "DESDE POSTMAN",
-        "desc": "DESDE POSTMAN Y su estado es cancelado",
-        "start": new Date("2020-04-12T05:00:00.000Z"),
-        "end": new Date("2020-04-12T05:00:00.000Z"),
-        "allday": false
-    },
-    {
-        "title": "DESDE POSTMAN",
-        "desc": "DESDE POSTMAN Y su estado es activo",
-        "start": new Date("2020-04-12T05:00:00.000Z"),
-        "end": new Date("2020-04-12T05:00:00.000Z"),
-        "allday": false
-    },
-    {
-        "title": "Evento prueba",
-        "desc": "Evento prueba Y su estado es cancelado",
-        "start": new Date("2020-04-12T05:00:00.000Z"),
-        "end": new Date("2020-04-12T05:00:00.000Z"),
-        "allday": false
-    },
-    {
-        "title": "DESDE POSTMAN ACTUALIZADO",
-        "desc": "DESDE POSTMAN ACTUALIZADO Y su estado es cancelado",
-        "start": new Date("2020-04-12T05:00:00.000Z"),
-        "end": new Date("2020-04-12T05:00:00.000Z"),
-        "allday": false
-    },
-    {
-        "title": "DESDE POSTMAN ACTUALIZADO",
-        "desc": "DESDE POSTMAN ACTUALIZADO Y su estado es cancelado",
-        "start": new Date("2020-04-12T05:00:00.000Z"),
-        "end": new Date("2020-04-12T05:00:00.000Z"),
-        "allday": false
-    },
-    {
-        "title": "DESDE POSTMAN",
-        "desc": "DESDE POSTMAN Y su estado es activo",
-        "start": new Date("2020-04-12T05:00:00.000Z"),
-        "end": new Date("2020-04-12T05:00:00.000Z"),
-        "allday": false
-    },
-    {
-        "title": "DESDE POSTMAN ACTUALIZADO",
-        "desc": "DESDE POSTMAN ACTUALIZADO Y su estado es activo",
-        "start": new Date("2020-04-12T05:00:00.000Z"),
-        "end": new Date("2020-04-12T05:00:00.000Z"),
-        "allday": false
-    }
-]
 
 export default class Inicio extends Component {
     state = {
@@ -131,7 +66,7 @@ export default class Inicio extends Component {
                     selectable
                     popup
                     // events={this.state.eventos}
-                    events = {eventtt}
+                    events = {this.state.eventos}
                     defaultView='week'
                     scrollToTime={new Date(1970, 1, 1, 6)}
                     defaultDate={now()}

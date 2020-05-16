@@ -67,7 +67,7 @@ export default class header extends Component {
                         <div className="profile-menu">
                             <div className="btn-group tx-profilemenu dropleft">
                                 <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Perfil
+                                {sessionStorage.getItem("f1004_nombre")}
                                                     <span className="glyphicon glyphicon-user"></span>
                                 </button>
                                 <div className="dropdown-menu " aria-labelledby="dropdownMenuButton" role="menu">
