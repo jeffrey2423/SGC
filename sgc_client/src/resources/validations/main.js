@@ -26,12 +26,12 @@ validationController.success = (estado, descripcion, id) => {
     })
 };
 
-validationController.error = (estado, descripcion, id, traza) => {
+validationController.error = (estado, descripcion, id, traza = "") => {
     Swal.fire({
         icon: 'error',
         title: estado,
         text: descripcion,
-        footer: id + " " + traza === null || traza === "" ? "" : traza
+        footer: "<center>" + id + "<br/>" + traza +"</center>" 
     })
 };
 
