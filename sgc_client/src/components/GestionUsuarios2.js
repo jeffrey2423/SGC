@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { MDBContainer, MDBIcon, MDBBtn } from "mdbreact";
+import { MDBContainer, MDBIcon, MDBTooltip } from "mdbreact";
 import axios from 'axios'
 import validation from '../resources/validations/main';
 import clientResource from '../resources/client';
@@ -380,38 +380,103 @@ export default class GestionUsuarios2 extends Component {
                                                 <td>{usuario.f_profesion}</td>
                                                 <td>{usuario.f_email}</td>
                                                 <td>{usuario.f_perfil}</td>
-                                                <td>{usuario.f_activo}</td>
                                                 <td>
-                                                    <span
-                                                        style={{ cursor: 'pointer',
-                                                        width: '75%' }}
-                                                        class="badge badge-secondary m-2 modBtn p-2"
-                                                        // data-toggle="modal"
-                                                        // data-target="#exampleModal"
-                                                        onClick={() => this.editModal(usuario.f_id)}
-                                                    >
-                                                        Editar
-                                                    </span>
                                                     {usuario.f_activo === 'Activo' ? (
-
-                                                        <span
-                                                            style={{ cursor: 'pointer',
-                                                            width: '75%' }}
-                                                            class="badge badge-danger m-2 p-2"
-                                                            onClick={() => this.inactivar(usuario.f_id)}
-                                                        >Inactivar
-                                                        </span>
-                                                    ) : (
-
+                                                        <MDBTooltip
+                                                            domElement
+                                                            tag="span"
+                                                            placement="top"
+                                                        >
                                                             <span
-                                                                style={{ cursor: 'pointer' ,
-                                                                width: '75%'}}
-                                                                class="badge badge-danger m-2 p-2"
-                                                                onClick={() => this.activar(usuario.f_id)}
-                                                            >Activar
+                                                                style={{
+                                                                    borderRadius: '3px',
+                                                                    cursor: 'default',
+                                                                    width: '75%'
+                                                                }}
+                                                                class="badge badge-success m-2 p-2"
+                                                            >{usuario.f_activo}
                                                             </span>
+                                                            <span>Usuario Activo</span>
+                                                        </MDBTooltip>
+                                                    ) : (
+                                                            <MDBTooltip
+                                                                domElement
+                                                                tag="span"
+                                                                placement="top"
+                                                            >
+
+                                                                <span
+                                                                    style={{ borderRadius: '3px', cursor: 'default', width: '80%' }}
+                                                                    class="badge badge-danger m-2 p-2"
+                                                                >{usuario.f_activo}
+                                                                </span>
+                                                                <span>Usuario Inactivo</span>
+                                                            </MDBTooltip>
 
                                                         )}
+
+
+                                                </td>
+                                                <td>
+                                                    <center>
+                                                        <MDBTooltip
+                                                            domElement
+                                                            tag="span"
+                                                            placement="left"
+                                                        >
+                                                            <span
+                                                                style={{
+                                                                    cursor: 'pointer'
+                                                                }}
+                                                                class="badge badge-secondary m-2 p-2 badge-pill"
+                                                                // data-toggle="modal"
+                                                                // data-target="#exampleModal"
+                                                                onClick={() => this.editModal(usuario.f_id)}
+                                                            >
+                                                                <MDBIcon icon="user-edit" size="2x" />
+                                                            </span>
+                                                            <span>Editar Usuario</span>
+                                                        </MDBTooltip>
+                                                        {usuario.f_activo === 'Activo' ? (
+                                                            <MDBTooltip
+                                                                domElement
+                                                                tag="span"
+                                                                placement="left"
+                                                            >
+
+                                                                <span
+                                                                    style={{
+                                                                        cursor: 'pointer'
+                                                                    }}
+                                                                    class="badge badge-danger m-2 p-2 badge-pill"
+                                                                    onClick={() => this.inactivar(usuario.f_id)}
+                                                                >
+                                                                    <MDBIcon icon="user-times" size="2x" />
+                                                                </span>
+                                                                <span>Inactivar Usuario</span>
+                                                            </MDBTooltip>
+                                                        ) : (
+
+                                                                <MDBTooltip
+                                                                    domElement
+                                                                    tag="span"
+                                                                    placement="left"
+                                                                >
+
+                                                                    <span
+                                                                        style={{
+                                                                            cursor: 'pointer'
+                                                                        }}
+                                                                        class="badge badge-success m-2 p-2 badge-pill"
+                                                                        onClick={() => this.activar(usuario.f_id)}
+                                                                    >
+                                                                        <MDBIcon icon="user-check" size="2x" />
+                                                                    </span>
+                                                                    <span>Activar Usuario</span>
+                                                                </MDBTooltip>
+
+                                                            )}
+                                                    </center>
 
                                                 </td>
 
@@ -651,7 +716,7 @@ export default class GestionUsuarios2 extends Component {
                                                                             id="f_perfil"
                                                                             onChange={this.onInputChange}
                                                                         >
-                                                                        <option
+                                                                            <option
                                                                                 value="default" selected disabled
                                                                             >Perfil/Rol..
                                                                         </option>

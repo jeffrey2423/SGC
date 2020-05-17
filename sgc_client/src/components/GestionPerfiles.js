@@ -1,4 +1,5 @@
 import React, { Component, Suspense } from 'react'
+import { MDBIcon, MDBTooltip } from "mdbreact";
 import axios from 'axios'
 import { format, register } from 'timeago.js';
 import validation from '../resources/validations/main';
@@ -149,7 +150,7 @@ export class GestionPerfiles extends Component {
         e.preventDefault();
         const data = {
             nombre: this.state.perfilNuevo,
-            description: this.state.desPerfilNuevo
+            descripcion: this.state.desPerfilNuevo
         }
         if (validation.validarCampo(this.state.perfilNuevo, "nombre")) {
             const res = await axios.post("http://localhost:4000/api/user/profile/createProfile", data, {
@@ -228,10 +229,17 @@ export class GestionPerfiles extends Component {
                                                     key={perfil.f1000_id}
                                                     onClick={() => this.getPermisosExt(perfil.f1000_id)}>
                                                     <div className="float-right">
-                                                        <span className="badge badge-secondary badge-pill"
-                                                            onClick={() => validation.descripcion(perfil.f1000_descripcion)}>
-                                                            Descripcion
-                                            </span>
+                                                        <MDBTooltip
+                                                            domElement
+                                                            tag="span"
+                                                            placement="left"
+                                                        >
+                                                            <span className="badge badge-secondary badge-pill"
+                                                                onClick={() => validation.descripcion(perfil.f1000_descripcion)}>
+                                                                <MDBIcon icon="eye" size="2x" />
+                                                            </span>
+                                                            <span>Ver mas</span>
+                                                        </MDBTooltip>
                                                     </div>
 
                                                     {perfil.f1000_nombre}
@@ -255,14 +263,28 @@ export class GestionPerfiles extends Component {
                                                 >
                                                     {permiso.f_nombre_permiso}
                                                     <div className="float-right">
-                                                        <span className="badge badge-primary badge-pill"
-                                                            onClick={() => this.deletePermisoExt(permiso.f_id_permiso)}>
-                                                            Borrar
-                                            </span>
-                                                        <span className="badge badge-secondary badge-pill"
-                                                            onClick={() => validation.descripcion(permiso.f_desc_permiso)}>
-                                                            Descripcion
-                                            </span>
+                                                        <MDBTooltip
+                                                            domElement
+                                                            tag="span"
+                                                            placement="left"
+                                                        >
+                                                            <span className="badge badge-primary badge-pill mr-3"
+                                                                onClick={() => this.deletePermisoExt(permiso.f_id_permiso)}>
+                                                                <MDBIcon icon="trash-alt" size="2x"/>
+                                                            </span>
+                                                            <span>Eliminar</span>
+                                                        </MDBTooltip>
+                                                        <MDBTooltip
+                                                            domElement
+                                                            tag="span"
+                                                            placement="right"
+                                                        >
+                                                            <span className="badge badge-secondary badge-pill"
+                                                                onClick={() => validation.descripcion(permiso.f_desc_permiso)}>
+                                                                <MDBIcon icon="eye" size="2x" />
+                                                            </span>
+                                                            <span>Ver mas</span>
+                                                        </MDBTooltip>
                                                     </div>
 
 
@@ -297,7 +319,7 @@ export class GestionPerfiles extends Component {
 
 
                                     >
-                                        <option>
+                                        <option disabled selected>
                                             Perfiles
                                 </option>
                                         {
@@ -323,7 +345,7 @@ export class GestionPerfiles extends Component {
 
 
                                     >
-                                        <option>
+                                        <option disabled selected>
                                             Permisos
                                 </option>
                                         {
@@ -438,9 +460,7 @@ export class GestionPerfiles extends Component {
                                         value={this.state.perfilSeleccionadoSelect}
                                         onChange={this.onInputChange}
                                     >
-                                        <option>
-                                            Perfiles
-                                </option>
+                                        <option value="default" selected disabled>Perfiles...</option>
                                         {
                                             this.state.perfiles.map(perfil =>
                                                 <option value={perfil.f1000_id} key={perfil.f1000_id}>
@@ -460,7 +480,7 @@ export class GestionPerfiles extends Component {
                                             className="btn btn-outline-secondary btn-block"
                                         >
                                             Asignar perfil
-                            </button>
+                                        </button>
                                     </form>
                                 </div>
                             </div>

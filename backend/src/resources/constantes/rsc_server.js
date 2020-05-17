@@ -209,6 +209,16 @@ module.exports = {
         id: 1041,
         description: "No tienes permisos para ver usuarios, comunícate con el administrador",
         status: "error"
+    },
+    1042:{
+        id: 1042,
+        description: "Evento Activado con exito",
+        status: "success"
+    },
+    1043:{
+        id: 1043,
+        description: "Error al tratar de activar el evento",
+        status: "success"
     }
 
 

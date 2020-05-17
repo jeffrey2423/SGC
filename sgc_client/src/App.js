@@ -4,8 +4,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Header from './/components/header'
 
-import Inicio from './/components/Inicio'
-import GestionUsuarios from './/components/GestionUsuarios'
+
+// import GestionUsuarios from './/components/GestionUsuarios'
 import Login from './/components/login'
 import My404 from './/components/My404'
 
@@ -15,6 +15,7 @@ import './App.css'
 const GestionPerfiles = lazy(() => import('.//components/GestionPerfiles'))
 const GestionUsuarios2 = lazy(() => import('.//components/GestionUsuarios2'))
 const GestionCitas = lazy(() => import('.//components/GestionCitas'))
+const Inicio = lazy(() => import('.//components/Inicio'))
 
 
 
@@ -28,10 +29,12 @@ function App() {
       <div className="container p-4 spa-content">
         <Switch>
           <Route path="/" exact component={Login} />
-          <Route path="/Inicio" exact component={Inicio} />
+
           {/* <Route path="/GestionUsuarios" exact component={GestionUsuarios} /> */}
 
           <Suspense fallback={<Loading />}>
+            <Route path="/Inicio" exact component={Inicio} />
+
             <Route path="/GestionCitas" exact component={GestionCitas} />
 
             <Route path="/GestionUsuarios" exact component={GestionUsuarios2} />
