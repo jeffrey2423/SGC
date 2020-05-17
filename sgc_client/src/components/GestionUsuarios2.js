@@ -373,7 +373,7 @@ export default class GestionUsuarios2 extends Component {
                                             <tr>
                                                 <th scope="row">{usuario.f_id}</th>
                                                 <td>
-                                                    {clientResource.isoToDate(usuario.f_fecha_creacion)}
+                                                    {clientResource.isoToDateSecs(usuario.f_fecha_creacion)}
                                                 </td>
                                                 <td>{usuario.f_nombre}</td>
                                                 <td>{usuario.f_apellido}</td>
@@ -383,7 +383,8 @@ export default class GestionUsuarios2 extends Component {
                                                 <td>{usuario.f_activo}</td>
                                                 <td>
                                                     <span
-                                                        style={{ cursor: 'pointer' }}
+                                                        style={{ cursor: 'pointer',
+                                                        width: '75%' }}
                                                         class="badge badge-secondary m-2 modBtn p-2"
                                                         // data-toggle="modal"
                                                         // data-target="#exampleModal"
@@ -394,7 +395,8 @@ export default class GestionUsuarios2 extends Component {
                                                     {usuario.f_activo === 'Activo' ? (
 
                                                         <span
-                                                            style={{ cursor: 'pointer' }}
+                                                            style={{ cursor: 'pointer',
+                                                            width: '75%' }}
                                                             class="badge badge-danger m-2 p-2"
                                                             onClick={() => this.inactivar(usuario.f_id)}
                                                         >Inactivar
@@ -402,7 +404,8 @@ export default class GestionUsuarios2 extends Component {
                                                     ) : (
 
                                                             <span
-                                                                style={{ cursor: 'pointer' }}
+                                                                style={{ cursor: 'pointer' ,
+                                                                width: '75%'}}
                                                                 class="badge badge-danger m-2 p-2"
                                                                 onClick={() => this.activar(usuario.f_id)}
                                                             >Activar
@@ -510,7 +513,7 @@ export default class GestionUsuarios2 extends Component {
                                                                             value={this.state.f_profesion}
                                                                             onChange={this.onInputChange}
                                                                         >
-                                                                            <option value="default" selected>Profesión...</option>
+                                                                            <option value="default" selected disabled>Profesión...</option>
                                                                             <option value="2">Administrador</option>
                                                                             <option value="1">Colaborador</option>
                                                                         </select>
@@ -793,7 +796,7 @@ export default class GestionUsuarios2 extends Component {
                                                                 name="f_profesion"
                                                                 onChange={this.onInputChange}
                                                             >
-                                                                <option value="default" selected>Choose...</option>
+                                                                <option value="default" selected disabled>Choose...</option>
                                                                 <option value="2">Administrador</option>
                                                                 <option value="1">Colaborador</option>
                                                             </select>
@@ -843,7 +846,7 @@ export default class GestionUsuarios2 extends Component {
                                         type="submit"
                                         className="btn btn-secondary">
                                         Crear usuario
-                                        </button>
+                                    </button>
 
                                 </div>
                             </form>

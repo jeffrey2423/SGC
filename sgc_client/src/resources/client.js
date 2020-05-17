@@ -63,14 +63,46 @@ ClientController.isoToDate = (iso) => {
 
     const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
         "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-    const weekNames = ["Domingo","Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"];
+    const weekNames = ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"];
 
     let date = new Date(iso);
     // const fechaCliente = date.getDay() + " de " + monthNames[date.getMonth() + 1] + " del " + date.getFullYear()
     // return fechaCliente;
-     return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+    return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+}
+
+function AddZero(num) {
+    return (num >= 0 && num < 10) ? "0" + num : num + "";
+}
+
+ClientController.isoToDateSecs = (iso) => {
+
+    var now = new Date(iso);
+    var strDateTime = [[AddZero(now.getDate()),
+    AddZero(now.getMonth() + 1),
+    now.getFullYear()].join("/"),
+    [AddZero(now.getHours()),
+    AddZero(now.getMinutes())].join(":"),
+    now.getHours() >= 12 ? "PM" : "AM"].join(" ");
+
+    return strDateTime;
 }
 
 ClientController.snooze = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+ClientController.showDesc = (tittle, desc) => {
+    Swal.fire({
+        title: tittle,
+        text: desc,
+        showConfirmButton: false,
+        showCloseButton: true,
+    })
+}
+
+ClientController.dateToTs= (date) => {
+    let current_datetime = new Date(date)
+    let formatted_date = current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate() + " " + current_datetime.getHours() + ":" + current_datetime.getMinutes() + ":" + current_datetime.getSeconds()
+    return formatted_date;
+}
 
 export default ClientController;

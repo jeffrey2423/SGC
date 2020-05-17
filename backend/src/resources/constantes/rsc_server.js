@@ -182,7 +182,7 @@ module.exports = {
     },
     1036:{
         id: 1036,
-        description: "El usuario asignado ya tiene un evento con esa fecha y hora inicial",
+        description: "El usuario asignado ya tiene un evento en ese rango de fechas",
         status: "error"
     },
     1037:{

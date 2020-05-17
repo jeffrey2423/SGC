@@ -6,8 +6,6 @@ import Header from './/components/header'
 
 import Inicio from './/components/Inicio'
 import GestionUsuarios from './/components/GestionUsuarios'
-import GestionUsuarios2 from './/components/GestionUsuarios2'
-import GestionCitas from './/components/GestionCitas'
 import Login from './/components/login'
 import My404 from './/components/My404'
 
@@ -15,6 +13,8 @@ import Loading from './/components/Loading'
 import './App.css'
 
 const GestionPerfiles = lazy(() => import('.//components/GestionPerfiles'))
+const GestionUsuarios2 = lazy(() => import('.//components/GestionUsuarios2'))
+const GestionCitas = lazy(() => import('.//components/GestionCitas'))
 
 
 
@@ -30,11 +30,15 @@ function App() {
           <Route path="/" exact component={Login} />
           <Route path="/Inicio" exact component={Inicio} />
           {/* <Route path="/GestionUsuarios" exact component={GestionUsuarios} /> */}
-          <Route path="/GestionUsuarios" exact component={GestionUsuarios2} />
-          <Route path="/GestionCitas" exact component={GestionCitas} />
+
           <Suspense fallback={<Loading />}>
+            <Route path="/GestionCitas" exact component={GestionCitas} />
+
+            <Route path="/GestionUsuarios" exact component={GestionUsuarios2} />
+
             <Route path="/GestionPerfiles" exact component={GestionPerfiles} />
           </Suspense>
+
           <Route component={My404} />
         </Switch>
       </div>

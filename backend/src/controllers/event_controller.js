@@ -31,9 +31,9 @@ eventController.getEvents = async (req, res) => {
                         '           END	AS Estado  ' +
                         '           FROM t1006_eventos AS eventos  ' +
                         '           LEFT JOIN t1004_usuarios AS creador  ' +
-                        '           ON eventos.f1006_id_usuario_asignado_t1004 = creador.f1004_id  ' +
+                        '           ON eventos.f1006_id_usuario_creador_t1004 = creador.f1004_id  ' +
                         '           LEFT JOIN t1004_usuarios AS asignado  ' +
-                        '          ON eventos.f1006_id_usuario_creador_t1004 = asignado.f1004_id    '
+                        '          ON eventos.f1006_id_usuario_asignado_t1004 = asignado.f1004_id    '
                 }
             } else {
                 const id_usuario = req.body.id_usuario;
@@ -59,9 +59,9 @@ eventController.getEvents = async (req, res) => {
                         '           END	AS Estado  ' +
                         '           FROM t1006_eventos AS eventos  ' +
                         '           LEFT JOIN t1004_usuarios AS creador  ' +
-                        '           ON eventos.f1006_id_usuario_asignado_t1004 = creador.f1004_id  ' +
+                        '           ON eventos.f1006_id_usuario_creador_t1004 = creador.f1004_id  ' +
                         '           LEFT JOIN t1004_usuarios AS asignado  ' +
-                        '          ON eventos.f1006_id_usuario_creador_t1004 = asignado.f1004_id    ' +
+                        '          ON eventos.f1006_id_usuario_asignado_t1004 = asignado.f1004_id  ' +
                         '  	WHERE t1006_eventos.f1006_id_usuario_asignado_t1004 = ' + id_usuario
                 }
             }

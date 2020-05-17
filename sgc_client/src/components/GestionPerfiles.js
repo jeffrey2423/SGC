@@ -182,7 +182,7 @@ export class GestionPerfiles extends Component {
         }
         if (this.state.perfilSeleccionadoSelect !== 0 &&
             this.state.usuarioSeleccionado !== 0) {
-            const res = await axios.put("http://localhost:4000/api/user/updateUserPerfil", data, {
+            const res = await axios.post("http://localhost:4000/api/user/updateUserPerfil", data, {
                 headers: {
                     'Content-Type': 'application/json;charset=UTF-8',
                     'Authorization': `Bearer ${this.state.token}`
@@ -212,7 +212,7 @@ export class GestionPerfiles extends Component {
     render() {
         return (
             <div className="container">
-                <Suspense delayMs={400} fallback={<Loading/>}>
+                <Suspense delayMs={400} fallback={<Loading />}>
                     <div className="card-spa">
                         <div class="card-body">
                             <h2 className="card-title">Permisos asociados a un perfil</h2>
@@ -417,9 +417,7 @@ export class GestionPerfiles extends Component {
                                         onChange={this.onInputChange}
 
                                     >
-                                        <option>
-                                            Usuarios
-                                </option>
+                                        <option value="default" selected disabled>Colaborador...</option>
                                         {
                                             this.state.usuarios.map(usuarios =>
                                                 <option value={usuarios.f_id} key={usuarios.f_id}>
