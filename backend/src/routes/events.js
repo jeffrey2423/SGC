@@ -5,7 +5,7 @@ const eventController = require('../controllers/event_controller');
 
 router.route('/getEvents/:id')
     //obtener datos
-    .get(eventController.getEvents)
+    .post(eventController.getEvents)
 
 router.route('/getEventsFilter')
     //obtener datos con filtro
