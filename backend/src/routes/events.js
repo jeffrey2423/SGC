@@ -15,12 +15,18 @@ router.route('/createEvent')
     //obtener datos con filtro
     .post(eventController.createEvent)
 
-router.route('/deleteEvent/:id')
+router.route('/deleteEvent')
     //obtener datos con filtro
     .post(eventController.deleteEvent)
 
 router.route('/updateEvent/:id')
     //obtener datos con filtro
     .post(eventController.updateEvent)
+
+router.route('/activateEvent')
+    //obtener datos con filtro
+    .post(eventController.activateEvent)
+
+
 
 module.exports = router;

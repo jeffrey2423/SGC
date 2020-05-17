@@ -206,7 +206,7 @@ eventController.createEvent = async (req, res) => {
 
 eventController.deleteEvent = async (req, res) => {
     try {
-        const id_evento = req.params.id;
+        const id_evento = req.body.id;
 
         const query = {
             text: "select * from f_eliminar_evento($1)",
@@ -218,6 +218,30 @@ eventController.deleteEvent = async (req, res) => {
             } else {
                 connection.query('ROLLBACK');
                 res.json(rscController.leerRecurso(1037, err.message));
+            }
+        });
+
+
+    } catch (error) {
+        await connection.query('ROLLBACK');
+        res.json(rscController.leerRecurso(1037, error.message));
+    }
+}
+
+eventController.activateEvent = async (req, res) => {
+    try {
+        const id_evento = req.body.id;
+
+        const query = {
+            text: "select * from f_activar_evento($1)",
+            values: [id_evento]
+        }
+        await connection.query(query, (err, results) => {
+            if (!err) {
+                res.json(rscController.leerRecurso(1042));
+            } else {
+                connection.query('ROLLBACK');
+                res.json(rscController.leerRecurso(1043, err.message));
             }
         });
 

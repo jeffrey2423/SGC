@@ -147,3 +147,15 @@ textarea:hover, input:hover, textarea:active, input:active, textarea:focus, inpu
 /* .dataTables_filter > label::before {
   content: "Buscar";
 } */
+
+.rbc-month-row {
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -ms-flex: 100px;
+  flex: 100px;
+  overflow: hidden;
+  height: 100%;
+  }
