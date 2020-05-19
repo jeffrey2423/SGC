@@ -39,7 +39,10 @@ export default class GestionCitas extends Component {
   onChangeInicio = fecha_inicio => this.setState({ fecha_inicio })
 
   createModal = async () => {
-    await this.getUsuarios();
+    if (sessionStorage.getItem("f1004_id_profesion_t1003") == config.ADMINISTRADOR) {
+      await this.getUsuarios();
+    }    
+    
     this.setState({
       fecha_inicio: new Date(),
       fecha_fin: new Date()
@@ -161,7 +164,12 @@ export default class GestionCitas extends Component {
     // data.ind_todo_el_dia = this.state.todoDia;
     data.ind_todo_el_dia = 0;
     data.id_creador = sessionStorage.getItem("f1004_id");
-    data.id_asignado = this.state.asignado;
+    if (sessionStorage.getItem("f1004_id_profesion_t1003") == config.ADMINISTRADOR) {
+      data.id_asignado = this.state.asignado;
+    }else{
+      data.id_asignado = sessionStorage.getItem("f1004_id");
+    }  
+    
 
     const res = await axios.post("http://localhost:4000/api/user/events/createEvent", data, {
       headers: {
@@ -489,7 +497,7 @@ export default class GestionCitas extends Component {
                               />
                             </div>
                           </div>
-
+                          {sessionStorage.getItem("f1004_id_profesion_t1003") == config.ADMINISTRADOR ? (
                           <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                             <div class="input-group mb-3">
                               <div class="input-group-prepend">
@@ -514,6 +522,9 @@ export default class GestionCitas extends Component {
                               </select>
                             </div>
                           </div>
+                          ) : (
+                            null
+                          )}
                         </div>
 
                         {/*FILA NUMERO TRES DEL FORMULARIO */}
