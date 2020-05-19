@@ -59,19 +59,44 @@ profileController.getPermissions = async (req, res) => {
 
 profileController.createProfile = async (req, res) => {
     try {
+        const nombrePerfil = req.body.nombre;
         const perfil = req.body;
-        const query = {
-            text: "select * from f_insertar_perfil($1)",
-            values: [perfil]
+        let resultadoValidar;
+        const queryValidarPerfil = {
+            text: "select * from f_validar_crear_perfil($1)",
+            values: [nombrePerfil]
         };
-        await connection.query(query, (err, results) => {
+        // Validamos que el permiso ya no este asiganado
+        await connection.query(queryValidarPerfil, (err, results) => {
             if (!err) {
-                res.json(rscController.leerRecurso(1014));
+                const estadoPerfil = results.rows[0].f_validar_perfil_ext;
+                resultadoValidar = (estadoPerfil == rscController.ESTADO_PERMISO.NO_EXISTE) ? true : false;
+
             } else {
-                connection.query('ROLLBACK');
+                resultadoValidar = false;
                 res.json(rscController.leerRecurso(1013, err.message));
             }
         });
+
+        // dormimos el hilo principal para que no pase al siguiente bloque
+        // sin que la variable resultadoValidar este llena
+        await rscController.snooze(15);
+        if (resultadoValidar) {
+            const query = {
+                text: "select * from f_insertar_perfil($1)",
+                values: [perfil]
+            };
+            await connection.query(query, (err, results) => {
+                if (!err) {
+                    res.json(rscController.leerRecurso(1014));
+                } else {
+                    connection.query('ROLLBACK');
+                    res.json(rscController.leerRecurso(1013, err.message));
+                }
+            });
+        } else {
+            res.json(rscController.leerRecurso(1044));
+        }
     } catch (error) {
         await connection.query('ROLLBACK');
         res.json(rscController.leerRecurso(1013, error.message));
@@ -133,7 +158,7 @@ profileController.deletePermisoExt = async (req, res) => {
 
         const query = {
             text: "select * from f_eliminar_permiso_ext($1,$2)",
-            values: [perfil,permiso]
+            values: [perfil, permiso]
         };
         await connection.query(query, (err, results) => {
             if (!err) {

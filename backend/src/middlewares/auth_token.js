@@ -33,7 +33,7 @@ module.exports = async (req, res, next) => {
                         // console.log(perfilUsuario)
                         queryParams = [perfilUsuario, permisos.OBTENER_USUARIOS];
                         await connection.query(query, queryParams, (err, results) => {
-                             rscController.snooze(10);
+                             rscController.snooze(15);
                             if (!err) {
                                 const permisoUsuario = results.rows[0].f_verificar_permiso_usuario;
                                 permitir = (permisoUsuario == rscController.ESTADO_USUARIO.EXISTE_PERMISO) ? true : false;
@@ -43,7 +43,8 @@ module.exports = async (req, res, next) => {
                                 res.json(rscController.leerRecurso(1005, err.message));
                             }
                         });
-                        await rscController.snooze(15);
+
+                        await rscController.snooze(20);
 
                         if (permitir) {
                             next();
@@ -67,7 +68,7 @@ module.exports = async (req, res, next) => {
                                 res.json(rscController.leerRecurso(1005, err.message));
                             }
                         });
-                        await rscController.snooze(15);
+                        await rscController.snooze(20);
 
                         if (permitir) {
                             next();
