@@ -1,11 +1,12 @@
 import React, { Component, Suspense } from 'react'
-import { MDBIcon, MDBTooltip } from "mdbreact";
+import { MDBIcon, MDBContainer, MDBTooltip } from "mdbreact";
 import axios from 'axios'
 import { format, register } from 'timeago.js';
 import validation from '../resources/validations/main';
 import clientResource from '../resources/client';
 //import Breadcrumbs from './Breadcrumbs'
 import Loading from './Loading'
+import $ from 'jquery';
 
 register('es_ES', clientResource.localeFunc);
 
@@ -30,8 +31,26 @@ export class GestionPerfiles extends Component {
         } else {
             this.getPerfiles();
             this.getPermisos();
-            //this.getUsuarios();
         }
+    }
+
+    createModal = async () => {
+
+        $('#createModal').modal({ show: true });
+
+    }
+
+    createModal2 = async () => {
+
+        $('#createModal2').modal({ show: true });
+
+    }
+
+    createModal3 = async () => {
+        this.getUsuarios();
+
+        $('#createModal3').modal({ show: true });
+
     }
 
     getPerfiles = async () => {
@@ -118,7 +137,7 @@ export class GestionPerfiles extends Component {
 
     }
 
-    onSubmit = async (e) => {
+    asignarPermiPerfil = async (e) => {
         e.preventDefault();
         const data = {
             id_perfil: this.state.perfilSeleccionadoSelect,
@@ -213,162 +232,137 @@ export class GestionPerfiles extends Component {
     render() {
         return (
             <div className="container">
-                <Suspense delayMs={400} fallback={<Loading />}>
-                    <div className="card-spa">
-                        <div class="card-body">
-                            <h2 className="card-title">Permisos asociados a un perfil</h2>
-                            <hr />
-                            <div className="row">
-                                <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                    <ul className="list-group" style={{ width: '100%', height: '80%', overflowY: 'scroll' }}>
-                                        <li className="list-group-item active">Perfiles</li>
-                                        {
-                                            this.state.perfiles.map(perfil => (
-                                                <li
-                                                    className="list-group-item list-group-item-action"
-                                                    key={perfil.f1000_id}
-                                                    onClick={() => this.getPermisosExt(perfil.f1000_id)}>
-                                                    <div className="float-right">
-                                                        <MDBTooltip
-                                                            domElement
-                                                            tag="span"
-                                                            placement="left"
-                                                        >
-                                                            <span className="badge badge-secondary badge-pill"
-                                                                onClick={() => validation.descripcion(perfil.f1000_descripcion)}>
-                                                                <MDBIcon icon="eye" size="2x" />
-                                                            </span>
-                                                            <span>Ver mas</span>
-                                                        </MDBTooltip>
-                                                    </div>
+                <div className="card-spa">
+                    <div class="card-body">
+                        <h2 className="card-title">Permisos asociados a un perfil</h2>
+                        <hr />
+                        <div className="row">
+                            <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <ul className="list-group" style={{ width: '100%', height: '80%', overflowY: 'scroll' }}>
+                                    <li className="list-group-item active">Perfiles</li>
+                                    {
+                                        this.state.perfiles.map(perfil => (
+                                            <li
+                                                className="list-group-item list-group-item-action"
+                                                key={perfil.f1000_id}
+                                                onClick={() => this.getPermisosExt(perfil.f1000_id)}>
+                                                <div className="float-right">
+                                                    <MDBTooltip
+                                                        domElement
+                                                        tag="span"
+                                                        placement="left"
+                                                    >
+                                                        <span className="badge badge-secondary badge-pill"
+                                                            onClick={() => validation.descripcion(perfil.f1000_descripcion)}>
+                                                            <MDBIcon icon="eye" size="2x" />
+                                                        </span>
+                                                        <span>Ver mas</span>
+                                                    </MDBTooltip>
+                                                </div>
 
-                                                    {perfil.f1000_nombre}
-                                                    <div className="d-flex w-100 justify-content-between">
-                                                        <small>{format(perfil.f1000_ts, 'es_ES')}</small>
-                                                    </div>
-                                                </li>)
-                                            )
-                                        }
-                                    </ul>
-                                </div>
-                                <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                    <ul className="list-group" style={{ width: '100%', height: '80%', overflowY: 'scroll' }}>
+                                                {perfil.f1000_nombre}
+                                                <div className="d-flex w-100 justify-content-between">
+                                                    <small>{format(perfil.f1000_ts, 'es_ES')}</small>
+                                                </div>
+                                            </li>)
+                                        )
+                                    }
+                                </ul>
+                            </div>
+                            <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <ul className="list-group" style={{ width: '100%', height: '80%', overflowY: 'scroll' }}>
 
-                                        <li className="list-group-item active">Permisos</li>
-                                        {
-                                            this.state.permisos.map(permiso => (
-                                                <li
-                                                    className="list-group-item list-group-item-action"
-                                                    key={permiso.f_id_permiso}
-                                                >
-                                                    {permiso.f_nombre_permiso}
-                                                    <div className="float-right">
-                                                        <MDBTooltip
-                                                            domElement
-                                                            tag="span"
-                                                            placement="left"
-                                                        >
-                                                            <span className="badge badge-primary badge-pill mr-3"
-                                                                onClick={() => this.deletePermisoExt(permiso.f_id_permiso)}>
-                                                                <MDBIcon icon="trash-alt" size="2x"/>
-                                                            </span>
-                                                            <span>Eliminar</span>
-                                                        </MDBTooltip>
-                                                        <MDBTooltip
-                                                            domElement
-                                                            tag="span"
-                                                            placement="right"
-                                                        >
-                                                            <span className="badge badge-secondary badge-pill"
-                                                                onClick={() => validation.descripcion(permiso.f_desc_permiso)}>
-                                                                <MDBIcon icon="eye" size="2x" />
-                                                            </span>
-                                                            <span>Ver mas</span>
-                                                        </MDBTooltip>
-                                                    </div>
+                                    <li className="list-group-item active">Permisos</li>
+                                    {
+                                        this.state.permisos.map(permiso => (
+                                            <li
+                                                className="list-group-item list-group-item-action"
+                                                key={permiso.f_id_permiso}
+                                            >
+                                                {permiso.f_nombre_permiso}
+                                                <div className="float-right">
+                                                    <MDBTooltip
+                                                        domElement
+                                                        tag="span"
+                                                        placement="left"
+                                                    >
+                                                        <span className="badge badge-danger badge-pill mr-3"
+                                                            onClick={() => this.deletePermisoExt(permiso.f_id_permiso)}>
+                                                            <MDBIcon icon="trash-alt" size="2x" />
+                                                        </span>
+                                                        <span>Eliminar</span>
+                                                    </MDBTooltip>
+                                                    <MDBTooltip
+                                                        domElement
+                                                        tag="span"
+                                                        placement="right"
+                                                    >
+                                                        <span className="badge badge-secondary badge-pill"
+                                                            onClick={() => validation.descripcion(permiso.f_desc_permiso)}>
+                                                            <MDBIcon icon="eye" size="2x" />
+                                                        </span>
+                                                        <span>Ver mas</span>
+                                                    </MDBTooltip>
+                                                </div>
 
 
-                                                    <div className="d-flex w-100 justify-content-between">
-                                                        <small>{format(permiso.f_fecha_creacion_permiso, 'es_ES')}</small>
-                                                    </div>
+                                                <div className="d-flex w-100 justify-content-between">
+                                                    <small>{format(permiso.f_fecha_creacion_permiso, 'es_ES')}</small>
+                                                </div>
 
-                                                </li>)
-                                            )
-                                        }
-                                    </ul>
-                                </div>
-                            </div >
+                                            </li>)
+                                        )
+                                    }
+                                </ul>
+                            </div>
                         </div >
                     </div >
-                </Suspense>
+                </div >
 
                 {/* FILA ASIGNAR PERMISO */}
+
                 <div className="card-spa mt-4">
                     <div className="card-body">
-                        <h2 className="card-title">Asignar permiso a un perfil</h2>
-                        <hr />
+                        <h2 className="card-title"></h2>
+
                         <div className="row">
                             <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 
                                 <div className="form-group">
-                                    <select
-                                        name="perfilSeleccionadoSelect"
-                                        className="form-control"
-                                        value={this.state.perfilSeleccionadoSelect}
-                                        onChange={this.onInputChange}
-
-
+                                    <button
+                                        type="button"
+                                        className="btn btn-outline-secondary btn-block"
+                                        onClick={this.createModal}
                                     >
-                                        <option disabled selected>
-                                            Perfiles
-                                </option>
-                                        {
-                                            this.state.perfiles.map(perfil =>
-                                                <option value={perfil.f1000_id} key={perfil.f1000_id}>
-                                                    {perfil.f1000_nombre}
-                                                </option>
-                                            )
-                                        }
-
-                                    </select>
-                                </div>
-
-                            </div>
-
-                            <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                <div className="form-group">
-                                    <select
-                                        name="permisoSeleccionadoSelect"
-                                        className="form-control"
-                                        value={this.state.permisoSeleccionadoSelect}
-                                        onChange={this.onInputChange}
-
-
-                                    >
-                                        <option disabled selected>
-                                            Permisos
-                                </option>
-                                        {
-                                            this.state.permisos_todos.map(permisos_all =>
-                                                <option value={permisos_all.f1001_id} key={permisos_all.f1001_id}>
-                                                    {permisos_all.f1001_nombre}
-                                                </option>
-                                            )
-                                        }
-
-                                    </select>
-                                </div>
-                            </div>
-                            <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                <div className="form-group">
-                                    <form onSubmit={this.onSubmit}>
-                                        <button
-                                            type="submit"
-                                            className="btn btn-outline-secondary  btn-block"
-                                        >
-                                            Asignar permiso
+                                        Asignar permiso a un perfil
                             </button>
-                                    </form>
+
+                                </div>
+
+                            </div>
+
+                            <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <div className="form-group">
+                                    <button
+                                        type="button"
+                                        className="btn btn-outline-secondary btn-block"
+                                        onClick={this.createModal2}
+                                    >
+                                        Agregar un perfil
+                            </button>
+                                </div>
+                            </div>
+                            <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <div className="form-group">
+
+                                    <button
+                                        type="button"
+                                        className="btn btn-outline-secondary btn-block"
+                                        onClick={this.createModal3}
+                                    >
+                                        Asignar perfil a un usuario
+                            </button>
+
                                 </div>
                             </div>
 
@@ -376,118 +370,236 @@ export class GestionPerfiles extends Component {
                     </div>
                 </div>
 
-                {/* FILA CREAR PERFIL */}
-                <div className="card-spa mt-4">
-                    <div className="card-body">
-                        <h2 className="card-title">Agregar un perfil</h2>
-                        <hr />
-                        <div className="row ">
-                            <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                <div className="form-group">
-                                    <input
-                                        type="text"
-                                        className="form-control"
-                                        placeholder="Nombre"
-                                        name="perfilNuevo"
-                                        onChange={this.onInputChange}
-                                        required
-                                    >
-                                    </input>
+                {/* MODAL PARA ASIGNAR UN PERMISO A PERFIL  */}
+                <div class="modal fade bd-example-modal-xl" id="createModal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+                    <div className="modal-dialog modal-xl" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h4 className="modal-title" id="exampleModalLabel">Asignar permiso a un perfil</h4>
+                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div className="modal-body">
+                                <MDBContainer>
+                                    {/* FILA ASIGNAR PERMISO */}
+                                    <form onSubmit={this.asignarPermiPerfil}>
 
-                                </div>
-                            </div>
-                            <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                <div className="form-group">
-                                    <input
-                                        type="text"
-                                        className="form-control"
-                                        placeholder="Descripcion"
-                                        name="desPerfilNuevo"
-                                        onChange={this.onInputChange}
-                                    >
-                                    </input>
-                                </div>
-                            </div>
-                            <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                <div className="form-group">
-                                    <form onSubmit={this.onSubmitPerfil}>
-                                        <button
-                                            type="submit"
-                                            className="btn btn-outline-secondary btn-block"
-                                        >
-                                            Crear perfil
-                            </button>
+
+                                        <div className="row">
+                                            <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+
+                                                <div className="form-group">
+                                                    <select
+                                                        name="perfilSeleccionadoSelect"
+                                                        className="form-control"
+                                                        value={this.state.perfilSeleccionadoSelect}
+                                                        onChange={this.onInputChange}
+
+
+                                                    >
+                                                        <option >
+                                                            Perfiles
+                                                                </option>
+                                                        {
+                                                            this.state.perfiles.map(perfil =>
+                                                                <option value={perfil.f1000_id} key={perfil.f1000_id}>
+                                                                    {perfil.f1000_nombre}
+                                                                </option>
+                                                            )
+                                                        }
+
+                                                    </select>
+                                                </div>
+
+                                            </div>
+
+                                            <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                                <div className="form-group">
+                                                    <select
+                                                        name="permisoSeleccionadoSelect"
+                                                        className="form-control"
+                                                        value={this.state.permisoSeleccionadoSelect}
+                                                        onChange={this.onInputChange}
+
+
+                                                    >
+                                                        <option >
+                                                            Permisos
+                                                                </option>
+                                                        {
+                                                            this.state.permisos_todos.map(permisos_all =>
+                                                                <option value={permisos_all.f1001_id} key={permisos_all.f1001_id}>
+                                                                    {permisos_all.f1001_nombre}
+                                                                </option>
+                                                            )
+                                                        }
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                                <div className="form-group">
+
+                                                    <button
+                                                        type="submit"
+                                                        className="btn btn-outline-secondary btn-block"
+                                                    >
+                                                        Asignar permiso
+                                                            </button>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+
                                     </form>
-                                </div>
+                                </MDBContainer>
                             </div>
+
                         </div>
                     </div>
                 </div>
-                {/* FILA ASIGNAR PERFIL */}
-                <div className="card-spa mt-4">
-                    <div className="card-body">
-                        <h2 className="card-title">Asignar perfil a un usuario</h2>
-                        <hr />
-                        <div className="row">
-                            <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                <div className="form-group">
-                                    <select
-                                        name="usuarioSeleccionado"
-                                        className="form-control"
-                                        onClick={this.getUsuarios}
-                                        value={this.state.usuarioSeleccionado}
-                                        onChange={this.onInputChange}
+                {/* FIN MODAL PARA ASIGNAR UN PERMISO A PERFIL */}
 
-                                    >
-                                        <option value="default" selected disabled>Colaborador...</option>
-                                        {
-                                            this.state.usuarios.map(usuarios =>
-                                                <option value={usuarios.f_id} key={usuarios.f_id}>
-                                                    {usuarios.f_nombre}
-                                                </option>
-                                            )
-                                        }
-
-                                    </select>
-
-                                </div>
+                {/* MODAL PARA CREAR UN PERFIL */}
+                <div class="modal fade bd-example-modal-xl" id="createModal2" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+                    <div className="modal-dialog modal-xl" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h4 className="modal-title" id="exampleModalLabel">Agregar un perfil</h4>
+                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
                             </div>
-                            <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                <div className="form-group">
-                                    <select
-                                        name="perfilSeleccionadoSelect"
-                                        className="form-control"
-                                        value={this.state.perfilSeleccionadoSelect}
-                                        onChange={this.onInputChange}
-                                    >
-                                        <option value="default" selected disabled>Perfiles...</option>
-                                        {
-                                            this.state.perfiles.map(perfil =>
-                                                <option value={perfil.f1000_id} key={perfil.f1000_id}>
-                                                    {perfil.f1000_nombre}
-                                                </option>
-                                            )
-                                        }
+                            <div className="modal-body">
+                                <MDBContainer>
+                                    <div className="row ">
+                                        <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                            <div className="form-group">
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    placeholder="Nombre"
+                                                    name="perfilNuevo"
+                                                    onChange={this.onInputChange}
+                                                    required
+                                                >
+                                                </input>
 
-                                    </select>
-                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                            <div className="form-group">
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    placeholder="Descripcion"
+                                                    name="desPerfilNuevo"
+                                                    onChange={this.onInputChange}
+                                                >
+                                                </input>
+                                            </div>
+                                        </div>
+                                        <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                            <div className="form-group">
+                                                <form onSubmit={this.onSubmitPerfil}>
+                                                    <button
+                                                        type="submit"
+                                                        className="btn btn-outline-secondary btn-block"
+                                                    >
+                                                        Crear perfil
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </MDBContainer>
                             </div>
-                            <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                <div className="form-group">
-                                    <form onSubmit={this.onSubmitUsuario}>
-                                        <button
-                                            type="submit"
-                                            className="btn btn-outline-secondary btn-block"
-                                        >
-                                            Asignar perfil
+
+                        </div>
+                    </div>
+                </div>
+                {/* FIN MODAL CREAR PERFIL  */}
+
+                {/* MODAL PARA ASIGNAR PERFIL USUARIO */}
+                <div class="modal fade bd-example-modal-xl" id="createModal3" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+                    <div className="modal-dialog modal-xl" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h4 className="modal-title" id="exampleModalLabel">Asignar perfil a un usuario</h4>
+                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div className="modal-body">
+                                <MDBContainer>
+                                    {/* FILA ASIGNAR PERFIL */}
+                                    <div className="row">
+                                        <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                            <div className="form-group">
+                                                <select
+                                                    name="usuarioSeleccionado"
+                                                    className="form-control"
+                                                    // onClick={this.getUsuarios}
+                                                    value={this.state.usuarioSeleccionado}
+                                                    onChange={this.onInputChange}
+
+                                                >
+                                                    <option value="default" selected disabled>Colaborador...</option>
+                                                    {
+                                                        this.state.usuarios.map(usuarios =>
+                                                            <option value={usuarios.f_id} key={usuarios.f_id}>
+                                                                {usuarios.f_nombre}
+                                                            </option>
+                                                        )
+                                                    }
+
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                        <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                            <div className="form-group">
+                                                <select
+                                                    name="perfilSeleccionadoSelect"
+                                                    className="form-control"
+                                                    value={this.state.perfilSeleccionadoSelect}
+                                                    onChange={this.onInputChange}
+                                                >
+                                                    <option value="default" selected disabled>Perfiles...</option>
+                                                    {
+                                                        this.state.perfiles.map(perfil =>
+                                                            <option value={perfil.f1000_id} key={perfil.f1000_id}>
+                                                                {perfil.f1000_nombre}
+                                                            </option>
+                                                        )
+                                                    }
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                            <div className="form-group">
+                                                <form onSubmit={this.onSubmitUsuario}>
+                                                    <button
+                                                        type="submit"
+                                                        className="btn btn-outline-secondary btn-block"
+                                                    >
+                                                        Asignar perfil
                                         </button>
-                                    </form>
-                                </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </MDBContainer>
                             </div>
-                        </div>
 
+                        </div>
                     </div>
                 </div>
+                {/* FIN MODAL ASIGNAR PERFIL USUARIO */}
             </div>
 
         )

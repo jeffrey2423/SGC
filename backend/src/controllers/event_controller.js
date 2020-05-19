@@ -37,6 +37,7 @@ eventController.getEvents = async (req, res) => {
                 }
             } else {
                 const id_usuario = req.body.id_usuario;
+                console.log(id_usuario)
                 query = {
                     text: '    SELECT   ' +
                         '           f1006_ts						AS f_fecha_creacion,  ' +
@@ -62,7 +63,7 @@ eventController.getEvents = async (req, res) => {
                         '           ON eventos.f1006_id_usuario_creador_t1004 = creador.f1004_id  ' +
                         '           LEFT JOIN t1004_usuarios AS asignado  ' +
                         '          ON eventos.f1006_id_usuario_asignado_t1004 = asignado.f1004_id  ' +
-                        '  	WHERE t1006_eventos.f1006_id_usuario_asignado_t1004 = ' + id_usuario
+                        '  	WHERE eventos.f1006_id_usuario_asignado_t1004 = ' + id_usuario
                 }
             }
 
