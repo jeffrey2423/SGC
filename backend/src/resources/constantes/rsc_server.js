@@ -219,7 +219,12 @@ module.exports = {
         id: 1043,
         description: "Error al tratar de activar el evento",
         status: "success"
-    }
+    },
+    1044:{
+        id: 1044,
+        description: "Ese perfil ya existe",
+        status: "error"
+    },
 
 
 

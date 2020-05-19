@@ -238,7 +238,7 @@ export class GestionPerfiles extends Component {
                         <hr />
                         <div className="row">
                             <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                <ul className="list-group" style={{ width: '100%', height: '80%', overflowY: 'scroll' }}>
+                                <ul className="list-group" style={{ width: '100%', height: '60%', overflowY: 'scroll' }}>
                                     <li className="list-group-item active">Perfiles</li>
                                     {
                                         this.state.perfiles.map(perfil => (
@@ -270,7 +270,7 @@ export class GestionPerfiles extends Component {
                                 </ul>
                             </div>
                             <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                <ul className="list-group" style={{ width: '100%', height: '80%', overflowY: 'scroll' }}>
+                                <ul className="list-group" style={{ width: '100%', height: '60%', overflowY: 'scroll' }}>
 
                                     <li className="list-group-item active">Permisos</li>
                                     {
@@ -317,58 +317,61 @@ export class GestionPerfiles extends Component {
                             </div>
                         </div >
                     </div >
-                </div >
 
-                {/* FILA ASIGNAR PERMISO */}
+                    {/* FILA BOTONES */}
+                    <div className="card-spa">
+                        <div className="card-body">
+                            <h2 className="card-title"></h2>
 
-                <div className="card-spa mt-4">
-                    <div className="card-body">
-                        <h2 className="card-title"></h2>
+                            <div className="row">
+                                <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 
-                        <div className="row">
-                            <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-
-                                <div className="form-group">
-                                    <button
-                                        type="button"
-                                        className="btn btn-outline-secondary btn-block"
-                                        onClick={this.createModal}
-                                    >
-                                        Asignar permiso a un perfil
+                                    <div className="form-group">
+                                        <button
+                                            type="button"
+                                            className="btn btn-outline-secondary btn-block"
+                                            onClick={this.createModal}
+                                        >
+                                            Asignar permiso a un perfil
                             </button>
+
+                                    </div>
 
                                 </div>
 
-                            </div>
-
-                            <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                <div className="form-group">
-                                    <button
-                                        type="button"
-                                        className="btn btn-outline-secondary btn-block"
-                                        onClick={this.createModal2}
-                                    >
-                                        Agregar un perfil
+                                <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                    <div className="form-group">
+                                        <button
+                                            type="button"
+                                            className="btn btn-outline-secondary btn-block"
+                                            onClick={this.createModal2}
+                                        >
+                                            Agregar un perfil
                             </button>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                <div className="form-group">
+                                <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                    <div className="form-group">
 
-                                    <button
-                                        type="button"
-                                        className="btn btn-outline-secondary btn-block"
-                                        onClick={this.createModal3}
-                                    >
-                                        Asignar perfil a un usuario
+                                        <button
+                                            type="button"
+                                            className="btn btn-outline-secondary btn-block"
+                                            onClick={this.createModal3}
+                                        >
+                                            Asignar perfil a un usuario
                             </button>
 
+                                    </div>
                                 </div>
-                            </div>
 
+                            </div>
                         </div>
                     </div>
-                </div>
+                </div >
+                {/* FIN FILA BOTONES */}
+
+
+
 
                 {/* MODAL PARA ASIGNAR UN PERMISO A PERFIL  */}
                 <div class="modal fade bd-example-modal-xl" id="createModal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
