@@ -232,13 +232,13 @@ export class GestionPerfiles extends Component {
     render() {
         return (
             <div className="container">
-                <div className="card-spa">
+                <div className="card-spa" >
                     <div class="card-body">
                         <h2 className="card-title">Permisos asociados a un perfil</h2>
                         <hr />
                         <div className="row">
                             <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                <ul className="list-group" style={{ width: '100%', height: '60%', overflowY: 'scroll' }}>
+                                <ul className="list-group" style={{ width: '100%', height: '80%', overflowY: 'scroll' }}>
                                     <li className="list-group-item active">Perfiles</li>
                                     {
                                         this.state.perfiles.map(perfil => (
@@ -270,7 +270,7 @@ export class GestionPerfiles extends Component {
                                 </ul>
                             </div>
                             <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                <ul className="list-group" style={{ width: '100%', height: '60%', overflowY: 'scroll' }}>
+                                <ul className="list-group" style={{ width: '100%', height: '80%', overflowY: 'scroll' }}>
 
                                     <li className="list-group-item active">Permisos</li>
                                     {
@@ -393,52 +393,67 @@ export class GestionPerfiles extends Component {
                                             <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 
                                                 <div className="form-group">
-                                                    <select
-                                                        name="perfilSeleccionadoSelect"
-                                                        className="form-control"
-                                                        value={this.state.perfilSeleccionadoSelect}
-                                                        onChange={this.onInputChange}
+                                                    <div class="input-group mb-2">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text">Permisos</div>
+
+                                                        </div>
+                                                        <select
+                                                            id="perfilSeleccionadoSelect"
+                                                            name="perfilSeleccionadoSelect"
+                                                            className="form-control"
+                                                            value={this.state.perfilSeleccionadoSelect}
+                                                            onChange={this.onInputChange}
 
 
-                                                    >
-                                                        <option >
+                                                        >
+                                                            {/* <option >
                                                             Perfiles
-                                                                </option>
-                                                        {
-                                                            this.state.perfiles.map(perfil =>
-                                                                <option value={perfil.f1000_id} key={perfil.f1000_id}>
-                                                                    {perfil.f1000_nombre}
-                                                                </option>
-                                                            )
-                                                        }
+                                                                </option> */}
+                                                            {
+                                                                this.state.perfiles.map(perfil =>
+                                                                    <option value={perfil.f1000_id} key={perfil.f1000_id}>
+                                                                        {perfil.f1000_nombre}
+                                                                    </option>
+                                                                )
+                                                            }
 
-                                                    </select>
+                                                        </select>
+
+                                                    </div>
                                                 </div>
 
                                             </div>
 
                                             <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                                 <div className="form-group">
-                                                    <select
-                                                        name="permisoSeleccionadoSelect"
-                                                        className="form-control"
-                                                        value={this.state.permisoSeleccionadoSelect}
-                                                        onChange={this.onInputChange}
+                                                    <div class="input-group mb-2">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text">Permisos</div>
+
+                                                        </div>
+
+                                                        <select
+                                                            name="permisoSeleccionadoSelect"
+                                                            className="form-control"
+                                                            value={this.state.permisoSeleccionadoSelect}
+                                                            onChange={this.onInputChange}
 
 
-                                                    >
-                                                        <option >
+                                                        >
+                                                            {/* <option >
                                                             Permisos
-                                                                </option>
-                                                        {
-                                                            this.state.permisos_todos.map(permisos_all =>
-                                                                <option value={permisos_all.f1001_id} key={permisos_all.f1001_id}>
-                                                                    {permisos_all.f1001_nombre}
-                                                                </option>
-                                                            )
-                                                        }
+                                                                </option> */}
+                                                            {
+                                                                this.state.permisos_todos.map(permisos_all =>
+                                                                    <option value={permisos_all.f1001_id} key={permisos_all.f1001_id}>
+                                                                        {permisos_all.f1001_nombre}
+                                                                    </option>
+                                                                )
+                                                            }
 
-                                                    </select>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
@@ -550,7 +565,7 @@ export class GestionPerfiles extends Component {
                                                     onChange={this.onInputChange}
 
                                                 >
-                                                    <option value="default" selected disabled>Colaborador...</option>
+                                                    {/* <option value="default" >Colaborador...</option> */}
                                                     {
                                                         this.state.usuarios.map(usuarios =>
                                                             <option value={usuarios.f_id} key={usuarios.f_id}>
@@ -571,7 +586,7 @@ export class GestionPerfiles extends Component {
                                                     value={this.state.perfilSeleccionadoSelect}
                                                     onChange={this.onInputChange}
                                                 >
-                                                    <option value="default" selected disabled>Perfiles...</option>
+                                                    {/* <option value="default" >Perfiles...</option> */}
                                                     {
                                                         this.state.perfiles.map(perfil =>
                                                             <option value={perfil.f1000_id} key={perfil.f1000_id}>

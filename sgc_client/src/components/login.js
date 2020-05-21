@@ -8,8 +8,8 @@ const config = require('../config/config')
 
 export default class login extends Component {
     state = {
-        email: "actualizado@gmail.com",
-        pass: "1234567"
+        email: "",
+        pass: ""
 
     }
     async componentDidMount() {

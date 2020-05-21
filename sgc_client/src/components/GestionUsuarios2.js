@@ -838,7 +838,7 @@ export default class GestionUsuarios2 extends Component {
                                                                 name="f_perfil"
                                                                 onChange={this.onInputChange}
                                                             >
-                                                                <option value="default" selected disabled>Choose...</option>
+                                                                {/* <option value="default" selected disabled>Choose...</option> */}
                                                                 {
                                                                     this.state.perfiles.map(perfil =>
                                                                         <option value={perfil.f1000_id} key={perfil.f1000_id}>
@@ -861,7 +861,7 @@ export default class GestionUsuarios2 extends Component {
                                                                 name="f_profesion"
                                                                 onChange={this.onInputChange}
                                                             >
-                                                                <option value="default" selected disabled>Choose...</option>
+                                                                {/* <option value="default" selected disabled>Choose...</option> */}
                                                                 <option value="2">Administrador</option>
                                                                 <option value="1">Colaborador</option>
                                                             </select>
