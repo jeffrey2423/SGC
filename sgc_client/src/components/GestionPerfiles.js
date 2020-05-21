@@ -7,6 +7,7 @@ import clientResource from '../resources/client';
 //import Breadcrumbs from './Breadcrumbs'
 import Loading from './Loading'
 import $ from 'jquery';
+import config from '../config/config'
 
 register('es_ES', clientResource.localeFunc);
 
@@ -54,7 +55,7 @@ export class GestionPerfiles extends Component {
     }
 
     getPerfiles = async () => {
-        const res = await axios.get("http://localhost:4000/api/user/profile/getProfiles", {
+        const res = await axios.get(config.BASE_URL + "api/user/profile/getProfiles", {
             headers: {
                 'Authorization': `Bearer ${this.state.token}`
             }
@@ -68,7 +69,7 @@ export class GestionPerfiles extends Component {
 
     getPermisosExt = async (id_perfil) => {
 
-        const res = await axios.get("http://localhost:4000/api/user/profile/getPermission/" + id_perfil, {
+        const res = await axios.get(config.BASE_URL + "api/user/profile/getPermission/" + id_perfil, {
             headers: {
                 'Authorization': `Bearer ${this.state.token}`
             }
@@ -83,7 +84,7 @@ export class GestionPerfiles extends Component {
     }
     getPermisos = async () => {
 
-        const res = await axios.get("http://localhost:4000/api/user/profile/getPermission/" + 9999, {
+        const res = await axios.get(config.BASE_URL + "api/user/profile/getPermission/" + 9999, {
             headers: {
                 'Authorization': `Bearer ${this.state.token}`
             }
@@ -97,7 +98,7 @@ export class GestionPerfiles extends Component {
     }
     getUsuarios = async () => {
 
-        const res = await axios.get("http://localhost:4000/api/user/getUsers/" + 9999, {
+        const res = await axios.get(config.BASE_URL + "api/user/getUsers/" + 9999, {
             headers: {
                 'Authorization': `Bearer ${this.state.token}`
             }
@@ -115,7 +116,7 @@ export class GestionPerfiles extends Component {
         const res = await validation.confirmacion();
 
         if (res.value) {
-            const res = await axios.delete("http://localhost:4000/api/user/profile/deletePermisoExt", {
+            const res = await axios.delete(config.BASE_URL + "api/user/profile/deletePermisoExt", {
                 headers: {
                     'Authorization': `Bearer ${this.state.token}`
                 },
@@ -145,7 +146,7 @@ export class GestionPerfiles extends Component {
         }
         if (this.state.perfilSeleccionadoSelect !== 0 &&
             this.state.permisoSeleccionadoSelect !== 0) {
-            const res = await axios.post("http://localhost:4000/api/user/profile/createProfileExt", data, {
+            const res = await axios.post(config.BASE_URL + "api/user/profile/createProfileExt", data, {
                 headers: {
                     'Content-Type': 'application/json;charset=UTF-8',
                     'Authorization': `Bearer ${this.state.token}`
@@ -172,7 +173,7 @@ export class GestionPerfiles extends Component {
             descripcion: this.state.desPerfilNuevo
         }
         if (validation.validarCampo(this.state.perfilNuevo, "nombre")) {
-            const res = await axios.post("http://localhost:4000/api/user/profile/createProfile", data, {
+            const res = await axios.post(config.BASE_URL + "api/user/profile/createProfile", data, {
                 headers: {
                     'Content-Type': 'application/json;charset=UTF-8',
                     'Authorization': `Bearer ${this.state.token}`
@@ -202,7 +203,7 @@ export class GestionPerfiles extends Component {
         }
         if (this.state.perfilSeleccionadoSelect !== 0 &&
             this.state.usuarioSeleccionado !== 0) {
-            const res = await axios.post("http://localhost:4000/api/user/updateUserPerfil", data, {
+            const res = await axios.post(config.BASE_URL + "api/user/updateUserPerfil", data, {
                 headers: {
                     'Content-Type': 'application/json;charset=UTF-8',
                     'Authorization': `Bearer ${this.state.token}`

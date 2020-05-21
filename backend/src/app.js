@@ -7,7 +7,7 @@ const authToken = require("./middlewares/auth_token");
 const config = require('./config/config')
 
 //SETTINGS
-app.set('port', process.env.PORT ||  4000);
+app.set('port', config.API_PORT ||  4000);
 
 
 //MIDDLEWARES
