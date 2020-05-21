@@ -8,6 +8,7 @@ module.exports = {
     PORTSERVER: process.env.PORTSERVER || 5000,
     SECRET_KEY: process.env.SECRET_KEY || "sgc_api",
     COLABORADOR: 1,
-    ADMINISTRADOR: 2
+    ADMINISTRADOR: 2,
+    BASE_URL: "http://localhost:4000/"
 
 }

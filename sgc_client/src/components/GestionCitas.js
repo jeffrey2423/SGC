@@ -7,7 +7,7 @@ import clientResource from '../resources/client';
 import 'datatables.net-dt'
 import $ from 'jquery';
 import 'datatables.net';
-const config = require('../config/config')
+import config from '../config/config'
 
 export default class GestionCitas extends Component {
 
@@ -41,8 +41,8 @@ export default class GestionCitas extends Component {
   createModal = async () => {
     if (sessionStorage.getItem("f1004_id_profesion_t1003") == config.ADMINISTRADOR) {
       await this.getUsuarios();
-    }    
-    
+    }
+
     this.setState({
       fecha_inicio: new Date(),
       fecha_fin: new Date()
@@ -80,7 +80,7 @@ export default class GestionCitas extends Component {
     data.ind_todo_el_dia = 0;
     data.id_creador = sessionStorage.getItem("f1004_id");
     data.id_asignado = this.state.asignado;
-    const res = await axios.post("http://localhost:4000/api/user/events/updateEvent/" + this.state.id_cita_actualizar, data, {
+    const res = await axios.post(config.BASE_URL + "api/user/events/updateEvent/" + this.state.id_cita_actualizar, data, {
       headers: {
         'Content-Type': 'application/json;charset=UTF-8',
         'Authorization': `Bearer ${this.state.token}`
@@ -104,7 +104,7 @@ export default class GestionCitas extends Component {
       id_usuario: sessionStorage.getItem("f1004_id")
     }
 
-    const res = await axios.post("http://localhost:4000/api/user/events/getEvents/" + id, userData, {
+    const res = await axios.post(config.BASE_URL + "api/user/events/getEvents/" + id, userData, {
       headers: {
         'Authorization': `Bearer ${this.state.token}`
       }
@@ -124,7 +124,7 @@ export default class GestionCitas extends Component {
       id_profesion: sessionStorage.getItem("f1004_id_profesion_t1003"),
       id_usuario: sessionStorage.getItem("f1004_id")
     }
-    const res = await axios.post("http://localhost:4000/api/user/events/getEvents/" + 9999, userData, {
+    const res = await axios.post(config.BASE_URL + "api/user/events/getEvents/" + 9999, userData, {
       headers: {
         'Authorization': `Bearer ${this.state.token}`
       }
@@ -138,7 +138,7 @@ export default class GestionCitas extends Component {
   }
   getUsuarios = async () => {
 
-    const res = await axios.get("http://localhost:4000/api/user/getUsers/" + 9999, {
+    const res = await axios.get(config.BASE_URL + "api/user/getUsers/" + 9999, {
       headers: {
         'Authorization': `Bearer ${this.state.token}`
       }
@@ -166,12 +166,12 @@ export default class GestionCitas extends Component {
     data.id_creador = sessionStorage.getItem("f1004_id");
     if (sessionStorage.getItem("f1004_id_profesion_t1003") == config.ADMINISTRADOR) {
       data.id_asignado = this.state.asignado;
-    }else{
+    } else {
       data.id_asignado = sessionStorage.getItem("f1004_id");
-    }  
-    
+    }
 
-    const res = await axios.post("http://localhost:4000/api/user/events/createEvent", data, {
+
+    const res = await axios.post(config.BASE_URL + "api/user/events/createEvent", data, {
       headers: {
         'Content-Type': 'application/json;charset=UTF-8',
         'Authorization': `Bearer ${this.state.token}`
@@ -212,7 +212,7 @@ export default class GestionCitas extends Component {
 
     if (resP.value) {
 
-      const res = await axios.post("http://localhost:4000/api/user/events/deleteEvent", data, {
+      const res = await axios.post(config.BASE_URL + "api/user/events/deleteEvent", data, {
         headers: {
           'Authorization': `Bearer ${this.state.token}`,
           'Content-Type': 'application/json;charset=UTF-8'
@@ -236,7 +236,7 @@ export default class GestionCitas extends Component {
 
     if (resP.value) {
 
-      const res = await axios.post("http://localhost:4000/api/user/events/activateEvent", data, {
+      const res = await axios.post(config.BASE_URL + "api/user/events/activateEvent", data, {
         headers: {
           'Authorization': `Bearer ${this.state.token}`,
           'Content-Type': 'application/json;charset=UTF-8'
@@ -394,7 +394,7 @@ export default class GestionCitas extends Component {
                                         <span
                                           style={{ cursor: 'pointer' }}
                                           class="badge badge-success m-2 badge-pill p-2"
-                                         onClick={() => this.activateCita(cita.f_id)}
+                                          onClick={() => this.activateCita(cita.f_id)}
                                         >
                                           <MDBIcon far icon="calendar-check" size="2x" />
                                         </span>
@@ -498,33 +498,33 @@ export default class GestionCitas extends Component {
                             </div>
                           </div>
                           {sessionStorage.getItem("f1004_id_profesion_t1003") == config.ADMINISTRADOR ? (
-                          <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                            <div class="input-group mb-3">
-                              <div class="input-group-prepend">
-                                <label class="input-group-text" for="inputGroupSelect01">Responsable</label>
+                            <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                              <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                  <label class="input-group-text" for="inputGroupSelect01">Responsable</label>
+                                </div>
+                                <select
+                                  className="form-control"
+                                  // onClick={this.getUsuarios}
+                                  name="asignado"
+                                  onChange={this.onInputChange}
+
+                                >
+
+                                  {
+                                    this.state.usuarios.map(usuarios =>
+                                      <option value={usuarios.f_id} key={usuarios.f_id}>
+                                        {usuarios.f_nombre}
+                                      </option>
+                                    )
+                                  }
+
+                                </select>
                               </div>
-                              <select
-                                className="form-control"
-                                // onClick={this.getUsuarios}
-                                name="asignado"
-                                onChange={this.onInputChange}
-
-                              >
-                                
-                                {
-                                  this.state.usuarios.map(usuarios =>
-                                    <option value={usuarios.f_id} key={usuarios.f_id}>
-                                      {usuarios.f_nombre}
-                                    </option>
-                                  )
-                                }
-
-                              </select>
                             </div>
-                          </div>
                           ) : (
-                            null
-                          )}
+                              null
+                            )}
                         </div>
 
                         {/*FILA NUMERO TRES DEL FORMULARIO */}

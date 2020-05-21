@@ -1,11 +1,12 @@
 const { Pool, Client } = require('pg');
+const config = require('../config/config')
 
 const connection = new Client({
-    user: process.env.USER,
-    host: process.env.HOST,
-    database: process.env.DATABASE,
-    password: process.env.PASS,
-    port: process.env.PORTBD
+    user: config.USER,
+    host: config.HOST,
+    database: config.DATABASE,
+    password: config.PASS,
+    port: config.PORTBD
 });
 
 connection.connect(function (err){

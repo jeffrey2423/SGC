@@ -10,6 +10,7 @@ import $ from 'jquery';
 
 //import BigCalendar from 'react-big-calendar';
 import moment, { now } from 'moment';
+import config from '../config/config'
 
 // Setup the localizer by providing the moment (or globalize) Object
 // to the correct localizer.
@@ -41,7 +42,7 @@ export default class Inicio extends Component {
 
     getUsuarios = async () => {
 
-        const res = await axios.get("http://localhost:4000/api/user/getUsers/" + 9999, {
+        const res = await axios.get(config.BASE_URL + "api/user/getUsers/" + 9999, {
             headers: {
                 'Authorization': `Bearer ${this.state.token}`
             }
@@ -67,7 +68,7 @@ export default class Inicio extends Component {
             id_profesion: sessionStorage.getItem("f1004_id_profesion_t1003"),
             id_usuario: sessionStorage.getItem("f1004_id")
         }
-        const res = await axios.post("http://localhost:4000/api/user/events/getEventsFilter", userData, {
+        const res = await axios.post(config.BASE_URL + "api/user/events/getEventsFilter", userData, {
             headers: {
                 'Authorization': `Bearer ${this.state.token}`
             }
@@ -113,7 +114,7 @@ export default class Inicio extends Component {
         data.id_creador = sessionStorage.getItem("f1004_id");
         data.id_asignado = this.state.asignado;
 
-        const res = await axios.post("http://localhost:4000/api/user/events/createEvent", data, {
+        const res = await axios.post(config.BASE_URL + "api/user/events/createEvent", data, {
             headers: {
                 'Content-Type': 'application/json;charset=UTF-8',
                 'Authorization': `Bearer ${this.state.token}`

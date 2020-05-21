@@ -9,6 +9,7 @@ import 'datatables.net-dt'
 // import $$ from 'mdbootstrap/js/addons/DataTable'
 import $ from 'jquery';
 import 'datatables.net';
+import config from '../config/config'
 
 export default class GestionUsuarios2 extends Component {
     state = {
@@ -40,7 +41,7 @@ export default class GestionUsuarios2 extends Component {
     }
 
     getPerfiles = async () => {
-        const res = await axios.get("http://localhost:4000/api/user/profile/getProfiles", {
+        const res = await axios.get(config.BASE_URL + "api/user/profile/getProfiles", {
             headers: {
                 'Authorization': `Bearer ${this.state.token}`
             }
@@ -54,7 +55,7 @@ export default class GestionUsuarios2 extends Component {
 
     getUsuarios = async () => {
 
-        const res = await axios.get("http://localhost:4000/api/user/getUsers/" + 9999, {
+        const res = await axios.get(config.BASE_URL + "api/user/getUsers/" + 9999, {
             headers: {
                 'Authorization': `Bearer ${this.state.token}`
             }
@@ -69,7 +70,7 @@ export default class GestionUsuarios2 extends Component {
 
     getUsuario = async (id) => {
 
-        const res = await axios.get("http://localhost:4000/api/user/getUsers/" + id, {
+        const res = await axios.get(config.BASE_URL + "api/user/getUsers/" + id, {
             headers: {
                 'Authorization': `Bearer ${this.state.token}`
             }
@@ -93,7 +94,7 @@ export default class GestionUsuarios2 extends Component {
         const resP = await validation.confirmacion();
         if (resP.value) {
 
-            const res = await axios.post("http://localhost:4000/api/user/activateUser", data, {
+            const res = await axios.post(config.BASE_URL + "api/user/activateUser", data, {
                 headers: {
                     'Content-Type': 'application/json;charset=UTF-8',
                     'Authorization': `Bearer ${this.state.token}`
@@ -120,7 +121,7 @@ export default class GestionUsuarios2 extends Component {
 
         if (resP.value) {
 
-            const res = await axios.post("http://localhost:4000/api/user/deleteUser", data, {
+            const res = await axios.post(config.BASE_URL + "api/user/deleteUser", data, {
                 headers: {
                     'Authorization': `Bearer ${this.state.token}`,
                     'Content-Type': 'application/json;charset=UTF-8'
@@ -212,7 +213,7 @@ export default class GestionUsuarios2 extends Component {
             data.email = this.state.f_email;
             data.clave = this.state.f_clave;
             data.id_perfil = this.state.f_perfil;
-            const res = await axios.post("http://localhost:4000/api/user/createUser", data, {
+            const res = await axios.post(config.BASE_URL + "api/user/createUser", data, {
                 headers: {
                     'Content-Type': 'application/json;charset=UTF-8',
                     'Authorization': `Bearer ${this.state.token}`
@@ -238,7 +239,7 @@ export default class GestionUsuarios2 extends Component {
         data.apellido = this.state.f_apellido;
         data.id_profesion = this.state.f_profesion;
 
-        const res = await axios.post("http://localhost:4000/api/user/updateUser/" + this.state.id_usuario_actualizar, data, {
+        const res = await axios.post(config.BASE_URL + "api/user/updateUser/" + this.state.id_usuario_actualizar, data, {
             headers: {
                 'Content-Type': 'application/json;charset=UTF-8',
                 'Authorization': `Bearer ${this.state.token}`
@@ -260,7 +261,7 @@ export default class GestionUsuarios2 extends Component {
         const data = {};
         data.clave = this.state.f_clave;
 
-        const res = await axios.post("http://localhost:4000/api/user/updateUserPass/" + this.state.id_usuario_actualizar, data, {
+        const res = await axios.post(config.BASE_URL + "api/user/updateUserPass/" + this.state.id_usuario_actualizar, data, {
             headers: {
                 'Content-Type': 'application/json;charset=UTF-8',
                 'Authorization': `Bearer ${this.state.token}`
@@ -283,7 +284,7 @@ export default class GestionUsuarios2 extends Component {
         const data = {};
         data.email = this.state.f_email;
 
-        const res = await axios.post("http://localhost:4000/api/user/updateUserEmail/" + this.state.id_usuario_actualizar, data, {
+        const res = await axios.post(config.BASE_URL + "api/user/updateUserEmail/" + this.state.id_usuario_actualizar, data, {
             headers: {
                 'Content-Type': 'application/json;charset=UTF-8',
                 'Authorization': `Bearer ${this.state.token}`
@@ -305,7 +306,7 @@ export default class GestionUsuarios2 extends Component {
         data.id_usuario = this.state.id_usuario_actualizar;
         data.id_perfil = this.state.f_perfil;
 
-        const res = await axios.post("http://localhost:4000/api/user/updateUserPerfil", data, {
+        const res = await axios.post(config.BASE_URL + "api/user/updateUserPerfil", data, {
             headers: {
                 'Content-Type': 'application/json;charset=UTF-8',
                 'Authorization': `Bearer ${this.state.token}`
