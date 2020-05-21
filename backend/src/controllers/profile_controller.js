@@ -69,9 +69,8 @@ profileController.createProfile = async (req, res) => {
         // Validamos que el permiso ya no este asiganado
         await connection.query(queryValidarPerfil, (err, results) => {
             if (!err) {
-                const estadoPerfil = results.rows[0].f_validar_perfil_ext;
+                const estadoPerfil = results.rows[0].f_validar_crear_perfil;
                 resultadoValidar = (estadoPerfil == rscController.ESTADO_PERMISO.NO_EXISTE) ? true : false;
-
             } else {
                 resultadoValidar = false;
                 res.json(rscController.leerRecurso(1013, err.message));

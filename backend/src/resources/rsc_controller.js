@@ -1,6 +1,5 @@
 const connection = require('../database/database');
 const rsc = require('./constantes/rsc_server');
-const authToken = require("../middlewares/auth_token");
 
 const rsc_controller = {};
 
