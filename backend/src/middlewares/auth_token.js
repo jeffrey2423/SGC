@@ -13,7 +13,7 @@ module.exports = async (req, res, next) => {
         let datosUsuario;
         const query = "select f_verificar_permiso_usuario($1, $2)";
         let queryParams;
-
+        ruta = req.path;
         if (ruta != rutas.LOGIN) {
             if (req.headers.authorization) {
                 const token = req.headers.authorization.split(' ')[1];
@@ -27,7 +27,7 @@ module.exports = async (req, res, next) => {
                         perfilUsuario = decoded.f1004_id_perfil_t1000;
                     }
                 });
-                ruta = req.path;
+                
                 switch (ruta) {
                     // case rutas.OBTENER_USUARIOS:
                     //     // console.log(perfilUsuario)
