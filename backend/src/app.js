@@ -7,25 +7,8 @@ const config = require('./config/config')
 const bodyParser = require('body-parser');
 const app = express();
 
-app.use(morgan('dev'));
-app.use(function (req, res, next) { req.headers['if-none-match'] = 'no-match-for-this'; next(); });
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-    res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
-
-    next();
-
-
-});
-app.options("/*", function (req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
-    res.sendStatus(200);
-});
-app.use(express.urlencoded({ extended: false }));
+app.use(cors(config.application.cors.server));
+app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 
 app.use(authToken);
