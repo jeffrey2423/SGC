@@ -12,6 +12,7 @@ const connection = new Client({
 connection.connect(function (err){
     try {
         if(err){
+            console.log("Fallo conexion");
             console.log(err);
             return;
         }else{
@@ -19,6 +20,7 @@ connection.connect(function (err){
         }
     } catch (error) {
         console.log(err);
+        console.log("Fallo conexion");
     }
 
 });
