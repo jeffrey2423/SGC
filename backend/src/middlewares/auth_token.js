@@ -80,7 +80,7 @@ module.exports = async (req, res, next) => {
                         queryParams = [perfilUsuario, permisos.CREAR_CITAS];
 
                         await connection.query(query, queryParams, (err, results) => {
-                            rscController.snooze(15);
+                            rscController.snooze(20);
                             if (!err) {
                                 const permisoUsuario = results.rows[0].f_verificar_permiso_usuario;
                                 permitir = (permisoUsuario == rscController.ESTADO_USUARIO.EXISTE_PERMISO) ? true : false;
@@ -103,7 +103,7 @@ module.exports = async (req, res, next) => {
                         queryParams = [perfilUsuario, permisos.CREAR_USUARIOS];
 
                         await connection.query(query, queryParams, (err, results) => {
-                            rscController.snooze(15);
+                            rscController.snooze(20);
                             if (!err) {
                                 const permisoUsuario = results.rows[0].f_verificar_permiso_usuario;
                                 permitir = (permisoUsuario == rscController.ESTADO_USUARIO.EXISTE_PERMISO) ? true : false;
@@ -126,7 +126,7 @@ module.exports = async (req, res, next) => {
                         queryParams = [perfilUsuario, permisos.CANCELAR_CITAS];
 
                         await connection.query(query, queryParams, (err, results) => {
-                            rscController.snooze(15);
+                            rscController.snooze(20);
                             if (!err) {
                                 const permisoUsuario = results.rows[0].f_verificar_permiso_usuario;
                                 permitir = (permisoUsuario == rscController.ESTADO_USUARIO.EXISTE_PERMISO) ? true : false;
@@ -149,7 +149,7 @@ module.exports = async (req, res, next) => {
                         queryParams = [perfilUsuario, permisos.INACTIVAR_USUARIOS];
 
                         await connection.query(query, queryParams, (err, results) => {
-                            rscController.snooze(15);
+                            rscController.snooze(20);
                             if (!err) {
                                 const permisoUsuario = results.rows[0].f_verificar_permiso_usuario;
                                 permitir = (permisoUsuario == rscController.ESTADO_USUARIO.EXISTE_PERMISO) ? true : false;
@@ -173,7 +173,7 @@ module.exports = async (req, res, next) => {
                         queryParams = [perfilUsuario, permisos.CREAR_PERFIL];
 
                         await connection.query(query, queryParams, (err, results) => {
-                            rscController.snooze(15);
+                            rscController.snooze(20);
                             if (!err) {
                                 const permisoUsuario = results.rows[0].f_verificar_permiso_usuario;
                                 permitir = (permisoUsuario == rscController.ESTADO_USUARIO.EXISTE_PERMISO) ? true : false;
@@ -196,7 +196,7 @@ module.exports = async (req, res, next) => {
                         queryParams = [perfilUsuario, permisos.ACTIVAR_CITAS];
 
                         await connection.query(query, queryParams, (err, results) => {
-                            rscController.snooze(15);
+                            rscController.snooze(20);
                             if (!err) {
                                 const permisoUsuario = results.rows[0].f_verificar_permiso_usuario;
                                 permitir = (permisoUsuario == rscController.ESTADO_USUARIO.EXISTE_PERMISO) ? true : false;
@@ -219,7 +219,7 @@ module.exports = async (req, res, next) => {
                         queryParams = [perfilUsuario, permisos.ACTIVAR_USUARIOS];
 
                         await connection.query(query, queryParams, (err, results) => {
-                            rscController.snooze(15);
+                            rscController.snooze(20);
                             if (!err) {
                                 const permisoUsuario = results.rows[0].f_verificar_permiso_usuario;
                                 permitir = (permisoUsuario == rscController.ESTADO_USUARIO.EXISTE_PERMISO) ? true : false;
@@ -242,7 +242,7 @@ module.exports = async (req, res, next) => {
                             queryParams = [perfilUsuario, permisos.EDITAR_CITAS];
 
                             await connection.query(query, queryParams, (err, results) => {
-                                rscController.snooze(15);
+                                rscController.snooze(20);
                                 if (!err) {
                                     const permisoUsuario = results.rows[0].f_verificar_permiso_usuario;
                                     permitir = (permisoUsuario == rscController.ESTADO_USUARIO.EXISTE_PERMISO) ? true : false;
@@ -263,7 +263,7 @@ module.exports = async (req, res, next) => {
                             queryParams = [perfilUsuario, permisos.EDITAR_USUARIOS];
 
                             await connection.query(query, queryParams, (err, results) => {
-                                rscController.snooze(15);
+                                rscController.snooze(20);
                                 if (!err) {
                                     const permisoUsuario = results.rows[0].f_verificar_permiso_usuario;
                                     permitir = (permisoUsuario == rscController.ESTADO_USUARIO.EXISTE_PERMISO) ? true : false;

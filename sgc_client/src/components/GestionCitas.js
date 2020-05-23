@@ -310,36 +310,25 @@ export default class GestionCitas extends Component {
                           style={{ color: 'red' }}
                         >
                           {cita.estado === 'Activo' ? (
-                            <MDBTooltip
-                              domElement
-                              tag="span"
-                              placement="top"
-                            >
-                              <span
-                                style={{
-                                  borderRadius: '3px',
-                                  cursor: 'default',
-                                  width: '75%'
-                                }}
-                                class="badge badge-success m-2 p-2"
-                              >Cita Activa
-                            </span>
-                              <span>Esta cita esta activa</span>
-                            </MDBTooltip>
-                          ) : (
-                              <MDBTooltip
-                                domElement
-                                tag="span"
-                                placement="top"
-                              >
 
-                                <span
-                                  style={{ borderRadius: '3px', cursor: 'default', width: '80%' }}
-                                  class="badge badge-danger m-2 p-2"
-                                >Cita Cancelada
+                            <span
+                              style={{
+                                borderRadius: '3px',
+                                cursor: 'default',
+                                width: '75%'
+                              }}
+                              class="badge badge-success m-2 p-2"
+                            >Cita Activa
+                            </span>
+
+                          ) : (
+
+                              <span
+                                style={{ borderRadius: '3px', cursor: 'default', width: '80%' }}
+                                class="badge badge-danger m-2 p-2"
+                              >Cita Cancelada
                               </span>
-                                <span>Esta cita fue cancelada</span>
-                              </MDBTooltip>
+
 
                             )}
 
@@ -352,54 +341,36 @@ export default class GestionCitas extends Component {
 
                               sessionStorage.getItem("f1004_id_profesion_t1003") == config.ADMINISTRADOR ? (
                                 <React.Fragment>
-                                  <MDBTooltip
-                                    domElement
-                                    tag="span"
-                                    placement="left"
+
+                                  <span
+                                    style={{ cursor: 'pointer' }}
+                                    class="badge badge-secondary m-2 badge-pill p-2"
+                                    onClick={() => this.editModal(cita.f_id)}
                                   >
-                                    <span
-                                      style={{ cursor: 'pointer' }}
-                                      class="badge badge-secondary m-2 badge-pill p-2"
-                                      onClick={() => this.editModal(cita.f_id)}
-                                    >
-                                      <MDBIcon icon="pen-square" size="2x" />
-                                    </span>
-                                    <span>Editar Cita</span>
-                                  </MDBTooltip>
+                                    <MDBIcon icon="pen-square" size="2x" />
+                                  </span>
+
 
                                   {cita.estado === 'Activo' ? (
-                                    <MDBTooltip
-                                      domElement
-                                      tag="span"
-                                      placement="left"
-                                    >
 
-                                      <span
-                                        style={{ cursor: 'pointer' }}
-                                        class="badge badge-danger m-2 badge-pill p-2"
-                                        onClick={() => this.cancelCita(cita.f_id)}
-                                      >
-                                        <MDBIcon icon="ban" size="2x" />
-                                      </span>
-                                      <span>Cancelar Cita</span>
-                                    </MDBTooltip>
+                                    <span
+                                      style={{ cursor: 'pointer' }}
+                                      class="badge badge-danger m-2 badge-pill p-2"
+                                      onClick={() => this.cancelCita(cita.f_id)}
+                                    >
+                                      <MDBIcon icon="ban" size="2x" />
+                                    </span>
+
 
                                   ) : (
-                                      <MDBTooltip
-                                        domElement
-                                        tag="span"
-                                        placement="left"
+                                      <span
+                                        style={{ cursor: 'pointer' }}
+                                        class="badge badge-success m-2 badge-pill p-2"
+                                        onClick={() => this.activateCita(cita.f_id)}
                                       >
+                                        <MDBIcon far icon="calendar-check" size="2x" />
+                                      </span>
 
-                                        <span
-                                          style={{ cursor: 'pointer' }}
-                                          class="badge badge-success m-2 badge-pill p-2"
-                                          onClick={() => this.activateCita(cita.f_id)}
-                                        >
-                                          <MDBIcon far icon="calendar-check" size="2x" />
-                                        </span>
-                                        <span>Activar Cita</span>
-                                      </MDBTooltip>
                                     )}
                                 </React.Fragment>
                               ) :
@@ -407,23 +378,18 @@ export default class GestionCitas extends Component {
                                 null
 
                             }
-                            <MDBTooltip
-                              domElement
-                              tag="span"
-                              placement="right"
-                            >
-                              <span
-                                class="badge badge-light m-2 badge-pill p-2"
-                                style={{ cursor: 'pointer' }}
-                                onClick={() => clientResource.showDesc(cita.title, cita.desc)}
-                              >
-                                <center>
-                                  <MDBIcon far icon="eye" size="2x" />
-                                </center>
 
-                              </span>
-                              <span>Ver descripcion</span>
-                            </MDBTooltip>
+                            <span
+                              class="badge badge-light m-2 badge-pill p-2"
+                              style={{ cursor: 'pointer' }}
+                              onClick={() => clientResource.showDesc(cita.title, cita.desc)}
+                            >
+                              <center>
+                                <MDBIcon far icon="eye" size="2x" />
+                              </center>
+
+                            </span>
+
                           </center>
 
                         </td>
