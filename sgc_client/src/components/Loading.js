@@ -5,7 +5,7 @@ export default class Loading extends Component {
         return (
             <div>              
                 <img class="img-fluid imagen" alt="Responsive" 
-                src="https://www.antenalabs.com/images/loader.gif" />               
+                src="./loader.gif" />               
             </div>
         )
     }

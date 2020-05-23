@@ -1,7 +1,8 @@
 const { Pool, Client } = require('pg');
+// var pg = require('pg');
 const config = require('../config/config')
 
-const connection = new Client({
+const connection = new Pool({
     user: config.USER,
     host: config.HOST,
     database: config.DATABASE,
@@ -9,18 +10,25 @@ const connection = new Client({
     port: config.PORTBD
 });
 
-connection.connect(function (err){
-    try {
-        if(err){
-            console.log(err);
-            return;
-        }else{
-            console.log('Database is connected');
-        }
-    } catch (error) {
-        console.log(err);
-    }
 
+// var conString = "postgres://" + config.USER + ":" + config.PASS + "@localhost:5432/" + config.DATABASE + "";
+
+// var client = new pg.Pool(conString);
+
+// client.connect((err) => {
+//     if (err) {
+//         console.log(err);
+//         return;
+//     } else {
+//         console.log('Database is connected');
+//     }
+// });
+connection.connect(function (err) {
+    if (err) {
+        console.log(err);
+    } else {
+        console.log('Database is connected');
+    }
 });
 
 module.exports = connection;

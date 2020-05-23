@@ -178,7 +178,7 @@ eventController.createEvent = async (req, res) => {
 
         // dormimos el hilo principal para que no pase al siguiente bloque
         // sin que la variable resultadoValidar este llena
-        await rscController.snooze(10);
+        await rscController.snooze(20);
 
         if (resultadoValidar) {
             const newEvent = req.body;
@@ -276,7 +276,7 @@ eventController.updateEvent = async (req, res) => {
 
         // dormimos el hilo principal para que no pase al siguiente bloque
         // sin que la variable resultadoValidar este llena
-        await rscController.snooze(10);
+        await rscController.snooze(20);
         if (resultadoValidar) {
             const newData = req.body;
 
