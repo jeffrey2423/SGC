@@ -7,11 +7,11 @@ const config = require('./config/config')
 const bodyParser = require('body-parser');
 const app = express();
 
-// app.use(cors(config.application.cors.server));
-app.use(cors({
-    origin: ['*'],
-    credentials: true
-}));
+app.use(cors(config.application.cors.server));
+// app.use(cors({
+//     origin: ['*'],
+//     credentials: true
+// }));
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 
