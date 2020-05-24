@@ -27,33 +27,26 @@ export default class GestionUsuarios2 extends Component {
     }
 
     async componentDidMount() {
-        this.tableRes();
-
         if (!sessionStorage.getItem("token")) {
             window.location.href = '/';
         } else {
             await this.getUsuarios();
             window.setTimeout(function () {
                 $('#example').DataTable();
+                // $('[data-toggle="tooltip"]').tooltip()
             }, 1000);
             await this.getPerfiles()
+            this.toolTip();
+
 
 
         }
     }
 
-    tableRes = () => {
-        $(document).ready(function () {
-            $('.table-responsive').on('show.bs.dropdown', function () {
-                $('.table-responsive').css("overflow", "inherit");
-            });
-
-            $('.table-responsive').on('hide.bs.dropdown', function () {
-                $('.table-responsive').css("overflow", "auto");
-            })
-        });
-
+    toolTip = () => {
+        $('[data-toggle="tooltip"]').tooltip()
     }
+
 
     getPerfiles = async () => {
         const res = await axios.get(config.BASE_URL + "api/user/profile/getProfiles", {
@@ -79,6 +72,7 @@ export default class GestionUsuarios2 extends Component {
             validation.error(res.data.status, res.data.description, res.data.id, res.data.traza);
         } else {
             this.setState({ usuarios: res.data });
+            this.toolTip();
         }
 
     }
@@ -120,9 +114,8 @@ export default class GestionUsuarios2 extends Component {
             } else {
                 this.getUsuarios();
                 validation.success(res.data.status, res.data.description, res.data.id);
-                // window.setTimeout(function () {
-                //     clientResource.refreshPage();
-                // }, 1500);
+                // $('#inactivar').attr('data-original-title', 'Inactivar este usuario');
+                // $('#inactivar').tooltip();
             }
         }
 
@@ -148,9 +141,8 @@ export default class GestionUsuarios2 extends Component {
             } else {
                 this.getUsuarios();
                 validation.success(res.data.status, res.data.description, res.data.id);
-                // window.setTimeout(function () {
-                //     clientResource.refreshPage();
-                // }, 1500);
+                // $('#activar').attr('data-original-title', 'Activar este usuario');
+                // $('#activar').tooltip();
             }
         }
 
@@ -400,20 +392,31 @@ export default class GestionUsuarios2 extends Component {
                                                     {usuario.f_activo === 'Activo' ? (
 
                                                         <span
+
                                                             style={{
                                                                 borderRadius: '3px',
                                                                 cursor: 'default',
-                                                                width: '75%'
+                                                                width: '75%',
+                                                                color: '#00c851 ',
+                                                                fontWeight: 'bold'
                                                             }}
-                                                            class="badge badge-success m-2 p-2"
+                                                            class=" m-2 p-2"
                                                         >{usuario.f_activo}
                                                         </span>
 
                                                     ) : (
 
                                                             <span
-                                                                style={{ borderRadius: '3px', cursor: 'default', width: '80%' }}
-                                                                class="badge badge-danger m-2 p-2"
+
+                                                                style={{
+                                                                    borderRadius: '3px',
+                                                                    cursor: 'default',
+                                                                    width: '80%',
+                                                                    color: '#ff3547 ',
+                                                                    fontWeight: 'bold'
+
+                                                                }}
+                                                                class="m-2 p-2"
                                                             >{usuario.f_activo}
                                                             </span>
 
@@ -422,8 +425,10 @@ export default class GestionUsuarios2 extends Component {
 
                                                 </td>
                                                 <td>
+
                                                     <center>
                                                         <span
+                                                            // data-toggle="tooltip" data-placement="left" title="Editar este usuario"
                                                             style={{
                                                                 cursor: 'pointer'
                                                             }}
@@ -437,7 +442,10 @@ export default class GestionUsuarios2 extends Component {
 
                                                         {usuario.f_activo === 'Activo' ? (
 
+
                                                             <span
+                                                                id="activar"
+                                                                // data-toggle="tooltip" data-placement="left" title="Inactivar este usuario"
                                                                 style={{
                                                                     cursor: 'pointer'
                                                                 }}
@@ -451,6 +459,8 @@ export default class GestionUsuarios2 extends Component {
 
 
                                                                 <span
+                                                                    id="inactivar"
+                                                                    // data-toggle="tooltip" data-placement="left" title="Activar este usuario"
                                                                     style={{
                                                                         cursor: 'pointer'
                                                                     }}
