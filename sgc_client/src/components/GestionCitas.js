@@ -262,17 +262,16 @@ export default class GestionCitas extends Component {
           <div className="card-body">
 
             <span
-              style={{ cursor: 'pointer' }}
+              style={{ cursor: 'pointer', float: 'right' }}
               class="btn btn-secondary btn "
               onClick={() => this.createModal()}
             >
               <MDBIcon far icon="calendar-check" className="mr-1" />Nueva cita
           </span>
 
-            <hr />
-            <h2 className="card-title">Citas programadas</h2>
-            <hr />
 
+            <h2 className="card-title">Citas programadas</h2>
+            
             <div class="table-responsive ">
 
               <table className="table table-bordered table-striped mb-0" id="example">
@@ -510,7 +509,7 @@ export default class GestionCitas extends Component {
                               <DateTimePicker
                                 onChange={this.onChangeInicio}
                                 value={this.state.fecha_inicio}
-                              // format="y-MM-dd h:mm:ss a"
+                               format="y-MM-dd h:mm:ss a"
 
 
                               />
@@ -525,7 +524,7 @@ export default class GestionCitas extends Component {
                               <DateTimePicker
                                 onChange={this.onChangeFin}
                                 value={this.state.fecha_fin}
-                              // format="y-MM-dd h:mm:ss a"
+                               format="y-MM-dd h:mm:ss a"
 
                               />
                             </div>
@@ -677,7 +676,7 @@ export default class GestionCitas extends Component {
                               <DateTimePicker
                                 onChange={this.onChangeInicio}
                                 value={this.state.fecha_inicio}
-                              // format="y-MM-dd h:mm:ss a"
+                               format="y-MM-dd h:mm:ss a"
 
 
                               />
@@ -692,7 +691,7 @@ export default class GestionCitas extends Component {
                               <DateTimePicker
                                 onChange={this.onChangeFin}
                                 value={this.state.fecha_fin}
-                              // format="y-MM-dd h:mm:ss a"
+                               format="y-MM-dd h:mm:ss a"
 
                               />
                             </div>
