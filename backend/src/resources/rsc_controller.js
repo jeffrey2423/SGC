@@ -22,7 +22,7 @@ rsc_controller.ESTADO_EVENTO = {
 rsc_controller.TIPO_PROFESION = {
     COLABORADOR: 1,
     ADMINISTRADOR: 2
-    
+
 }
 
 // Funcion para obtener el json del recurso para enviar al Cliente 
@@ -78,28 +78,25 @@ rsc_controller.obtenerEstadoUsuario = async (email) => {
 };
 
 
-rsc_controller.validarPermisoUsuario = async (perfil, permiso) => {
-    try {
-        const query = {
-            text: "select f_verificar_permiso_usuario()",
-            values: [perfil, permiso],
-        }
-        await connection.query(query, (err, results) => {
-            if (!err) {
-                const permisoUsuario = results.rows[0].f_verificar_permiso_usuario;
-                console.log(permisoUsuario);
-                return (permisoUsuario != rscController.ESTADO_USUARIO.EXISTE_PERMISO) ? true : false;
+rsc_controller.validarPermisoUsuario = (perfil, permiso) => {
 
-            } else {
-                console.log(err.message);
-                return false;
-            }
-        });
-    } catch (error) {
-        console.log(error.message);
-        return false;
+    const query = {
+        text: "select f_verificar_permiso_usuario($1, $2)",
+        values: [perfil, permiso],
     }
+    connection.query(query, (err, results) => {
+        if (!err) {
+            const permisoUsuario = results.rows[0].f_verificar_permiso_usuario;
+            // return permisoUsuario == 1 ? { status: true } : { status: false };
+             console.log(permisoUsuario == 1 ? {status:true} : {status:false});
+        }
+        else {
+            return err.message;
+        }
+    });
+
 }
+
 
 rsc_controller.snooze = ms => new Promise(resolve => setTimeout(resolve, ms));
 

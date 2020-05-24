@@ -61,7 +61,6 @@ profileController.createProfile = async (req, res) => {
     try {
         const nombrePerfil = req.body.nombre;
         const perfil = req.body;
-        let resultadoValidar;
         const queryValidarPerfil = {
             text: "select * from f_validar_crear_perfil($1)",
             values: [nombrePerfil]
@@ -70,32 +69,29 @@ profileController.createProfile = async (req, res) => {
         await connection.query(queryValidarPerfil, (err, results) => {
             if (!err) {
                 const estadoPerfil = results.rows[0].f_validar_crear_perfil;
-                resultadoValidar = (estadoPerfil == rscController.ESTADO_PERMISO.NO_EXISTE) ? true : false;
+                const resultadoValidar = (estadoPerfil == rscController.ESTADO_PERMISO.NO_EXISTE) ? true : false;
+                if (resultadoValidar) {
+                    const query = {
+                        text: "select * from f_insertar_perfil($1)",
+                        values: [perfil]
+                    };
+                    connection.query(query, (err, results) => {
+                        if (!err) {
+                            res.json(rscController.leerRecurso(1014));
+                        } else {
+                            connection.query('ROLLBACK');
+                            res.json(rscController.leerRecurso(1013, err.message));
+                        }
+                    });
+                } else {
+                    res.json(rscController.leerRecurso(1044));
+                }
             } else {
-                resultadoValidar = false;
                 res.json(rscController.leerRecurso(1013, err.message));
             }
         });
 
-        // dormimos el hilo principal para que no pase al siguiente bloque
-        // sin que la variable resultadoValidar este llena
-        await rscController.snooze(20);
-        if (resultadoValidar) {
-            const query = {
-                text: "select * from f_insertar_perfil($1)",
-                values: [perfil]
-            };
-            await connection.query(query, (err, results) => {
-                if (!err) {
-                    res.json(rscController.leerRecurso(1014));
-                } else {
-                    connection.query('ROLLBACK');
-                    res.json(rscController.leerRecurso(1013, err.message));
-                }
-            });
-        } else {
-            res.json(rscController.leerRecurso(1044));
-        }
+
     } catch (error) {
         await connection.query('ROLLBACK');
         res.json(rscController.leerRecurso(1013, error.message));
@@ -106,7 +102,6 @@ profileController.createProfileExt = async (req, res) => {
     try {
         const datos = req.body;
         console.log(datos);
-        let resultadoValidar;
         const queryValidarUsuario = {
             text: "select * from f_validar_perfil_ext($1)",
             values: [datos]
@@ -115,35 +110,34 @@ profileController.createProfileExt = async (req, res) => {
         await connection.query(queryValidarUsuario, (err, results) => {
             if (!err) {
                 const estadoPerfil = results.rows[0].f_validar_perfil_ext;
-                resultadoValidar = (estadoPerfil == rscController.ESTADO_PERMISO.NO_EXISTE) ? true : false;
+                const resultadoValidar = (estadoPerfil == rscController.ESTADO_PERMISO.NO_EXISTE) ? true : false;
+                if (resultadoValidar) {
+                    const query = {
+                        text: "select * from f_insertar_perfil_ext($1)",
+                        values: [datos]
+                    };
+                    connection.query(query, (err, results) => {
+                        if (!err) {
+                            res.json(rscController.leerRecurso(1017));
+                            
+
+                        } else {
+                            connection.query('ROLLBACK');
+                            res.json(rscController.leerRecurso(1015, err.message));
+                            
+                        }
+                    });
+                } else {
+                    res.json(rscController.leerRecurso(1016));
+                }
 
             } else {
-                resultadoValidar = false;
                 res.json(rscController.leerRecurso(1016, err.message));
+                
             }
         });
 
-        // dormimos el hilo principal para que no pase al siguiente bloque
-        // sin que la variable resultadoValidar este llena
-        await rscController.snooze(20);
 
-        if (resultadoValidar) {
-            const query = {
-                text: "select * from f_insertar_perfil_ext($1)",
-                values: [datos]
-            };
-            await connection.query(query, (err, results) => {
-                if (!err) {
-                    res.json(rscController.leerRecurso(1017));
-
-                } else {
-                    connection.query('ROLLBACK');
-                    res.json(rscController.leerRecurso(1015, err.message));
-                }
-            });
-        } else {
-            res.json(rscController.leerRecurso(1016));
-        }
     } catch (error) {
         await connection.query('ROLLBACK');
         res.json(rscController.leerRecurso(1015, error.message));

@@ -159,7 +159,6 @@ eventController.getEventsFilter = async (req, res) => {
 
 eventController.createEvent = async (req, res) => {
     try {
-        let resultadoValidar;
         const queryValidarEvento = {
             text: "select * from f_validar_evento($1,$2)",
             values: [req.body.id_asignado, req.body.fecha_inicial]
@@ -168,36 +167,29 @@ eventController.createEvent = async (req, res) => {
         await connection.query(queryValidarEvento, (err, results) => {
             if (!err) {
                 const estadoEvento = results.rows[0].f_validar_evento;
-                resultadoValidar = (estadoEvento == rscController.ESTADO_EVENTO.NO_EXISTE) ? true : false;
+                const resultadoValidar = (estadoEvento == rscController.ESTADO_EVENTO.NO_EXISTE) ? true : false;
+                if (resultadoValidar) {
+                    const newEvent = req.body;
+                    const query = {
+                        text: "select * from f_insertar_evento($1)",
+                        values: [newEvent]
+                    };
+                    connection.query(query, (err, results) => {
+                        if (!err) {
+                            res.json(rscController.leerRecurso(1035));
 
+                        } else {
+                            connection.query('ROLLBACK');
+                            res.json(rscController.leerRecurso(1034, err.message));
+                        }
+                    });
+                } else {
+                    res.json(rscController.leerRecurso(1036));
+                }
             } else {
-                resultadoValidar = false;
                 res.json(rscController.leerRecurso(1034, err.message));
             }
         });
-
-        // dormimos el hilo principal para que no pase al siguiente bloque
-        // sin que la variable resultadoValidar este llena
-        await rscController.snooze(20);
-
-        if (resultadoValidar) {
-            const newEvent = req.body;
-            const query = {
-                text: "select * from f_insertar_evento($1)",
-                values: [newEvent]
-            };
-            await connection.query(query, (err, results) => {
-                if (!err) {
-                    res.json(rscController.leerRecurso(1035));
-
-                } else {
-                    connection.query('ROLLBACK');
-                    res.json(rscController.leerRecurso(1034, err.message));
-                }
-            });
-        } else {
-            res.json(rscController.leerRecurso(1036));
-        }
 
     } catch (error) {
         await connection.query('ROLLBACK');
@@ -256,7 +248,6 @@ eventController.activateEvent = async (req, res) => {
 eventController.updateEvent = async (req, res) => {
     try {
         const id_evento = req.params.id;
-        let resultadoValidar;
         const queryValidarEvento = {
             text: "select * from f_validar_evento_actualizar($1,$2,$3)",
             values: [req.body.id_asignado, req.body.fecha_inicial, id_evento]
@@ -266,35 +257,30 @@ eventController.updateEvent = async (req, res) => {
             if (!err) {
                 const estadoEvento = results.rows[0].f_validar_evento_actualizar;
                 console.log(estadoEvento);
-                resultadoValidar = (estadoEvento == rscController.ESTADO_EVENTO.NO_EXISTE) ? true : false;
+                const resultadoValidar = (estadoEvento == rscController.ESTADO_EVENTO.NO_EXISTE) ? true : false;
 
+                if (resultadoValidar) {
+                    const newData = req.body;
+
+                    const query = {
+                        text: "select * from f_actualizar_evento($1,$2)",
+                        values: [newData, id_evento]
+                    }
+                    connection.query(query, (err, results) => {
+                        if (!err) {
+                            res.json(rscController.leerRecurso(1039));
+                        } else {
+                            connection.query('ROLLBACK');
+                            res.json(rscController.leerRecurso(1040, err.message));
+                        }
+                    });
+                } else {
+                    res.json(rscController.leerRecurso(1036));
+                }
             } else {
-                resultadoValidar = false;
                 res.json(rscController.leerRecurso(1040, err.message));
             }
         });
-
-        // dormimos el hilo principal para que no pase al siguiente bloque
-        // sin que la variable resultadoValidar este llena
-        await rscController.snooze(20);
-        if (resultadoValidar) {
-            const newData = req.body;
-
-            const query = {
-                text: "select * from f_actualizar_evento($1,$2)",
-                values: [newData, id_evento]
-            }
-            await connection.query(query, (err, results) => {
-                if (!err) {
-                    res.json(rscController.leerRecurso(1039));
-                } else {
-                    connection.query('ROLLBACK');
-                    res.json(rscController.leerRecurso(1040, err.message));
-                }
-            });
-        } else {
-            res.json(rscController.leerRecurso(1036));
-        }
 
     } catch (error) {
         await connection.query('ROLLBACK');

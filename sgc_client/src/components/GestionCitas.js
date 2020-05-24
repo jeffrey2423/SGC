@@ -476,7 +476,7 @@ export default class GestionCitas extends Component {
                                   onChange={this.onInputChange}
 
                                 >
-
+                                  <option value="default" selected disabled>Escoja un usuario...</option>
                                   {
                                     this.state.usuarios.map(usuarios =>
                                       <option value={usuarios.f_id} key={usuarios.f_id}>
@@ -646,7 +646,7 @@ export default class GestionCitas extends Component {
                                 onChange={this.onInputChange}
 
                               >
-                                <option value="default" selected disabled>Colaborador...</option>
+                                <option value="default" selected disabled>Usuario...</option>
                                 {
                                   this.state.usuarios.map(usuarios =>
                                     <option value={usuarios.f_id} key={usuarios.f_id}>
