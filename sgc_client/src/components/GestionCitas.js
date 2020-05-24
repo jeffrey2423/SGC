@@ -309,28 +309,35 @@ export default class GestionCitas extends Component {
                         <td
                           style={{ color: 'red' }}
                         >
-                          {cita.estado === 'Activo' ? (
-
-                            <span
-                              style={{
-                                borderRadius: '3px',
-                                cursor: 'default',
-                                width: '75%'
-                              }}
-                              class="badge badge-success m-2 p-2"
-                            >Cita Activa
-                            </span>
-
-                          ) : (
+                          <center>
+                            {cita.estado === 'Activo' ? (
 
                               <span
-                                style={{ borderRadius: '3px', cursor: 'default', width: '80%' }}
-                                class="badge badge-danger m-2 p-2"
-                              >Cita Cancelada
+                                style={{
+                                  borderRadius: '3px',
+                                  cursor: 'default',
+                                  width: '75%',
+                                  color: '#00c851 ',
+                                  fontWeight: 'bold'
+                                }}
+                                class=""
+                              >Activa
                               </span>
 
+                            ) : (
 
-                            )}
+                                <span
+                                  style={{
+                                    borderRadius: '3px', cursor: 'default', width: '80%', color: '#ff3547 ',
+                                    fontWeight: 'bold'
+                                  }}
+                                  class=""
+                                >Cancelada
+                                </span>
+
+
+                              )}
+                          </center>
 
                         </td>
 
