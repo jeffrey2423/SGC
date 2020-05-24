@@ -1,47 +1,110 @@
 import React, { Component } from 'react';
 import UserDatatablePage from './UserDatatablePage';
 import UserForm from './UserForm';
+import { MDBBtn, MDBIcon } from "mdbreact";
 import $ from 'jquery';
+import axios from 'axios';
+import validation from '../resources/validations/main';
 
 export default class GestionUsuarios extends Component {
 
+    state = {
+        user_to_update: {},
+        token: sessionStorage.getItem("token") === "" || sessionStorage.getItem("token") === null ? " " : sessionStorage.getItem("token")
+    }
+
     async componentDidMount() {
-        this.clickTableUpdateUser();
-        this.alertHoverTable();
+        if (!sessionStorage.getItem("token")) {
+            window.location.href = '/';
+        } else {
+            //this.clickTableUpdateUser();
+            //this.alertHoverTable();
+            this.hoverUserFormValidate();
+            this.clickAddUserScroll();
+        }
+
+    }
+
+    getUserToUpdate = async (id) => {
+
+        const res = await axios.get("http://localhost:4000/api/user/getUsers/" + id, {
+            headers: {
+                'Authorization': `Bearer ${this.state.token}`
+            }
+        });
+        if (res.data.status === "error") {
+            validation.error(res.data.status, res.data.description, res.data.id, res.data.traza);
+        } else {
+            this.setState({ user_to_update: res.data[0] });
+            return (this.state.user_to_update);
+        }
+
     }
 
     clickTableUpdateUser = () => {
-        $(document).on('click', '#usersdatatable table tbody tr td', function () {
 
-            //Get data from table
-            let usuario = {};
-            usuario.f_nombre = $(this).parents("tr").find("td").eq(1).html();
-            usuario.f_apellido = $(this).parents("tr").find("td").eq(2).html();
-            usuario.f_email = $(this).parents("tr").find("td").eq(3).html();
-            usuario.f_profesion = $(this).parents("tr").find("td").eq(4).html();
-            usuario.f_perfil = $(this).parents("tr").find("td").eq(5).html();
-            usuario.f_activo = $(this).parents("tr").find("td").eq(6).html();
+        let usuario = {}, id;
+        let current = this;
+
+        $(document).on('click', '#datatable_users tbody tr td', function () {
+
+            id = $(this).parents("tr").find("td").eq(0).html();
+            current.getUserToUpdate(id);
+            usuario.f_nombre = current.state.user_to_update.f1004_nombre;
+            usuario.f_apellido = current.state.user_to_update.f1004_apellido;
+            usuario.f_email = current.state.user_to_update.f1004_email;
+            usuario.f_profesion = current.state.user_to_update.f1004_id_profesion_t1003;
+            usuario.f_perfil = current.state.user_to_update.f1004_id_perfil_t1000;
+            usuario.f_activo = current.state.user_to_update.f1004_ind_activo;
 
             //Set data to form
-            $("#f_nombre").attr("value", usuario.f_nombre);
-            $("#f_apellido").attr("value", usuario.f_apellido);
-            $("#f_email").attr("value", usuario.f_email);
-            $("#f_perfil option[value="+usuario.f_perfil+"]").attr('selected','selected');
+            $("#f_nombre").val(usuario.f_nombre);
+            $("#f_apellido").val(usuario.f_apellido);
+            $("#f_email").val(usuario.f_email);
+            $("#f_perfil").val(usuario.f_perfil);
+            $("#f_profesion").val(usuario.f_profesion);
+            $("#f_activo").val(usuario.f_activo);
+            $("#userform").addClass("update-user");
+            $("#userform").removeClass("insert-user");
 
             $('html, body').animate({
                 scrollTop: $("#userform").offset().top
             }, 1500);
         });
+
+        /*this.getUserToUpdate(id);
+        usuario.f_nombre = this.state.user_to_update.f1004_nombre;
+        usuario.f_apellido = this.state.user_to_update.f1004_apellido;
+        usuario.f_email = this.state.user_to_update.f1004_email;
+        usuario.f_profesion = this.state.user_to_update.f1004_id_profesion_t1003;
+        usuario.f_perfil = this.state.user_to_update.f1004_id_perfil_t1000;
+        usuario.f_activo = this.state.user_to_update.f1004_ind_activo;
+
+        //Set data to form
+        $("#f_nombre").val(usuario.f_nombre);
+        $("#f_apellido").val(usuario.f_apellido);
+        $("#f_email").val(usuario.f_email);
+        $("#f_perfil").val(usuario.f_perfil);
+        $("#f_profesion").val(usuario.f_profesion);
+        $("#f_activo").val(usuario.f_activo);
+        $("#userform").addClass("update-user");
+        $("#userform").removeClass("insert-user");
+
+        $('html, body').animate({
+            scrollTop: $("#userform").offset().top
+        }, 1500);
+*/
     }
 
-    alertHoverTable = () => {
+    alertHoverTable () {
         $(document).ready(function () {
             $('div.tableuser tr').not(':first').mouseover(function () {
-                $("#message-mouseover").empty();
-                $("#message-mouseover").append("Click sobre la fila para actualizar");
+                $("#message-mouseover-user .message").empty();
+                $("#message-mouseover-user .message").append("<strong>¿Quieres actualizar?</strong> Deberías dar click sobre la fila.");
+                $("#message-mouseover-user").removeClass("hide-field");
             })
                 .mouseout(function () {
-                    $("#message-mouseover").empty();
+                    //$("#message-mouseover-user").empty();
                 });
         });
         /*$("#usersdatatable table tr")
@@ -56,20 +119,71 @@ export default class GestionUsuarios extends Component {
 
     }
 
+    hoverUserFormValidate = () => {
+        $(document).ready(function () {
+            $('div.userform').mouseover(function () {
+                //Validate if update or insert
+                if ($("#userform").hasClass("update-user")) {
+                    //Add icons to update particular fields
+                    $("#update-password").removeClass("hide-field");
+                    $("#bt-update-user").removeClass("hide-field");
+                    $("#bt-insert-user").addClass("hide-field");
+                    $("#f_estado").removeClass("hide-field");
+                } else {
+                    if ($("#userform").hasClass("insert-user")) {
+                        //Remove icons to insert form
+                        $("#update-password").addClass("hide-field");
+                        $("#bt-update-user").addClass("hide-field");
+                        $("#bt-insert-user").removeClass("hide-field");
+                        $("#f_estado").addClass("hide-field");
+                    }
+                }
+            })
+                .mouseout(function () {
+                });
+        });
+    }
+
+    clickAddUserScroll = () => {
+        $(document).on('click', '#add-user-scroll', function () {
+            $("#userform").removeClass("update-user");
+            $("#userform").addClass("insert-user");
+
+            $('html, body').animate({
+                scrollTop: $("#userform").offset().top
+            }, 1500);
+        });
+    }
+
     render() {
         return (
             <div className="container">
                 <div className="card-spa">
                     <div className="card-body">
+                        <MDBBtn color="purple" title="Agregar usuario" id="add-user-scroll">
+                            <MDBIcon icon="user-alt" className="mr-1" />
+                        Agregar usuario</MDBBtn>
                         <h2 className="card-title">Usuarios de la aplicación</h2>
                         <hr />
-                        <span id="message-mouseover"></span>
-                        <div className="tableuser" id="usersdatatable">
+                        
+                        <div style={{ height: '45px' }}>
+                        <div className="alert alert-info alert-dismissible fade show 
+                        message-mouseover hide-field" id="message-mouseover-user"  role="alert"
+                        style={{ display: 'block' }}>
+                                <div className="message">
+                                </div>
+                                <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        </div>
+                        <div className="tableuser" id="usersdatatable" onClick={this.clickTableUpdateUser}
+                        onMouseOver={this.alertHoverTable}>
                             <UserDatatablePage />
                         </div>
                     </div>
                 </div>
-                <div className="userform card-spa container mt-4" id="userform">
+                <div className="userform card-spa container mt-4 insert-user" id="userform">
                     <h2>Formulario de usuarios</h2>
                     <hr />
                     <UserForm />

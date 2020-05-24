@@ -42,7 +42,6 @@ userController.getUsers = async (req, res) => {
 // funcion para guardar usuarios
 userController.createUser = async (req, res) => {
     try {
-        let resultadoValidar;
         const queryValidarUsuario = {
             text: "select * from f_validar_usuario_db($1)",
             values: [req.body.email]
@@ -52,35 +51,29 @@ userController.createUser = async (req, res) => {
             if (!err) {
                 const estadoUsuario = results.rows[0].f_validar_usuario_db;
                 resultadoValidar = (estadoUsuario != rscController.ESTADO_USUARIO.NO_EXISTE) ? true : false;
+                if (resultadoValidar) {
+                    const newUser = req.body;
+                    const query = {
+                        text: "select * from f_insertar_usuario($1)",
+                        values: [newUser]
+                    };
+                    connection.query(query, (err, results) => {
+                        if (!err) {
+                            res.json(rscController.leerRecurso(1002));
 
+                        } else {
+                            connection.query('ROLLBACK');
+                            res.json(rscController.leerRecurso(1003, err.message));
+                        }
+                    });
+                } else {
+                    res.json(rscController.leerRecurso(1004));
+                }
             } else {
-                resultadoValidar = false;
                 res.json(rscController.leerRecurso(1003, err.message));
             }
         });
 
-        // dormimos el hilo principal para que no pase al siguiente bloque
-        // sin que la variable resultadoValidar este llena
-        await rscController.snooze(10);
-
-        if (resultadoValidar) {
-            const newUser = req.body;
-            const query = {
-                text: "select * from f_insertar_usuario($1)",
-                values: [newUser]
-            };
-            await connection.query(query, (err, results) => {
-                if (!err) {
-                    res.json(rscController.leerRecurso(1002));
-
-                } else {
-                    connection.query('ROLLBACK');
-                    res.json(rscController.leerRecurso(1003, err.message));
-                }
-            });
-        } else {
-            res.json(rscController.leerRecurso(1004));
-        }
 
     } catch (error) {
         await connection.query('ROLLBACK');
@@ -143,7 +136,6 @@ userController.updateUserEmail = async (req, res) => {
         const id_usuario = req.params.id;
         const email = req.body.email;
 
-        let resultadoValidar;
         const queryValidarUsuario = {
             text: "select * from f_validar_usuario_email_actualizar($1,$2)",
             values: [id_usuario, email]
@@ -152,33 +144,28 @@ userController.updateUserEmail = async (req, res) => {
         await connection.query(queryValidarUsuario, (err, results) => {
             if (!err) {
                 const estadoUsuario = results.rows[0].f_validar_usuario_email_actualizar;
-                resultadoValidar = (estadoUsuario != rscController.ESTADO_USUARIO.NO_EXISTE) ? true : false;
+                const resultadoValidar = (estadoUsuario != rscController.ESTADO_USUARIO.NO_EXISTE) ? true : false;
 
+                if (resultadoValidar) {
+                    const query = {
+                        text: "select * from f_actualizar_usuario_email($1,$2)",
+                        values: [email, id_usuario]
+                    }
+                     connection.query(query, (err, results) => {
+                        if (!err) {
+                            res.json(rscController.leerRecurso(1023));
+                        } else {
+                            connection.query('ROLLBACK');
+                            res.json(rscController.leerRecurso(1022, err.message));
+                        }
+                    });
+                } else {
+                    res.json(rscController.leerRecurso(1004));
+                }
             } else {
-                resultadoValidar = false;
                 res.json(rscController.leerRecurso(1022, err.message));
             }
         });
-
-        await rscController.snooze(10);
-
-        if (resultadoValidar) {
-        const query = {
-            text: "select * from f_actualizar_usuario_email($1,$2)",
-            values: [email, id_usuario]
-        }
-        await connection.query(query, (err, results) => {
-            if (!err) {
-                res.json(rscController.leerRecurso(1023));
-            } else {
-                connection.query('ROLLBACK');
-                res.json(rscController.leerRecurso(1022, err.message));
-            }
-        });
-    }else{
-        res.json(rscController.leerRecurso(1004));
-    }
-
 
     } catch (error) {
         await connection.query('ROLLBACK');
@@ -188,7 +175,7 @@ userController.updateUserEmail = async (req, res) => {
 
 userController.deleteUser = async (req, res) => {
     try {
-        const id_usuario = req.params.id;
+        const id_usuario = req.body.id;
 
         const query = {
             text: "select * from f_eliminar_usuario($1)",
@@ -212,7 +199,7 @@ userController.deleteUser = async (req, res) => {
 
 userController.activateUser = async (req, res) => {
     try {
-        const id_usuario = req.params.id;
+        const id_usuario = req.body.id;
 
         const query = {
             text: "select * from f_activar_usuario($1)",

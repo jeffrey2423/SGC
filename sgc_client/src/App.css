@@ -37,21 +37,125 @@
   }
 }
 
-textarea:hover, 
-input:hover, 
-textarea:active, 
-input:active, 
-textarea:focus, 
-input:focus,
-button:focus,
-button:active,
-button:hover,
-label:focus,
-.btn:active,
-.btn.active
-{
-    outline:0px !important;
-    -webkit-appearance:none;
-    box-shadow: none !important;
+textarea:hover, input:hover, textarea:active, input:active, textarea:focus, input:focus, button:focus, button:active, button:hover, label:focus, .btn:active, .btn.active {
+  outline: 0px !important;
+  -webkit-appearance: none;
+  box-shadow: none !important;
 }
 
+.imagen {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.list-group::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.list-group::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+
+.list-group::-webkit-scrollbar-thumb {
+  background: gray;
+  border: 39px none #ffffff;
+  border-radius: 51px;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: gray;
+  border: 39px none #ffffff;
+  border-radius: 51px;
+}
+
+.badge {
+  cursor: pointer;
+}
+
+.dataTables_filter>label>input {
+  width: 50%;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+  border: 0px;
+  border-bottom: 2px solid gray;
+}
+
+.dataTables_filter>label>input:focus {
+  border-bottom: 2px solid indigo;
+}
+
+.dataTables_paginate>a:not([href]) {
+  background-color: #70388b;
+  color: white;
+  border-radius: 3px;
+  padding: 4px;
+  margin-right: 10px;
+}
+
+.dataTables_paginate>a:not([href]):hover {
+  color: white;
+}
+
+.dataTables_paginate>span>a {
+  /* background-color: #70388b; */
+  color: gray;
+  /* border-radius: 3px;
+  padding: 4px; */
+  margin-right: 10px;
+}
+
+.dataTables_paginate>span>a:hover {
+  color: gray;
+}
+
+.dataTables_length>label>select {
+  border: 0px;
+  border-bottom: 2px solid gray;
+}
+
+.dataTables_length>label>select:focus {
+  outline: 0;
+  border-bottom: 2px solid #70388b;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+}
+
+.nav-pills .tabM.active, .show>.nav-1 .nav-2 {
+  background: transparent !important;
+  border-bottom: 3px solid #9A5AB8 !important;
+  /* color: #ffffff !important */
+}
+
+.nav-1 .nav-2 {
+  color: #70388b !important;
+  background: transparent !important;
+}
+
+/* .dataTables_filter > label::before {
+  content: "Buscar";
+} */
+
+.rbc-month-row {
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -ms-flex: 100px;
+  flex: 100px;
+  overflow: hidden;
+  height: 100%;
+  }

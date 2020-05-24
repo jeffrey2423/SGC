@@ -4,16 +4,21 @@ import axios from 'axios'
 import validation from '../resources/validations/main';
 import clientResource from '../resources/client';
 const jwt = require("jsonwebtoken");
-const config  = require('../config/config')
+const config = require('../config/config')
 
 export default class login extends Component {
     state = {
-        email: "actualizado@gmail.com",
-        pass: "1234567"
+        email: "",
+        pass: ""
 
     }
+    async componentDidMount() {
+        if (sessionStorage.getItem("token")) {
+            window.history.back();
+        }
+    }
 
-    onSubmit = async (e) => {
+    handleSubmit = async (e) => {
         e.preventDefault();
         if (this.state.email !== "" &&
             this.state.pass !== "") {
@@ -21,7 +26,7 @@ export default class login extends Component {
                 email: this.state.email,
                 clave: this.state.pass
             }
-            const res = await axios.post("http://localhost:4000/api/user/auth/login", data, {
+            const res = await axios.post(config.BASE_URL + "api/user/auth/login", data, {
                 headers: {
                     'Content-Type': 'application/json;charset=UTF-8'
                 }
@@ -36,17 +41,17 @@ export default class login extends Component {
 
                 jwt.verify(token.token.toString(), config.SECRET_KEY, (err, decoded) => {
                     if (err) {
-                        validation.error("Error", "Error al intentar iniciar sesion, intente de nuevo", 1005 , "");
+                        validation.error("Error", "Error al intentar iniciar sesion, intente de nuevo", 1005, "");
                     } else {
                         const datosUsuario = decoded;
                         console.log(datosUsuario)
                         clientResource.agregarSesion(datosUsuario);
                     }
                 });
-                
+
                 window.location.href = '/inicio';
-                
-                
+
+
 
             }
         } else {
@@ -74,13 +79,13 @@ export default class login extends Component {
         return (
             <div className="row">
 
-                <div className="col-md-a mx-auto">
+                <form onSubmit={this.handleSubmit} className="col-md-a mx-auto card-spa">
 
-                    <form
-                        className="text-center border border-light p-5"
-                        onSubmit={this.onSubmit}
+                    <div
+                        className="text-center  p-5"
+
                     >
-                        <p className="h4 mb-4">Sign in</p>
+                        <p className="h4 mb-4">Inicio de sesion</p>
                         {/* Email */}
                         <input
                             name="email"
@@ -103,21 +108,24 @@ export default class login extends Component {
                         />
 
                         {/* Sign in button */}
-                        <button
-                            className="btn btn-block my-4"
-                            type="submit"
-                            style={styles["submit_style"]}
-                        >
-                            Sign in
+                        
+                            <button
+                                className="btn btn-block my-4"
+                                type="submit"
+                                style={styles["submit_style"]}
+                            >
+                                Iniciar Sesion
                         </button>
+                        
+
 
                         {/* Social login */}
                         <Link to="" className="mx-2" role="button"><i className="fab fa-facebook-f" style={styles["social"]} ></i></Link>
                         <Link to="" className="mx-2" role="button"><i className="fab fa-twitter" style={styles["social"]} ></i></Link>
                         <Link to="" className="mx-2" role="button"><i className="fab fa-linkedin-in" style={styles["social"]}></i></Link>
                         <Link to="" className="mx-2" role="button"><i className="fab fa-github" style={styles["social"]}></i></Link>
+                    </div>
                     </form>
-                </div>
             </div>
 
 

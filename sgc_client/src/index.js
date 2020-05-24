@@ -11,6 +11,9 @@ import 'mdbreact/dist/css/mdb.css';
 import 'jquery';
 import 'popper.js';
 
+import './assets/css/fonts.css';
+
+
 ReactDOM.render(
   <React.StrictMode>
     <App />

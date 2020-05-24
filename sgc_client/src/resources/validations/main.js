@@ -12,7 +12,7 @@ validationController.confirmacion = async () => {
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Si, Borrar!'
+        confirmButtonText: 'Si!'
     })
 
 };
@@ -26,12 +26,12 @@ validationController.success = (estado, descripcion, id) => {
     })
 };
 
-validationController.error = (estado, descripcion, id, traza) => {
+validationController.error = (estado, descripcion, id, traza = "") => {
     Swal.fire({
         icon: 'error',
         title: estado,
         text: descripcion,
-        footer: id + " " + traza === null || traza === "" ? "" : traza
+        footer: "<center>" + id + "<br/>" + traza +"</center>" 
     })
 };
 
@@ -48,6 +48,56 @@ validationController.validarCampo = (texto, campo) => {
     }
 
     return sePuede;
+};
+
+
+validationController.validarUsuario = (usuario) =>{
+    let results = [], result = true;
+    results.push(!validationController.validateEmptyField(usuario.nombre));
+    results.push(!validationController.validateEmptyField(usuario.apellido));
+    results.push(!validationController.validateEmptyField(usuario.clave));
+    results.push(usuario.clave==usuario.clave2);
+    results.push(validationController.validateSelect(usuario.id_profesion));
+    results.push(validationController.validateSelect(usuario.id_perfil));
+    results.push(validationController.validateEmail(usuario.email));
+
+    for(var element in results) {
+        result = result && results[element];
+    };
+
+    if(!result){
+        Swal.fire({
+            icon: 'error',
+            title: "Error de validación",
+            text: "Campos incorrectos, revise el formulario de registro",
+
+        })
+    }
+
+    return result;
+};
+
+validationController.validateEmptyField = (field) => {
+    var re = /^\s+$/;
+    return re.test(field) || field === null || field === "";
+};
+
+validationController.validateSelect = (field) => {
+    var re = /^[1-9]+[0-9]*$/;
+    return re.test(field);
+};
+
+validationController.validateEmail = (email) => {
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+  };
+
+validationController.insertUserSuccess = () =>{
+    Swal.fire({
+        icon: 'success',
+        title: "Registro exitoso",
+        text: "Usuario registrado con éxito"
+    })
 }
 
 validationController.errorGenereal = (desc) => {

@@ -31,12 +31,13 @@ eventController.getEvents = async (req, res) => {
                         '           END	AS Estado  ' +
                         '           FROM t1006_eventos AS eventos  ' +
                         '           LEFT JOIN t1004_usuarios AS creador  ' +
-                        '           ON eventos.f1006_id_usuario_asignado_t1004 = creador.f1004_id  ' +
+                        '           ON eventos.f1006_id_usuario_creador_t1004 = creador.f1004_id  ' +
                         '           LEFT JOIN t1004_usuarios AS asignado  ' +
-                        '          ON eventos.f1006_id_usuario_creador_t1004 = asignado.f1004_id    '
+                        '          ON eventos.f1006_id_usuario_asignado_t1004 = asignado.f1004_id    '
                 }
             } else {
                 const id_usuario = req.body.id_usuario;
+                console.log(id_usuario)
                 query = {
                     text: '    SELECT   ' +
                         '           f1006_ts						AS f_fecha_creacion,  ' +
@@ -59,10 +60,10 @@ eventController.getEvents = async (req, res) => {
                         '           END	AS Estado  ' +
                         '           FROM t1006_eventos AS eventos  ' +
                         '           LEFT JOIN t1004_usuarios AS creador  ' +
-                        '           ON eventos.f1006_id_usuario_asignado_t1004 = creador.f1004_id  ' +
+                        '           ON eventos.f1006_id_usuario_creador_t1004 = creador.f1004_id  ' +
                         '           LEFT JOIN t1004_usuarios AS asignado  ' +
-                        '          ON eventos.f1006_id_usuario_creador_t1004 = asignado.f1004_id    ' +
-                        '  	WHERE t1006_eventos.f1006_id_usuario_asignado_t1004 = ' + id_usuario
+                        '          ON eventos.f1006_id_usuario_asignado_t1004 = asignado.f1004_id  ' +
+                        '  	WHERE eventos.f1006_id_usuario_asignado_t1004 = ' + id_usuario
                 }
             }
 
@@ -158,7 +159,6 @@ eventController.getEventsFilter = async (req, res) => {
 
 eventController.createEvent = async (req, res) => {
     try {
-        let resultadoValidar;
         const queryValidarEvento = {
             text: "select * from f_validar_evento($1,$2)",
             values: [req.body.id_asignado, req.body.fecha_inicial]
@@ -167,36 +167,29 @@ eventController.createEvent = async (req, res) => {
         await connection.query(queryValidarEvento, (err, results) => {
             if (!err) {
                 const estadoEvento = results.rows[0].f_validar_evento;
-                resultadoValidar = (estadoEvento == rscController.ESTADO_EVENTO.NO_EXISTE) ? true : false;
+                const resultadoValidar = (estadoEvento == rscController.ESTADO_EVENTO.NO_EXISTE) ? true : false;
+                if (resultadoValidar) {
+                    const newEvent = req.body;
+                    const query = {
+                        text: "select * from f_insertar_evento($1)",
+                        values: [newEvent]
+                    };
+                    connection.query(query, (err, results) => {
+                        if (!err) {
+                            res.json(rscController.leerRecurso(1035));
 
+                        } else {
+                            connection.query('ROLLBACK');
+                            res.json(rscController.leerRecurso(1034, err.message));
+                        }
+                    });
+                } else {
+                    res.json(rscController.leerRecurso(1036));
+                }
             } else {
-                resultadoValidar = false;
                 res.json(rscController.leerRecurso(1034, err.message));
             }
         });
-
-        // dormimos el hilo principal para que no pase al siguiente bloque
-        // sin que la variable resultadoValidar este llena
-        await rscController.snooze(10);
-
-        if (resultadoValidar) {
-            const newEvent = req.body;
-            const query = {
-                text: "select * from f_insertar_evento($1)",
-                values: [newEvent]
-            };
-            await connection.query(query, (err, results) => {
-                if (!err) {
-                    res.json(rscController.leerRecurso(1035));
-
-                } else {
-                    connection.query('ROLLBACK');
-                    res.json(rscController.leerRecurso(1034, err.message));
-                }
-            });
-        } else {
-            res.json(rscController.leerRecurso(1036));
-        }
 
     } catch (error) {
         await connection.query('ROLLBACK');
@@ -206,7 +199,7 @@ eventController.createEvent = async (req, res) => {
 
 eventController.deleteEvent = async (req, res) => {
     try {
-        const id_evento = req.params.id;
+        const id_evento = req.body.id;
 
         const query = {
             text: "select * from f_eliminar_evento($1)",
@@ -228,10 +221,33 @@ eventController.deleteEvent = async (req, res) => {
     }
 }
 
+eventController.activateEvent = async (req, res) => {
+    try {
+        const id_evento = req.body.id;
+
+        const query = {
+            text: "select * from f_activar_evento($1)",
+            values: [id_evento]
+        }
+        await connection.query(query, (err, results) => {
+            if (!err) {
+                res.json(rscController.leerRecurso(1042));
+            } else {
+                connection.query('ROLLBACK');
+                res.json(rscController.leerRecurso(1043, err.message));
+            }
+        });
+
+
+    } catch (error) {
+        await connection.query('ROLLBACK');
+        res.json(rscController.leerRecurso(1037, error.message));
+    }
+}
+
 eventController.updateEvent = async (req, res) => {
     try {
         const id_evento = req.params.id;
-        let resultadoValidar;
         const queryValidarEvento = {
             text: "select * from f_validar_evento_actualizar($1,$2,$3)",
             values: [req.body.id_asignado, req.body.fecha_inicial, id_evento]
@@ -241,35 +257,30 @@ eventController.updateEvent = async (req, res) => {
             if (!err) {
                 const estadoEvento = results.rows[0].f_validar_evento_actualizar;
                 console.log(estadoEvento);
-                resultadoValidar = (estadoEvento == rscController.ESTADO_EVENTO.NO_EXISTE) ? true : false;
+                const resultadoValidar = (estadoEvento == rscController.ESTADO_EVENTO.NO_EXISTE) ? true : false;
 
+                if (resultadoValidar) {
+                    const newData = req.body;
+
+                    const query = {
+                        text: "select * from f_actualizar_evento($1,$2)",
+                        values: [newData, id_evento]
+                    }
+                    connection.query(query, (err, results) => {
+                        if (!err) {
+                            res.json(rscController.leerRecurso(1039));
+                        } else {
+                            connection.query('ROLLBACK');
+                            res.json(rscController.leerRecurso(1040, err.message));
+                        }
+                    });
+                } else {
+                    res.json(rscController.leerRecurso(1036));
+                }
             } else {
-                resultadoValidar = false;
                 res.json(rscController.leerRecurso(1040, err.message));
             }
         });
-
-        // dormimos el hilo principal para que no pase al siguiente bloque
-        // sin que la variable resultadoValidar este llena
-        await rscController.snooze(10);
-        if (resultadoValidar) {
-            const newData = req.body;
-
-            const query = {
-                text: "select * from f_actualizar_evento($1,$2)",
-                values: [newData, id_evento]
-            }
-            await connection.query(query, (err, results) => {
-                if (!err) {
-                    res.json(rscController.leerRecurso(1039));
-                } else {
-                    connection.query('ROLLBACK');
-                    res.json(rscController.leerRecurso(1040, err.message));
-                }
-            });
-        } else {
-            res.json(rscController.leerRecurso(1036));
-        }
 
     } catch (error) {
         await connection.query('ROLLBACK');

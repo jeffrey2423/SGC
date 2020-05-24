@@ -13,7 +13,7 @@ BEGIN
 	(
 		SELECT 1
 		FROM t1006_eventos AS t
-		WHERE t.f1006_fecha_iso8601_inicial = in_fecha_inicial
+		WHERE in_fecha_inicial BETWEEN t.f1006_fecha_iso8601_inicial AND t.f1006_fecha_iso8601_final
 		AND t.f1006_id_usuario_asignado_t1004 = in_id_usuario_asignado
 		AND f1006_ind_estado = CONST_ACTIVO
 	) THEN

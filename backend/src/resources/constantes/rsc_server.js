@@ -27,7 +27,7 @@ module.exports = {
     },
     1005:{
         id: 1005,
-        description: "Hubo un error al intentar iniciar sesion",
+        description: "Hubo un error al intentar iniciar sesión",
         status: "error"
     },
     1006:{
@@ -182,7 +182,7 @@ module.exports = {
     },
     1036:{
         id: 1036,
-        description: "El usuario asignado ya tiene un evento con esa fecha y hora inicial",
+        description: "El usuario asignado ya tiene un evento en ese rango de fechas",
         status: "error"
     },
     1037:{
@@ -204,7 +204,27 @@ module.exports = {
         id: 1040,
         description: "Error al actualizar el evento",
         status: "error"
-    }
+    },
+    1041:{
+        id: 1041,
+        description: "No tienes permisos para ver usuarios, comunícate con el administrador",
+        status: "error"
+    },
+    1042:{
+        id: 1042,
+        description: "Evento Activado con exito",
+        status: "success"
+    },
+    1043:{
+        id: 1043,
+        description: "Error al tratar de activar el evento",
+        status: "success"
+    },
+    1044:{
+        id: 1044,
+        description: "Ese perfil ya existe",
+        status: "error"
+    },
 
 
 

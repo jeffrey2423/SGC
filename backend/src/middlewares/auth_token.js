@@ -7,13 +7,13 @@ const jwt = require("jsonwebtoken");
 
 module.exports = async (req, res, next) => {
     try {
-        const ruta = req.path;
-        let permitir;
+        let ruta = ""
+        let permitir = false;
         let perfilUsuario;
         let datosUsuario;
         const query = "select f_verificar_permiso_usuario($1, $2)";
         let queryParams;
-
+        ruta = req.path;
         if (ruta != rutas.LOGIN) {
             if (req.headers.authorization) {
                 const token = req.headers.authorization.split(' ')[1];
@@ -29,51 +29,214 @@ module.exports = async (req, res, next) => {
                 });
 
                 switch (ruta) {
-                    case rutas.VER_USUARIOS:
-                        queryParams = [perfilUsuario, permisos.OBTENER_USUARIOS];
+                    case rutas.CREAR_CITAS:
+                        queryParams = [perfilUsuario, permisos.CREAR_CITAS];
+
                         await connection.query(query, queryParams, (err, results) => {
+                            // rscController.snooze(20);
                             if (!err) {
                                 const permisoUsuario = results.rows[0].f_verificar_permiso_usuario;
                                 permitir = (permisoUsuario == rscController.ESTADO_USUARIO.EXISTE_PERMISO) ? true : false;
-
+                                if (permitir) {
+                                    next();
+                                } else {
+                                    res.json(rscController.leerRecurso(1009));
+                                }
                             } else {
                                 permitir = false;
                                 res.json(rscController.leerRecurso(1005, err.message));
                             }
                         });
-                        await rscController.snooze(10);
+                        // await rscController.snooze(20);
 
-                        if (permitir) {
-                            next();
-                        } else {
-                            res.json(rscController.leerRecurso(1009));
-                        }
 
                         break;
 
                     case rutas.CREAR_USUARIO:
-                        queryParams = [perfilUsuario, permisos.CREAR_USUARIO];
+                        queryParams = [perfilUsuario, permisos.CREAR_USUARIOS];
 
                         await connection.query(query, queryParams, (err, results) => {
+                            // rscController.snooze(20);
                             if (!err) {
                                 const permisoUsuario = results.rows[0].f_verificar_permiso_usuario;
                                 permitir = (permisoUsuario == rscController.ESTADO_USUARIO.EXISTE_PERMISO) ? true : false;
-
+                                if (permitir) {
+                                    next();
+                                } else {
+                                    res.json(rscController.leerRecurso(1009));
+                                }
                             } else {
                                 permitir = false;
                                 res.json(rscController.leerRecurso(1005, err.message));
                             }
                         });
-                        await rscController.snooze(10);
+                        // await rscController.snooze(20);
 
-                        if (permitir) {
-                            next();
-                        } else {
-                            res.json(rscController.leerRecurso(1009));
-                        }
+
+                        break;
+
+                    case rutas.CANCELAR_CITAS:
+                        queryParams = [perfilUsuario, permisos.CANCELAR_CITAS];
+
+                        connection.query(query, queryParams, (err, results) => {
+                            // rscController.snooze(20);
+                            if (!err) {
+                                const permisoUsuario = results.rows[0].f_verificar_permiso_usuario;
+                                permitir = (permisoUsuario == rscController.ESTADO_USUARIO.EXISTE_PERMISO) ? true : false;
+                                if (permitir) {
+                                    next();
+                                } else {
+                                    res.json(rscController.leerRecurso(1009));
+                                }
+                            }
+                            else {
+                                permitir = false;
+                                res.json(rscController.leerRecurso(1005, err.message));
+                            }
+                        });
+
+                        break;
+
+                    case rutas.INACTIVAR_USUARIOS:
+                        queryParams = [perfilUsuario, permisos.INACTIVAR_USUARIOS];
+
+                         connection.query(query, queryParams, (err, results) => {
+                            // rscController.snooze(20);
+                            if (!err) {
+                                const permisoUsuario = results.rows[0].f_verificar_permiso_usuario;
+                                permitir = (permisoUsuario == rscController.ESTADO_USUARIO.EXISTE_PERMISO) ? true : false;
+                                if (permitir) {
+                                    next();
+                                } else {
+                                    res.json(rscController.leerRecurso(1009));
+                                }
+                            } else {
+                                permitir = false;
+                                res.json(rscController.leerRecurso(1005, err.message));
+                            }
+                        });
+                        // await rscController.snooze(20);
+
+                        break;
+
+                    case rutas.CREAR_PERFIL:
+                    case rutas.ASIGNAR_PERMISOS:
+                        queryParams = [perfilUsuario, permisos.CREAR_PERFIL];
+
+                         connection.query(query, queryParams, (err, results) => {
+                            // rscController.snooze(20);
+                            if (!err) {
+                                const permisoUsuario = results.rows[0].f_verificar_permiso_usuario;
+                                permitir = (permisoUsuario == rscController.ESTADO_USUARIO.EXISTE_PERMISO) ? true : false;
+                                if (permitir) {
+                                    next();
+                                } else {
+                                    res.json(rscController.leerRecurso(1009));
+                                }
+                            } else {
+                                permitir = false;
+                                res.json(rscController.leerRecurso(1005, err.message));
+                            }
+                        });
+                        // await rscController.snooze(20);
+
+
+                        break;
+
+                    case rutas.ACTIVAR_CITAS:
+                        queryParams = [perfilUsuario, permisos.ACTIVAR_CITAS];
+
+                         connection.query(query, queryParams, (err, results) => {
+                            // rscController.snooze(20);
+                            if (!err) {
+                                const permisoUsuario = results.rows[0].f_verificar_permiso_usuario;
+                                permitir = (permisoUsuario == rscController.ESTADO_USUARIO.EXISTE_PERMISO) ? true : false;
+                                if (permitir) {
+                                    next();
+                                } else {
+                                    res.json(rscController.leerRecurso(1009));
+                                }
+                            } else {
+                                permitir = false;
+                                res.json(rscController.leerRecurso(1005, err.message));
+                            }
+                        });
+                        // await rscController.snooze(20);
+
+    
+                        break;
+
+                    case rutas.ACTIVAR_USUARIOS:
+                        queryParams = [perfilUsuario, permisos.ACTIVAR_USUARIOS];
+
+                         connection.query(query, queryParams, (err, results) => {
+                            // rscController.snooze(20);
+                            if (!err) {
+                                const permisoUsuario = results.rows[0].f_verificar_permiso_usuario;
+                                permitir = (permisoUsuario == rscController.ESTADO_USUARIO.EXISTE_PERMISO) ? true : false;
+                                if (permitir) {
+                                    next();
+                                } else {
+                                    res.json(rscController.leerRecurso(1009));
+                                }
+                            } else {
+                                permitir = false;
+                                res.json(rscController.leerRecurso(1005, err.message));
+                            }
+                        });
+                        // await rscController.snooze(20);
+
+
                         break;
                     default:
-                        next();
+                        if (ruta.includes(rutas.EDITAR_CITAS)) {
+                            queryParams = [perfilUsuario, permisos.EDITAR_CITAS];
+
+                             connection.query(query, queryParams, (err, results) => {
+                                // rscController.snooze(20);
+                                if (!err) {
+                                    const permisoUsuario = results.rows[0].f_verificar_permiso_usuario;
+                                    permitir = (permisoUsuario == rscController.ESTADO_USUARIO.EXISTE_PERMISO) ? true : false;
+                                    if (permitir) {
+                                        next();
+                                    } else {
+                                        res.json(rscController.leerRecurso(1009));
+                                    }
+                                } else {
+                                    permitir = false;
+                                    res.json(rscController.leerRecurso(1005, err.message));
+                                }
+                            });
+                            // await rscController.snooze(20);
+
+
+                        } else if (ruta.includes(rutas.EDITAR_USUARIOS)) {
+                            queryParams = [perfilUsuario, permisos.EDITAR_USUARIOS];
+
+                             connection.query(query, queryParams, (err, results) => {
+                                // rscController.snooze(20);
+                                if (!err) {
+                                    const permisoUsuario = results.rows[0].f_verificar_permiso_usuario;
+                                    permitir = (permisoUsuario == rscController.ESTADO_USUARIO.EXISTE_PERMISO) ? true : false;
+
+                                    if (permitir) {
+                                        next();
+                                    } else {
+                                        res.json(rscController.leerRecurso(1009));
+                                    }
+                                } else {
+                                    permitir = false;
+                                    res.json(rscController.leerRecurso(1005, err.message));
+                                }
+                            });
+                            // await rscController.snooze(20);
+
+
+                        } else {
+                            next();
+                        }
+
+
                 }
 
             } else {
