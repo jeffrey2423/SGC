@@ -144,8 +144,8 @@ export class GestionPerfiles extends Component {
             id_perfil: this.state.perfilSeleccionadoSelect,
             id_permiso: this.state.permisoSeleccionadoSelect
         }
-        if (this.state.perfilSeleccionadoSelect !== 0 &&
-            this.state.permisoSeleccionadoSelect !== 0) {
+        if (this.state.perfilSeleccionadoSelect != 0 &&
+            this.state.permisoSeleccionadoSelect != 0) {
             const res = await axios.post(config.BASE_URL + "api/user/profile/createProfileExt", data, {
                 headers: {
                     'Content-Type': 'application/json;charset=UTF-8',
@@ -201,8 +201,8 @@ export class GestionPerfiles extends Component {
             id_perfil: this.state.perfilSeleccionadoSelect,
             id_usuario: this.state.usuarioSeleccionado
         }
-        if (this.state.perfilSeleccionadoSelect !== 0 &&
-            this.state.usuarioSeleccionado !== 0) {
+        if (this.state.perfilSeleccionadoSelect != 0 &&
+            this.state.usuarioSeleccionado != 0) {
             const res = await axios.post(config.BASE_URL + "api/user/updateUserPerfil", data, {
                 headers: {
                     'Content-Type': 'application/json;charset=UTF-8',
@@ -232,14 +232,64 @@ export class GestionPerfiles extends Component {
 
     render() {
         return (
-            <div className="container">
+            <div className="container" style={{ maxHeight: '50%' }}>
+
                 <div className="card-spa" >
                     <div class="card-body">
+                        <div className="">
+                            {/* FILA BOTONES */}
+
+                            <div className="row">
+                                <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+
+                                    <div className="form-group">
+                                        <button
+                                            type="button"
+                                            className="btn btn-secondary btn-block"
+                                            onClick={this.createModal}
+                                        >
+                                            <MDBIcon icon="pencil-alt" /> Asignar permiso a perfil
+                                            </button>
+
+                                    </div>
+
+                                </div>
+
+                                <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                    <div className="form-group">
+                                        <button
+                                            type="button"
+                                            className="btn btn-secondary btn-block"
+                                            onClick={this.createModal2}
+                                        >
+                                            <MDBIcon icon="plus-circle" /> Agregar un perfil
+                                            </button>
+                                    </div>
+                                </div>
+                                <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                    <div className="form-group">
+
+                                        <button
+                                            type="button"
+                                            className="btn btn-secondary btn-block"
+                                            onClick={this.createModal3}
+                                        >
+                                            <MDBIcon icon="pencil-alt" /> Asignar perfil a un usuario
+                                            </button>
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            {/* FIN FILA BOTONES */}
+                        </div>
+                        <hr />
                         <h2 className="card-title">Permisos asociados a un perfil</h2>
                         <hr />
                         <div className="row">
                             <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                <ul className="list-group" style={{ width: '100%', height: '80%', overflowY: 'scroll' }}>
+                                <ul className="list-group" style={{ width: '100%', height: '350px', overflowY: 'auto' }}>
                                     <li className="list-group-item active">Perfiles</li>
                                     {
                                         this.state.perfiles.map(perfil => (
@@ -271,7 +321,7 @@ export class GestionPerfiles extends Component {
                                 </ul>
                             </div>
                             <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                <ul className="list-group" style={{ width: '100%', height: '80%', overflowY: 'scroll' }}>
+                                <ul className="list-group" style={{ width: '100%', height: '350px', overflowY: 'auto' }}>
 
                                     <li className="list-group-item active">Permisos</li>
                                     {
@@ -318,58 +368,8 @@ export class GestionPerfiles extends Component {
                             </div>
                         </div >
                     </div >
-
-                    {/* FILA BOTONES */}
-                    <div className="card-spa">
-                        <div className="card-body">
-                            <h2 className="card-title"></h2>
-
-                            <div className="row">
-                                <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-
-                                    <div className="form-group">
-                                        <button
-                                            type="button"
-                                            className="btn btn-outline-secondary btn-block"
-                                            onClick={this.createModal}
-                                        >
-                                            Asignar permiso a un perfil
-                            </button>
-
-                                    </div>
-
-                                </div>
-
-                                <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                    <div className="form-group">
-                                        <button
-                                            type="button"
-                                            className="btn btn-outline-secondary btn-block"
-                                            onClick={this.createModal2}
-                                        >
-                                            Agregar un perfil
-                            </button>
-                                    </div>
-                                </div>
-                                <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                    <div className="form-group">
-
-                                        <button
-                                            type="button"
-                                            className="btn btn-outline-secondary btn-block"
-                                            onClick={this.createModal3}
-                                        >
-                                            Asignar perfil a un usuario
-                            </button>
-
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
                 </div >
-                {/* FIN FILA BOTONES */}
+
 
 
 
@@ -395,8 +395,8 @@ export class GestionPerfiles extends Component {
 
                                                 <div className="form-group">
                                                     <div class="input-group mb-2">
-                                                        <div class="input-group-prepend">
-                                                            <div class="input-group-text">Permisos</div>
+                                                        <div className="input-group-prepend">
+                                                            <div className="input-group-text">Perfiles</div>
 
                                                         </div>
                                                         <select
@@ -408,9 +408,8 @@ export class GestionPerfiles extends Component {
 
 
                                                         >
-                                                            {/* <option >
-                                                            Perfiles
-                                                                </option> */}
+                                                            {/* <option value="9999" selected >Escoja un perfil...</option> */}
+                                                            <option value="0" selected disabled>Escoja un perfil...</option>
                                                             {
                                                                 this.state.perfiles.map(perfil =>
                                                                     <option value={perfil.f1000_id} key={perfil.f1000_id}>
@@ -429,8 +428,8 @@ export class GestionPerfiles extends Component {
                                             <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                                 <div className="form-group">
                                                     <div class="input-group mb-2">
-                                                        <div class="input-group-prepend">
-                                                            <div class="input-group-text">Permisos</div>
+                                                        <div className="input-group-prepend">
+                                                            <div className="input-group-text">Permisos</div>
 
                                                         </div>
 
@@ -442,9 +441,8 @@ export class GestionPerfiles extends Component {
 
 
                                                         >
-                                                            {/* <option >
-                                                            Permisos
-                                                                </option> */}
+                                                            {/* <option value="9999" selected>Escoja un permiso...</option> */}
+                                                            <option value="0" selected disabled>Escoja un permiso...</option>
                                                             {
                                                                 this.state.permisos_todos.map(permisos_all =>
                                                                     <option value={permisos_all.f1001_id} key={permisos_all.f1001_id}>
@@ -496,28 +494,40 @@ export class GestionPerfiles extends Component {
                                     <div className="row ">
                                         <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                             <div className="form-group">
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    placeholder="Nombre"
-                                                    name="perfilNuevo"
-                                                    onChange={this.onInputChange}
-                                                    required
-                                                >
-                                                </input>
+                                                <div class="input-group mb-2">
+                                                    <div className="input-group-prepend">
+                                                        <div className="input-group-text">Nombre</div>
 
+                                                    </div>
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
+                                                        placeholder="Nombre"
+                                                        name="perfilNuevo"
+                                                        onChange={this.onInputChange}
+                                                        required
+                                                    >
+                                                    </input>
+
+                                                </div>
                                             </div>
                                         </div>
                                         <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                             <div className="form-group">
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    placeholder="Descripcion"
-                                                    name="desPerfilNuevo"
-                                                    onChange={this.onInputChange}
-                                                >
-                                                </input>
+                                                <div class="input-group mb-2">
+                                                    <div className="input-group-prepend">
+                                                        <div className="input-group-text">Desc.</div>
+
+                                                    </div>
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
+                                                        placeholder="Descripcion"
+                                                        name="desPerfilNuevo"
+                                                        onChange={this.onInputChange}
+                                                    >
+                                                    </input>
+                                                </div>
                                             </div>
                                         </div>
                                         <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
@@ -558,45 +568,60 @@ export class GestionPerfiles extends Component {
                                     <div className="row">
                                         <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                             <div className="form-group">
-                                                <select
-                                                    name="usuarioSeleccionado"
-                                                    className="form-control"
-                                                    // onClick={this.getUsuarios}
-                                                    value={this.state.usuarioSeleccionado}
-                                                    onChange={this.onInputChange}
+                                                <div class="input-group mb-2">
+                                                    <div className="input-group-prepend">
+                                                        <div className="input-group-text">Usuario</div>
 
-                                                >
-                                                    {/* <option value="default" >Colaborador...</option> */}
-                                                    {
-                                                        this.state.usuarios.map(usuarios =>
-                                                            <option value={usuarios.f_id} key={usuarios.f_id}>
-                                                                {usuarios.f_nombre}
-                                                            </option>
-                                                        )
-                                                    }
+                                                    </div>
+                                                    <select
+                                                        name="usuarioSeleccionado"
+                                                        className="form-control"
+                                                        // onClick={this.getUsuarios}
+                                                        value={this.state.usuarioSeleccionado}
+                                                        onChange={this.onInputChange}
 
-                                                </select>
+                                                    >
+                                                        {/* <option value="9999" selected>Escoja un usuario...</option> */}
+                                                        <option value="0" selected disabled>Escoja un usuario...</option>
+                                                        
+                                                        {
+                                                            this.state.usuarios.map(usuarios =>
+                                                                <option value={usuarios.f_id} key={usuarios.f_id}>
+                                                                    {usuarios.f_nombre}
+                                                                </option>
+                                                            )
+                                                        }
+
+                                                    </select>
+                                                </div>
 
                                             </div>
                                         </div>
                                         <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                             <div className="form-group">
-                                                <select
-                                                    name="perfilSeleccionadoSelect"
-                                                    className="form-control"
-                                                    value={this.state.perfilSeleccionadoSelect}
-                                                    onChange={this.onInputChange}
-                                                >
-                                                    {/* <option value="default" >Perfiles...</option> */}
-                                                    {
-                                                        this.state.perfiles.map(perfil =>
-                                                            <option value={perfil.f1000_id} key={perfil.f1000_id}>
-                                                                {perfil.f1000_nombre}
-                                                            </option>
-                                                        )
-                                                    }
+                                                <div class="input-group mb-2">
+                                                    <div className="input-group-prepend">
+                                                        <div className="input-group-text">Perfil</div>
 
-                                                </select>
+                                                    </div>
+                                                    <select
+                                                        name="perfilSeleccionadoSelect"
+                                                        className="form-control"
+                                                        value={this.state.perfilSeleccionadoSelect}
+                                                        onChange={this.onInputChange}
+                                                    >
+                                                        {/* <option value="9999" selected>Escoja un perfil...</option> */}
+                                                        <option value="0" selected disabled>Escoja un perfil...</option>
+                                                        {
+                                                            this.state.perfiles.map(perfil =>
+                                                                <option value={perfil.f1000_id} key={perfil.f1000_id}>
+                                                                    {perfil.f1000_nombre}
+                                                                </option>
+                                                            )
+                                                        }
+
+                                                    </select>
+                                                </div>
                                             </div>
                                         </div>
                                         <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">

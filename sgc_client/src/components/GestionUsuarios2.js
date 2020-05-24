@@ -535,6 +535,10 @@ export default class GestionUsuarios2 extends Component {
                                                             <div className="row ">
                                                                 <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                                                     <div className="input-group mb-3">
+                                                                        <div className="input-group-prepend">
+                                                                            <div className="input-group-text">Nombre</div>
+
+                                                                        </div>
                                                                         <input type="text" id="f_nombre" placeholder="Nombre del usuario" className="form-control"
                                                                             aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required
                                                                             name="f_nombre"
@@ -546,6 +550,10 @@ export default class GestionUsuarios2 extends Component {
 
                                                                 <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                                                     <div className="input-group mb-3">
+                                                                        <div className="input-group-prepend">
+                                                                            <div className="input-group-text">Apellido</div>
+
+                                                                        </div>
                                                                         <input type="text" id="f_apellido" placeholder="Apellido del usuario" className="form-control"
                                                                             aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required
                                                                             name="f_apellido"
@@ -557,6 +565,10 @@ export default class GestionUsuarios2 extends Component {
                                                             <div className="row ">
                                                                 <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                                                     <div className="input-group mb-3">
+                                                                        <div className="input-group-prepend">
+                                                                            <div className="input-group-text">Profesion</div>
+
+                                                                        </div>
                                                                         <select
                                                                             name="f_profesion"
                                                                             className="custom-select"
@@ -608,6 +620,10 @@ export default class GestionUsuarios2 extends Component {
                                                             <div className="row ">
                                                                 <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                                                     <div className="input-group mb-3">
+                                                                        <div className="input-group-prepend">
+                                                                            <div className="input-group-text">Clave</div>
+
+                                                                        </div>
                                                                         <input type="password" id="f_clave" placeholder="Contraseña de usuario" className="form-control"
                                                                             aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required
                                                                             // onChange={this.validatePassword}
@@ -620,6 +636,10 @@ export default class GestionUsuarios2 extends Component {
                                                             <div class="row">
                                                                 <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                                                     <div className="input-group mb-3">
+                                                                        <div className="input-group-prepend">
+                                                                            <div className="input-group-text">Clave</div>
+
+                                                                        </div>
                                                                         <input type="password" id="f_clave2" placeholder="Confirme su contraseña" className="form-control"
                                                                             aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required
                                                                             // onChange={this.validatePassword}                                                                        
@@ -662,11 +682,17 @@ export default class GestionUsuarios2 extends Component {
                                                             <div className="row ">
                                                                 <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                                                     <div className="input-group mb-3">
+
+                                                                        <div className="input-group-prepend">
+                                                                            <div className="input-group-text">E-mail</div>
+
+                                                                        </div>
                                                                         <input type="text" id="f_email" placeholder="Correo del usuario" className="form-control"
                                                                             aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required
                                                                             name="f_email"
                                                                             value={this.state.f_email}
                                                                             onChange={this.onInputChange} />
+
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -695,6 +721,11 @@ export default class GestionUsuarios2 extends Component {
                                                             <div className="row ">
                                                                 <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                                                     <div className="input-group mb-3">
+
+                                                                        <div className="input-group-prepend">
+                                                                            <div className="input-group-text">Perfil</div>
+
+                                                                        </div>
                                                                         <select
                                                                             name="f_perfil"
                                                                             value={this.state.f_perfil}
@@ -714,6 +745,7 @@ export default class GestionUsuarios2 extends Component {
                                                                                 )
                                                                             }
                                                                         </select>
+
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -824,7 +856,10 @@ export default class GestionUsuarios2 extends Component {
                                                                 name="f_perfil"
                                                                 onChange={this.onInputChange}
                                                             >
-                                                                {/* <option value="default" selected disabled>Choose...</option> */}
+                                                                <option
+                                                                    value="default" selected disabled
+                                                                >Perfil/Rol..
+                                                                        </option>
                                                                 {
                                                                     this.state.perfiles.map(perfil =>
                                                                         <option value={perfil.f1000_id} key={perfil.f1000_id}>
@@ -847,7 +882,7 @@ export default class GestionUsuarios2 extends Component {
                                                                 name="f_profesion"
                                                                 onChange={this.onInputChange}
                                                             >
-                                                                {/* <option value="default" selected disabled>Choose...</option> */}
+                                                                <option value="default" selected disabled>Profesión...</option>
                                                                 <option value="2">Administrador</option>
                                                                 <option value="1">Colaborador</option>
                                                             </select>
