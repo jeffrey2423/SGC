@@ -154,10 +154,12 @@ export default class Inicio extends Component {
                     views={allViews}
                     // startAccessor="start"
                     // endAccessor="end"
-                    // defaultView='week'
+                    defaultView='week'
+                    startAccessor="start"
+                    endAccessor="end"
                     // style={{ height: '100%', width: '100% ' }}
                     // scrollToTime={new Date(1970, 1, 1, 6)}
-                    // dayChosen ={new Date()}
+                    dayChosen ={new Date(now())}
                     defaultDate={new Date(now())}
                     onSelectEvent={event =>
                         clientResource.showDesc(event.title, event.desc)

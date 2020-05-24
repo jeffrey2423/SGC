@@ -343,7 +343,7 @@ export default class GestionUsuarios2 extends Component {
                 <div className="card-spa">
                     <div className="card-body">
                         <span
-                            style={{ cursor: 'pointer' }}
+                            style={{ cursor: 'pointer', float: 'right'  }}
                             class="btn btn-secondary btn "
                             // data-toggle="modal"
                             // data-target="#exampleModal"
@@ -351,9 +351,9 @@ export default class GestionUsuarios2 extends Component {
                         >
                             <MDBIcon icon="user-alt" className="mr-1" />Agregar usuario
                         </span>
-                        <hr />
+                       
                         <h2 className="card-title">Usuarios de la aplicación</h2>
-                        <hr />
+                        
                         {/* <div className="form-inline my-lg-0 float-right p-3">
                                 <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"></input>
                             </div> */}
