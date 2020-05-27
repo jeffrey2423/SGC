@@ -41,10 +41,10 @@ export default class login extends Component {
 
                 jwt.verify(token.token.toString(), config.SECRET_KEY, (err, decoded) => {
                     if (err) {
-                        validation.error("Error", "Error al intentar iniciar sesion, intente de nuevo", 1005, "");
+                        validation.error("Error", "Error al intentar iniciar sesion, intente de nuevo", 1005, err.message);
                     } else {
                         const datosUsuario = decoded;
-                        console.log(datosUsuario)
+                        // console.log(datosUsuario)
                         clientResource.agregarSesion(datosUsuario);
                     }
                 });
@@ -92,7 +92,7 @@ export default class login extends Component {
                             type="email"
                             id="defaultLoginFormEmail"
                             className="form-control mb-4"
-                            placeholder="E-mail"
+                            placeholder="Correo Electronico"
                             onChange={this.onInputChange}
                             value={this.state.email}
                         />
@@ -102,7 +102,7 @@ export default class login extends Component {
                             type="password"
                             id="defaultLoginFormPassword"
                             className="form-control mb-4"
-                            placeholder="Password"
+                            placeholder="Contraseña"
                             onChange={this.onInputChange}
                             value={this.state.pass}
                         />
