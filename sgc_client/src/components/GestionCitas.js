@@ -71,7 +71,7 @@ export default class GestionCitas extends Component {
 
   editCita = async (e) => {
     e.preventDefault();
-    // if (validation.validarUsuario(validate_user)) {
+
     const data = {};
     data.titulo = this.state.titulo;
     data.descripcion = this.state.desc;
@@ -80,20 +80,21 @@ export default class GestionCitas extends Component {
     data.ind_todo_el_dia = 0;
     data.id_creador = sessionStorage.getItem("f1004_id");
     data.id_asignado = this.state.asignado;
-    const res = await axios.post(config.BASE_URL + "api/user/events/updateEvent/" + this.state.id_cita_actualizar, data, {
-      headers: {
-        'Content-Type': 'application/json;charset=UTF-8',
-        'Authorization': `Bearer ${this.state.token}`
-      }
-    });
+    if (validation.validarCita(data)) {
+      const res = await axios.post(config.BASE_URL + "api/user/events/updateEvent/" + this.state.id_cita_actualizar, data, {
+        headers: {
+          'Content-Type': 'application/json;charset=UTF-8',
+          'Authorization': `Bearer ${this.state.token}`
+        }
+      });
 
-    if (res.data.status === "error") {
-      validation.error(res.data.status, res.data.description, res.data.id, res.data.traza);
-    } else {
-      this.getCitas();
-      validation.success(res.data.status, res.data.description, res.data.id);
+      if (res.data.status === "error") {
+        validation.error(res.data.status, res.data.description, res.data.id, res.data.traza);
+      } else {
+        this.getCitas();
+        validation.success(res.data.status, res.data.description, res.data.id);
+      }
     }
-    // }
 
   }
 
@@ -154,7 +155,7 @@ export default class GestionCitas extends Component {
   crearCita = async (e) => {
     e.preventDefault();
 
-    // if (validation.validarUsuario(validate_user)) {
+
     const data = {};
     data.titulo = this.state.titulo;
     // data.descripcion = this.state.desc;
@@ -169,23 +170,23 @@ export default class GestionCitas extends Component {
     } else {
       data.id_asignado = sessionStorage.getItem("f1004_id");
     }
+    if (validation.validarCita(data)) {
 
+      const res = await axios.post(config.BASE_URL + "api/user/events/createEvent", data, {
+        headers: {
+          'Content-Type': 'application/json;charset=UTF-8',
+          'Authorization': `Bearer ${this.state.token}`
+        }
+      });
 
-    const res = await axios.post(config.BASE_URL + "api/user/events/createEvent", data, {
-      headers: {
-        'Content-Type': 'application/json;charset=UTF-8',
-        'Authorization': `Bearer ${this.state.token}`
+      if (res.data.status === "error") {
+        validation.error(res.data.status, res.data.description, res.data.id, res.data.traza);
+      } else {
+        this.getCitas();
+        validation.success(res.data.status, res.data.description, res.data.id);
+        this.clickRestartForm();
       }
-    });
-
-    if (res.data.status === "error") {
-      validation.error(res.data.status, res.data.description, res.data.id, res.data.traza);
-    } else {
-      this.getCitas();
-      validation.success(res.data.status, res.data.description, res.data.id);
-      this.clickRestartForm();
     }
-    // }
 
     // $("#f_titulo").val(clientResource.dateToTs(this.state.fecha_inicio));
   }
@@ -271,7 +272,7 @@ export default class GestionCitas extends Component {
 
 
             <h2 className="card-title">Citas programadas</h2>
-            
+
             <div class="table-responsive ">
 
               <table className="table table-bordered table-striped mb-0" id="example">
@@ -509,7 +510,7 @@ export default class GestionCitas extends Component {
                               <DateTimePicker
                                 onChange={this.onChangeInicio}
                                 value={this.state.fecha_inicio}
-                               format="y-MM-dd h:mm:ss a"
+                                format="y-MM-dd h:mm:ss a"
 
 
                               />
@@ -524,7 +525,7 @@ export default class GestionCitas extends Component {
                               <DateTimePicker
                                 onChange={this.onChangeFin}
                                 value={this.state.fecha_fin}
-                               format="y-MM-dd h:mm:ss a"
+                                format="y-MM-dd h:mm:ss a"
 
                               />
                             </div>
@@ -676,7 +677,7 @@ export default class GestionCitas extends Component {
                               <DateTimePicker
                                 onChange={this.onChangeInicio}
                                 value={this.state.fecha_inicio}
-                               format="y-MM-dd h:mm:ss a"
+                                format="y-MM-dd h:mm:ss a"
 
 
                               />
@@ -691,7 +692,7 @@ export default class GestionCitas extends Component {
                               <DateTimePicker
                                 onChange={this.onChangeFin}
                                 value={this.state.fecha_fin}
-                               format="y-MM-dd h:mm:ss a"
+                                format="y-MM-dd h:mm:ss a"
 
                               />
                             </div>

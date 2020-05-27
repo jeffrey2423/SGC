@@ -239,27 +239,26 @@ export default class GestionUsuarios2 extends Component {
 
     actualizarGeneral = async (e) => {
         e.preventDefault();
-        // if (validation.validarUsuario(validate_user)) {
+
         const data = {};
-        data.user_id =
-            data.nombre = this.state.f_nombre;
+        data.nombre = this.state.f_nombre;
         data.apellido = this.state.f_apellido;
         data.id_profesion = this.state.f_profesion;
+        if (validation.validarUsuarioUpdate(data, clientResource.DATOS_USUARIO.GENERALES)) {
+            const res = await axios.post(config.BASE_URL + "api/user/updateUser/" + this.state.id_usuario_actualizar, data, {
+                headers: {
+                    'Content-Type': 'application/json;charset=UTF-8',
+                    'Authorization': `Bearer ${this.state.token}`
+                }
+            });
 
-        const res = await axios.post(config.BASE_URL + "api/user/updateUser/" + this.state.id_usuario_actualizar, data, {
-            headers: {
-                'Content-Type': 'application/json;charset=UTF-8',
-                'Authorization': `Bearer ${this.state.token}`
+            if (res.data.status === "error") {
+                validation.error(res.data.status, res.data.description, res.data.id, res.data.traza);
+            } else {
+                this.getUsuarios();
+                validation.success(res.data.status, res.data.description, res.data.id);
             }
-        });
-
-        if (res.data.status === "error") {
-            validation.error(res.data.status, res.data.description, res.data.id, res.data.traza);
-        } else {
-            this.getUsuarios();
-            validation.success(res.data.status, res.data.description, res.data.id);
         }
-        // }
 
     }
 
@@ -290,21 +289,21 @@ export default class GestionUsuarios2 extends Component {
         e.preventDefault();
         const data = {};
         data.email = this.state.f_email;
+        if (validation.validarUsuarioUpdate(data, clientResource.DATOS_USUARIO.ACCESO_EMAIL)) {
+            const res = await axios.post(config.BASE_URL + "api/user/updateUserEmail/" + this.state.id_usuario_actualizar, data, {
+                headers: {
+                    'Content-Type': 'application/json;charset=UTF-8',
+                    'Authorization': `Bearer ${this.state.token}`
+                }
+            });
 
-        const res = await axios.post(config.BASE_URL + "api/user/updateUserEmail/" + this.state.id_usuario_actualizar, data, {
-            headers: {
-                'Content-Type': 'application/json;charset=UTF-8',
-                'Authorization': `Bearer ${this.state.token}`
+            if (res.data.status === "error") {
+                validation.error(res.data.status, res.data.description, res.data.id, res.data.traza);
+            } else {
+                this.getUsuarios();
+                validation.success(res.data.status, res.data.description, res.data.id);
             }
-        });
-
-        if (res.data.status === "error") {
-            validation.error(res.data.status, res.data.description, res.data.id, res.data.traza);
-        } else {
-            this.getUsuarios();
-            validation.success(res.data.status, res.data.description, res.data.id);
         }
-
     }
 
     actualizarPerfil = async (e) => {
@@ -343,7 +342,7 @@ export default class GestionUsuarios2 extends Component {
                 <div className="card-spa">
                     <div className="card-body">
                         <span
-                            style={{ cursor: 'pointer', float: 'right'  }}
+                            style={{ cursor: 'pointer', float: 'right' }}
                             class="btn btn-secondary btn "
                             // data-toggle="modal"
                             // data-target="#exampleModal"
@@ -351,9 +350,9 @@ export default class GestionUsuarios2 extends Component {
                         >
                             <MDBIcon icon="user-alt" className="mr-1" />Agregar usuario
                         </span>
-                       
+
                         <h2 className="card-title">Usuarios de la aplicación</h2>
-                        
+
                         {/* <div className="form-inline my-lg-0 float-right p-3">
                                 <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"></input>
                             </div> */}
@@ -697,11 +696,12 @@ export default class GestionUsuarios2 extends Component {
                                                                             <div className="input-group-text">E-mail</div>
 
                                                                         </div>
-                                                                        <input type="text" id="f_email" placeholder="Correo del usuario" className="form-control"
-                                                                            aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" pattern=".*\S.*" required
+                                                                        <input type="email" id="f_email" placeholder="example@email.com" className="form-control"
+                                                                            aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required
                                                                             name="f_email"
                                                                             value={this.state.f_email}
-                                                                            onChange={this.onInputChange} />
+                                                                            onChange={this.onInputChange}
+                                                                        />
 
                                                                     </div>
                                                                 </div>
