@@ -23,6 +23,13 @@ ClientController.localeFunc = (number, index, total_sec) => {
     ][index];
 };
 
+ClientController.DATOS_USUARIO = {
+    GENERALES: 1,
+    SEGURIDAD: 2,
+    ACCESO_EMAIL:3,
+    ACCESO_PERFIL:4
+}
+
 ClientController.agregarSesion = (usuario) => {
     for (var key in usuario) {
         /*Guardando los datos en el sessionStorage*/
@@ -99,7 +106,7 @@ ClientController.showDesc = (tittle, desc) => {
     })
 }
 
-ClientController.dateToTs= (date) => {
+ClientController.dateToTs = (date) => {
     let current_datetime = new Date(date)
     let formatted_date = current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate() + " " + current_datetime.getHours() + ":" + current_datetime.getMinutes() + ":" + current_datetime.getSeconds()
     return formatted_date;
