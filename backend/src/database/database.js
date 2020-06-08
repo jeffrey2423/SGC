@@ -7,10 +7,17 @@ const connection = new Pool({
     host: config.HOST,
     database: config.DATABASE,
     password: config.PASS,
-    port: config.PORTBD
+    port: config.PORTBD,
+    ssl: true
 });
 
-
+connection.connect(function (err) {
+    if (err) {
+        console.log('Falló la conexion a la base de datos, Traza: ' + err.message);
+    } else {
+        console.log('Conexion a base de datos exitosa');
+    }
+});
 // var conString = "postgres://" + config.USER + ":" + config.PASS + "@localhost:5432/" + config.DATABASE + "";
 
 // var client = new pg.Pool(conString);
@@ -23,12 +30,6 @@ const connection = new Pool({
 //         console.log('Database is connected');
 //     }
 // });
-connection.connect(function (err) {
-    if (err) {
-        console.log(err);
-    } else {
-        console.log('Database is connected');
-    }
-});
+
 
 module.exports = connection;

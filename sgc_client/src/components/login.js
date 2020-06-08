@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom';
 import axios from 'axios'
 import validation from '../resources/validations/main';
 import clientResource from '../resources/client';
+import $ from 'jquery';
 const jwt = require("jsonwebtoken");
 const config = require('../config/config')
+
 
 export default class login extends Component {
     state = {
@@ -43,6 +45,8 @@ export default class login extends Component {
                     if (err) {
                         validation.error("Error", "Error al intentar iniciar sesion, intente de nuevo", 1005, err.message);
                     } else {
+                        $('#btn-login').prop('disabled', true);
+                        $("#btn-login").text('Cargando...');
                         const datosUsuario = decoded;
                         // console.log(datosUsuario)
                         clientResource.agregarSesion(datosUsuario);
@@ -108,15 +112,16 @@ export default class login extends Component {
                         />
 
                         {/* Sign in button */}
-                        
-                            <button
-                                className="btn btn-block my-4"
-                                type="submit"
-                                style={styles["submit_style"]}
-                            >
-                                Iniciar Sesion
+
+                        <button
+                            id="btn-login"
+                            className="btn btn-block my-4"
+                            type="submit"
+                            style={styles["submit_style"]}
+                        >
+                            Iniciar Sesion
                         </button>
-                        
+
 
 
                         {/* Social login */}
@@ -125,7 +130,7 @@ export default class login extends Component {
                         <Link to="" className="mx-2" role="button"><i className="fab fa-linkedin-in" style={styles["social"]}></i></Link>
                         <Link to="" className="mx-2" role="button"><i className="fab fa-github" style={styles["social"]}></i></Link>
                     </div>
-                    </form>
+                </form>
             </div>
 
 
