@@ -24,6 +24,8 @@ export default class login extends Component {
         e.preventDefault();
         if (this.state.email !== "" &&
             this.state.pass !== "") {
+            $('#btn-login').prop('disabled', true);
+            $("#btn-login").text('Cargando...');
             const data = {
                 email: this.state.email,
                 clave: this.state.pass
@@ -36,6 +38,8 @@ export default class login extends Component {
 
             if (res.data.status === "error") {
                 validation.error(res.data.status, res.data.description, res.data.id, res.data.traza);
+                $('#btn-login').prop('disabled', false);
+                $("#btn-login").text('Iniciar sesion');
             } else {
                 const token = res.data;
                 clientResource.agregarSesion(token);
@@ -44,9 +48,11 @@ export default class login extends Component {
                 jwt.verify(token.token.toString(), config.SECRET_KEY, (err, decoded) => {
                     if (err) {
                         validation.error("Error", "Error al intentar iniciar sesion, intente de nuevo", 1005, err.message);
+                        $('#btn-login').prop('disabled', false);
+                        $("#btn-login").text('Iniciar sesion');
                     } else {
-                        $('#btn-login').prop('disabled', true);
-                        $("#btn-login").text('Cargando...');
+                        // $('#btn-login').prop('disabled', true);
+                        // $("#btn-login").text('Cargando...');
                         const datosUsuario = decoded;
                         // console.log(datosUsuario)
                         clientResource.agregarSesion(datosUsuario);
