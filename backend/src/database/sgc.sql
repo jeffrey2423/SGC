@@ -1667,7 +1667,16 @@ COPY public.t1005_imagenes (f1005_ts, f1005_id, f1005_nombre, f1005_descripcion,
 --
 
 COPY public.t1006_eventos (f1006_ts, f1006_id, f1006_titulo, f1006_descripcion, f1006_fecha_iso8601_inicial, f1006_fecha_iso8601_final, f1006_ind_todo_el_dia, f1006_id_usuario_creador_t1004, f1006_id_usuario_asignado_t1004, f1006_ind_estado) FROM stdin;
-2020-05-23 19:46:16.832019	59	Cita de prueba	Esta es una cita de prueba	2020-05-23 19:45:42	2020-05-23 22:45:00	0	52	56	1
+2020-05-23 22:34:29.614371	66	prueba 2	prueba 2	2020-05-23 18:34:00	2020-05-23 19:34:00	0	52	56	1
+2020-05-23 22:35:35.386537	67	prueba 3	prueba 3	2020-05-24 08:34:53	2020-05-24 10:34:53	0	52	56	1
+2020-05-23 22:43:55.465919	68	prueba 4 editada	descripcion	2020-05-24 21:30:47	2020-05-24 22:30:47	0	52	56	1
+2020-05-23 22:50:31.341901	69	adsfgh	sdfdgdfdg	2020-05-24 16:04:31	2020-05-24 17:49:31	0	52	56	1
+2020-05-23 22:51:28.003179	70	sdfghjhk	dgfnvbsfdg	2020-05-26 14:51:06	2020-05-26 15:51:06	0	52	56	1
+2020-05-27 10:08:57.061574	71	Prueba	adsfdsd	2020-05-27 10:08:25	2020-05-27 10:08:25	0	52	56	1
+2020-05-27 10:10:33.738273	72	aad	ssdsd	2020-05-27 10:10:15	2020-05-27 10:10:15	0	52	52	1
+2020-05-27 10:14:55.865826	73	sdfgh	fdgffdgf	2020-05-27 10:13:19	2020-05-27 14:13:19	0	52	56	1
+2020-05-27 18:05:28.275071	74	asdfasdsf	dsfgdsfdg	2020-05-27 18:05:05	2020-05-27 20:05:05	0	52	56	1
+2020-05-23 22:28:24.472445	65	Prueba	esta es una prueba	2020-05-23 15:27:48	2020-05-23 17:27:48	0	52	52	0
 \.
 
 
@@ -1689,7 +1698,7 @@ SELECT pg_catalog.setval('public.t1001_permisos_f1001_id_seq', 13, true);
 -- Name: t1002_perfil_extendido_f1002_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.t1002_perfil_extendido_f1002_id_seq', 125, true);
+SELECT pg_catalog.setval('public.t1002_perfil_extendido_f1002_id_seq', 130, true);
 
 
 --
@@ -1703,7 +1712,7 @@ SELECT pg_catalog.setval('public.t1003_profesion_f1003_id_seq', 2, true);
 -- Name: t1004_usuarios_f1004_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.t1004_usuarios_f1004_id_seq', 72, true);
+SELECT pg_catalog.setval('public.t1004_usuarios_f1004_id_seq', 75, true);
 
 
 --
@@ -1717,7 +1726,7 @@ SELECT pg_catalog.setval('public.t1005_imagenes_f1005_id_seq', 1, false);
 -- Name: t1006_eventos_f1006_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.t1006_eventos_f1006_id_seq', 59, true);
+SELECT pg_catalog.setval('public.t1006_eventos_f1006_id_seq', 74, true);
 
 
 --
