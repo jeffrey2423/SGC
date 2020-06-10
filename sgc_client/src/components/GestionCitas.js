@@ -160,8 +160,10 @@ export default class GestionCitas extends Component {
     data.titulo = this.state.titulo;
     // data.descripcion = this.state.desc;
     data.descripcion = document.getElementById("desc").value;
-    data.fecha_inicial = clientResource.dateToTs(this.state.fecha_inicio);
-    data.fecha_final = clientResource.dateToTs(this.state.fecha_fin);
+    // data.fecha_inicial = clientResource.dateToTs(this.state.fecha_inicio);
+    // data.fecha_final = clientResource.dateToTs(this.state.fecha_fin);
+    data.fecha_inicial = this.state.fecha_inicio;
+    data.fecha_final = this.state.fecha_fin;
     // data.ind_todo_el_dia = this.state.todoDia;
     data.ind_todo_el_dia = 0;
     data.id_creador = sessionStorage.getItem("f1004_id");
