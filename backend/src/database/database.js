@@ -2,14 +2,24 @@ const { Pool, Client } = require('pg');
 // var pg = require('pg');
 const config = require('../config/config')
 
+// const connection = new Pool({
+//     user: config.USER,
+//     host: config.HOST,
+//     database: config.DATABASE,
+//     password: config.PASS,
+//     port: config.PORTBD,
+//     ssl: true
+// });
+
 const connection = new Pool({
-    user: config.USER,
-    host: config.HOST,
-    database: config.DATABASE,
-    password: config.PASS,
-    port: config.PORTBD,
-    ssl: true
+    user: "postgres",
+    host: "localhost",
+    database: "sgc",
+    password: "root",
+    port: 5432,
+    // ssl: true
 });
+
 
 connection.connect(function (err) {
     if (err) {
