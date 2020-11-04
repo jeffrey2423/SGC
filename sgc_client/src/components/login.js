@@ -30,39 +30,48 @@ export default class login extends Component {
                 email: this.state.email,
                 clave: this.state.pass
             }
-            const res = await axios.post(config.BASE_URL + "api/user/auth/login", data, {
-                headers: {
-                    'Content-Type': 'application/json;charset=UTF-8'
-                }
-            });
 
-            if (res.data.status === "error") {
-                validation.error(res.data.status, res.data.description, res.data.id, res.data.traza);
-                $('#btn-login').prop('disabled', false);
-                $("#btn-login").text('Iniciar sesion');
-            } else {
-                const token = res.data;
-                clientResource.agregarSesion(token);
-                console.log(token)
-
-                jwt.verify(token.token.toString(), config.SECRET_KEY, (err, decoded) => {
-                    if (err) {
-                        validation.error("Error", "Error al intentar iniciar sesion, intente de nuevo", 1005, err.message);
-                        $('#btn-login').prop('disabled', false);
-                        $("#btn-login").text('Iniciar sesion');
-                    } else {
-                        // $('#btn-login').prop('disabled', true);
-                        // $("#btn-login").text('Cargando...');
-                        const datosUsuario = decoded;
-                        // console.log(datosUsuario)
-                        clientResource.agregarSesion(datosUsuario);
+            try {
+                const res = await axios.post(config.BASE_URL + "api/user/auth/login", data, {
+                    headers: {
+                        'Content-Type': 'application/json;charset=UTF-8'
                     }
                 });
 
-                window.location.href = '/inicio';
+
+
+                if (res.data.status === "error") {
+                    validation.error(res.data.status, res.data.description, res.data.id, res.data.traza);
+                    $('#btn-login').prop('disabled', false);
+                    $("#btn-login").text('Iniciar sesion');
+                } else {
+                    const token = res.data;
+                    clientResource.agregarSesion(token);
+                    console.log(token)
+
+                    jwt.verify(token.token.toString(), config.SECRET_KEY, (err, decoded) => {
+                        if (err) {
+                            validation.error("Error", "Error al intentar iniciar sesion, intente de nuevo", 1005, err.message);
+                            $('#btn-login').prop('disabled', false);
+                            $("#btn-login").text('Iniciar sesion');
+                        } else {
+                            // $('#btn-login').prop('disabled', true);
+                            // $("#btn-login").text('Cargando...');
+                            const datosUsuario = decoded;
+                            // console.log(datosUsuario)
+                            clientResource.agregarSesion(datosUsuario);
+                        }
+                    });
+
+                    window.location.href = '/inicio';
 
 
 
+                }
+            } catch (error) {
+                validation.error(error.message);
+                $('#btn-login').prop('disabled', false);
+                $("#btn-login").text('Iniciar sesion');
             }
         } else {
             validation.errorGenereal("Hay campos vacios");

@@ -172,7 +172,10 @@ export default class GestionCitas extends Component {
     } else {
       data.id_asignado = sessionStorage.getItem("f1004_id");
     }
+    console.log(data)
     if (validation.validarCita(data)) {
+      data.fecha_inicial = clientResource.dateToTs(this.state.fecha_inicio);
+      data.fecha_final = clientResource.dateToTs(this.state.fecha_fin);
 
       const res = await axios.post(config.BASE_URL + "api/user/events/createEvent", data, {
         headers: {

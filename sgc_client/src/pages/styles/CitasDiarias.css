@@ -1,0 +1,14 @@
+.active {
+    visibility: visible;
+    transition: all 0.5s;
+  }
+  .hidden {
+    visibility: hidden;
+    transition: all 0.5s;
+    transform: translateY(-100%);
+  }
+
+  #buscador{
+    position: fixed;
+    z-index: 999; 
+}

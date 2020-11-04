@@ -288,5 +288,13 @@ eventController.updateEvent = async (req, res) => {
     }
 }
 
+eventController.traerCitasDiarias = async (req, res) => {
+    try {
+        
+    } catch (error) {
+        await connection.query('ROLLBACK');
+    }
+}
+
 
 module.exports = eventController;

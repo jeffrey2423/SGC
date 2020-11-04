@@ -1,0 +1,16 @@
+.active {
+    visibility: visible;
+    transition: all 0.5s;
+  }
+  .hidden {
+    visibility: hidden;
+    transition: all 0.5s;
+    transform: translateY(-100%);
+  }
+
+  #header{
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 999; 
+  }

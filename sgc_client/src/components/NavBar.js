@@ -63,6 +63,7 @@ export default class NavBar extends Component {
                                     <React.Fragment>
                                         <Link className="nav-bar-item nav-item nav-link" style={styles["navbar_link"]} to="/GestionUsuarios" id="GestionUsuarios">Gestion Usuarios</Link>
                                         <Link className="nav-bar-item nav-item nav-link" style={styles["navbar_link"]} to="/GestionPerfiles" id="GestionPerfiles">Gestion Perfiles</Link>
+                                        {/* <Link className="nav-bar-item nav-item nav-link" style={styles["navbar_link"]} to="/CitasDiarias"     id="CitasDiaria">Citas Diarias</Link> */}
                                     </React.Fragment>
                                 ) :
 
