@@ -16,7 +16,7 @@ const GestionPerfiles = lazy(() => import('.//components/GestionPerfiles'))
 const GestionUsuarios2 = lazy(() => import('.//components/GestionUsuarios2'))
 const GestionCitas = lazy(() => import('.//components/GestionCitas'))
 const Inicio = lazy(() => import('.//components/Inicio'))
-
+const CitasDiarias = lazy(() => import('./pages/CitasDiarias'))
 
 
 
@@ -26,7 +26,7 @@ function App() {
   return (
     <Router>
       <Header />
-      <div className="container p-4 spa-content">
+      <div className="container pt-auto spa-content">
         <Switch>
           <Route path="/" exact component={Login} />
 
@@ -40,6 +40,8 @@ function App() {
             <Route path="/GestionUsuarios" exact component={GestionUsuarios2} />
 
             <Route path="/GestionPerfiles" exact component={GestionPerfiles} />
+
+            <Route path="/CitasDiarias" exact component={CitasDiarias} />
           </Suspense>
 
           <Route component={My404} />
