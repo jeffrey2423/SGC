@@ -261,6 +261,7 @@ export class GestionPerfiles extends Component {
                                             type="button"
                                             className="btn btn-secondary btn-block"
                                             onClick={this.createModal2}
+                                            id="add-profile-btn"
                                         >
                                             <MDBIcon icon="plus-circle" /> Agregar un perfil
                                             </button>
@@ -506,6 +507,7 @@ export class GestionPerfiles extends Component {
                                                         name="perfilNuevo"
                                                         onChange={this.onInputChange}
                                                         required
+                                                        id="name-profile-input"
                                                     >
                                                     </input>
 
@@ -525,6 +527,7 @@ export class GestionPerfiles extends Component {
                                                         placeholder="Descripcion"
                                                         name="desPerfilNuevo"
                                                         onChange={this.onInputChange}
+                                                        id="description-profile-input"
                                                     >
                                                     </input>
                                                 </div>
@@ -536,6 +539,7 @@ export class GestionPerfiles extends Component {
                                                     <button
                                                         type="submit"
                                                         className="btn btn-outline-secondary btn-block"
+                                                        id="submit-new-profile-btn"
                                                     >
                                                         Crear perfil
                                                     </button>
